@@ -31,5 +31,9 @@ jobs:
         run: lake update
 
       - name: Build Lean project
-        run: lake build
+        env:
+          MATHLIB_NO_CACHE: "1"
+        run: |
+          lake update
+          lake build
 
