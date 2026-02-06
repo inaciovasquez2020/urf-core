@@ -1,10 +1,7 @@
-urc-minimal-blockchain/
 *.aux
 *.log
-*.swp
-.DS_Store
-.lake/
-!papers/
-!papers/ac0-csp/
-!papers/ac0-csp/**
+*.out
+*.toc
+*.pdf
+papers/**/arxiv/
 
