@@ -1,6 +1,7 @@
 import URF.ND.TypeBound
 import URF.XOR.K4
 import URF.Lifts.Spec
+import URF.XOR.ChronosK4Rows
 
 namespace URF
 
