@@ -45,3 +45,14 @@ If you utilize this core logic in your research, please cite it using the follow
   url    = {[https://github.com/inaciovasquez2020/urf-core](https://github.com/inaciovasquez2020/urf-core)}
 }
  (Cross-link scientific-infrastructure as canonical environment layer)
+Dependencies
+urf-prefab-system
+Source: https://github.com/inaciovasquez2020/urf-prefab-system
+Tier: Tier-A (frozen)
+Version: v0.2.1
+Usage
+This repository consumes the URF Prefab System for:
+Structural prefab definitions
+Assumption and invariant discipline
+Certification hook alignment
+No semantic or execution guarantees are inherited.
