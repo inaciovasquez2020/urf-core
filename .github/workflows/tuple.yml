@@ -1,0 +1,38 @@
+name: Tuple (CI binding)
+
+on:
+  push:
+    tags:
+      - "v*"
+      - "core-green-*"
+      - "repo-hygiene-*"
+
+permissions:
+  contents: write
+
+jobs:
+  tuple:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build tuple for tag
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          ./tuple/MAKE_TUPLE.sh "$tag" || true
+          file="tuple/TUPLE_${tag}.txt"
+          if [ -f "$file" ]; then
+            url="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            perl -pi -e "s|^ci_run_url:.*$|ci_run_url: $url|g" "$file"
+          fi
+
+      - name: Commit tuple (if changed)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tuple || true
+          git diff --cached --quiet && exit 0
+          git commit -m "ci: bind tuple to run ${GITHUB_RUN_ID} (${GITHUB_REF_NAME})"
+          git push origin HEAD:main
