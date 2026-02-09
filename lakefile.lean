@@ -1,24 +1,27 @@
 import Lake
 open Lake DSL
 
-package urf_core
+package «urf-core» where
+  moreLeanArgs := #[
+    "-Dlinter.unusedVariables=false",
+    "-Dlinter.unusedArguments=false"
+  ]
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4"
 
-lean_lib UrfCore {
-  srcDir := "src"
-}
+@[default_target]
+lean_lib URFCore where
 
-lean_exe urf_tests {
-  root := `src.Main
-}
+lean_lib Spine where
+  srcDir := "spine/lean"
 
+lean_lib URFSpine where
+  srcDir := "spine/lean"
 
-/-
-CI compatibility shim
-Ensures `lake exe cache get` exists for Lean Action Mathlib cache step
--/
-require mathlib from git
-  "https://github.com/leanprover-community/mathlib4"
+lean_lib TVDuality where
+  srcDir := "spine/lean"
+
+lean_lib MeasureDuality where
+  srcDir := "spine/lean"
 
