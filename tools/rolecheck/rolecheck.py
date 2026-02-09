@@ -2,6 +2,14 @@
 from __future__ import annotations
 import argparse
 import os
+import subprocess
+
+def git_tracked_set():
+    try:
+        out = subprocess.check_output(["git", "ls-files"], text=True)
+        return set(out.splitlines())
+    except Exception:
+        return set()
 import sys
 from pathlib import Path
 from fnmatch import fnmatch
