@@ -4,7 +4,7 @@
       "meta/lemmas.yaml",
       "meta/deps.yaml"
     ],
-    "timestamp": "2026-02-09T14:53:51Z",
+    "timestamp": "DETERMINISTIC",
     "tool": "tools/compile_dag.py"
   },
   "edges": [

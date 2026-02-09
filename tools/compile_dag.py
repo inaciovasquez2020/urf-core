@@ -34,10 +34,10 @@ def main():
         "version": 1,
         "nodes": nodes,
         "edges": edges,
-        "build": {
-            "timestamp": datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
-            "inputs": ["meta/lemmas.yaml", "meta/deps.yaml"],
-            "tool": "tools/compile_dag.py"
+"build": {
+    "timestamp": "DETERMINISTIC",
+    "inputs": ["meta/lemmas.yaml", "meta/deps.yaml"],
+    "tool": "tools/compile_dag.py"
         }
     }
 
