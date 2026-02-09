@@ -1,7 +1,7 @@
 # PIN THIS DIGEST after first pull:
 # docker pull ubuntu:24.04
 # docker inspect --format='{{index .RepoDigests 0}}' ubuntu:24.04
-FROM ubuntu:24.04@sha256:REPLACE_WITH_REAL_DIGEST
+FROM ubuntu:24.04@sha256:sha256:cd1dba651b3080c3686ecf4e3c4220f026b521fb76978881737d24f200828b2b
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
