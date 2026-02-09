@@ -3,8 +3,8 @@ open Lake DSL
 
 package «urf-core» where
   moreLeanArgs := #[
-    "-Dlinter.unusedVariables=false",
-    "-Dlinter.unusedArguments=false"
+    "-Dweak.linter.unusedVariables=false",
+    "-Dweak.linter.unusedArguments=false"
   ]
 
 require mathlib from git
