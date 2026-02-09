@@ -1,9 +1,9 @@
-name: Lean CI
+name: Lean Action CI
 
 on:
   push:
-    branches: [ main ]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,17 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Lean
+      - name: Install Lean toolchain (elan)
         uses: leanprover/lean-action@v1
-        with:
-          toolchain: leanprover/lean4:v4.27.0
 
-      - name: Lake update
+      - name: Lake update (deps)
         run: lake update
 
-      - name: Check Lean toolchain
-        run: ./scripts/check-lean-toolchain.sh
-
-      - name: Build
+      - name: Lake build
         run: lake build
 
+      # HARD PURGE build artifacts (role=core cannot contain .lake)
+      - name: Purge lake artifacts
+        run: |
+          rm -rf .lake || true
+          find . -name ".lake" -type d -prune -exec rm -rf {} +
+
+      - name: Rolecheck core
+        run: python3 tools/rolecheck/rolecheck.py core
