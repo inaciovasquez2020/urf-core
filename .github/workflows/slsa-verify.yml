@@ -1,0 +1,24 @@
+name: SLSA Verify Gate (GitHub attestations)
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  attestations: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify attestations exist and validate
+        run: |
+          gh --version
+          gh attestation verify transparency/merkle.root --repo "${GITHUB_REPOSITORY}"
+          gh attestation verify transparency/files.sha256 --repo "${GITHUB_REPOSITORY}"
+          gh attestation verify sigstore/image.digest --repo "${GITHUB_REPOSITORY}"
+          gh attestation verify sigstore/cosign.bundle.json --repo "${GITHUB_REPOSITORY}"
