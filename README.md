@@ -1,74 +1,150 @@
-URF Core
-Canonical Foundational Logic Layer for the Unified Rigidity Framework
-Role
-Foundational mathematics and logic layer of the URF program.
-Defines axioms, reductions, invariant structure, and primitive certificate semantics.
-Does not provide packaging, CI orchestration, or executable distribution bundles.
-Repository Guarantees
-Mathematical soundness of stated axioms and reductions (conditional components explicitly labeled).
-Deterministic certificate semantics at the logical layer.
-Stable primitive interfaces consumed by downstream prefab and infrastructure layers.
-This Repository Provides
-Core axiom system (URF Axiom series and invariant definitions).
-Formal reduction statements linking rigidity, capacity, locality, and admissibility.
-Proof skeletons and formalization entry points (Lean, LaTeX, and certificate logic).
-Primitive certificate semantic definitions (structure, meaning, and validity conditions).
-Canonical reference definitions used by prefab schemas and verifiers.
-Status
-Canonical foundational layer.
-Active development permitted only for mathematical or logical closure.
-Downstream compatibility preserved via semantic version discipline.
-Dependency Structure
-Upstream Dependencies: None at semantic level.
+# URF Core — Foundational Logic Layer
+
+Canonical foundational logic repository for the Unified Rigidity Framework (URF).
+
+This repository defines the mathematical, logical, and certificate-semantic base of the URF program.  
+All downstream executable, packaging, and environment layers derive their meaning from this layer.
+
+---
+
+## Purpose
+
+To provide the canonical source of:
+
+• URF axioms and invariant definitions  
+• Formal reduction theorems and obstruction statements  
+• Primitive certificate semantics (meaning and validity conditions)  
+• Formal proof architecture entry points (Lean, LaTeX, logical certificates)  
+
+This repository is the semantic authority for URF correctness.
+
+---
+
+## Layer Position
+
+URF Layer Stack
+
+Core → Prefab → Infrastructure → Applications
+
+Core defines truth conditions and invariant structure.  
+Prefab freezes executable packaging of Core outputs.  
+Infrastructure provides reproducible execution environments.  
+Applications consume certified logic.
+
+---
+
+## Canonical Scope
+
+### Mathematical Foundations
+• Rigidity principles  
+• Capacity–locality constraints  
+• Admissibility and invariant structure  
+• EntropyDepth and Chronos structural reductions  
+
+### Certificate Semantics
+• Logical validity rules  
+• Certificate meaning definitions  
+• Structural admissibility interpretation  
+• Primitive schema semantics (not packaging format)
+
+### Proof Architecture
+• Lean formalization entry points  
+• Reduction skeletons  
+• Conditional closure boundaries (explicitly labeled)  
+
+---
+
+## Explicit Non Scope
+
+This repository intentionally does NOT provide:
+
+• CI packaging or pipeline orchestration  
+• Frozen prefab bundles  
+• Container or environment reproducibility layers  
+• End user execution tooling  
+• Deployment workflows  
+
+These belong to Prefab or Infrastructure layers.
+
+---
+
+## Dependencies
+
+Semantic Dependencies: None  
+Mathematical Dependencies: Standard mathematical foundations only  
+
 Downstream Consumers:
-URF Prefab System (packaging, schemas, deterministic verifier wiring).
-Scientific Infrastructure (execution environment, reproducibility, CI standardization).
-Application Repositories (domain implementations and certification consumers).
-Explicit Non Scope
-Executable prefab bundles.
-CI pipeline definitions.
-Container or environment reproducibility specifications.
-End user deployment workflows.
-Experimental or draft packaging structures.
-Scope Boundaries
-Mathematical invariants and admissibility logic.
-Certificate meaning and logical validity rules.
-Reduction structure and obstruction statements.
-Formal proof architecture and theorem organization.
-Interfaces Exported
-Certificate semantic specification.
-Invariant and admissibility logic definitions.
-Formal theorem reference identifiers.
-Lean formalization entry modules.
-Compatibility Contract
-Prefab layer must not alter semantic meaning of certificates defined here.
-Infrastructure layer must not redefine logical validity rules.
-Downstream layers may only extend by instantiation, never by semantic override.
-References
-URF Prefab System
-https://github.com/inaciovasquez2020/urf-prefab-system
-Scientific Infrastructure
-https://github.com/inaciovasquez2020/scientific-infrastructure
-Research Website
-https://www.vasquezresearch.com
-Documentation Navigation
-Framework overview
-https://inaciovasquez2020.github.io
-Project index
-https://inaciovasquez2020.github.io/vasquez-index
-Scientific infrastructure environment
-https://inaciovasquez2020.github.io/scientific-infrastructure
-Citation
-If you use foundational URF logic or reductions, cite:
+
+URF Prefab System  
+https://github.com/inaciovasquez2020/urf-prefab-system  
+
+Scientific Infrastructure  
+https://github.com/inaciovasquez2020/scientific-infrastructure  
+
+---
+
+## Stability Model
+
+Status: Canonical Foundational Layer  
+
+Change Rules:
+
+• Mathematical meaning changes must originate here  
+• Downstream layers must not redefine certificate semantics  
+• Conditional components must remain explicitly labeled  
+• Versioning follows semantic mathematical compatibility  
+
+---
+
+## Formal Interfaces Exported
+
+Core exports:
+
+• Certificate semantic definitions  
+• Invariant and admissibility logic  
+• Formal theorem reference identifiers  
+• Lean formalization modules  
+• Logical validity boundary definitions  
+
+---
+
+## References
+
+Framework Overview  
+https://inaciovasquez2020.github.io  
+
+Project Index  
+https://inaciovasquez2020.github.io/vasquez-index/  
+
+Scientific Infrastructure Environment  
+https://inaciovasquez2020.github.io/scientific-infrastructure/  
+
+Research Website  
+https://www.vasquezresearch.com  
+
+---
+
+## Relationship to Prefab Layer
+
+Prefab Layer Responsibilities:
+
+• Freeze executable schema realizations  
+• Provide deterministic verifiers  
+• Provide CI reproducible bundles  
+• Provide importable prefab logic modules  
+
+Core remains the semantic authority.
+
+---
+
+## Citation
+
+If you use URF foundational logic or reductions, cite:
+
+```bibtex
 @manual{Vasquez_URF_Core_2026,
-author = {Vasquez, Inacio F.},
-title = {urf-core: Foundational Logic for the Universal Reference Frame},
-year = {2026},
-url = {https://github.com/inaciovasquez2020/urf-core}
+  author = {Vasquez, Inacio F.},
+  title  = {URF Core: Foundational Logic Layer for the Unified Rigidity Framework},
+  year   = {2026},
+  url    = {https://github.com/inaciovasquez2020/urf-core}
 }
-Layer Relationship Summary
-Core defines truth conditions and invariant structure.
-Prefab defines frozen executable packaging of Core outputs.
-Infrastructure defines environment and reproducibility envelope.
-Governance Rule
-Any change that alters logical meaning of certificates or invariants must occur in Core first and propagate downstream via versioned release.
