@@ -10,3 +10,6 @@ ip/
 ip/
 urf-cli/dist/
 **/.lake/
+
+# rolecheck local helpers (do not track)
+tools/rolecheck/git_tracked.py
