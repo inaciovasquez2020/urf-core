@@ -14,6 +14,7 @@ if [ -f lake-manifest.json ]; then
   lm_hash="$(shasum -a 256 lake-manifest.json | awk '{print $1}')"
 fi
 
+mkdir -p lean-attest
 cat > lean-attest/LEAN_BUILD_ATTEST.txt <<EOT
 commit: $commit
 tree: $tree

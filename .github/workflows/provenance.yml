@@ -15,8 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # Attest the repository state for this run (OIDC-signed)
       - name: Attest build provenance (repo)
         uses: actions/attest-build-provenance@v1
         with:

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
 tag="${1:?usage: $0 <tag>}"
 
 ./scripts/build-merkle.sh
@@ -9,9 +8,7 @@ commit="$(git rev-parse HEAD)"
 root="$(cat transparency/merkle.root)"
 ts="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-mkdir -p transparency/log
 entry="transparency/log/${tag}.entry"
-
 cat > "$entry" <<EOT
 tag: $tag
 commit: $commit
