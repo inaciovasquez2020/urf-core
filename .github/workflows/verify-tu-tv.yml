@@ -45,6 +45,11 @@ jobs:
           python3 tools/tv_cert/generate_tv_finite_cert.py 8 /tmp/tv_finite_n8_CERT.json
           python3 tools/tv_cert/verify_tv_finite_cert.py /tmp/tv_finite_n8_CERT.json
 
+      - name: TV step certificate test
+        run: |
+          python3 tools/tv_step_cert/generate_tv_step_cert.py 10 /tmp/tv_step_n10_CERT.json
+          python3 tools/tv_step_cert/verify_tv_step_cert.py /tmp/tv_step_n10_CERT.json
+
       - name: Mathlib lemma index script
         run: |
           tools/mathlib_index/index_signedmeasure_tv.sh
