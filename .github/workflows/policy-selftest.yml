@@ -1,0 +1,17 @@
+name: Policy Self-Test (Intentional Failure)
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v-policy-selftest*"]
+
+permissions:
+  contents: read
+
+jobs:
+  fail_one_required_check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Intentional failure to validate release policy enforcement"
+          exit 1
