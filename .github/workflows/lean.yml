@@ -1,6 +1,7 @@
 name: lean
 
 on:
+  push:n    paths-ignore:n      - zloop/**n  pull_request:n    paths-ignore:n      - zloop/**
   push:
     paths-ignore:
       - zloop/**
@@ -11,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+  push:n    paths-ignore:n      - zloop/**n  pull_request:n    paths-ignore:n      - zloop/**
     steps:
       - uses: actions/checkout@v4
       - uses: leanprover/lean-action@v1
