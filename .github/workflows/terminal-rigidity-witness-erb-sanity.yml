@@ -1,0 +1,10 @@
+      - name: Sanity checks
+        run: |
+          set -euo pipefail
+          test -f README.md
+          test -f STATUS.md
+          test -f FREEZE.md
+          test -f trw-erb-sigc.tex
+          test -f CITATION.cff
+          echo "Sanity checks passed"
+
