@@ -38,3 +38,15 @@ jobs:
         with:
           lake-package-directory: urf-core
 
+- name: Guard Lake configs in deps
+  run: |
+    set -e
+    for d in .lake/packages/*; do
+      if [ -d "$d" ]; then
+        if [ ! -f "$d/lakefile.lean" ] && [ ! -f "$d/lakefile.toml" ]; then
+          echo "Missing lakefile in $d"
+          exit 1
+        fi
+      fi
+    done
+
