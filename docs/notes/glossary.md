@@ -1,138 +1,244 @@
+# Glossary
+
+This glossary defines the canonical meanings of structural, logical, and semantic terms used throughout the Unified Rigidity Framework (URF).  
+Definitions are descriptive, not aspirational, and do not assert priority, correctness, or completeness beyond what is explicitly stated.
+
 ---
-title: URF Glossary
-status: explanatory
-scope: terminology / reference
+
+## A
+
+**Admissibility**  
+A property of a claim, process, or artifact indicating that it respects specified locality, capacity, and accounting constraints.
+
+**Application Layer**  
+The URF layer in which certified logic is consumed by domain-specific models, analyses, or decision procedures.
+
+**Artifact**  
+A concrete object (proof, certificate, transcript, dataset, or executable output) subject to verification or semantic interpretation.
+
 ---
 
-**finite**  
-A system is finite if it operates under a fixed upper bound on transcript capacity per step. In URF, finiteness refers to bounded information-processing capacity, not to the size of the object being studied.
+## C
 
-**capacity**  
-The maximum amount of information (entropy) that a refinement step can introduce, store, or resolve. Finite capacity is the core admissibility constraint of URF.
+**Capacity**  
+A bound on the amount of information, structure, or distinction that can be accumulated or represented within a system or process.
 
-**transcript**  
-The internal record of information accumulated by a refinement process. Bounds on transcript growth enforce capacity limits.
+**Certificate**  
+A structured artifact asserting that a claim satisfies specified semantic and admissibility conditions.
 
-**admissible**  
-A process is admissible if it respects all URF constraints, including locality and finite transcript capacity. Results in URF apply only to admissible processes.
+**Certificate Semantics**  
+The rules that determine what a certificate means and under what conditions it is considered valid, independent of tooling.
 
-**refinement**  
-A stepwise process that reduces uncertainty by locally updating information. Refinement is sequential and capacity-bounded in URF.
+**Certified NO Witness**  
+A certificate demonstrating that a claim fails admissibility or violates a required constraint.
 
-**entropy demand**  
-The total amount of uncertainty that must be resolved to complete a task or characterize an object. Denoted \(H(P)\).
+**Chronos**  
+A structural framework analyzing sequential refinement processes via information flow and entropy accumulation.
 
-**entropy depth**  
-The minimum number of refinement steps required to resolve the entropy demand under capacity constraints. Denoted \(\mathrm{ED}(P)\).
+**Conditional Result**  
+A result whose validity depends explicitly on one or more stated assumptions or unproven lemmas.
 
-**VCDI (Vasquez Capacity–Depth Inequality)**  
-The inequality \(\mathrm{ED}(P) \ge H(P)/C_{\max}\), relating entropy demand to entropy depth under finite capacity.
+**Configuration**  
+A finite description of a state in a logical game, refinement process, or structural analysis.
 
-**locality**  
-The restriction that refinement steps can depend only on bounded-radius, bounded-width information. FO\(^k\) locality is the canonical formalization.
+**Configuration Type**  
+An equivalence class of configurations indistinguishable under a specified logical or structural criterion.
 
-**global invariant**  
-A quantity that cannot be computed or approximated using purely local refinement (e.g., cycle rank, global homology, spectral data). Use of global invariants violates URF locality.
+**Core Layer**  
+The URF layer defining invariant meanings, admissibility conditions, and foundational semantics.
 
-**rigidity**  
-The condition where a refinement process cannot terminate or converge within admissibility constraints, typically because entropy depth diverges.
+---
 
-**wall**  
-A proven boundary beyond which admissible refinement cannot proceed. Walls separate feasible refinement from rigidity.
+## D
 
-**infinity (URF context)**  
-A regime characterized by unbounded entropy demand or unbounded capacity. Infinite objects are treated via finite exhaustions; direct refinement is rigid unless admissibility is violated.
+**Definability**  
+The property of a structure or feature being expressible within a specified logical formalism.
 
-**normalization**  
-The choice of scale or unit in a setting without a natural bound. In infinite-capacity regimes, notions like time or steps reduce to normalization choices.
+**Deterministic Verification**  
+Verification whose outcome is uniquely determined by the artifact and rules, without randomness or external choice.
 
-**bounded degree**  
-A restriction that the underlying structure (e.g., a graph) has a uniform upper bound on local connectivity. Used to ensure finiteness of local types and enforce locality.
+**Downstream Consumer**  
+Any repository, system, or process that relies on definitions or results exported by the Core Layer.
 
-**FO^k locality**  
-First-order logic with a fixed number of variables \(k\). FO^k locality formalizes the notion that only bounded, local neighborhoods can be inspected at each refinement step.
+---
 
-**exhaustion**  
-A sequence of finite instances \((P_n)\) whose union or limit represents an infinite object. URF analyzes infinite objects only through such finite exhaustions.
+## E
 
-**directed limit**  
-The limiting object obtained from a directed system of finite instances. In URF, divergence of entropy depth along the system implies rigidity of the limit.
+**Empirically Supported**  
+A status label indicating consistency with observed data or experiments, without constituting a formal proof.
 
-**capacity violation**  
-Any mechanism by which unbounded information is injected or resolved in a single step. Capacity violation renders a process non-admissible.
+**Entropy**  
+A measure of uncertainty or information content associated with a system or distribution.
 
-**locality violation**  
-Any mechanism that depends on non-local or global aggregation. Locality violation places a process outside the URF regime.
+**EntropyDepth (ED)**  
+A measure of the minimal sequential depth required to reduce entropy under admissible refinement steps.
 
-**global aggregation**  
-Computation that requires combining information from unboundedly many locations. Global aggregation is forbidden in admissible refinement.
+**Executable Artifact**  
+An artifact whose verification or interpretation involves running code or a formal procedure.
 
-**termination**  
-The event that a refinement process fully resolves its entropy demand in finitely many steps. Under URF, termination is possible only when entropy depth is finite.
+---
 
-**collapse**  
-The phenomenon where distinct configurations or uncertainties become indistinguishable under bounded refinement. Collapse is often the mechanism behind rigidity.
+## F
 
-**sharp bound**  
-A lower or upper bound that cannot be improved within a fixed admissible class. VCDI is sharp with respect to the capacity constant.
+**Finite Capacity**  
+The condition that capacity bounds are fixed or asymptotically bounded rather than unbounded.
 
-**normal form**  
-A canonical representation of a process or argument that makes capacity and locality constraints explicit.
+**Finite-Variable Logic (FOᵏ)**  
+First-order logic restricted to a fixed number of variables.
 
-**regime**  
-A class of processes defined by shared structural constraints (e.g., admissible refinement regime vs. global-invariant regime).
+**Final Wall**  
+A terminal structural boundary beyond which further refinement or distinction is impossible under given constraints.
 
-**configuration**  
-A local state or pattern visible to a bounded-radius, bounded-width observer. Configuration types are finite under bounded degree and fixed locality.
+**Frozen State**  
+A repository or specification state in which semantic meaning is fixed and changes are restricted.
 
-**configuration type**  
-An equivalence class of configurations indistinguishable by FO^k-local refinement. Finite in number for fixed parameters.
+---
 
-**pumping**  
-A normalization principle asserting that repeated visitation of the same configuration type yields a bounded local witness. Used to derive rigidity and walls.
+## G
 
-**support**  
-The minimal region on which a refinement step or witness depends. Bounded support is required for admissibility.
+**Graph Locality**  
+Dependence of properties only on bounded-radius neighborhoods in a graph.
 
-**support rigidity**  
-The principle that bounded-support operations cannot generate unbounded global structure without violating capacity or locality.
+---
 
-**cycle rank**  
-The dimension of the cycle space \( \dim_{\mathbb{F}_2} Z_1(G) \). A canonical global invariant separating URF from non-local regimes.
+## I
 
-**homogeneity**  
-Uniformity of local configuration types across an instance. Persistent homogeneity under refinement leads to rigidity.
+**Information Ceiling**  
+An upper bound on information gain achievable per step or per process under admissibility constraints.
 
-**heterogeneity**  
-Diversity of local configuration types. Necessary for progress under bounded refinement.
+**Information Gain**  
+The reduction in uncertainty obtained through a refinement or observation step.
 
-**witness**  
-A bounded object (configuration, parity, dependency) certifying distinguishability or progress. Witness size is capacity-controlled.
+**Information Work**  
+The cumulative informational effect of a sequence of refinement steps.
 
-**oracle**  
-An external information source. Oracles with unbounded output or precision violate capacity; global oracles violate locality.
+**Infrastructure Layer**  
+The URF layer providing reproducible execution environments and tooling, without redefining semantics.
 
-**capacity class**  
-A family of processes sharing the same per-step capacity bound \(C_{\max}\). Sharp bounds are stated per capacity class.
+**Invariant**  
+A property preserved under admissible transformations or refinements.
 
-**refinement wall**  
-A theorem asserting impossibility of further progress within a given capacity and locality regime.
+---
 
-**terminal wall**  
-A wall that cannot be bypassed without violating admissibility. Marks a regime boundary, not a limitation of technique.
+## L
 
-**regime exit**  
-Any explicit step that leaves the admissible refinement regime (capacity violation, locality violation, or oracle use).
+**Lean Formalization**  
+A representation of definitions or proofs in the Lean proof assistant.
 
-**global-invariant regime**  
-A regime in which computation relies on non-local quantities. Outside URF by definition.
+**Local Homogeneity**  
+The condition that all bounded-radius neighborhoods share the same local type.
 
-**finite exhaustion**  
-Analysis method where infinite objects are studied only through increasing finite instances with controlled parameters.
+**Local Type**  
+The equivalence class of structures indistinguishable within a fixed radius and logic.
 
-**limit rigidity**  
-Divergence of entropy depth along an exhaustion, implying non-termination of the directed limit.
+**Locality**  
+Restriction of attention or influence to bounded-radius neighborhoods or bounded context.
 
-**normalization choice**  
-A scale or unit fixed for convenience in the absence of a natural bound. Has no invariant meaning without capacity limits.
+---
+
+## N
+
+**Non-Amplification**  
+The principle that admissible steps cannot increase information or entropy beyond bounded limits.
+
+**Non-Claiming State**  
+A repository or artifact state that intentionally makes no assertion of correctness or resolution.
+
+**Normalization**  
+The process of transforming procedures into a canonical or constrained form for analysis.
+
+---
+
+## O
+
+**Obstruction**  
+A structural feature that prevents a claim or process from satisfying admissibility.
+
+---
+
+## P
+
+**Pebble Game**  
+A logical game used to analyze expressiveness and indistinguishability in finite-variable logic.
+
+**Prefab Layer**  
+The URF layer that freezes executable realizations of Core semantics for reuse.
+
+**Proof Skeleton**  
+A structured outline of a proof identifying dependencies and logical flow without full derivation.
+
+**Proof Obligation**  
+A condition that must be satisfied to complete a proof or certify a claim.
+
+---
+
+## R
+
+**Reduction**  
+A transformation mapping one problem or structure into another while preserving specified properties.
+
+**Refinement Process**  
+A sequential procedure that incrementally distinguishes or constrains possibilities.
+
+**Rigidity**  
+The phenomenon that local indistinguishability forces global structural constraints.
+
+---
+
+## S
+
+**Schema**  
+A formal description of the structure and fields of a certificate or artifact.
+
+**Semantic Authority**  
+The repository or layer responsible for defining the meaning of terms and artifacts.
+
+**Structural Invariant**  
+An invariant arising from structural, rather than numerical or probabilistic, constraints.
+
+**Structural Rigidity**  
+Rigidity arising from purely structural conditions.
+
+---
+
+## T
+
+**Terminal Wall**  
+A boundary beyond which admissible refinement cannot proceed.
+
+**Transcript**  
+A recorded sequence of states or observations produced by a refinement or algorithm.
+
+**Transcript Capacity**  
+The maximum information content that can be encoded in a transcript under constraints.
+
+---
+
+## U
+
+**Unified Rigidity Framework (URF)**  
+A framework for analyzing the limits of refinement, computation, and distinction under locality and capacity constraints.
+
+**URF-ADMISSIBLE**  
+The canonical decision interface specifying admissibility conditions within URF.
+
+---
+
+## V
+
+**Validity Conditions**  
+The requirements an artifact must satisfy to be considered meaningful or correct.
+
+**Verifier**  
+A procedure or tool that checks whether an artifact satisfies specified conditions.
+
+---
+
+## W
+
+**Weisfeiler–Leman (WL)**  
+A family of refinement algorithms for graph isomorphism and structural distinction.
+
+**WL-k**  
+The k-dimensional Weisfeiler–Leman refinement procedure.
 
