@@ -1,4 +1,5 @@
 # Structural Laws (Derived Invariants)
+Chronos Strategy-Class Boundary (No-Go): admissible fixed-radius local refinement requires Ω(n) total transcript capacity when H(X)=Ω(n). See Chronos-EntropyDepth/docs/foundations/chronos_no_go_theorem.md.
 
 This document records a small set of **structural invariants** that recur across
 the Unified Rigidity Framework (URF) repositories and associated artifacts.
