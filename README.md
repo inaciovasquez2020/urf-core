@@ -203,3 +203,5 @@ If you use URF foundational logic or reductions, cite:
 
 URF applies only to **post-hoc certification of asserted results**. It is unnecessary for exploratory or provisional work and does not govern discovery, intuition, or consensus formation. It provides a voluntary, artifact-based mechanism to make consequential claims auditable.
 
+
+- Chronos–EntropyDepth: https://github.com/inaciovasquez2020/Chronos-EntropyDepth
