@@ -3,8 +3,7 @@
 **Skeleton (lightweight checks only)**  
 ![Skeleton CI](https://github.com/inaciovasquez2020/urf-core/actions/workflows/entropy-check.yml/badge.svg)
 
-**Artifact / Verified (full verification)**  
-![Verified CI](https://github.com/inaciovasquez2020/urf-core/actions/workflows/lean.yml/badge.svg)
+![Verified CI](https://github.com/inaciovasquez2020/urf-core/actions/workflows/lean.yml/badge.svg?branch=paper-I-artifacts)
 
 # URF Core — Foundational Logic Layer
 
