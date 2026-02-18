@@ -8,6 +8,7 @@ on:
  (ci: fix pdf-verify workflow YAML structure)
 
 jobs:
+  if: |n      exists('lean-toolchain') ||n      exists('proofs') ||n      exists('certs') ||n      exists('artifacts')
   sanity:
     runs-on: ubuntu-latest
 

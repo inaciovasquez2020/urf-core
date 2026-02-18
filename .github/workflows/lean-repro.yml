@@ -10,6 +10,7 @@ permissions:
   contents: read
 
 jobs:
+  if: |n      exists('lean-toolchain') ||n      exists('proofs') ||n      exists('certs') ||n      exists('artifacts')
   lean_repro:
     runs-on: ubuntu-latest
   push:n    paths-ignore:n      - zloop/**n  pull_request:n    paths-ignore:n      - zloop/**

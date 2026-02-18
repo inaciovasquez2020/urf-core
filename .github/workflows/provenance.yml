@@ -13,6 +13,7 @@ permissions:
   attestations: write
 
 jobs:
+  if: |n      exists('lean-toolchain') ||n      exists('proofs') ||n      exists('certs') ||n      exists('artifacts')
   provenance:
     runs-on: ubuntu-latest
     steps:
