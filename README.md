@@ -1,14 +1,16 @@
 ## CI Status
 
-**Skeleton (lightweight checks only)**  
-![Skeleton CI](https://github.com/inaciovasquez2020/urf-core/actions/workflows/entropy-check.yml/badge.svg)
+### Skeleton (lightweight checks only)
+![Skeleton CI](https://github.com/inaciovasquez2020/urf-core/actions/workflows/state-skeleton.yml/badge.svg?branch=main)
+
+### Artifact / Verified (full verification)
+![Verified CI](https://github.com/inaciovasquez2020/urf-core/actions/workflows/lean.yml/badge.svg?branch=paper-I-artifacts)
+
+---
+**URF Core — Foundational Logic Layer**
 
 **Artifact / Verified (full verification)**  
 ![Verified CI](https://github.com/inaciovasquez2020/urf-core/actions/workflows/lean.yml/badge.svg)
-
-# URF Core — Foundational Logic Layer
-
-Canonical foundational logic repository for the **Unified Rigidity Framework (URF)**.
 
 This repository defines the **mathematical, logical, and certificate-semantic base** of the URF program. All downstream executable, packaging, and environment layers derive their meaning from this layer.
 
