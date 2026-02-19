@@ -14,3 +14,4 @@ ip/
 __pycache__/
 tools/rolecheck/__pycache__/
 
+certs/urfvis/*.key
