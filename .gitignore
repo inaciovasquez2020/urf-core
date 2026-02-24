@@ -1,4 +1,4 @@
 src/urf_prefab_system.egg-info/
 .venv/
 *.minisig
-src/urf_llm/check.py\
+src/urf_llm/check.py
