@@ -1,11 +1,19 @@
-# Power-Graph R-Coloring Experiment Results
+# Power-Graph R-Coloring Scaling Results
 
-Setup:
-- n = 100
+Parameters:
 - R = 1
-- Computation: build G^(2R) and estimate χ(G^(2R)) via greedy coloring (largest_first)
+- Greedy coloring (largest_first)
+- χ computed on G^(2R)
 
-Results (greedy χ):
-- Path graph P_n: 3
-- Star graph K_{1,n-1}: 100
-- Random 3-regular graph: 7
+| n   | Path | Star | Random 3-regular |
+|-----|------|------|------------------|
+| 50  | 3    | 50   | 7                |
+| 100 | 3    | 100  | 8                |
+| 200 | 3    | 200  | 7                |
+| 400 | 3    | 400  | 7                |
+
+Observations:
+
+- Path: χ₁(G) constant.
+- Star: χ₁(G) linear in n.
+- Random 3-regular: χ₁(G) appears bounded (≈ 7–8).
