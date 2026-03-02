@@ -149,6 +149,12 @@ Core exports:
 * Lean formalization modules
 * Logical validity boundary definitions
 
+## Structural Modules
+
+- Power-Graph Depth Analysis  
+  Experiments and theorem on bounded χ_R for bounded-degree graphs.  
+  See: `manuscripts/power_graph/`
+
 ---
 
 ## References
@@ -248,3 +254,4 @@ Non-scope:
 - No release tag until externally required
 
 URFOPS is a specification layer only.
+
