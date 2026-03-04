@@ -14,5 +14,5 @@ jobs:
       - name: Install Lean
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
-          source $HOME/.elan/env
+          source "$HOME/.elan/env"
           lean --version
