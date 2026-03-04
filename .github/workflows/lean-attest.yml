@@ -1,7 +1,7 @@
 name: Lean Attest
 
 on:
-  push:n    paths-ignore:n      - zloop/**n  pull_request:n    paths-ignore:n      - zloop/**
+  push:\n    paths-ignore:\n      - zloop/**n  pull_request:\n    paths-ignore:\n      - zloop/**
   workflow_dispatch:
   push:
     tags: ["v*","core-green-*","repo-hygiene-*"]
@@ -13,7 +13,7 @@ jobs:
   if: |n      exists('lean-toolchain') ||n      exists('proofs') ||n      exists('certs') ||n      exists('artifacts')
   attest:
     runs-on: ubuntu-latest
-  push:n    paths-ignore:n      - zloop/**n  pull_request:n    paths-ignore:n      - zloop/**
+  push:\n    paths-ignore:\n      - zloop/**n  pull_request:\n    paths-ignore:\n      - zloop/**
     steps:
       - uses: actions/checkout@v4
         with:

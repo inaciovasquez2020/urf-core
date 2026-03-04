@@ -21,7 +21,7 @@ jobs:
       - 'v*'
     steps:
       - uses: actions/checkout@v4
-      with:n        fetch-depth: 0
+      with:\n        fetch-depth: 0
         with:
           fetch-depth: 0
 
