@@ -1,19 +1,15 @@
-name: Docker (deterministic)
+name: Docker
 
 on:
-  workflow_dispatch:
   push:
-    tags: ["v*"]
-
-permissions:
-  contents: read
+    branches: [ main ]
 
 jobs:
   docker:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - name: Build (no push)
-        run: |
-          docker build --pull --no-cache -t urf-core:${GITHUB_SHA} .
-          docker images --digests | sed -n '1,10p'
+
+      - name: Build container
+        run: docker build -t urf-core .

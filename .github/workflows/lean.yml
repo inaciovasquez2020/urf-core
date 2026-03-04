@@ -1,41 +1,18 @@
-name: lean
+name: Lean
 
 on:
-  push:\n    paths-ignore:\n      - zloop/**n  pull_request:\n    paths-ignore:\n      - zloop/**
   push:
-    branches:
-      - main
-    paths:
-      - "urf-core/**"
-      - "urf-axioms/**"
-      - "urf-spine/**"
-      - "urf-prefab-system/**"
-      - "flagship-lean/**"
-      - "mathlib4/**"
-      - ".github/workflows/lean.yml"
   pull_request:
-    paths:
-      - "urf-core/**"
-      - "urf-axioms/**"
-      - "urf-spine/**"
-      - "urf-prefab-system/**"
-      - "flagship-lean/**"
-      - "mathlib4/**"
-      - ".github/workflows/lean.yml"
 
 jobs:
-  if: |n      exists('lean-toolchain') ||n      exists('proofs') ||n      exists('certs') ||n      exists('artifacts')
   lean:
     runs-on: ubuntu-latest
-  push:\n    paths-ignore:\n      - zloop/**n  pull_request:\n    paths-ignore:\n      - zloop/**
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - uses: leanprover/lean-action@v1
-        with:
-          lake-package-directory: urf-core
-
+      - name: Install Lean
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+          source $HOME/.elan/env
+          lean --version

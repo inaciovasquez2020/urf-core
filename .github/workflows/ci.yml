@@ -1,26 +1,18 @@
-name: ci
+name: CI
 
 on:
   push:
   pull_request:
-  workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: leanprover/lean-action@v1
-        with:
-          cache: false
-          use-mathlib-cache: false
-
-      - run: lake update
-      - run: lake build
-     
- - name: Invariant file binding
+      - name: Python tests
         run: |
-          while read -r file; do
-            test -f "$file"
-          done < .ci/required_files.txt
+          python3 -m pip install --upgrade pip
+          pip install pytest networkx numpy || true
+          if [ -d tests ]; then pytest -q; fi

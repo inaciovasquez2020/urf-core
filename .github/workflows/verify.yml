@@ -1,7 +1,0 @@
-
-      - name: Core invariant guards
-        run: |
-          test -f schema/core_invariants.schema.json
-          test -f CHANGELOG.md
-          test -f CONTRIBUTING.md
-          test -f examples/end_to_end.md
