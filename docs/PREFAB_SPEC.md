@@ -1,21 +1,20 @@
-# URF Prefab System Specification
+# Prefab Specification
 
-## Purpose
-The Prefab System provides canonical build, emission, and certification
-commands to instantiate URF artifacts reproducibly.
+A prefab is a reusable URF construction defined by
 
-## Capabilities
-- Quickstart for the URF stack
-- Unified CLI for building, emitting certificates, and verifying
-- Integration with CI enforcement policies
+P = (I, C, N, V)
 
-## Guarantees
-- Deterministic prefab artifacts
-- Manifest-first builds by default
-- Bridge from theory (URN/Chronos/Cyclone) to executable artifacts
+I : input schema
+C : admissibility constraints
+N : normalization map
+V : verification predicate
 
-## Workflow
-1. build
-2. emit-cert
-3. verify
-4. publish or archive via prefab manifests
+Correctness condition
+
+V(X) = True ⇒ N(X) is canonical.
+
+Composition rule
+
+P₂ ∘ P₁ is admissible if
+
+N₂(N₁(X)) is well-defined.
