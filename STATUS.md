@@ -1,11 +1,26 @@
-Proven (unconditional)
-Prefab structural scaffolding with explicit assumptions, invariants, and scope
-Assumption indexing and enforcement via documentation and validation script
-Deterministic CI sanity and validation checks
-Conditional (explicit hypotheses / dependencies)
-Future Lean formalization of prefab interfaces
-URF-SG certification hooks pending downstream schema alignment
-Open / reduction targets
-Formal prefab interface schema stabilization
-Lean skeleton for prefab composition
-Executable prefab validator beyond document checks
+# URF Prefab System Status
+
+## Scope
+
+Prefab system for standardized URF components, reusable invariants, and composable verification modules.
+
+## Core Layers
+
+- prefab invariants
+- component templates
+- verification hooks
+- composition interface
+
+## Status Labels
+
+- closed
+- conditional
+- open
+- archival
+
+## Current State
+
+- prefab definitions: active
+- composition layer: active
+- verification hooks: partial
+- full system closure: conditional
