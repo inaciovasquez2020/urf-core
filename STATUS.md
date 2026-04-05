@@ -26,11 +26,11 @@ python3 - <<'PY'
 from pathlib import Path
 p = Path("STATUS.md")
 s = p.read_text()
-s = s.replace("- verification hooks: partial", "- verification hooks: present")
+s = s.replace("- verification hooks: present", "- verification hooks: present")
 p.write_text(s)
 PY
 git add STATUS.md && \
 git commit -m "Resolve status line for verification hooks" && \
 git push origin HEAD:main- composition layer: active
-- verification hooks: partial
+- verification hooks: present
 - full system closure: conditional
