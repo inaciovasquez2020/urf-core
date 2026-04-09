@@ -1,0 +1,29 @@
+status: FINAL
+name: URF Simultaneous Stress Test
+short_name: SST-1
+version: 1.0.0
+domain_constraints:
+  locality_model: "FO^k_R admissible or local dynamical analogue"
+  preserved_gap_required: true
+regimes:
+  disordered:
+    condition: "alpha < 1"
+    time: "Omega(n)"
+  critical:
+    condition: "alpha = 1"
+    time: "Omega(n/log n)"
+  ordered:
+    condition: "alpha > 1"
+    time: "O(log n)"
+stress_tests:
+  complexity:
+    target: "L vs P"
+    obstruction: "I* orthogonal to logarithmic-reach descriptors"
+  biology:
+    target: "Morphogenesis"
+    obstruction: "diffusive local propagation implies Omega(n)"
+  adversarial:
+    target: "Gap attack"
+    obstruction: "spectral gap collapse leaks kernel"
+functional: "T >= H(I*) / Cap_step(alpha, lambda)"
+result: "Chronos Bound is locality-constrained evolution latency under preserved spectral gap"
