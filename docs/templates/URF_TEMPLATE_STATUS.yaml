@@ -1,0 +1,25 @@
+status: FINAL
+name: URF Unified Template
+version: 1.0.0
+components:
+  regimes:
+    alpha_lt_1: "Omega(n)"
+    alpha_eq_1: "Omega(n/log n)"
+    alpha_gt_1: "O(log n)"
+  kernel:
+    decomposition: "Sigma = Sigma_ker ⊕ Sigma_acc"
+    projection: "Pi_{k,R}(Sigma_ker) = 0"
+  chronos:
+    functional: "T ≥ H(I*) / Cap_step(alpha)"
+  capacity:
+    alpha_lt_1: "Theta(1)"
+    alpha_eq_1: "Theta(log n)"
+    alpha_gt_1: "Theta(n^gamma)"
+applications:
+  distributed: "Consensus lower bounds under locality"
+  quantum: "Topological protection via kernel"
+invariants:
+  - locality
+  - capacity
+  - topology
+result: "Phase-Dependent Rigidity"
