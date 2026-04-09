@@ -24,3 +24,5 @@ URF Core contains the foundational axioms, interfaces, and reference objects for
 - reference object: canonical
 - verification path: active
 - extension layers: external to core
+
+Status: acknowledgment integrated across core repos.
