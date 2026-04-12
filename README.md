@@ -43,3 +43,11 @@ If you utilize this core logic in your research, please cite it using the follow
   url    = {[https://github.com/inaciovasquez2020/urf-core](https://github.com/inaciovasquez2020/urf-core)}
 }
  (Cross-link scientific-infrastructure as canonical environment layer)
+
+## Repository role
+
+This repository is the canonical upstream for URF definitions, theorem statements, dependency ledgers, and closure claims.
+
+Community-additive examples, tests, implementations, and non-canonical extensions belong in `urf-core-community`.
+
+Exposition and release-facing documentation belong in `urf-textbook`.
