@@ -75,7 +75,7 @@ The current explicit route is:
 
 ## Next theorem objects
 
-1. Prove transport of quotient data across `D \sim D'`.
-2. Prove quotient descent of `\preceq`.
-3. Prove quotient descent of `\widehat{\mathcal C}`.
-4. Assemble unconditional finite-quotient admissibility.
+1. Prove quotient descent of `\preceq`.
+2. Prove quotient descent of `\widehat{\mathcal C}`.
+3. Assemble unconditional finite-quotient admissibility.
+4. Derive unconditional representation-invariant minimal augmentation.
