@@ -14,5 +14,7 @@ def test_eclipse_status_invariance_bridge_certified_lock():
     assert "\\operatorname{StatusTruthful}(\\mathcal P_0)" in text
     assert "\\operatorname{StatusInvariant}_A(\\mathcal P_0)." in text
     assert "\\operatorname{WitnessSet}(a(\\mathcal P_0))(k)=W_0(k)." in text
+    assert "\\operatorname{CertifiesStatus}(W_0(k),S,k)\\iff S=S_0(k)." in text
     assert "S_{a(\\mathcal P_0)}(k)=S_0(k)." in text
     assert "\\operatorname{StatusMap}(a(\\mathcal P_0))=\\operatorname{StatusMap}(\\mathcal P_0)." in text
+    assert "Parts \\(3a\\), \\(3b\\), and \\(3c\\)" in text
