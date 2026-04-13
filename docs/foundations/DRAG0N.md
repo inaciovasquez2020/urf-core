@@ -75,7 +75,7 @@ The current explicit route is:
 
 ## Next theorem objects
 
-1. Prove quotient descent of `\preceq`.
-2. Prove quotient descent of `\widehat{\mathcal C}`.
-3. Assemble unconditional finite-quotient admissibility.
-4. Derive unconditional representation-invariant minimal augmentation.
+1. Prove quotient descent of `\widehat{\mathcal C}`.
+2. Assemble unconditional finite-quotient admissibility.
+3. Derive unconditional representation-invariant minimal augmentation.
+4. Specialize the axioms to target domains.
