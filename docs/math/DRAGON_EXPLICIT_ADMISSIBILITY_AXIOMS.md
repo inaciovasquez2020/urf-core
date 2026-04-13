@@ -27,6 +27,8 @@ For fixed `k`, every admissible augmentation uses at most `k` primitive wall-typ
 
 The induced frontier partition datum `\Pi_D(Z,\pi)` takes values in a finite set `\mathfrak P_D^{(k)}`.
 
+Current standalone route: `docs/math/DRAGON_FINITE_PARTITION_IMAGE_LEMMA.md`.
+
 ### Axiom A4: Quantized score image
 
 For fixed `D` and `k`, the values of
