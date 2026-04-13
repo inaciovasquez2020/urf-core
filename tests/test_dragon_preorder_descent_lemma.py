@@ -14,5 +14,5 @@ def test_dragon_finite_quotient_points_to_preorder_descent():
 
 def test_dragon_foundation_updates_next_objects_after_transport():
     text = Path("docs/foundations/DRAG0N.md").read_text(encoding="utf-8")
-    assert "1. Prove quotient descent of `\\preceq`." in text
-    assert "4. Derive unconditional representation-invariant minimal augmentation." in text
+    assert "1. Prove quotient descent of `\\widehat{\\mathcal C}`." in text
+    assert "3. Derive unconditional representation-invariant minimal augmentation." in text
