@@ -67,6 +67,12 @@ where `\Pi_D` denotes the induced frontier partition data.
 
 The weakest remaining theorem object is `docs/math/DRAGON_FINITE_QUOTIENT_ADMISSIBILITY_LEMMA.md`.
 
+## Explicit finiteness route
+
+The current explicit route is:
+1. `docs/math/DRAGON_EXPLICIT_ADMISSIBILITY_AXIOMS.md`
+2. `docs/math/DRAGON_FINITE_QUOTIENT_FROM_EXPLICIT_AXIOMS.md`
+
 ## Next theorem objects
 
 1. Prove finiteness of `\mathcal M_{\mathrm{aug}}^{(k)}(D)/{\equiv}`.
