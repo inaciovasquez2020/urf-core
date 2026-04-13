@@ -23,7 +23,7 @@ Then:
 1. `\mathcal M_{\mathrm{aug}}^{(k)}(D)/{\equiv}` is finite.
 2. `\preceq` descends to a well-defined preorder on `\mathcal M_{\mathrm{aug}}^{(k)}(D)/{\equiv}`.
 3. `\widehat{\mathcal C}(D\mid Z,\pi)` is constant on `\equiv`-classes.
-4. If `D \sim D'`, then
+4. If `D \sim D'`, then by `docs/math/DRAGON_TRANSPORT_UNDER_DIAGNOSTIC_EQUIVALENCE_LEMMA.md`,
    \[
    \mathcal M_{\mathrm{aug}}^{(k)}(D)/{\equiv}\cong
    \mathcal M_{\mathrm{aug}}^{(k)}(D')/{\equiv}.
