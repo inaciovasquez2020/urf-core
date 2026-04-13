@@ -19,7 +19,7 @@ is finite.
 1. By A1 and A2, only finitely many primitive wall selections may occur.
 2. By A3, only finitely many partition data may occur.
 3. By A4, only finitely many score values may occur.
-4. By A5, an `\equiv`-class is determined by score value together with partition datum.
+4. By `docs/math/DRAGON_QUOTIENT_DETERMINACY_LEMMA.md`, an `\equiv`-class is determined by score value together with partition datum.
 5. Hence only finitely many `\equiv`-classes exist.
 
 ## Consequence
