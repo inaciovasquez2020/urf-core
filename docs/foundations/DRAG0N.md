@@ -51,9 +51,25 @@ D \sim D' \implies \widehat{\mathcal C}(D)=\widehat{\mathcal C}(D').
 
 Hence the induced minimal augmentation class is well-defined on equivalence classes.
 
+## Augmentation equivalence
+
+Define augmentation equivalence by
+\[
+(Z,\pi)\equiv(Z',\pi')
+\iff
+\widehat{\mathcal C}(D\mid Z,\pi)=\widehat{\mathcal C}(D\mid Z',\pi')
+\quad\text{and}\quad
+\Pi_D(Z,\pi)=\Pi_D(Z',\pi'),
+\]
+where `\Pi_D` denotes the induced frontier partition data.
+
+## Current unconditional frontier
+
+The weakest remaining theorem object is `docs/math/DRAGON_FINITE_QUOTIENT_ADMISSIBILITY_LEMMA.md`.
+
 ## Next theorem objects
 
-1. Define augmentation equivalence `\equiv`.
-2. Prove downward closure of admissible `\tau`-achievers.
-3. Prove existence of `\preceq`-minimal elements in the quotient.
-4. Prove transport of minimal classes across `D \sim D'`.
+1. Prove finiteness of `\mathcal M_{\mathrm{aug}}^{(k)}(D)/{\equiv}`.
+2. Prove quotient descent of `\preceq`.
+3. Prove quotient descent of `\widehat{\mathcal C}`.
+4. Prove transport of quotient data across `D \sim D'`.
