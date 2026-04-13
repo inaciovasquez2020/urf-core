@@ -10,7 +10,10 @@ Conditional.
 - `ECLIPSE_WITNESS_STATUS_EXCLUSIVITY.md`
 - `ECLIPSE_WITNESS_STATUS_UNIQUENESS_CERTIFIED.md`
 - `ECLIPSE_WITNESS_PRESERVATION_POINTWISE.md`
+- `ECLIPSE_AUDIT_WITNESS_EXTRACTION.md`
+- `ECLIPSE_STATUS_TRUTHFUL_WITNESS_DETERMINACY.md`
 - `ECLIPSE_STATUS_INVARIANCE_FROM_WITNESS_PRESERVATION.md`
+- `ECLIPSE_STATUS_INVARIANCE_BRIDGE_COMPOSITION.md`
 - `ECLIPSE_STATUS_INVARIANCE_BRIDGE_CERTIFIED.md`
 - `ECLIPSE_RECONSTRUCTION_STABILITY_FROM_EXTERNAL_REPRODUCIBILITY.md`
 - `ECLIPSE_DEPENDENCY_INVARIANCE_FROM_CLOSURE.md`
@@ -35,6 +38,28 @@ Conditional.
 \]
 
 is structurally locked.
+
+## Bridge-support status
+
+\[
+\text{Witness-status uniqueness chain}=\text{locked}.
+\]
+
+\[
+\text{Audit-to-witness extraction}=\text{locked}.
+\]
+
+\[
+\text{Truthful-witness determinacy}=\text{locked}.
+\]
+
+\[
+\text{Status-invariance bridge composition}=\text{locked}.
+\]
+
+\[
+\text{Status-invariance bridge certified assembly}=\text{locked}.
+\]
 
 ## Exact theorem status
 
