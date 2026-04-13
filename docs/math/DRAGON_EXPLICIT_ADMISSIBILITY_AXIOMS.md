@@ -23,6 +23,8 @@ Every admissible augmentation `(Z,\pi)\in\mathcal M_{\mathrm{aug}}^{(k)}(D)` is 
 
 For fixed `k`, every admissible augmentation uses at most `k` primitive wall-types.
 
+Current standalone route: `docs/math/DRAGON_FINITE_WALL_ALPHABET_LEMMA.md`.
+
 ### Axiom A3: Finite partition data
 
 The induced frontier partition datum `\Pi_D(Z,\pi)` takes values in a finite set `\mathfrak P_D^{(k)}`.
