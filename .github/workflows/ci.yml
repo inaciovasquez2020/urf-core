@@ -1,15 +1,32 @@
 name: CI
+
 on:
   workflow_dispatch:
   push:
   pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Python tests
         run: |
           python3 -m pip install --upgrade pip
           pip install pytest networkx numpy || true
-          if [ -d tests ]; then pytest -q; fi
+          pytest -q \
+            tests/test_eclipse_witness_status_certification.py \
+            tests/test_eclipse_witness_status_exclusivity.py \
+            tests/test_eclipse_witness_status_uniqueness_certified.py \
+            tests/test_eclipse_witness_preservation_pointwise.py \
+            tests/test_eclipse_status_invariance_from_witness_preservation.py \
+            tests/test_eclipse_status_invariance_bridge_certified.py \
+            tests/test_eclipse_reconstruction_stability_from_external_reproducibility.py \
+            tests/test_eclipse_dependency_invariance_from_closure.py \
+            tests/test_eclipse_concrete_assembly.py \
+            tests/test_eclipse_extensionality_certified.py \
+            tests/test_eclipse_general_reverse_lift.py \
+            tests/test_eclipse_forward_implication.py \
+            tests/test_eclipse_equivalence.py \
+            tests/test_eclipse_closure_snapshot.py
