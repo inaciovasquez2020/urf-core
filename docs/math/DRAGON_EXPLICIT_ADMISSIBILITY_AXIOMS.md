@@ -35,6 +35,8 @@ For fixed `D` and `k`, the values of
 \]
 on admissible augmentations belong to a finite set `\mathfrak C_D^{(k)}`.
 
+Current standalone route: `docs/math/DRAGON_FINITE_SCORE_IMAGE_LEMMA.md`.
+
 ### Axiom A5: Quotient compatibility
 
 If
