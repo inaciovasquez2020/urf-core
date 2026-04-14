@@ -1,0 +1,31 @@
+{
+  "lemma_id": "PL-0006",
+  "status": "open",
+  "witness": "Final Poincare-deduction layer built on the finite-extinction interface.",
+  "assumptions": [
+    "PL-0005 replay interface available",
+    "Closed simply connected three-manifold case",
+    "Morgan-Tian proof-path hypotheses for the deduction from finite extinction to the Poincare conclusion"
+  ],
+  "conclusion": "Finite extinction, together with the preceding Ricci-flow-with-surgery framework, yields the Poincare conclusion in the replay chain.",
+  "dependency_inputs": [
+    "PL-0005"
+  ],
+  "source_to_claim_map": [
+    {
+      "source": "morgan_tian",
+      "locator": "Section 98-100",
+      "claim": "Final deduction of the Poincare conclusion from the finite-extinction layer"
+    }
+  ],
+  "local_verification_notes": [
+    "Exact deduction statement still to be normalized verbatim.",
+    "Need explicit downstream interface from PL-0005 into the final deduction step.",
+    "Quantifier-level replay remains open."
+  ],
+  "open_gaps": [
+    "Need exact normalized deduction statement.",
+    "Need precise PL-0005-to-PL-0006 interface.",
+    "Need precise hypothesis-to-conclusion transcription."
+  ]
+}
