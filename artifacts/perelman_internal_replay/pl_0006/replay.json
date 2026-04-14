@@ -29,7 +29,7 @@
     "Need precise hypothesis-to-conclusion transcription."
   ],
   "verbatim_source_excerpt": "TO_BE_FILLED_FROM_SOURCE",
-  "normalized_statement": "The final topological deduction closes the simply connected three-dimensional case by combining the finite-extinction layer with the previously established replay chain.",
+  "normalized_statement": "Finite extinction, combined with the preceding Ricci-flow-with-surgery framework, yields the Poincare conclusion for closed simply connected three-manifolds.",
   "normalization_notes": [
     "Replace placeholder excerpt with exact source text from Morgan-Tian, Section 98-100.",
     "Current normalized statement is structural and still requires exact theorem-level normalization."
