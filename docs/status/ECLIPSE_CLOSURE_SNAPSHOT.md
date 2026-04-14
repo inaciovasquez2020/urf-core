@@ -111,6 +111,10 @@ Conditional.
 \text{Structural lock phase}=\text{complete}.
 \[
 \text{Theorem-certification phase}=\text{open}.
+\[
+\text{Unconditional Eclipse equivalence}=\text{not proved}.
+\]
+
 \]
 
 \]
