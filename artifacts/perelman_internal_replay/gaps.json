@@ -1,0 +1,35 @@
+{
+  "status": "open",
+  "gaps": [
+    {
+      "id": "PG-0001",
+      "lemma_id": "PL-0002",
+      "kind": "missing_statement",
+      "status": "open"
+    },
+    {
+      "id": "PG-0002",
+      "lemma_id": "PL-0003",
+      "kind": "missing_statement",
+      "status": "open"
+    },
+    {
+      "id": "PG-0003",
+      "lemma_id": "PL-0004",
+      "kind": "missing_statement",
+      "status": "open"
+    },
+    {
+      "id": "PG-0004",
+      "lemma_id": "PL-0005",
+      "kind": "missing_statement",
+      "status": "open"
+    },
+    {
+      "id": "PG-0005",
+      "lemma_id": "PL-0006",
+      "kind": "missing_statement",
+      "status": "open"
+    }
+  ]
+}

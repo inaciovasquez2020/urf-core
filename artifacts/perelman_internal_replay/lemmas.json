@@ -1,0 +1,65 @@
+{
+  "status": "open",
+  "lemmas": [
+    {
+      "id": "PL-0001",
+      "section": "Global proof graph",
+      "statement": "Top-level target theorem for the Poincare Conjecture through the Perelman proof path.",
+      "source": "morgan_tian",
+      "source_locator": "global",
+      "dependencies": [],
+      "status": "open",
+      "notes": "Root theorem node."
+    },
+    {
+      "id": "PL-0002",
+      "section": "No local collapsing",
+      "statement": "",
+      "source": "perelman_2002_entropy",
+      "source_locator": "",
+      "dependencies": [],
+      "status": "open",
+      "notes": ""
+    },
+    {
+      "id": "PL-0003",
+      "section": "Canonical neighborhoods",
+      "statement": "",
+      "source": "perelman_2003_surgery",
+      "source_locator": "",
+      "dependencies": ["PL-0002"],
+      "status": "open",
+      "notes": ""
+    },
+    {
+      "id": "PL-0004",
+      "section": "Surgery and continuation",
+      "statement": "",
+      "source": "perelman_2003_surgery",
+      "source_locator": "",
+      "dependencies": ["PL-0002", "PL-0003"],
+      "status": "open",
+      "notes": ""
+    },
+    {
+      "id": "PL-0005",
+      "section": "Finite extinction",
+      "statement": "",
+      "source": "perelman_2003_finite_extinction",
+      "source_locator": "",
+      "dependencies": ["PL-0004"],
+      "status": "open",
+      "notes": ""
+    },
+    {
+      "id": "PL-0006",
+      "section": "Poincare deduction",
+      "statement": "",
+      "source": "morgan_tian",
+      "source_locator": "",
+      "dependencies": ["PL-0005"],
+      "status": "open",
+      "notes": ""
+    }
+  ]
+}
