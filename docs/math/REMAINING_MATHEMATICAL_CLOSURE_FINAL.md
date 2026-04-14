@@ -225,3 +225,18 @@ Conditional.
 \mathbf{SDP}\Rightarrow \mathbf{UEP}
 }
 \]
+
+## Coercive Gradient Inequality
+
+\[
+\boxed{
+\mathbf{CGI}:\ 
+\Phi(G)-\Phi(\mathcal D_{\mathrm{sec}}G)
+\le c_{k,\Delta,R}\cdot \partial_{\mathrm{sec}}(G)
+}
+\]
+
+\[
+\boxed{
+\mathbf{CGI}\Rightarrow \mathbf{SDP}
+}
