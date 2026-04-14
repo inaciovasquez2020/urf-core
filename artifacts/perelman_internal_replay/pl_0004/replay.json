@@ -1,0 +1,33 @@
+{
+  "lemma_id": "PL-0004",
+  "status": "open",
+  "witness": "Surgery-and-continuation layer built on the no-local-collapsing and canonical-neighborhood interfaces.",
+  "assumptions": [
+    "PL-0002 replay interface available",
+    "PL-0003 replay interface available",
+    "Three-dimensional Ricci-flow setting",
+    "Surgery framework hypotheses as used in Perelman 2003 surgery paper"
+  ],
+  "conclusion": "Ricci flow with surgery can be continued through singular times in the form required by the finite-extinction layer.",
+  "dependency_inputs": [
+    "PL-0002",
+    "PL-0003"
+  ],
+  "source_to_claim_map": [
+    {
+      "source": "perelman_2003_surgery",
+      "locator": "Section 73-77",
+      "claim": "Continuation through surgery times with required structural estimates preserved"
+    }
+  ],
+  "local_verification_notes": [
+    "Exact theorem statement still to be normalized verbatim.",
+    "Need explicit downstream interface from PL-0003 into the surgery step.",
+    "Quantifier-level replay remains open."
+  ],
+  "open_gaps": [
+    "Need exact normalized theorem statement.",
+    "Need precise PL-0002/PL-0003-to-PL-0004 interface.",
+    "Need precise hypothesis-to-conclusion transcription."
+  ]
+}
