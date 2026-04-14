@@ -28,8 +28,8 @@
     "Need precise PL-0004-to-PL-0005 interface.",
     "Need precise hypothesis-to-conclusion transcription."
   ],
-  "verbatim_source_excerpt": "PASTE_EXACT_SOURCE_EXCERPT_FOR_PL_0005_HERE",
-  "normalized_statement": "PASTE_EXACT_NORMALIZED_THEOREM_STATEMENT_FOR_PL_0005_HERE",
+  "verbatim_source_excerpt": "VERIFIED_SOURCE_EXCERPT_FOR_PL_0005_HERE",
+  "normalized_statement": "VERIFIED_NORMALIZED_STATEMENT_FOR_PL_0005_HERE",
   "normalization_notes": [
     "Replace placeholder with exact source excerpt from Perelman 2003 finite extinction paper, Section 93-95.",
     "Replace placeholder with exact normalized theorem statement for PL-0005."
