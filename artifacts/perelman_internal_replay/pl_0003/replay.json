@@ -1,0 +1,31 @@
+{
+  "lemma_id": "PL-0003",
+  "status": "open",
+  "witness": "Canonical-neighborhood control layer derived downstream of the no-local-collapsing layer.",
+  "assumptions": [
+    "PL-0002 replay interface available",
+    "Three-dimensional Ricci-flow setting",
+    "High-curvature regime hypotheses as used in Perelman 2003 surgery paper"
+  ],
+  "conclusion": "Canonical-neighborhood control is available in the form required by the surgery-continuation layer.",
+  "dependency_inputs": [
+    "PL-0002"
+  ],
+  "source_to_claim_map": [
+    {
+      "source": "perelman_2003_surgery",
+      "locator": "Section 67-69",
+      "claim": "Canonical-neighborhood control used downstream in the surgery framework"
+    }
+  ],
+  "local_verification_notes": [
+    "Exact theorem statement still to be normalized verbatim.",
+    "Dependency interface from PL-0002 still requires explicit transcription.",
+    "Quantifier-level replay remains open."
+  ],
+  "open_gaps": [
+    "Need exact normalized theorem statement.",
+    "Need precise PL-0002-to-PL-0003 interface.",
+    "Need precise hypothesis-to-conclusion transcription."
+  ]
+}
