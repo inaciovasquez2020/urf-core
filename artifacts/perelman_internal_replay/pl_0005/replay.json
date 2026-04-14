@@ -28,10 +28,10 @@
     "Need precise PL-0004-to-PL-0005 interface.",
     "Need precise hypothesis-to-conclusion transcription."
   ],
-  "verbatim_source_excerpt": "TO_BE_FILLED_FROM_SOURCE",
-  "normalized_statement": "For the simply connected case relevant to Poincare, the surgically modified Ricci-flow solution becomes extinct in finite time.",
+  "verbatim_source_excerpt": "PASTE_EXACT_SOURCE_EXCERPT_FOR_PL_0005_HERE",
+  "normalized_statement": "PASTE_EXACT_NORMALIZED_THEOREM_STATEMENT_FOR_PL_0005_HERE",
   "normalization_notes": [
-    "Replace placeholder excerpt with exact source text from Perelman 2003 finite extinction paper, Section 93-95.",
-    "Current normalized statement is structural and still requires exact theorem-level normalization."
+    "Replace placeholder with exact source excerpt from Perelman 2003 finite extinction paper, Section 93-95.",
+    "Replace placeholder with exact normalized theorem statement for PL-0005."
   ]
 }
