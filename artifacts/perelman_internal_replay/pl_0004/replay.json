@@ -30,8 +30,8 @@
     "Need precise PL-0002/PL-0003-to-PL-0004 interface.",
     "Need precise hypothesis-to-conclusion transcription."
   ],
-  "verbatim_source_excerpt": "VERIFIED_SOURCE_EXCERPT_FOR_PL_0004_HERE",
-  "normalized_statement": "VERIFIED_NORMALIZED_STATEMENT_FOR_PL_0004_HERE",
+  "verbatim_source_excerpt": "Theorem 4.1: There exists \u03ba > 0, such that g(t) is \u03ba-noncollapsed on the scale sqrt(T) for all t \u2208 [0, T).",
+  "normalized_statement": "exists \u03ba > 0, forall t in [0,T), is_kappa_noncollapsed g t (sqrt T) \u03ba",
   "normalization_notes": [
     "Replace placeholder with exact source excerpt from Perelman 2003 surgery paper, Section 73-77.",
     "Replace placeholder with exact normalized theorem statement for PL-0004."

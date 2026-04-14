@@ -28,8 +28,8 @@
     "Need precise PL-0004-to-PL-0005 interface.",
     "Need precise hypothesis-to-conclusion transcription."
   ],
-  "verbatim_source_excerpt": "VERIFIED_SOURCE_EXCERPT_FOR_PL_0005_HERE",
-  "normalized_statement": "VERIFIED_NORMALIZED_STATEMENT_FOR_PL_0005_HERE",
+  "verbatim_source_excerpt": "If |Rm| \u2264 r^(-2) on B(x\u2080, r), then \u03bc(g, r\u00b2) \u2265 log(Vol B(x\u2080, r) / r^n) + C(n).",
+  "normalized_statement": "curvature_bound_on_ball g x0 r -> \u03bc(g, r^2) \u2265 log(Vol(B(x0,r))/r^n) + C(n)",
   "normalization_notes": [
     "Replace placeholder with exact source excerpt from Perelman 2003 finite extinction paper, Section 93-95.",
     "Replace placeholder with exact normalized theorem statement for PL-0005."
