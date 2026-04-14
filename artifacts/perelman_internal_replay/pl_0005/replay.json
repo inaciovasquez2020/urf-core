@@ -1,0 +1,31 @@
+{
+  "lemma_id": "PL-0005",
+  "status": "open",
+  "witness": "Finite-extinction layer built on the surgery-and-continuation interface.",
+  "assumptions": [
+    "PL-0004 replay interface available",
+    "Simply connected three-manifold case",
+    "Ricci-flow-with-surgery framework hypotheses as used in Perelman 2003 finite extinction paper"
+  ],
+  "conclusion": "The surgically modified Ricci-flow solution becomes extinct in finite time in the form required by the final Poincare deduction layer.",
+  "dependency_inputs": [
+    "PL-0004"
+  ],
+  "source_to_claim_map": [
+    {
+      "source": "perelman_2003_finite_extinction",
+      "locator": "Section 93-95",
+      "claim": "Finite extinction in the simply connected case used downstream for the Poincare conclusion"
+    }
+  ],
+  "local_verification_notes": [
+    "Exact theorem statement still to be normalized verbatim.",
+    "Need explicit downstream interface from PL-0004 into the finite-extinction step.",
+    "Quantifier-level replay remains open."
+  ],
+  "open_gaps": [
+    "Need exact normalized theorem statement.",
+    "Need precise PL-0004-to-PL-0005 interface.",
+    "Need precise hypothesis-to-conclusion transcription."
+  ]
+}
