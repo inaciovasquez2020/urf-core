@@ -7,39 +7,56 @@ Status: OPEN.
 \begin{minipage}{0.93\linewidth}
 \textbf{Finite-Type Spectral Separation Theorem.}
 
-FSS(k,\Delta,R)
-
-lambda := \lambda_2(L_{G,R})
-
-
-Define this target theorem shorthand by
+Let
 \[
-FSS(k,\Delta,R).
+\mathcal T_{k,\Delta,R}=\{\,\tau_1,\dots,\tau_N\,\}
 \]
-Fix \(k,\Delta,R\). There exist constants
+be the finite set of rooted radius-\(R\) \(k\)-types of connected graphs of maximum degree \(\le \Delta\). For each finite connected graph \(G\) of maximum degree \(\le\Delta\), let
+\[
+\pi_{G,R}\in \Delta(\mathcal T_{k,\Delta,R})
+\]
+be the empirical rooted-type distribution, and let
+\[
+L_{G,R}\in \mathrm{Sym}_N(\mathbb R)
+\]
+be the canonical self-adjoint finite-type transition operator extracted from the rooted radius-\(R\) adjacency transport on \(\mathcal T_{k,\Delta,R}\).
+
+Define
+\[
+Q_R(G):=Z_1(G)/Z_1^{\le 2R+1}(G).
+\]
+
+Then there exist constants
 \[
 \varepsilon=\varepsilon(k,\Delta,R)>0,\qquad C=C(k,\Delta,R)<\infty
 \]
-such that for every finite connected graph \(G\) of maximum degree \(\le \Delta\), with local cycle-rank quotient
+such that for every finite connected \(G\) with
 \[
-Q_R(G):=Z_1(G)/Z_1^{\le 2R+1}(G),
+\dim_{\mathbb F_2}Q_R(G)\ge C,
 \]
-the following holds.
+the restricted operator
+\[
+L_{G,R}\big|_{\mathbf 1^\perp}
+\]
+has spectral gap at least \(\varepsilon\), i.e.
+\[
+\lambda_2(L_{G,R})\ge \varepsilon,
+\]
+equivalently,
+\[
+\forall v\in \mathbf 1^\perp\setminus\{0\},\qquad
+\frac{\langle L_{G,R}v,v\rangle}{\|v\|^2}\ge \varepsilon
+\]
+for some nonzero \(v\in\mathbf 1^\perp\).
 
-If \(\dim_{\mathbb F_2} Q_R(G)\ge C\), then there exists a finite-dimensional self-adjoint operator
+Abbreviation:
 \[
-L_{G,R}
-\]
-canonically extracted from the radius-\(R\) rooted-type transition system of \(G\), together with a vector
-\[
-v_{G,R}\perp \mathbf 1,
-\]
-such that
-\[
-\frac{\langle L_{G,R}v_{G,R},v_{G,R}\rangle}{\|v_{G,R}\|^2}\ge \varepsilon.
+\mathrm{FSS}(k,\Delta,R).
 \]
 
-Equivalently, sufficiently large nontrivial quotient cycle-rank forces a uniform positive spectral gap on the nonconstant finite-type sector.
+FSS(k,\Delta,R)
+
+lambda := \lambda_2(L_{G,R})
 \end{minipage}
 }
 \]
