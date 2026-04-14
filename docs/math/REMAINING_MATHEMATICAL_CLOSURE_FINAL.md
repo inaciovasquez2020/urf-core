@@ -121,3 +121,29 @@ Conditional.
 (\mathbf{SS}\wedge \mathbf{MC})\Rightarrow \text{Global coercivity}.
 }
 \]
+
+## Next Benchmark-Level Sub-Lemmas
+
+\[
+\boxed{
+\mathbf{SSW}=\text{benchmark witness-sequence exclusion under }\mathbf{SS}
+}
+\]
+
+\[
+\boxed{
+\mathbf{LCRB}_{\mathcal B}=\text{benchmark-family local cycle-rank bound under }\mathbf{LCRB}
+}
+\]
+
+\[
+\boxed{
+\mathbf{SSW}\Rightarrow \text{benchmark support for }\mathbf{SS}
+}
+\]
+
+\[
+\boxed{
+\mathbf{LCRB}_{\mathcal B}\Rightarrow \text{benchmark support for }\mathbf{LCRB}
+}
+\]
