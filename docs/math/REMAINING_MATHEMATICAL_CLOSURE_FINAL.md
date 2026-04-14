@@ -199,3 +199,29 @@ Conditional.
 \mathbf{UEP}\Rightarrow \mathbf{TBA}
 }
 \]
+
+## BlAA-Core Sector-Deletion Layer
+
+\[
+\boxed{
+\mathbf{SDP}=\text{Sector-Deletion Preservation}
+}
+\]
+
+\[
+\boxed{
+\mathcal D_{\mathrm{sec}}=\text{sector-deletion operator}
+}
+\]
+
+\[
+\boxed{
+\mathbf{MCE}_{\mathrm{SDP}}=\text{minimal counterexample to }\mathbf{SDP}
+}
+\]
+
+\[
+\boxed{
+\mathbf{SDP}\Rightarrow \mathbf{UEP}
+}
+\]
