@@ -1,0 +1,22 @@
+[
+  {
+    "graph_id": "G_expander_like_001",
+    "candidate_lambda_sep": 1.0,
+    "status": "non_witness_in_v1"
+  },
+  {
+    "graph_id": "G_gadget_001",
+    "candidate_lambda_sep": 1.0,
+    "status": "non_witness_in_v1"
+  },
+  {
+    "graph_id": "G_tree_001",
+    "candidate_lambda_sep": 1.0,
+    "status": "non_witness_in_v1"
+  },
+  {
+    "graph_id": "G_unicyclic_001",
+    "candidate_lambda_sep": 1.0,
+    "status": "non_witness_in_v1"
+  }
+]
