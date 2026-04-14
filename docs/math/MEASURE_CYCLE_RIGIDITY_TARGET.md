@@ -6,6 +6,14 @@ Status: OPEN.
 \boxed{
 \begin{minipage}{0.93\linewidth}
 \textbf{Measure-Cycle Coercivity Theorem.}
+
+MCR(k,\Delta,R)
+
+
+Define this target theorem shorthand by
+\[
+MCR(k,\Delta,R).
+\]
 Fix \(k,\Delta,R\). There exist constants
 \[
 \eta=\eta(k,\Delta,R)>0,\qquad C=C(k,\Delta,R)<\infty
