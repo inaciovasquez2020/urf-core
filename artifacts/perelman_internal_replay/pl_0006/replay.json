@@ -28,10 +28,10 @@
     "Need precise PL-0005-to-PL-0006 interface.",
     "Need precise hypothesis-to-conclusion transcription."
   ],
-  "verbatim_source_excerpt": "TO_BE_FILLED_FROM_SOURCE",
-  "normalized_statement": "Finite extinction, combined with the preceding Ricci-flow-with-surgery framework, yields the Poincare conclusion for closed simply connected three-manifolds.",
+  "verbatim_source_excerpt": "PASTE_EXACT_SOURCE_EXCERPT_FOR_PL_0006_HERE",
+  "normalized_statement": "PASTE_EXACT_NORMALIZED_THEOREM_STATEMENT_FOR_PL_0006_HERE",
   "normalization_notes": [
-    "Replace placeholder excerpt with exact source text from Morgan-Tian, Section 98-100.",
-    "Current normalized statement is structural and still requires exact theorem-level normalization."
+    "Replace placeholder with exact source excerpt from Morgan-Tian, Section 98-100.",
+    "Replace placeholder with exact normalized theorem statement for PL-0006."
   ]
 }
