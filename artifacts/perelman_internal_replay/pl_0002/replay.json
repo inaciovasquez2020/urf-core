@@ -1,0 +1,27 @@
+{
+  "lemma_id": "PL-0002",
+  "status": "open",
+  "witness": "No-local-collapsing control layer required for downstream canonical-neighborhood and surgery steps.",
+  "assumptions": [
+    "Three-dimensional Ricci-flow setting",
+    "Hypotheses as recorded in Perelman 2002 entropy paper for the no-local-collapsing theorem"
+  ],
+  "conclusion": "A noncollapsing estimate is available in the form needed by the replay chain.",
+  "dependency_inputs": [],
+  "source_to_claim_map": [
+    {
+      "source": "perelman_2002_entropy",
+      "locator": "Section 26-27",
+      "claim": "No-local-collapsing control used downstream in the proof path"
+    }
+  ],
+  "local_verification_notes": [
+    "Exact theorem statement still to be normalized verbatim.",
+    "Quantifier-level replay remains open."
+  ],
+  "open_gaps": [
+    "Need exact normalized theorem statement.",
+    "Need precise hypothesis-to-conclusion transcription.",
+    "Need explicit downstream interface to PL-0003."
+  ]
+}
