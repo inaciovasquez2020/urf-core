@@ -9,3 +9,7 @@ urc-minimal-blockchain/
 # benchmark python cache
 docs/benchmarks/cycle_local_rigidity/**/__pycache__/
 docs/benchmarks/cycle_local_rigidity/**/*.pyc
+
+# python cache
+**/__pycache__/
+**/*.pyc
