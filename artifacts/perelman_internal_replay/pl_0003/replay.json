@@ -27,5 +27,8 @@
     "Need exact normalized theorem statement.",
     "Need precise PL-0002-to-PL-0003 interface.",
     "Need precise hypothesis-to-conclusion transcription."
-  ]
+  ],
+  "verbatim_source_excerpt": "",
+  "normalized_statement": "",
+  "normalization_notes": []
 }
