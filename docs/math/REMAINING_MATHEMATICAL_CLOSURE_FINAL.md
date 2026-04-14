@@ -240,3 +240,17 @@ Conditional.
 \boxed{
 \mathbf{CGI}\Rightarrow \mathbf{SDP}
 }
+
+## Local Change Bound Layer
+
+\[
+\boxed{
+\mathbf{LCB}:\ 
+|\Delta_e \Phi(G)|\le C_{k,\Delta,R}
+}
+\]
+
+\[
+\boxed{
+\mathbf{LCB}\Rightarrow \mathbf{CGI}
+}
