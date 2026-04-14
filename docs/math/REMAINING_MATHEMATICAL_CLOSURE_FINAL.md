@@ -147,3 +147,27 @@ Conditional.
 \mathbf{LCRB}_{\mathcal B}\Rightarrow \text{benchmark support for }\mathbf{LCRB}
 }
 \]
+
+## Benchmark Estimator / Surrogate Layer
+
+\[
+\boxed{
+\widehat{\lambda}_{\mathrm{sep}}^{\mathcal B}
+=
+\text{locked estimator under }\mathbf{SSW}
+}
+\]
+
+\[
+\boxed{
+\widehat{C}_2^{\mathcal B}
+=
+\text{locked surrogate under }\mathbf{LCRB}_{\mathcal B}
+}
+\]
+
+\[
+\boxed{
+\text{Empirical promotion of }\mathbf{SSW}\text{ or }\mathbf{LCRB}_{\mathcal B}\text{ is not admissible without a theorem bridge.}
+}
+\]
