@@ -182,3 +182,20 @@ Conditional.
 \lambda_{\mathrm{sep}}
 }
 \]
+
+## Uniform Extension Principle
+
+\[
+\boxed{
+\mathbf{UEP}:\ 
+\mathcal B_{k,\Delta,R}
+\Rightarrow
+\mathcal G_{k,\Delta,R}
+}
+\]
+
+\[
+\boxed{
+\mathbf{UEP}\Rightarrow \mathbf{TBA}
+}
+\]
