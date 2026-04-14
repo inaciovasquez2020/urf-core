@@ -1,0 +1,38 @@
+{
+  "lemma_id": "PL-0001",
+  "status": "open",
+  "witness": "Root theorem node combining PL-0002 through PL-0006 into the final Poincare conclusion.",
+  "assumptions": [
+    "PL-0002 replay interface available",
+    "PL-0003 replay interface available",
+    "PL-0004 replay interface available",
+    "PL-0005 replay interface available",
+    "PL-0006 replay interface available",
+    "Closed simply connected three-manifold case"
+  ],
+  "conclusion": "The Poincare Conjecture follows once PL-0002 through PL-0006 are internally discharged and composed.",
+  "dependency_inputs": [
+    "PL-0002",
+    "PL-0003",
+    "PL-0004",
+    "PL-0005",
+    "PL-0006"
+  ],
+  "source_to_claim_map": [
+    {
+      "source": "morgan_tian",
+      "locator": "global",
+      "claim": "Global proof-graph composition from the verified Perelman proof path to the Poincare conclusion"
+    }
+  ],
+  "local_verification_notes": [
+    "Exact global composition statement still to be normalized verbatim.",
+    "Need explicit composition map from PL-0002 through PL-0006 into the root theorem.",
+    "Quantifier-level replay remains open."
+  ],
+  "open_gaps": [
+    "Need exact normalized global composition statement.",
+    "Need precise PL-0002/PL-0003/PL-0004/PL-0005/PL-0006-to-PL-0001 interface.",
+    "Need precise hypothesis-to-conclusion transcription."
+  ]
+}
