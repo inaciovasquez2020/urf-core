@@ -171,3 +171,14 @@ Conditional.
 \text{Empirical promotion of }\mathbf{SSW}\text{ or }\mathbf{LCRB}_{\mathcal B}\text{ is not admissible without a theorem bridge.}
 }
 \]
+
+## Theorem Bridge Axiom
+
+\[
+\boxed{
+\mathbf{TBA}:\ 
+\widehat{\lambda}_{\mathrm{sep}}^{\mathcal B}
+\Rightarrow
+\lambda_{\mathrm{sep}}
+}
+\]
