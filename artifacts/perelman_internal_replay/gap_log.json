@@ -1,0 +1,8 @@
+{
+  "status": "open",
+  "gaps": [
+    "No lemma-by-lemma replay recorded",
+    "No dependency closure recorded",
+    "No internal proof-object normalization recorded"
+  ]
+}
