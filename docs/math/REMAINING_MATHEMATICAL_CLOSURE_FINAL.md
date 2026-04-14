@@ -101,3 +101,23 @@ Conditional.
 \[
 \text{Global coercivity}=\text{conditional}
 \]
+
+## Terminal Theorem Objects
+
+\[
+\boxed{
+\mathbf{SS}=\text{Finite-type spectral separation}
+}
+\]
+
+\[
+\boxed{
+\mathbf{MC}=\text{Measure-cycle coercivity}
+}
+\]
+
+\[
+\boxed{
+(\mathbf{SS}\wedge \mathbf{MC})\Rightarrow \text{Global coercivity}.
+}
+\]
