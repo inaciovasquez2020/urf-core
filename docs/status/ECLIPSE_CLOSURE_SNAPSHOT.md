@@ -167,5 +167,13 @@ Conditional.
 \text{Unconditional Eclipse equivalence}=\text{not proved}.
 \]
 
+\[
+\text{Terminal obstruction}=\text{DraG0n Completeness}.
+\]
+
+\[
+\text{Lock order}=7 \prec 3 \prec 1 \prec 2 \prec 6 \prec 5 \prec 8 \prec 4.
+\]
+
 ## Terminal missing object
 
