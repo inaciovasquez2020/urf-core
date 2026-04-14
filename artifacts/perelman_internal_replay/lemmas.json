@@ -9,21 +9,35 @@
       "source_locator": "global",
       "dependencies": [],
       "status": "open",
+<<<<<<< HEAD
       "notes": "Top-level theorem target node for the replay DAG."
+=======
+      "notes": "Root theorem node."
+>>>>>>> origin/main
     },
     {
       "id": "PL-0002",
       "section": "No local collapsing",
+<<<<<<< HEAD
       "statement": "Perelman's no-local-collapsing theorem supplies the noncollapsing control required for subsequent canonical-neighborhood and surgery arguments in the three-dimensional Ricci-flow proof path.",
       "source": "perelman_2002_entropy",
       "source_locator": "Section 26-27",
       "dependencies": [],
       "status": "open",
       "notes": "Replay target for the noncollapsing control layer used downstream in the surgery proof path."
+=======
+      "statement": "",
+      "source": "perelman_2002_entropy",
+      "source_locator": "",
+      "dependencies": [],
+      "status": "open",
+      "notes": ""
+>>>>>>> origin/main
     },
     {
       "id": "PL-0003",
       "section": "Canonical neighborhoods",
+<<<<<<< HEAD
       "statement": "Canonical-neighborhood control holds at high-curvature regions under the noncollapsing and curvature assumptions used in the surgery framework.",
       "source": "perelman_2003_surgery",
       "source_locator": "Section 67-69",
@@ -32,10 +46,19 @@
       ],
       "status": "open",
       "notes": "Replay target for the canonical-neighborhood layer derived after noncollapsing control."
+=======
+      "statement": "",
+      "source": "perelman_2003_surgery",
+      "source_locator": "",
+      "dependencies": ["PL-0002"],
+      "status": "open",
+      "notes": ""
+>>>>>>> origin/main
     },
     {
       "id": "PL-0004",
       "section": "Surgery and continuation",
+<<<<<<< HEAD
       "statement": "Ricci flow with surgery can be continued through singular times while preserving the structural estimates required by the proof path.",
       "source": "perelman_2003_surgery",
       "source_locator": "Section 73-77",
@@ -45,10 +68,19 @@
       ],
       "status": "open",
       "notes": "Replay target for continuation through surgery times with required structural estimates preserved."
+=======
+      "statement": "",
+      "source": "perelman_2003_surgery",
+      "source_locator": "",
+      "dependencies": ["PL-0002", "PL-0003"],
+      "status": "open",
+      "notes": ""
+>>>>>>> origin/main
     },
     {
       "id": "PL-0005",
       "section": "Finite extinction",
+<<<<<<< HEAD
       "statement": "For the simply connected case relevant to Poincare, the surgically modified Ricci-flow solution becomes extinct in finite time.",
       "source": "perelman_2003_finite_extinction",
       "source_locator": "Section 93-95",
@@ -57,10 +89,19 @@
       ],
       "status": "open",
       "notes": "Replay target for the finite-extinction layer in the simply connected three-manifold case."
+=======
+      "statement": "",
+      "source": "perelman_2003_finite_extinction",
+      "source_locator": "",
+      "dependencies": ["PL-0004"],
+      "status": "open",
+      "notes": ""
+>>>>>>> origin/main
     },
     {
       "id": "PL-0006",
       "section": "Poincare deduction",
+<<<<<<< HEAD
       "statement": "Finite extinction, combined with the preceding Ricci-flow-with-surgery framework, yields the Poincare conclusion for closed simply connected three-manifolds.",
       "source": "morgan_tian",
       "source_locator": "Section 98-100",
@@ -69,6 +110,14 @@
       ],
       "status": "open",
       "notes": "Replay target for the final deduction of the Poincare conclusion from the preceding verified layers."
+=======
+      "statement": "",
+      "source": "morgan_tian",
+      "source_locator": "",
+      "dependencies": ["PL-0005"],
+      "status": "open",
+      "notes": ""
+>>>>>>> origin/main
     }
   ]
 }
