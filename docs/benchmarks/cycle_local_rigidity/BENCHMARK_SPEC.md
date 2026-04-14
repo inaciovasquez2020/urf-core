@@ -52,7 +52,19 @@ Operationally in benchmark v1:
 \[
 C_R(G)
 =
-\#\{\text{fundamental cycles of length } > 2R+1\}.
+\dim_{\mathbf F_2}
+\left(
+\operatorname{span}
+\{
+[e] :
+e\text{ is a non-tree edge whose fundamental cycle has length } > 2R+1
+\}
+\right).
+\]
+
+For the current implementation this equals the number of non-tree edges whose
+fundamental cycle length is \(>2R+1\), i.e. the exact rank of the selected
+fundamental-cycle subspace.
 \]
 
 ## Canonical Theorem Target

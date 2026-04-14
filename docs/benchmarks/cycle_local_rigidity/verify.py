@@ -148,15 +148,15 @@ def tree_distance(parent: Dict[int, int], u: int, v: int) -> int:
 def cycle_overlap_rank_v1(graph: Graph, R: int) -> int:
     parent, tree_edges = spanning_tree_parents(graph)
     tree_edge_set = set(tree_edges)
-    count = 0
+    long_cycle_edges = []
     for e in graph.edges:
         a, b = sorted(e)
         if (a, b) in tree_edge_set:
             continue
         cycle_len = tree_distance(parent, a, b) + 1
         if cycle_len > 2 * R + 1:
-            count += 1
-    return count
+            long_cycle_edges.append((a, b))
+    return len(long_cycle_edges)
 
 
 def verify(graph_path: Path, cert_path: Path, delta: int = 4) -> int:
