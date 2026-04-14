@@ -1,0 +1,35 @@
+{
+  "status": "open",
+  "sources": [
+    {
+      "id": "perelman_2002_entropy",
+      "title": "The entropy formula for the Ricci flow and its geometric applications",
+      "kind": "preprint",
+      "locator": "arXiv:math/0211159"
+    },
+    {
+      "id": "perelman_2003_surgery",
+      "title": "Ricci flow with surgery on three-manifolds",
+      "kind": "preprint",
+      "locator": "arXiv:math/0303109"
+    },
+    {
+      "id": "perelman_2003_finite_extinction",
+      "title": "Finite extinction time for the solutions to the Ricci flow on certain three-manifolds",
+      "kind": "preprint",
+      "locator": "arXiv:math/0307245"
+    },
+    {
+      "id": "morgan_tian",
+      "title": "Ricci Flow and the Poincare Conjecture",
+      "kind": "monograph",
+      "locator": "Clay Mathematics Monographs 3"
+    },
+    {
+      "id": "kleiner_lott",
+      "title": "Notes on Perelman's Papers",
+      "kind": "notes",
+      "locator": "arXiv:math/0605667"
+    }
+  ]
+}
