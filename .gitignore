@@ -9,7 +9,14 @@ urc-minimal-blockchain/
 # benchmark python cache
 docs/benchmarks/cycle_local_rigidity/**/__pycache__/
 docs/benchmarks/cycle_local_rigidity/**/*.pyc
+<<<<<<< HEAD
 
 # python cache
 **/__pycache__/
 **/*.pyc
+=======
+>>>>>>> origin/docs/remaining-math-closure-final
+
+# benchmark python cache
+docs/benchmarks/cycle_local_rigidity/**/__pycache__/
+docs/benchmarks/cycle_local_rigidity/**/*.pyc
