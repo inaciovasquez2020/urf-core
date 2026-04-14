@@ -5,3 +5,7 @@ urc-minimal-blockchain/
 *.swp
 .DS_Store
 .lake/
+
+# benchmark python cache
+docs/benchmarks/cycle_local_rigidity/**/__pycache__/
+docs/benchmarks/cycle_local_rigidity/**/*.pyc
