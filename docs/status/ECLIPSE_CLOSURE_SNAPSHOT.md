@@ -109,6 +109,10 @@ Conditional.
 \text{Direct theorem-replacement chain}=\text{locked}.
 \[
 \text{Structural lock phase}=\text{complete}.
+\[
+\text{Theorem-certification phase}=\text{open}.
+\]
+
 \]
 
 \]
