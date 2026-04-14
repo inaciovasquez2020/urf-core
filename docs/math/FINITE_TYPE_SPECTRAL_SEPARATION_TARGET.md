@@ -6,6 +6,16 @@ Status: OPEN.
 \boxed{
 \begin{minipage}{0.93\linewidth}
 \textbf{Finite-Type Spectral Separation Theorem.}
+
+FSS(k,\Delta,R)
+
+lambda := \lambda_2(L_{G,R})
+
+
+Define this target theorem shorthand by
+\[
+FSS(k,\Delta,R).
+\]
 Fix \(k,\Delta,R\). There exist constants
 \[
 \varepsilon=\varepsilon(k,\Delta,R)>0,\qquad C=C(k,\Delta,R)<\infty
