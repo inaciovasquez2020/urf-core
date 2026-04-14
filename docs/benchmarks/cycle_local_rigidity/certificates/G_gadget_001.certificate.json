@@ -1,0 +1,17 @@
+{
+  "graph_id": "G_gadget_001",
+  "family": "gadget",
+  "n": 8,
+  "m": 9,
+  "max_degree": 3,
+  "k": 3,
+  "R": 2,
+  "threshold": 1,
+  "local_type_count": 5,
+  "cycle_overlap_rank": 2,
+  "status": "rigidity_triggered",
+  "witness": {
+    "type_a_vertex": 0,
+    "type_b_vertex": 1
+  }
+}

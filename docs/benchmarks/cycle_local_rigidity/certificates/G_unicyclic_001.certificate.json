@@ -1,0 +1,17 @@
+{
+  "graph_id": "G_unicyclic_001",
+  "family": "unicyclic",
+  "n": 8,
+  "m": 8,
+  "max_degree": 2,
+  "k": 3,
+  "R": 2,
+  "threshold": 1,
+  "local_type_count": 2,
+  "cycle_overlap_rank": 1,
+  "status": "rigidity_triggered",
+  "witness": {
+    "type_a_vertex": 0,
+    "type_b_vertex": 1
+  }
+}

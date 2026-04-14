@@ -1,0 +1,5 @@
+graph_id,family,n,m,max_degree,k,R,cycle_overlap_rank,local_type_count,threshold,status
+G_expander_like_001,expander-like,9,9,3,3,2,1,8,1,rigidity_triggered
+G_gadget_001,gadget,8,9,3,3,2,2,5,1,rigidity_triggered
+G_tree_001,tree,8,7,2,3,2,0,4,1,no_trigger
+G_unicyclic_001,unicyclic,8,8,2,3,2,1,2,1,rigidity_triggered
