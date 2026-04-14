@@ -1,0 +1,14 @@
+{
+  "graph_id": "G_tree_001",
+  "family": "tree",
+  "n": 8,
+  "m": 7,
+  "max_degree": 2,
+  "k": 3,
+  "R": 2,
+  "threshold": 1,
+  "local_type_count": 4,
+  "cycle_overlap_rank": 0,
+  "status": "no_trigger",
+  "witness": {}
+}

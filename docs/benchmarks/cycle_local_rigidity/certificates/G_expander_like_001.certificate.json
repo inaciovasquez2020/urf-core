@@ -1,0 +1,17 @@
+{
+  "graph_id": "G_expander_like_001",
+  "family": "expander-like",
+  "n": 9,
+  "m": 9,
+  "max_degree": 3,
+  "k": 3,
+  "R": 2,
+  "threshold": 1,
+  "local_type_count": 8,
+  "cycle_overlap_rank": 1,
+  "status": "rigidity_triggered",
+  "witness": {
+    "type_a_vertex": 0,
+    "type_b_vertex": 1
+  }
+}
