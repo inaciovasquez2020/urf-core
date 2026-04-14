@@ -1,0 +1,40 @@
+{
+  "graphs_total": 4,
+  "homogeneous_graphs_total": 0,
+  "min_candidate_lambda_sep_on_homogeneous": null,
+  "max_cycle_overlap_rank_on_homogeneous": null,
+  "ssw_empirical_counterexample_found": false,
+  "lcrb_benchmark_upper_bound_observed": null,
+  "promotion_admissible": false,
+  "promotion_blocker": "Missing repository-native implication from benchmark evidence to quantified theorem statement.",
+  "rows": [
+    {
+      "graph_id": "G_expander_like_001",
+      "n": 9,
+      "local_type_count": 8,
+      "cycle_overlap_rank": 1,
+      "candidate_lambda_sep": 0.8888888888888888
+    },
+    {
+      "graph_id": "G_gadget_001",
+      "n": 8,
+      "local_type_count": 5,
+      "cycle_overlap_rank": 2,
+      "candidate_lambda_sep": 0.625
+    },
+    {
+      "graph_id": "G_tree_001",
+      "n": 8,
+      "local_type_count": 4,
+      "cycle_overlap_rank": 0,
+      "candidate_lambda_sep": 0.5
+    },
+    {
+      "graph_id": "G_unicyclic_001",
+      "n": 8,
+      "local_type_count": 2,
+      "cycle_overlap_rank": 1,
+      "candidate_lambda_sep": 0.25
+    }
+  ]
+}
