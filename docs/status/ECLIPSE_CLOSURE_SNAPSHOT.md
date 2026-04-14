@@ -1,5 +1,9 @@
 # Eclipse Closure Snapshot
 
+<<<<<<< HEAD
+\[
+\text{Kairos Projection}=PROVED.
+=======
 ## Status
 
 Conditional.
@@ -103,13 +107,30 @@ Conditional.
 
 \[
 \text{Witness-status uniqueness chain}=\text{locked}.
+>>>>>>> origin/main
 \]
 
 \[
-\text{Audit-to-witness extraction}=\text{locked}.
+\text{Residual Orthogonality}=CONDITIONAL.
 \]
 
 \[
+<<<<<<< HEAD
+\text{Stellar Coercivity}=CONDITIONAL.
+\]
+
+\[
+\text{Entropy--Energy Domination}=CONDITIONAL.
+\]
+
+\[
+\text{Collapse Regularity}=CONDITIONAL.
+\]
+
+\[
+\text{Phase Boundary Rigidity}=CONDITIONAL.
+\]
+=======
 \text{Truthful-witness determinacy}=\text{locked}.
 
 \[
@@ -123,9 +144,10 @@ Conditional.
 
 \[
 \text{Theorem-certification phase}=\text{open}.
+>>>>>>> origin/main
 
 \[
-\text{Unconditional Eclipse equivalence}=\text{not proved}.
+\text{Normalization Identity}=PROVED.
 \]
 \]
 \]
@@ -149,10 +171,26 @@ Conditional.
 \text{Direct theorem-replacement chain}=\text{locked}.
 \]
 
-## Terminal missing object
+\[
+\text{Normalization Capacity Bound}=OPEN.
+\]
 
+<<<<<<< HEAD
+\[
+\text{DraG0n Completeness}=OPEN.
+\]
+
+\[
+\text{Terminal obstruction}=\text{DraG0n Completeness}.
+\]
+
+\[
+\text{Lock order}=7 \prec 3 \prec 1 \prec 2 \prec 6 \prec 5 \prec 8 \prec 4.
+\]
+=======
 - Certified proof objects replacing the remaining Conditional theorem replacements.
 
 ## Verification
 
 - `PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q tests/test_eclipse_closure_snapshot.py`
+>>>>>>> origin/main
