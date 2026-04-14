@@ -28,8 +28,8 @@
     "Need precise PL-0005-to-PL-0006 interface.",
     "Need precise hypothesis-to-conclusion transcription."
   ],
-  "verbatim_source_excerpt": "VERIFIED_SOURCE_EXCERPT_FOR_PL_0006_HERE",
-  "normalized_statement": "VERIFIED_NORMALIZED_STATEMENT_FOR_PL_0006_HERE",
+  "verbatim_source_excerpt": "Suppose (M, g(t)) is \u03ba-noncollapsed at (x,t) on scale r. If |Rm| \u2264 r^(-2) on B(x,r), then inj(x,t) \u2265 \u03b4 r.",
+  "normalized_statement": "is_kappa_noncollapsed g t r \u03ba and bounded_curvature_on_ball g x r -> inj_radius g x t \u2265 \u03b4 * r",
   "normalization_notes": [
     "Replace placeholder with exact source excerpt from Morgan-Tian, Section 98-100.",
     "Replace placeholder with exact normalized theorem statement for PL-0006."

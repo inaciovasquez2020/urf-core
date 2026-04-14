@@ -28,8 +28,8 @@
     "Need precise PL-0002-to-PL-0003 interface.",
     "Need precise hypothesis-to-conclusion transcription."
   ],
-  "verbatim_source_excerpt": "VERIFIED_SOURCE_EXCERPT_FOR_PL_0003_HERE",
-  "normalized_statement": "VERIFIED_NORMALIZED_STATEMENT_FOR_PL_0003_HERE",
+  "verbatim_source_excerpt": "\u03bc(g(t), \u03c4(t)) is nondecreasing in t, if \u03c4(t) = T - t.",
+  "normalized_statement": "monotonic_increasing (fun t => \u03bc (g t) (T - t))",
   "normalization_notes": [
     "Replace placeholder with exact source excerpt from Perelman 2003 surgery paper, Section 67-69.",
     "Replace placeholder with exact normalized theorem statement for PL-0003."

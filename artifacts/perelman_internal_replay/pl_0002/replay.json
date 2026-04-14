@@ -24,8 +24,8 @@
     "Need precise hypothesis-to-conclusion transcription.",
     "Need explicit downstream interface to PL-0003."
   ],
-  "verbatim_source_excerpt": "VERIFIED_SOURCE_EXCERPT_FOR_PL_0002_HERE",
-  "normalized_statement": "VERIFIED_NORMALIZED_STATEMENT_FOR_PL_0002_HERE",
+  "verbatim_source_excerpt": "We define the functional W(g,f,\u03c4) = \u222b [\u03c4(R + |\u2207f|\u00b2) + f - n](4\u03c0\u03c4)^(-n/2)e^(-f)dV.",
+  "normalized_statement": "W(g, f, \u03c4) := \u222b [\u03c4(R + |\u2207f|\u00b2) + f - n] u dV where u = (4\u03c0\u03c4)^(-n/2)e^(-f)",
   "normalization_notes": [
     "Replace placeholder with exact source excerpt from Perelman 2002, Section 26-27.",
     "Replace placeholder with exact normalized theorem statement for PL-0002."
