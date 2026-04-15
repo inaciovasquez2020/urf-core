@@ -1,18 +1,25 @@
 {
-  "real_data_mode": true,
+  "blocking_reason": "authentic_DES_aligned_210_vectors_not_yet_downloadable_from_source_sites",
+  "covariance_rows": 44101,
   "inputs_present": {
     "covariance": true,
-    "u_urf": false,
-    "u_ia": false,
     "u_bar": false,
-    "u_cal": false
+    "u_cal": false,
+    "u_ia": false,
+    "u_urf": false
   },
+  "missing_files": [
+    "artifacts/urf_des_real_eval_inputs/u_urf.csv",
+    "artifacts/urf_des_real_eval_inputs/u_ia.csv",
+    "artifacts/urf_des_real_eval_inputs/u_bar.csv",
+    "artifacts/urf_des_real_eval_inputs/u_cal.csv"
+  ],
   "missing_inputs": [
     "/Users/inaciof.vasquez/urf-core/artifacts/urf_des_real_eval_inputs/u_urf.csv",
     "/Users/inaciof.vasquez/urf-core/artifacts/urf_des_real_eval_inputs/u_ia.csv",
     "/Users/inaciof.vasquez/urf-core/artifacts/urf_des_real_eval_inputs/u_bar.csv",
     "/Users/inaciof.vasquez/urf-core/artifacts/urf_des_real_eval_inputs/u_cal.csv"
   ],
-  "covariance_rows": 44101,
-  "status": "blocked_missing_authentic_vectors"
+  "real_data_mode": true,
+  "status": "blocked_external_non_downloadable_vectors"
 }
