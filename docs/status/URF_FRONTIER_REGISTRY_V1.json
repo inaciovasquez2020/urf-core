@@ -1,0 +1,15 @@
+{
+  "registry_version": 1,
+  "artifact": "URF_FRONTIER_REGISTRY_V1",
+  "status": "CANONICAL",
+  "date": "2026-04-17",
+  "frontier_id": "URF_RESIDUAL_FRONTIER",
+  "canonical_source": "docs/status/URF_REMAINING_FRONTIER_CANONICAL.md",
+  "scope": "public_facing",
+  "escalation_policy": "forbid_stronger_downstream_status",
+  "downstream_mode": "pointer_only",
+  "open_boundary": {
+    "name": "witness_family_boundary",
+    "status": "OPEN"
+  }
+}
