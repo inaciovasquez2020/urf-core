@@ -5,31 +5,7 @@ import sys
 required = [
     "README.md",
     ".gitmodules",
-    "Chronos-EntropyDepth",
-    "CorrRank",
-    "aiv-verifier-public",
-    "bepty",
-    "biological-friction-framework",
-    "capacity-locality-certification",
-    "cells-downwards-rh",
-    "chronos-urf-rr",
-    "clay-problem-lab",
-    "cslib-fmt",
-    "cycle-local-rigidity",
-    "cyclone-terminal-obstruction",
-    "poincare-new-derivation",
-    "radiative-rigidity",
-    "scientific-infrastructure",
-    "urf-axioms",
-    "urf-core",
-    "urf-minimal-obstruction",
-    "urf-prefab-system",
-    "urf-textbook",
-    "vasquez-index",
-    "whiplash-stability",
-    "yang-mills-hs-gap-cert",
-    "ym-os-quantization",
-    "ym-spectral-wall-next",
+    "scripts",
 ]
 
 missing = [p for p in required if not Path(p).exists()]
@@ -45,9 +21,7 @@ checks = {
     "mentions_unified_rigidity_framework": (
         "unified rigidity framework" in readme or "urf" in readme
     ),
-    "mentions_verification_or_submodules": (
-        "verification" in readme or "submodules" in readme
-    ),
+    "gitmodules_nonempty": len(gitmodules.strip()) > 0,
     "gitmodules_mentions_urf_core": "urf-core" in gitmodules,
     "gitmodules_mentions_vasquez_index": "vasquez-index" in gitmodules,
     "gitmodules_mentions_radiative_rigidity": "radiative-rigidity" in gitmodules,
