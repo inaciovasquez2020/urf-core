@@ -2,3 +2,6 @@ src/urf_prefab_system.egg-info/
 .venv/
 *.minisig
 src/urf_llm/check.py
+__pycache__/
+*.pyc
+.pytest_cache/
