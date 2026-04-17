@@ -1,10 +1,9 @@
 # URF Remaining Frontier — Canonical
 
 Status: CANONICAL
-Scope: URF residual frontier
 Date: 2026-04-17
 
-## Remaining public-facing frontier
+## Remaining public-facing URF residual frontier
 The only remaining whole-URF public-facing residual is the unresolved witness-family boundary (unspecified form) referenced by executable descendants.
 
 ## Canonical rule
