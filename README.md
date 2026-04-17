@@ -51,3 +51,5 @@ This repository is the canonical upstream for URF definitions, theorem statement
 Community-additive examples, tests, implementations, and non-canonical extensions belong in `urf-core-community`.
 
 Exposition and release-facing documentation belong in `urf-textbook`.
+
+Canonical whole-URF residual frontier: docs/status/URF_REMAINING_FRONTIER_CANONICAL.md
