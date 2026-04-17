@@ -1,11 +1,11 @@
 # URF Remaining Frontier — Canonical
 
 Status: CANONICAL
-Scope: public-facing whole-URF residual frontier only
+Scope: URF public-facing residual frontier only
 Date: 2026-04-17
 
 ## Remaining public-facing frontier
-The only remaining whole-URF public-facing residual is the unresolved unconditional witness-family mathematics boundary referenced by executable descendants.
+The only remaining whole-URF public-facing residual is the unresolved witness-family boundary (unspecified form) referenced by executable descendants.
 
 ## Canonical rule
 All whole-URF public-facing residual-frontier references must point to this file.
@@ -17,7 +17,7 @@ All whole-URF public-facing residual-frontier references must point to this file
 
 ## Completion rule
 Whole-URF public-facing completion may be increased only by:
-1. resolving the unconditional witness-family mathematics boundary, or
+1. resolving the witness-family boundary (unspecified form), or
 2. reducing duplicate public-facing frontier statements to this canonical file without escalation.
 
 ## Freeze rule
