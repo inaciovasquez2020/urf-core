@@ -1,0 +1,27 @@
+name: urf-frontier-registry-consistency
+
+on:
+  push:
+    paths:
+      - 'docs/status/URF_FRONTIER_REGISTRY_V1.json'
+      - 'docs/status/URF_REMAINING_FRONTIER_CANONICAL.md'
+      - 'scripts/check_urf_frontier_registry_consistency.py'
+      - 'tests/test_urf_frontier_registry_consistency.py'
+      - '.github/workflows/urf-frontier-registry-consistency.yml'
+  pull_request:
+    paths:
+      - 'docs/status/URF_FRONTIER_REGISTRY_V1.json'
+      - 'docs/status/URF_REMAINING_FRONTIER_CANONICAL.md'
+      - 'scripts/check_urf_frontier_registry_consistency.py'
+      - 'tests/test_urf_frontier_registry_consistency.py'
+      - '.github/workflows/urf-frontier-registry-consistency.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pytest -q tests/test_urf_frontier_registry_consistency.py
