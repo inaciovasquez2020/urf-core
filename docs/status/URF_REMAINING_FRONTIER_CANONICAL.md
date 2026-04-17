@@ -1,7 +1,7 @@
 # URF Remaining Frontier — Canonical
 
 Status: CANONICAL
-Scope: URF public-facing residual frontier only
+Scope: URF residual frontier
 Date: 2026-04-17
 
 ## Remaining public-facing frontier
