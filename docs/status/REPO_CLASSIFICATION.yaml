@@ -1,0 +1,36 @@
+version: 1
+frozen_as_of: 2026-04-18
+classes:
+  core:
+    - urf-core
+    - chronos-urf-rr
+    - scientific-infrastructure
+    - urf-verifier
+  bridge:
+    - urf-axioms
+    - urf-spine
+    - urf-core-verifier
+    - cycle-local-rigidity
+    - capacity-locality-certification
+    - urf-counterexamples
+    - urf-minimal-obstruction
+    - urf-open-review-ledger
+    - urf-reductions-sat-csp
+    - cslib-fmt
+    - overlap-rigidity-lean
+    - support-drift
+    - terminal-rigidity-witness-erb
+    - owc-counterexamples
+    - inaciovasquez2020
+  application:
+    - rank-dichotomy-cat0
+    - urf-application-stress-test
+    - urc-minimal-blockchain
+    - radiative-rigidity
+    - dfm-mkc-cosmology
+    - pachner-invariant
+  experimental:
+    - overlap-rigidity-lean-dev
+    - clay-problem-lab
+    - ym-spectral-wall-next
+    - cells-downwards-rh
