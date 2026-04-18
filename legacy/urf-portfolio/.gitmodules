@@ -1,0 +1,75 @@
+[submodule "urf-core"]
+	path = urf-core
+	url = https://github.com/inaciovasquez2020/urf-core.git
+[submodule "urf-axioms"]
+	path = urf-axioms
+	url = https://github.com/inaciovasquez2020/urf-axioms.git
+[submodule "chronos-urf-rr"]
+	path = chronos-urf-rr
+	url = https://github.com/inaciovasquez2020/chronos-urf-rr.git
+[submodule "cslib-fmt"]
+	path = cslib-fmt
+	url = https://github.com/inaciovasquez2020/cslib-fmt.git
+[submodule "cyclone-terminal-obstruction"]
+	path = cyclone-terminal-obstruction
+	url = https://github.com/inaciovasquez2020/cyclone-terminal-obstruction.git
+[submodule "CorrRank"]
+	path = CorrRank
+	url = https://github.com/inaciovasquez2020/CorrRank.git
+[submodule "Chronos-EntropyDepth"]
+	path = Chronos-EntropyDepth
+	url = https://github.com/inaciovasquez2020/Chronos-EntropyDepth.git
+[submodule "cycle-local-rigidity"]
+	path = cycle-local-rigidity
+	url = https://github.com/inaciovasquez2020/cycle-local-rigidity.git
+[submodule "urf-prefab-system"]
+	path = urf-prefab-system
+	url = https://github.com/inaciovasquez2020/urf-prefab-system.git
+[submodule "urf-minimal-obstruction"]
+	path = urf-minimal-obstruction
+	url = https://github.com/inaciovasquez2020/urf-minimal-obstruction.git
+[submodule "urf-textbook"]
+	path = urf-textbook
+	url = https://github.com/inaciovasquez2020/urf-textbook.git
+[submodule "bepty"]
+	path = bepty
+	url = https://github.com/inaciovasquez2020/bepty.git
+[submodule "yang-mills-hs-gap-cert"]
+	path = yang-mills-hs-gap-cert
+	url = https://github.com/inaciovasquez2020/yang-mills-hs-gap-cert.git
+[submodule "radiative-rigidity"]
+	path = radiative-rigidity
+	url = https://github.com/inaciovasquez2020/radiative-rigidity.git
+[submodule "biological-friction-framework"]
+	path = biological-friction-framework
+	url = https://github.com/inaciovasquez2020/biological-friction-framework.git
+[submodule "capacity-locality-certification"]
+	path = capacity-locality-certification
+	url = https://github.com/inaciovasquez2020/capacity-locality-certification.git
+[submodule "clay-problem-lab"]
+	path = clay-problem-lab
+	url = https://github.com/inaciovasquez2020/clay-problem-lab.git
+[submodule "poincare-new-derivation"]
+	path = poincare-new-derivation
+	url = https://github.com/inaciovasquez2020/poincare-new-derivation.git
+[submodule "cells-downwards-rh"]
+	path = cells-downwards-rh
+	url = https://github.com/inaciovasquez2020/cells-downwards-rh.git
+[submodule "ym-os-quantization"]
+	path = ym-os-quantization
+	url = https://github.com/inaciovasquez2020/ym-os-quantization.git
+[submodule "ym-spectral-wall-next"]
+	path = ym-spectral-wall-next
+	url = https://github.com/inaciovasquez2020/ym-spectral-wall-next.git
+[submodule "whiplash-stability"]
+	path = whiplash-stability
+	url = https://github.com/inaciovasquez2020/whiplash-stability.git
+[submodule "scientific-infrastructure"]
+	path = scientific-infrastructure
+	url = https://github.com/inaciovasquez2020/scientific-infrastructure.git
+[submodule "aiv-verifier-public"]
+	path = aiv-verifier-public
+	url = https://github.com/inaciovasquez2020/aiv-verifier-public.git
+[submodule "vasquez-index"]
+	path = vasquez-index
+	url = https://github.com/inaciovasquez2020/vasquez-index.git
