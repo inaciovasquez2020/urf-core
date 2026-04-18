@@ -1,0 +1,33 @@
+{
+"$schema": "http://json-schema.org/draft-07/schema#",
+"title": "URF Prefab Schema",
+"type": "object",
+"required": ["id", "assumptions", "invariants", "interface", "scope"],
+"properties": {
+"id": {
+"type": "string",
+"description": "Stable prefab identifier"
+},
+"assumptions": {
+"type": "array",
+"items": { "type": "string" }
+},
+"invariants": {
+"type": "array",
+"items": { "type": "string" }
+},
+"interface": {
+"type": "object",
+"required": ["inputs", "outputs"],
+"properties": {
+"inputs": { "type": "array", "items": { "type": "string" } },
+"outputs": { "type": "array", "items": { "type": "string" } }
+}
+},
+"scope": {
+"type": "string",
+"description": "Explicit non-goals and limits"
+}
+},
+"additionalProperties": false
+}

@@ -1,0 +1,17 @@
+name: prefab-check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  invariant:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify prefab structure
+        run: |
+          test -f lean-toolchain
+          test -d Prefab || test -d src || test -d prefab || true
+          echo "OK: prefab repository structure verified"

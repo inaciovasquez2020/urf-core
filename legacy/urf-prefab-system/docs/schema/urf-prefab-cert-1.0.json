@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://inaciovasquez2020.github.io/urf/schema/urf-prefab-cert-1.0.json",
+  "title": "URF Prefab Certificate v1.0",
+  "x-status": "FROZEN"
+  "type": "object",
+  "required": [
+    "schema",
+    "verdict",
+    "checker",
+    "ruleset",
+    "input_hash"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "urf-prefab-cert/1.0"
+    },
+    "verdict": {
+      "type": "string",
+      "const": "ACCEPT"
+    },
+    "checker": {
+      "type": "string",
+      "const": "urf-llm-check"
+    },
+    "ruleset": {
+      "type": "string",
+      "const": "prefab-admissibility"
+    },
+    "input_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}
+

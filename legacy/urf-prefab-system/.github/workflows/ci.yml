@@ -1,0 +1,41 @@
+name: prefab-ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sanity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show repository status
+        run: |
+          pwd
+          ls -la
+          cat STATUS.md
+          cat ASSUMPTIONS.md
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run reproduction script
+        run: |
+          chmod +x reproduce.sh
+          ./reproduce.sh
+
+      - name: Validate prefab structure
+        run: |
+          chmod +x tools/validate_prefab.sh
+          ./tools/validate_prefab.sh
+
+      - name: Validate prefab JSON schema
+        run: |
+          python3 tools/validate_json_schema.py

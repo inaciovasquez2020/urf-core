@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urf-prefab-system.schema.json",
+  "title": "URF Prefab System Certificate",
+  "type": "object",
+  "required": ["prefabs", "interfaces", "generators", "sinks", "composition", "budgets"],
+  "properties": {
+    "prefabs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "C_max"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": { "type": "string", "enum": ["cell", "interface", "sink", "generator", "observer", "custom"] },
+          "C_max": { "type": "number" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "from", "to", "C_link"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "from": { "type": "string", "minLength": 1 },
+          "to": { "type": "string", "minLength": 1 },
+          "C_link": { "type": "number" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "generators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "C_in"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "C_in": { "type": "number" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sinks": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "composition": {
+      "type": "object",
+      "required": ["ast"],
+      "properties": {
+        "ast": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "budgets": {
+      "type": "object",
+      "required": ["global_input_budget"],
+      "properties": {
+        "global_input_budget": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

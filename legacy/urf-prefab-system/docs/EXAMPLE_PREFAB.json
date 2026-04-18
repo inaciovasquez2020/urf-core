@@ -1,0 +1,10 @@
+{
+"id": "prefab.example.minimal",
+"assumptions": ["A1"],
+"invariants": ["I1.Structural"],
+"interface": {
+"inputs": [],
+"outputs": ["prefab.object"]
+},
+"scope": "Structural template only; no semantic or execution claims."
+}
