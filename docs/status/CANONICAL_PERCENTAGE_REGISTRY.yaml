@@ -1,0 +1,216 @@
+version: 1
+frozen_as_of: 2026-04-18
+source_of_truth: urf-core
+schema:
+  fields:
+    - repo
+    - class
+    - percent_min
+    - percent_max
+    - status
+    - critical
+    - notes
+registry:
+  - repo: urf-core
+    class: core
+    percent_min: 98
+    percent_max: 100
+    status: CANONICAL
+    critical: true
+    notes: canonical upstream
+  - repo: chronos-urf-rr
+    class: core
+    percent_min: 99
+    percent_max: 100
+    status: EXECUTABLE_CLOSED_SCOPE
+    critical: true
+    notes: executable closure anchor
+  - repo: scientific-infrastructure
+    class: core
+    percent_min: 99
+    percent_max: 100
+    status: CANONICAL
+    critical: true
+    notes: provenance-ci-verification layer
+  - repo: urf-verifier
+    class: core
+    percent_min: 95
+    percent_max: 99
+    status: CANONICAL
+    critical: true
+    notes: authoritative verifier
+  - repo: urf-axioms
+    class: bridge
+    percent_min: 95
+    percent_max: 99
+    status: CONDITIONAL_FORMALIZATION
+    critical: false
+    notes: axiom layer
+  - repo: urf-spine
+    class: bridge
+    percent_min: 90
+    percent_max: 97
+    status: CONDITIONAL_FORMALIZATION
+    critical: false
+    notes: canonical spine
+  - repo: urf-core-verifier
+    class: bridge
+    percent_min: 90
+    percent_max: 97
+    status: CONDITIONAL_VERIFIER
+    critical: false
+    notes: invariant audit suite
+  - repo: cycle-local-rigidity
+    class: bridge
+    percent_min: 92
+    percent_max: 97
+    status: CONDITIONAL_MATH
+    critical: false
+    notes: locality-to-global obstruction bridge
+  - repo: capacity-locality-certification
+    class: bridge
+    percent_min: 90
+    percent_max: 96
+    status: CONDITIONAL_CERTIFICATION
+    critical: false
+    notes: certification interface
+  - repo: urf-counterexamples
+    class: bridge
+    percent_min: 90
+    percent_max: 96
+    status: CANONICAL_BOUNDARY
+    critical: false
+    notes: limit and failure-mode layer
+  - repo: urf-minimal-obstruction
+    class: bridge
+    percent_min: 88
+    percent_max: 95
+    status: CONDITIONAL_CERTIFIED
+    critical: false
+    notes: minimal obstruction catalog
+  - repo: urf-open-review-ledger
+    class: bridge
+    percent_min: 88
+    percent_max: 95
+    status: CANONICAL_LEDGER
+    critical: false
+    notes: public review and audit trail
+  - repo: urf-reductions-sat-csp
+    class: bridge
+    percent_min: 85
+    percent_max: 93
+    status: CONDITIONAL_REDUCTIONS
+    critical: false
+    notes: reductions layer
+  - repo: cslib-fmt
+    class: bridge
+    percent_min: 85
+    percent_max: 93
+    status: CONDITIONAL_FORMAL_LIBRARY
+    critical: false
+    notes: finite-model-theory library
+  - repo: overlap-rigidity-lean-dev
+    class: experimental
+    percent_min: 80
+    percent_max: 90
+    status: DEV_SCAFFOLD
+    critical: false
+    notes: development-only lean repo
+  - repo: overlap-rigidity-lean
+    class: bridge
+    percent_min: 80
+    percent_max: 90
+    status: CONDITIONAL_FRAMEWORK
+    critical: false
+    notes: uclp decision framework
+  - repo: support-drift
+    class: bridge
+    percent_min: 85
+    percent_max: 93
+    status: CONDITIONAL_THEOREM
+    critical: false
+    notes: deterministic support-drift
+  - repo: terminal-rigidity-witness-erb
+    class: bridge
+    percent_min: 85
+    percent_max: 93
+    status: CONDITIONAL_CERTIFIED
+    critical: false
+    notes: no-escape witness layer
+  - repo: rank-dichotomy-cat0
+    class: application
+    percent_min: 80
+    percent_max: 90
+    status: CONDITIONAL_THEOREM
+    critical: false
+    notes: application-domain theorem
+  - repo: urf-application-stress-test
+    class: application
+    percent_min: 80
+    percent_max: 90
+    status: EXECUTABLE_APPLICATION
+    critical: false
+    notes: adversarial-load layer
+  - repo: urc-minimal-blockchain
+    class: application
+    percent_min: 75
+    percent_max: 88
+    status: EXECUTABLE_APPLICATION
+    critical: false
+    notes: minimal demonstrator
+  - repo: radiative-rigidity
+    class: application
+    percent_min: 95
+    percent_max: 99
+    status: SUBMISSION_READY_SCOPE
+    critical: false
+    notes: nuclear-electroweak application
+  - repo: dfm-mkc-cosmology
+    class: application
+    percent_min: 90
+    percent_max: 96
+    status: EXECUTABLE_APPLICATION
+    critical: false
+    notes: cosmology application
+  - repo: pachner-invariant
+    class: application
+    percent_min: 90
+    percent_max: 97
+    status: EXECUTABLE_HIGH_CONDITIONAL_MATH
+    critical: false
+    notes: strong artifact; broader theorem ambition remains open
+  - repo: clay-problem-lab
+    class: experimental
+    percent_min: 95
+    percent_max: 99
+    status: EXECUTABLE_OPEN_FRONTIER
+    critical: false
+    notes: explicit non-claim boundaries
+  - repo: ym-spectral-wall-next
+    class: experimental
+    percent_min: 70
+    percent_max: 85
+    status: EXPERIMENTAL
+    critical: false
+    notes: extension sandbox
+  - repo: cells-downwards-rh
+    class: experimental
+    percent_min: 70
+    percent_max: 85
+    status: EXPERIMENTAL
+    critical: false
+    notes: spectral-floor exploration
+  - repo: owc-counterexamples
+    class: bridge
+    percent_min: 85
+    percent_max: 93
+    status: CANONICAL_BOUNDARY
+    critical: false
+    notes: parallel counterexample layer
+  - repo: inaciovasquez2020
+    class: bridge
+    percent_min: 95
+    percent_max: 99
+    status: CANONICAL_INDEX
+    critical: false
+    notes: start-here map
