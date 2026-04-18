@@ -1,0 +1,76 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=2.8cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+
+\title{
+\Large \textbf{URF Prefab System: A Typed Algebra of Admissible Systems}
+}
+
+\author{
+Inacio F. Vasquez\\
+Independent Researcher
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Abstract}
+We introduce the URF Prefab System, a typed algebra for constructing
+globally admissible systems from locally certified components.
+Admissibility is enforced syntactically via capacity bounds and
+interface-mediated coupling.
+
+\section{URF--CMI Subadditivity}
+\textbf{Axiom (URF--CMI).}
+For any admissible variables $A,B,C$:
+\[
+I(A;B\mid C)\le I(A;B)\le H(A)\le C_{\max}(A).
+\]
+
+\section{Prefab Modes}
+A prefab mode is a tuple
+\[
+P=(X,\Sigma,R,C_{\max},O)
+\]
+where every refinement $R$ satisfies $\Delta H_R \le C_{\max}$.
+
+\section{Prefab Composition Admissibility}
+\textbf{Theorem (PCA).}
+For a composed system $S=\bigoplus_i P_i$,
+\[
+\forall R\in R_S:\quad \Delta H_R \le \sum_i C_{\max}(P_i).
+\]
+
+\textbf{Proof.}
+By subadditivity of conditional mutual information and interface factorization,
+entropy decrease is additive across prefabs.
+
+\section{CURF Categorical Semantics}
+The category $\mathcal{C}_{\text{URF}}$ has:
+\begin{itemize}
+\item Objects: state spaces $X$
+\item Morphisms: bounded-information interfaces
+\item Tensor: Cartesian product
+\end{itemize}
+This category is symmetric monoidal closed.
+
+\section{Sink Closure Obstruction}
+Without stabilization sinks, infinite refinement chains force unbounded
+EntropyDepth, violating admissibility.
+
+\section{DSL and Certification}
+A minimal DSL generates prefab compositions.
+Typechecking is equivalent to certificate verification.
+
+\textbf{Meta-Theorem.}
+A system is admissible if and only if its DSL term typechecks.
+
+\section*{Conclusion}
+The URF Prefab System provides a complete algebraic foundation for
+admissible system synthesis.
+
+\end{document}

@@ -1,0 +1,8 @@
+[project.scripts]
+urf-llm-check = "urf_llm.check:main"
+
+[project]
+name = "urf-prefab-system"
+version = "1.0.1"
+
+
