@@ -1,5 +1,8 @@
 name: Docker
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches: [ main ]
@@ -13,3 +16,4 @@ jobs:
 
       - name: Build container
         run: docker build -t urf-core .
+  workflow_dispatch:
