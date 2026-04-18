@@ -5,6 +5,7 @@ env:
 on:
   push:
   pull_request:
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,4 +24,3 @@ jobs:
           source $HOME/.elan/env
           lake update
           lake build
-  workflow_dispatch:

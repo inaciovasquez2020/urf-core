@@ -6,6 +6,7 @@ env:
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -34,4 +35,3 @@ jobs:
         run: |
           PYTHONDONTWRITEBYTECODE=1 python3 -m pip install . pytest
           PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q tests/test_remaining_math_targets.py
-  workflow_dispatch:
