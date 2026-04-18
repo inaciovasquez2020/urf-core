@@ -1,0 +1,97 @@
+version: 1
+frozen_as_of: 2026-04-18
+audit_policy:
+  allowed_frontier_states:
+    - CLOSED_SCOPE
+    - CANONICAL
+    - CONDITIONAL
+    - OPEN
+    - EXPERIMENTAL
+ledger:
+  - repo: urf-core
+    frontier: CANONICAL
+    weakest_remaining_object: external_validation_only
+  - repo: chronos-urf-rr
+    frontier: CLOSED_SCOPE
+    weakest_remaining_object: external_validation_only
+  - repo: scientific-infrastructure
+    frontier: CANONICAL
+    weakest_remaining_object: none_internal
+  - repo: urf-verifier
+    frontier: CANONICAL
+    weakest_remaining_object: verifier-hardening-tail
+  - repo: urf-axioms
+    frontier: CONDITIONAL
+    weakest_remaining_object: theorem-level closure alignment
+  - repo: urf-spine
+    frontier: CONDITIONAL
+    weakest_remaining_object: canonical core-construction closure
+  - repo: urf-core-verifier
+    frontier: CONDITIONAL
+    weakest_remaining_object: full invariant-suite hardening
+  - repo: cycle-local-rigidity
+    frontier: CONDITIONAL
+    weakest_remaining_object: local-to-global obstruction theorem lock
+  - repo: capacity-locality-certification
+    frontier: CONDITIONAL
+    weakest_remaining_object: certification completeness lock
+  - repo: urf-counterexamples
+    frontier: CANONICAL
+    weakest_remaining_object: expansion coverage only
+  - repo: urf-minimal-obstruction
+    frontier: CONDITIONAL
+    weakest_remaining_object: minimal obstruction completeness
+  - repo: urf-open-review-ledger
+    frontier: CANONICAL
+    weakest_remaining_object: rolling public ingestion only
+  - repo: urf-reductions-sat-csp
+    frontier: CONDITIONAL
+    weakest_remaining_object: reduction completeness theorem
+  - repo: cslib-fmt
+    frontier: CONDITIONAL
+    weakest_remaining_object: locality interface expansion
+  - repo: overlap-rigidity-lean-dev
+    frontier: EXPERIMENTAL
+    weakest_remaining_object: not_authoritative
+  - repo: overlap-rigidity-lean
+    frontier: CONDITIONAL
+    weakest_remaining_object: canonical_uclp_closure
+  - repo: support-drift
+    frontier: CONDITIONAL
+    weakest_remaining_object: final_theorem_write_through
+  - repo: terminal-rigidity-witness-erb
+    frontier: CONDITIONAL
+    weakest_remaining_object: witness_generalization_lock
+  - repo: rank-dichotomy-cat0
+    frontier: CONDITIONAL
+    weakest_remaining_object: theorem_level_closure
+  - repo: urf-application-stress-test
+    frontier: CONDITIONAL
+    weakest_remaining_object: edge_case_completion_matrix
+  - repo: urc-minimal-blockchain
+    frontier: CONDITIONAL
+    weakest_remaining_object: demonstrator_hardening
+  - repo: radiative-rigidity
+    frontier: CONDITIONAL
+    weakest_remaining_object: publication_cycle_only
+  - repo: dfm-mkc-cosmology
+    frontier: CONDITIONAL
+    weakest_remaining_object: real_data_integration_stability
+  - repo: pachner-invariant
+    frontier: CONDITIONAL
+    weakest_remaining_object: final_theorem_package_closure
+  - repo: clay-problem-lab
+    frontier: OPEN
+    weakest_remaining_object: terminal_high_high_resonance_curvature_gain
+  - repo: ym-spectral-wall-next
+    frontier: EXPERIMENTAL
+    weakest_remaining_object: exploratory_spectral_extension
+  - repo: cells-downwards-rh
+    frontier: EXPERIMENTAL
+    weakest_remaining_object: exploratory_spectral_floor_closure
+  - repo: owc-counterexamples
+    frontier: CANONICAL
+    weakest_remaining_object: scope_expansion_only
+  - repo: inaciovasquez2020
+    frontier: CANONICAL
+    weakest_remaining_object: index_freshness_only

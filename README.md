@@ -53,3 +53,10 @@ Community-additive examples, tests, implementations, and non-canonical extension
 Exposition and release-facing documentation belong in `urf-textbook`.
 
 Canonical whole-URF residual frontier: docs/status/URF_REMAINING_FRONTIER_CANONICAL.md
+
+## Consolidated modules
+
+- `legacy/urf-roadmap`
+- `legacy/urf-portfolio`
+- `legacy/urf-prefab-system`
+
