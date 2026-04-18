@@ -7,6 +7,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 jobs:
   release:
@@ -14,4 +15,3 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-  workflow_dispatch:

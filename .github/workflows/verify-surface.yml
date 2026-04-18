@@ -6,6 +6,7 @@ env:
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   check:
@@ -16,4 +17,3 @@ jobs:
         with:
           python-version: "3.11"
       - run: python3 scripts/verify_repo.py
-  workflow_dispatch:
