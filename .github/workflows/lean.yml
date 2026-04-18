@@ -10,7 +10,7 @@ jobs:
 
       - name: Install Lean toolchain from repo
         run: |
-          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh || sleep 5 && elan-init.sh -sSf | sh -s -- -y
           source $HOME/.elan/env
           elan toolchain install $(cat lean-toolchain)
           elan default $(cat lean-toolchain)
