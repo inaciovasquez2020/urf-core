@@ -21,8 +21,20 @@ Status: OPEN.
 
 - `docs/math/YGZ_SPECTRAL_RIGIDITY_PACKAGE.md`
 
+## Conditional deduction
+
+If A+B+C from `docs/math/YGZ_SPECTRAL_RIGIDITY_PACKAGE.md` hold, then:
+
+\[
+\ker(\iota)=\{0\},
+\qquad
+\forall w\in W_{\mathrm{env}},\qquad
+\mathcal P(w)\Longrightarrow \mathcal P(\iota(w)).
+\]
+
 ## Completion rule
 
+Conditional completion is admissible under A+B+C.
 Unconditional spectral-rigidity completion is admissible only after both statements above are proved.
 
 ## Non-claim
