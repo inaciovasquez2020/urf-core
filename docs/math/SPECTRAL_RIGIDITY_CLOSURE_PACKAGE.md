@@ -26,6 +26,11 @@ From those two ingredients one obtains
 \operatorname{SpectralRigidity}(u,C_0,A,\theta).
 \]
 
+## Reduction witnesses
+
+- `docs/math/ENVELOPE_WITNESS_INCLUSION_REDUCTION.md`
+- `docs/math/ENVELOPE_PROPAGATION_REDUCTION.md`
+
 ## Stop rule
 
 No unconditional spectral-rigidity theorem is claimed before both ingredients are proved.
