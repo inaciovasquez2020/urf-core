@@ -28,6 +28,11 @@ No unconditional spectral-rigidity theorem is currently proved.
 - `docs/math/ENVELOPE_WITNESS_INCLUSION_REDUCTION.md`
 - `docs/math/ENVELOPE_PROPAGATION_REDUCTION.md`
 
+## Obligation layer
+
+- `docs/math/ENVELOPE_WITNESS_INCLUSION_KERNEL_OBLIGATION.md`
+- `docs/math/ENVELOPE_PROPAGATION_PRESERVATION_OBLIGATION.md`
+
 ## Upgrade rule
 
 Unconditional closure is admissible only after both frontier ingredients are discharged.
