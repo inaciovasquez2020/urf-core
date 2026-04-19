@@ -24,6 +24,10 @@ It remains to prove
 \ker(\iota)=\{0\}.
 \]
 
+## Kernel obligation
+
+- `docs/math/ENVELOPE_WITNESS_INCLUSION_KERNEL_OBLIGATION.md`
+
 ## Non-claim
 
 This note does not claim that the theorem above has been proved.
