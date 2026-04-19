@@ -30,30 +30,46 @@ W_{\mathrm{repo}}\ \text{explicitly specified},
 \]
 
 \[
-\mathfrak I:W_{\mathrm{env}}\to\mathcal S\ \text{a structural invariant such that}
+\mathfrak I:W_{\mathrm{env}}\to\mathcal S\ \text{a structural invariant}.
+\]
+
+## Axioms
+
+\[
+\textbf{A.}\qquad
+\forall w\in W_{\mathrm{env}},\qquad
+\mathfrak I(w)=0\iff w=0.
 \]
 
 \[
-\mathfrak I(w)=0\iff w=0
-\quad\text{on}\quad
-\ker(\iota),
+\textbf{B.}\qquad
+\forall w\in W_{\mathrm{env}},\qquad
+\iota(w)=0\Longrightarrow \mathfrak I(w)=0.
 \]
 
 \[
-\forall w\in W_{\mathrm{env}},
-\qquad
+\textbf{C.}\qquad
+\forall w\in W_{\mathrm{env}},\qquad
 \mathcal P(w)\Longrightarrow \mathcal P(\iota(w)).
 \]
 
-## Consequence
+## Consequences
 
 \[
-\text{Then}
+\text{From A and B,}
 \qquad
 \ker(\iota)=\{0\}.
+\]
+
+\[
+\text{From C,}
+\qquad
+\forall w\in W_{\mathrm{env}},\qquad
+\mathcal P(w)\Longrightarrow \mathcal P(\iota(w)).
 \]
 
 ## Status note
 
 This package is a conditional resolution schema for the spectral-rigidity final wall.
+Conditional completion is admissible only under A+B+C.
 It does not claim that the required objects above have already been constructed in the repository.
