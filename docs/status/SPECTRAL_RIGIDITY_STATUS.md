@@ -23,6 +23,11 @@ The exact open theorem-level ingredients are:
 
 No unconditional spectral-rigidity theorem is currently proved.
 
+## Reduction layer
+
+- `docs/math/ENVELOPE_WITNESS_INCLUSION_REDUCTION.md`
+- `docs/math/ENVELOPE_PROPAGATION_REDUCTION.md`
+
 ## Upgrade rule
 
 Unconditional closure is admissible only after both frontier ingredients are discharged.
