@@ -17,6 +17,10 @@ Status: OPEN.
 \mathcal P(w)\Longrightarrow \mathcal P(\iota(w)).
 \]
 
+## YGZ package
+
+- `docs/math/YGZ_SPECTRAL_RIGIDITY_PACKAGE.md`
+
 ## Completion rule
 
 Unconditional spectral-rigidity completion is admissible only after both statements above are proved.
