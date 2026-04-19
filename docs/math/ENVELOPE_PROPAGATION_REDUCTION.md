@@ -28,6 +28,10 @@ If repository-native admissibility propagates along the envelope bridge, then th
 
 It remains to prove that the bridge predicate \(\mathcal P\) is preserved under the envelope-to-repository transfer.
 
+## Preservation obligation
+
+- `docs/math/ENVELOPE_PROPAGATION_PRESERVATION_OBLIGATION.md`
+
 ## Non-claim
 
 This note does not claim that the theorem above has been proved.
