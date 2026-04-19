@@ -31,6 +31,11 @@ From those two ingredients one obtains
 - `docs/math/ENVELOPE_WITNESS_INCLUSION_REDUCTION.md`
 - `docs/math/ENVELOPE_PROPAGATION_REDUCTION.md`
 
+## Obligation witnesses
+
+- `docs/math/ENVELOPE_WITNESS_INCLUSION_KERNEL_OBLIGATION.md`
+- `docs/math/ENVELOPE_PROPAGATION_PRESERVATION_OBLIGATION.md`
+
 ## Stop rule
 
 No unconditional spectral-rigidity theorem is claimed before both ingredients are proved.
