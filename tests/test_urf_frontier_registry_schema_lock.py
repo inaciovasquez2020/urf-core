@@ -9,3 +9,4 @@ def test_urf_frontier_registry_schema_lock():
         text=True,
     )
     assert "urf-frontier-registry-schema-lock: PASS" in r.stdout
+ 
