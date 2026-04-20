@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "urf-core",
+  "author": {
+    "@type": "Person",
+    "name": "Inacio Vasquez",
+    "identifier": "https://orcid.org/0009-0008-8459-3400"
+  },
+  "codeRepository": "https://github.com/inaciovasquez2020/urf-core",
+  "url": "https://github.com/inaciovasquez2020/urf-core",
+  "license": "https://opensource.org/license/mit",
+  "version": "main",
+  "datePublished": "2026-04-20",
+  "citation": "Vasquez, Inacio. urf-core. GitHub repository. Version main. 2026-04-20."
+}
