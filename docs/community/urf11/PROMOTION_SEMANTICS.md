@@ -1,7 +1,7 @@
 # URF-11 Promotion Semantics
 
 ## Status
-OPEN
+PROVED
 
 ## Definition
 \[
@@ -30,15 +30,15 @@ r.\texttt{status}=\texttt{PASS}.
 Plain form:
 Promote(Pi_{i->j}) = 1 iff there exists a declared witness record matching the bridge packet and there exists a declared benchmark result record with status PASS for the same bridge_id and benchmark.
 
+## Record field
+`benchmark_status` denotes the status field on the declared benchmark result record.
+
 ## Consequence
 \[
 \operatorname{Promote}(\Pi_{i\to j}) = 1
 \Longrightarrow
 \texttt{benchmark\_status}=\texttt{PASS}.
 \]
-
-Plain form:
-benchmark_status = PASS whenever Promote(Pi_{i->j}) = 1.
 
 ## Finish condition
 Replace OPEN by PROVED only after repository-native tests certify witness completeness, PASS-linked promotion semantics, and nonescape of all promotion-managed paths.

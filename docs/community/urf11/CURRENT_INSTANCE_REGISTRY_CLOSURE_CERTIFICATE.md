@@ -1,7 +1,7 @@
 # URF-11 Current-Instance Registry Closure Certificate
 
 ## Status
-OPEN
+PROVED
 
 ## Certified current-instance statement
 For the current registries on this repository state, every declared bridge packet resolves through all canonical registry layers:

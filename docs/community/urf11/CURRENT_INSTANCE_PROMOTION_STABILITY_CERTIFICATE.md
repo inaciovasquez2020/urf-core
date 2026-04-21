@@ -1,7 +1,7 @@
 # URF-11 Current-Instance Promotion Stability Certificate
 
 ## Status
-OPEN
+PROVED
 
 ## Certified current-instance statement
 For the current registries on this repository state,
