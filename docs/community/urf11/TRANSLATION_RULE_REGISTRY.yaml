@@ -1,0 +1,78 @@
+translation_rules:
+  - rule_id: f1_to_f2_rule_v1
+    source_field: F1
+    target_field: F2
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f2_to_f3_rule_v1
+    source_field: F2
+    target_field: F3
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f3_to_f4_rule_v1
+    source_field: F3
+    target_field: F4
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f4_to_f5_rule_v1
+    source_field: F4
+    target_field: F5
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f5_to_f6_rule_v1
+    source_field: F5
+    target_field: F6
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f6_to_f7_rule_v1
+    source_field: F6
+    target_field: F7
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f7_to_f8_rule_v1
+    source_field: F7
+    target_field: F8
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f8_to_f9_rule_v1
+    source_field: F8
+    target_field: F9
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f9_to_f10_rule_v1
+    source_field: F9
+    target_field: F10
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f10_to_f11_rule_v1
+    source_field: F10
+    target_field: F11
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN
+  - rule_id: f11_to_f1_rule_v1
+    source_field: F11
+    target_field: F1
+    bridge_translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    input_contract: declared_input_output_schema_v1
+    output_contract: declared_target_benchmark_contract_v1
+    status: OPEN

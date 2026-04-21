@@ -22,6 +22,7 @@ Every accepted contribution must target either:
 - `ACCEPTANCE_REGISTRY.yaml`
 - `SUBPROBLEM_REGISTRY.yaml`
 - `EXPORTED_OBJECT_REGISTRY.yaml`
+- `TRANSLATION_RULE_REGISTRY.yaml`
 
 ## Field directories
 - `fields/`
