@@ -10,7 +10,10 @@ This file designates the repository-native witness surfaces for each module in
 ## Module designations
 
 ### axioms_and_laws
-OPEN
+- `docs/community/urf11/WEAK_INTERACTION_THEOREM.md`
+- `docs/community/urf11/PROMOTION_STABILITY_LAW.md`
+- `docs/community/urf11/PROMOTION_SCOPE_POLICY.md`
+- `docs/community/urf11/PROMOTION_SEMANTICS.md`
 
 ### certificates_and_verifiers
 OPEN
