@@ -1,0 +1,56 @@
+acceptance_records:
+  - field_code: F10
+    acceptance_id: f10_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f10_acceptance_witness_v1
+    status: OPEN
+  - field_code: F11
+    acceptance_id: f11_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f11_acceptance_witness_v1
+    status: OPEN
+  - field_code: F1
+    acceptance_id: f1_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f1_acceptance_witness_v1
+    status: OPEN
+  - field_code: F2
+    acceptance_id: f2_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f2_acceptance_witness_v1
+    status: OPEN
+  - field_code: F3
+    acceptance_id: f3_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f3_acceptance_witness_v1
+    status: OPEN
+  - field_code: F4
+    acceptance_id: f4_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f4_acceptance_witness_v1
+    status: OPEN
+  - field_code: F5
+    acceptance_id: f5_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f5_acceptance_witness_v1
+    status: OPEN
+  - field_code: F6
+    acceptance_id: f6_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f6_acceptance_witness_v1
+    status: OPEN
+  - field_code: F7
+    acceptance_id: f7_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f7_acceptance_witness_v1
+    status: OPEN
+  - field_code: F8
+    acceptance_id: f8_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f8_acceptance_witness_v1
+    status: OPEN
+  - field_code: F9
+    acceptance_id: f9_acceptance_contract_v1
+    acceptance_statement: declared benchmark, measurable target metric, reproducible interface, and pass/fail criterion for admissible partial progress
+    witness_type: f9_acceptance_witness_v1
+    status: OPEN
