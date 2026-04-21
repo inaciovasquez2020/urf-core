@@ -21,6 +21,7 @@ Every accepted contribution must target either:
 - `BENCHMARK_REGISTRY.yaml`
 - `ACCEPTANCE_REGISTRY.yaml`
 - `SUBPROBLEM_REGISTRY.yaml`
+- `EXPORTED_OBJECT_REGISTRY.yaml`
 
 ## Field directories
 - `fields/`
