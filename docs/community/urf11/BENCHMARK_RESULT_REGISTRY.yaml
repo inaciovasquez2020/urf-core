@@ -1,0 +1,45 @@
+benchmark_results:
+  - bridge_id: f1_to_f2_bridge_v1
+    benchmark: urf11/f1_to_f2/v1
+    metric: f2_transfer_metric
+    status: PASS
+  - bridge_id: f2_to_f3_bridge_v1
+    benchmark: urf11/f2_to_f3/v1
+    metric: f3_transfer_metric
+    status: PASS
+  - bridge_id: f3_to_f4_bridge_v1
+    benchmark: urf11/f3_to_f4/v1
+    metric: f4_transfer_metric
+    status: PASS
+  - bridge_id: f4_to_f5_bridge_v1
+    benchmark: urf11/f4_to_f5/v1
+    metric: f5_transfer_metric
+    status: PASS
+  - bridge_id: f5_to_f6_bridge_v1
+    benchmark: urf11/f5_to_f6/v1
+    metric: f6_transfer_metric
+    status: PASS
+  - bridge_id: f6_to_f7_bridge_v1
+    benchmark: urf11/f6_to_f7/v1
+    metric: f7_transfer_metric
+    status: PASS
+  - bridge_id: f7_to_f8_bridge_v1
+    benchmark: urf11/f7_to_f8/v1
+    metric: f8_transfer_metric
+    status: PASS
+  - bridge_id: f8_to_f9_bridge_v1
+    benchmark: urf11/f8_to_f9/v1
+    metric: f9_transfer_metric
+    status: PASS
+  - bridge_id: f9_to_f10_bridge_v1
+    benchmark: urf11/f9_to_f10/v1
+    metric: f10_transfer_metric
+    status: PASS
+  - bridge_id: f10_to_f11_bridge_v1
+    benchmark: urf11/f10_to_f11/v1
+    metric: f11_transfer_metric
+    status: PASS
+  - bridge_id: f11_to_f1_bridge_v1
+    benchmark: urf11/f11_to_f1/v1
+    metric: f1_transfer_metric
+    status: PASS

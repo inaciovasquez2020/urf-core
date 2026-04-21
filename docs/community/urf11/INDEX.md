@@ -25,6 +25,7 @@ Every accepted contribution must target either:
 - `TRANSLATION_RULE_REGISTRY.yaml`
 - `BRIDGE_PACKET_REGISTRY.yaml`
 - `PROMOTION_WITNESS_REGISTRY.yaml`
+- `BENCHMARK_RESULT_REGISTRY.yaml`
 
 ## Field directories
 - `fields/`
@@ -34,3 +35,4 @@ Every accepted contribution must target either:
 
 ## Canonical policy locks
 - `PROMOTION_SCOPE_POLICY.md`
+- `PROMOTION_SEMANTICS.md`
