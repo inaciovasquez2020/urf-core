@@ -25,6 +25,7 @@ Every accepted contribution must target either:
 - `TRANSLATION_RULE_REGISTRY.yaml`
 - `BRIDGE_PACKET_REGISTRY.yaml`
 - `PROMOTION_WITNESS_REGISTRY.yaml`
+- `PROMOTION_PATH_REGISTRY.yaml`
 - `BENCHMARK_RESULT_REGISTRY.yaml`
 
 ## Field directories

@@ -1,0 +1,25 @@
+promotion_managed_paths:
+  - path: docs/community/urf11/BRIDGE_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
+  - path: docs/community/urf11/BRIDGE_PACKET_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
+  - path: docs/community/urf11/BENCHMARK_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
+  - path: docs/community/urf11/BENCHMARK_RESULT_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
+  - path: docs/community/urf11/ACCEPTANCE_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
+  - path: docs/community/urf11/EXPORTED_OBJECT_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
+  - path: docs/community/urf11/TRANSLATION_RULE_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
+  - path: docs/community/urf11/PROMOTION_WITNESS_REGISTRY.yaml
+    scope: mutable
+    status: OPEN
