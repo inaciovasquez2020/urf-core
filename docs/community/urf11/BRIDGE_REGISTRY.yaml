@@ -1,0 +1,13 @@
+bridges: []
+rules:
+  ordered_pair_required: true
+  source_not_equal_target: true
+  required_fields:
+    - source_field
+    - source_subproblem
+    - target_field
+    - exported_object
+    - translation_rule
+    - target_acceptance_test
+    - benchmark
+    - status
