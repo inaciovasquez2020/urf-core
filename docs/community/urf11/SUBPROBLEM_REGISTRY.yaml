@@ -1,0 +1,133 @@
+subproblem_records:
+  - field_code: F10
+    subproblem_id: F10-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F10
+    subproblem_id: F10-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F10
+    subproblem_id: F10-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F11
+    subproblem_id: F11-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F11
+    subproblem_id: F11-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F11
+    subproblem_id: F11-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F1
+    subproblem_id: F1-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F1
+    subproblem_id: F1-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F1
+    subproblem_id: F1-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F2
+    subproblem_id: F2-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F2
+    subproblem_id: F2-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F2
+    subproblem_id: F2-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F3
+    subproblem_id: F3-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F3
+    subproblem_id: F3-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F3
+    subproblem_id: F3-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F4
+    subproblem_id: F4-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F4
+    subproblem_id: F4-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F4
+    subproblem_id: F4-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F5
+    subproblem_id: F5-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F5
+    subproblem_id: F5-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F5
+    subproblem_id: F5-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F6
+    subproblem_id: F6-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F6
+    subproblem_id: F6-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F6
+    subproblem_id: F6-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F7
+    subproblem_id: F7-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F7
+    subproblem_id: F7-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F7
+    subproblem_id: F7-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F8
+    subproblem_id: F8-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F8
+    subproblem_id: F8-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F8
+    subproblem_id: F8-S3
+    title: cross-field transfer validation
+    status: OPEN
+  - field_code: F9
+    subproblem_id: F9-S1
+    title: declared benchmark extraction
+    status: OPEN
+  - field_code: F9
+    subproblem_id: F9-S2
+    title: exported-object design
+    status: OPEN
+  - field_code: F9
+    subproblem_id: F9-S3
+    title: cross-field transfer validation
+    status: OPEN
