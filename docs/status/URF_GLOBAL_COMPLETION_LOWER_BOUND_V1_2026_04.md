@@ -57,6 +57,7 @@ P_{\mathrm{URF}}
 ## Scope
 This is a certified lower bound only.
 No exact value is claimed here for the remaining module scores.
+Superseded operationally by `docs/status/URF_GLOBAL_COMPLETION_EXACT_VALUE_V1_2026_04.md` for exact reporting.
 
 ## Finish condition
 Replace this lower-bound certificate by an exact-value certificate only after every remaining module score is designated and computed repository-natively.
