@@ -38,7 +38,7 @@ If you utilize this core logic in your research, please cite it using the follow
 ```bibtex
 @manual{Vasquez_URF_Core_2026,
   author = {Vasquez, Inacio F.},
-  title  = {urf-core: Foundational Logic for the Universal Reference Frame},
+  title  = {urf-core: Foundational Logic for the Unified Rigidity Framework},
   year   = {2026},
   url    = {[https://github.com/inaciovasquez2020/urf-core](https://github.com/inaciovasquez2020/urf-core)}
 }
