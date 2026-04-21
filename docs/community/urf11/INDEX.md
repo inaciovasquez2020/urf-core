@@ -23,9 +23,14 @@ Every accepted contribution must target either:
 - `SUBPROBLEM_REGISTRY.yaml`
 - `EXPORTED_OBJECT_REGISTRY.yaml`
 - `TRANSLATION_RULE_REGISTRY.yaml`
+- `BRIDGE_PACKET_REGISTRY.yaml`
+- `PROMOTION_WITNESS_REGISTRY.yaml`
 
 ## Field directories
 - `fields/`
 
 ## Canonical theorem locks
 - `WEAK_INTERACTION_THEOREM.md`- `PROMOTION_STABILITY_LAW.md`
+
+## Canonical policy locks
+- `PROMOTION_SCOPE_POLICY.md`

@@ -1,0 +1,100 @@
+bridge_packets:
+  - bridge_id: f1_to_f2_bridge_v1
+    source_field: F1
+    source_subproblem: F1-S2
+    target_field: F2
+    exported_object: f1_transfer_object_v1
+    translation_rule: f1_to_f2_rule_v1
+    acceptance_id: f2_acceptance_contract_v1
+    benchmark: urf11/f1_to_f2/v1
+    status: OPEN
+  - bridge_id: f2_to_f3_bridge_v1
+    source_field: F2
+    source_subproblem: F2-S2
+    target_field: F3
+    exported_object: f2_transfer_object_v1
+    translation_rule: f2_to_f3_rule_v1
+    acceptance_id: f3_acceptance_contract_v1
+    benchmark: urf11/f2_to_f3/v1
+    status: OPEN
+  - bridge_id: f3_to_f4_bridge_v1
+    source_field: F3
+    source_subproblem: F3-S2
+    target_field: F4
+    exported_object: f3_transfer_object_v1
+    translation_rule: f3_to_f4_rule_v1
+    acceptance_id: f4_acceptance_contract_v1
+    benchmark: urf11/f3_to_f4/v1
+    status: OPEN
+  - bridge_id: f4_to_f5_bridge_v1
+    source_field: F4
+    source_subproblem: F4-S2
+    target_field: F5
+    exported_object: f4_transfer_object_v1
+    translation_rule: f4_to_f5_rule_v1
+    acceptance_id: f5_acceptance_contract_v1
+    benchmark: urf11/f4_to_f5/v1
+    status: OPEN
+  - bridge_id: f5_to_f6_bridge_v1
+    source_field: F5
+    source_subproblem: F5-S2
+    target_field: F6
+    exported_object: f5_transfer_object_v1
+    translation_rule: f5_to_f6_rule_v1
+    acceptance_id: f6_acceptance_contract_v1
+    benchmark: urf11/f5_to_f6/v1
+    status: OPEN
+  - bridge_id: f6_to_f7_bridge_v1
+    source_field: F6
+    source_subproblem: F6-S2
+    target_field: F7
+    exported_object: f6_transfer_object_v1
+    translation_rule: f6_to_f7_rule_v1
+    acceptance_id: f7_acceptance_contract_v1
+    benchmark: urf11/f6_to_f7/v1
+    status: OPEN
+  - bridge_id: f7_to_f8_bridge_v1
+    source_field: F7
+    source_subproblem: F7-S2
+    target_field: F8
+    exported_object: f7_transfer_object_v1
+    translation_rule: f7_to_f8_rule_v1
+    acceptance_id: f8_acceptance_contract_v1
+    benchmark: urf11/f7_to_f8/v1
+    status: OPEN
+  - bridge_id: f8_to_f9_bridge_v1
+    source_field: F8
+    source_subproblem: F8-S2
+    target_field: F9
+    exported_object: f8_transfer_object_v1
+    translation_rule: f8_to_f9_rule_v1
+    acceptance_id: f9_acceptance_contract_v1
+    benchmark: urf11/f8_to_f9/v1
+    status: OPEN
+  - bridge_id: f9_to_f10_bridge_v1
+    source_field: F9
+    source_subproblem: F9-S2
+    target_field: F10
+    exported_object: f9_transfer_object_v1
+    translation_rule: f9_to_f10_rule_v1
+    acceptance_id: f10_acceptance_contract_v1
+    benchmark: urf11/f9_to_f10/v1
+    status: OPEN
+  - bridge_id: f10_to_f11_bridge_v1
+    source_field: F10
+    source_subproblem: F10-S2
+    target_field: F11
+    exported_object: f10_transfer_object_v1
+    translation_rule: f10_to_f11_rule_v1
+    acceptance_id: f11_acceptance_contract_v1
+    benchmark: urf11/f10_to_f11/v1
+    status: OPEN
+  - bridge_id: f11_to_f1_bridge_v1
+    source_field: F11
+    source_subproblem: F11-S2
+    target_field: F1
+    exported_object: f11_transfer_object_v1
+    translation_rule: f11_to_f1_rule_v1
+    acceptance_id: f1_acceptance_contract_v1
+    benchmark: urf11/f11_to_f1/v1
+    status: OPEN
