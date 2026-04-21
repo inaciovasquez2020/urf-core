@@ -1,0 +1,89 @@
+benchmarks:
+  - id: urf11/f1_to_f2/v1
+    source_field: F1
+    target_field: F2
+    source_metric: f1_primary_metric
+    target_metric: f2_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f2_to_f3/v1
+    source_field: F2
+    target_field: F3
+    source_metric: f2_primary_metric
+    target_metric: f3_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f3_to_f4/v1
+    source_field: F3
+    target_field: F4
+    source_metric: f3_primary_metric
+    target_metric: f4_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f4_to_f5/v1
+    source_field: F4
+    target_field: F5
+    source_metric: f4_primary_metric
+    target_metric: f5_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f5_to_f6/v1
+    source_field: F5
+    target_field: F6
+    source_metric: f5_primary_metric
+    target_metric: f6_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f6_to_f7/v1
+    source_field: F6
+    target_field: F7
+    source_metric: f6_primary_metric
+    target_metric: f7_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f7_to_f8/v1
+    source_field: F7
+    target_field: F8
+    source_metric: f7_primary_metric
+    target_metric: f8_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f8_to_f9/v1
+    source_field: F8
+    target_field: F9
+    source_metric: f8_primary_metric
+    target_metric: f9_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f9_to_f10/v1
+    source_field: F9
+    target_field: F10
+    source_metric: f9_primary_metric
+    target_metric: f10_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f10_to_f11/v1
+    source_field: F10
+    target_field: F11
+    source_metric: f10_primary_metric
+    target_metric: f11_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
+  - id: urf11/f11_to_f1/v1
+    source_field: F11
+    target_field: F1
+    source_metric: f11_primary_metric
+    target_metric: f1_transfer_metric
+    interface_contract: declared_input_output_schema_v1
+    witness_type: benchmark_report_v1
+    status: OPEN
