@@ -1,4 +1,92 @@
-bridges: []
+bridges:
+  - source_field: F1
+    source_subproblem: F1-S2
+    target_field: F2
+    exported_object: f1_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f1_to_f2/v1
+    status: OPEN
+  - source_field: F2
+    source_subproblem: F2-S2
+    target_field: F3
+    exported_object: f2_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f2_to_f3/v1
+    status: OPEN
+  - source_field: F3
+    source_subproblem: F3-S2
+    target_field: F4
+    exported_object: f3_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f3_to_f4/v1
+    status: OPEN
+  - source_field: F4
+    source_subproblem: F4-S2
+    target_field: F5
+    exported_object: f4_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f4_to_f5/v1
+    status: OPEN
+  - source_field: F5
+    source_subproblem: F5-S2
+    target_field: F6
+    exported_object: f5_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f5_to_f6/v1
+    status: OPEN
+  - source_field: F6
+    source_subproblem: F6-S2
+    target_field: F7
+    exported_object: f6_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f6_to_f7/v1
+    status: OPEN
+  - source_field: F7
+    source_subproblem: F7-S2
+    target_field: F8
+    exported_object: f7_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f7_to_f8/v1
+    status: OPEN
+  - source_field: F8
+    source_subproblem: F8-S2
+    target_field: F9
+    exported_object: f8_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f8_to_f9/v1
+    status: OPEN
+  - source_field: F9
+    source_subproblem: F9-S2
+    target_field: F10
+    exported_object: f9_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f9_to_f10/v1
+    status: OPEN
+  - source_field: F10
+    source_subproblem: F10-S2
+    target_field: F11
+    exported_object: f10_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f10_to_f11/v1
+    status: OPEN
+  - source_field: F11
+    source_subproblem: F11-S2
+    target_field: F1
+    exported_object: f11_transfer_object_v1
+    translation_rule: map declared source benchmark outputs into the target benchmark input contract with an explicit uncertainty budget
+    target_acceptance_test: target benchmark contract passes and at least one declared metric is improved stabilized or explained
+    benchmark: urf11/f11_to_f1/v1
+    status: OPEN
 rules:
   ordered_pair_required: true
   source_not_equal_target: true

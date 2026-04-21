@@ -21,3 +21,6 @@ Every accepted contribution must target either:
 
 ## Field directories
 - `fields/`
+
+## Canonical theorem locks
+- `WEAK_INTERACTION_THEOREM.md`- `PROMOTION_STABILITY_LAW.md`
