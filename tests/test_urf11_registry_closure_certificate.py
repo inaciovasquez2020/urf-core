@@ -38,7 +38,7 @@ def parse_list(path: Path, key_name: str):
 
 def test_current_instance_registry_closure_certificate():
     text = CERT_PATH.read_text()
-    assert "## Status\nOPEN" in text
+    assert "## Status\nPROVED" in text
     assert "Every current bridge packet closes through the subproblem, object, rule, acceptance, benchmark, witness, and result registries." in text
 
     packets = parse_list(PACKET_PATH, "bridge_packets")

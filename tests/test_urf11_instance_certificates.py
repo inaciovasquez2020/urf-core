@@ -57,7 +57,7 @@ def Promote(packet, witnesses, results):
 
 def test_current_instance_weak_interaction_certificate():
     text = WEAK_CERT.read_text()
-    assert "## Status\nOPEN" in text
+    assert "## Status\nPROVED" in text
     assert "deg^{+}(F_i)\ge 1" in text
     assert "Every field currently has at least one outgoing bridge packet." in text
 
@@ -71,7 +71,7 @@ def test_current_instance_weak_interaction_certificate():
 
 def test_current_instance_promotion_stability_certificate():
     text = STAB_CERT.read_text()
-    assert "## Status\nOPEN" in text
+    assert "## Status\nPROVED" in text
     assert "benchmark\\_status}=\\texttt{PASS}" in text
     assert "Promotion is currently confined to docs/community/urf11" in text
 

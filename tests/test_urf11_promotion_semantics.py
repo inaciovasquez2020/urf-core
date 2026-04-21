@@ -48,7 +48,7 @@ def Promote(packet, witnesses, results):
 
 def test_promotion_semantics_literal():
     text = SEMANTICS_PATH.read_text()
-    assert "## Status\nOPEN" in text
+    assert "## Status\nPROVED" in text
     assert "Promote(Pi_{i->j}) = 1 iff there exists a declared witness record matching the bridge packet and there exists a declared benchmark result record with status PASS for the same bridge_id and benchmark." in text
     assert "benchmark_status" in text
     assert "PASS" in text
