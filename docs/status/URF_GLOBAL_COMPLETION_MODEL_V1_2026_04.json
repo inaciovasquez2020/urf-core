@@ -1,0 +1,37 @@
+{
+  "model_id": "urf-global-completion-v1-2026-04",
+  "status": "CANONICAL",
+  "scope": "urf-core repository-global completion model",
+  "modules": [
+    {
+      "id": "axioms_and_laws",
+      "weight": 0.20,
+      "score_rule": "status_complete_or_proved_ratio"
+    },
+    {
+      "id": "certificates_and_verifiers",
+      "weight": 0.20,
+      "score_rule": "verified_surface_ratio"
+    },
+    {
+      "id": "namespace_and_ci_integrity",
+      "weight": 0.15,
+      "score_rule": "passing_integrity_checks_ratio"
+    },
+    {
+      "id": "community_and_bridge_surfaces",
+      "weight": 0.15,
+      "score_rule": "current_instance_closure_ratio"
+    },
+    {
+      "id": "status_governance_and_audit",
+      "weight": 0.15,
+      "score_rule": "audit_truth_surface_ratio"
+    },
+    {
+      "id": "global_completion_policy",
+      "weight": 0.15,
+      "score_rule": "policy_declared_and_tested"
+    }
+  ]
+}

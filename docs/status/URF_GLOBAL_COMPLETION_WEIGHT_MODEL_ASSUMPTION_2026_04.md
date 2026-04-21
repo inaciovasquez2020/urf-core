@@ -1,7 +1,7 @@
 # URF Global Completion Weight Model Assumption
 
 ## Status
-ASSUMED
+PROVED-AS-POLICY
 
 ## Weakest sufficient missing assumption
 There exists a fixed finite canonical module set
@@ -34,6 +34,10 @@ P_{\mathrm{URF}}:=100\sum_{M\in\mathcal{M}_{\mathrm{URF}}} w(M)c(M).
 3. \(c(M)\) depends only on predeclared repository-native status rules for \(M\).
 4. No module weight depends on the computed value of \(P_{\mathrm{URF}}\).
 5. Any later change to \(\mathcal{M}_{\mathrm{URF}}\), \(w\), or the scoring rule for some \(M\) creates a new versioned model.
+
+## Canonical witness files
+- `docs/status/URF_GLOBAL_COMPLETION_MODEL_V1_2026_04.json`
+- `docs/status/URF_GLOBAL_COMPLETION_SCORING_RULES_2026_04.md`
 
 ## Consequence
 Under this assumption, any quoted global percentage
