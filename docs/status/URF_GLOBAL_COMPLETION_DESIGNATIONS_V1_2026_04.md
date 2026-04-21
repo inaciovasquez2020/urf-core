@@ -1,7 +1,7 @@
 # URF Global Completion Designations (v1)
 
 ## Status
-OPEN
+CANONICAL
 
 ## Scope
 This file designates the repository-native witness surfaces for each module in
