@@ -20,6 +20,7 @@ Every accepted contribution must target either:
 - `BRIDGE_REGISTRY.yaml`
 - `BENCHMARK_REGISTRY.yaml`
 - `ACCEPTANCE_REGISTRY.yaml`
+- `SUBPROBLEM_REGISTRY.yaml`
 
 ## Field directories
 - `fields/`
