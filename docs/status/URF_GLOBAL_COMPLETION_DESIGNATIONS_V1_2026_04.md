@@ -25,6 +25,11 @@ This file designates the repository-native witness surfaces for each module in
 - `tests/test_urf11_promotion_stability_computed.py`
 - `tests/test_urf11_instance_certificates.py`
 - `tests/test_urf_global_completion_lower_bound_literal.py`
+- `tests/test_urf11_registry_closure_certificate.py`
+- `tests/test_urf11_weak_interaction_computed.py`
+- `tests/test_urf11_promotion_stability_computed.py`
+- `tests/test_urf11_instance_certificates.py`
+- `tests/test_urf_global_completion_lower_bound_literal.py`
 
 ### namespace_and_ci_integrity
 - `build/build`
