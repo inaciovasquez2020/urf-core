@@ -1,0 +1,67 @@
+exported_objects:
+  - object_id: f1_transfer_object_v1
+    source_field: F1
+    target_field: F2
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f2_transfer_object_v1
+    source_field: F2
+    target_field: F3
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f3_transfer_object_v1
+    source_field: F3
+    target_field: F4
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f4_transfer_object_v1
+    source_field: F4
+    target_field: F5
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f5_transfer_object_v1
+    source_field: F5
+    target_field: F6
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f6_transfer_object_v1
+    source_field: F6
+    target_field: F7
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f7_transfer_object_v1
+    source_field: F7
+    target_field: F8
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f8_transfer_object_v1
+    source_field: F8
+    target_field: F9
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f9_transfer_object_v1
+    source_field: F9
+    target_field: F10
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f10_transfer_object_v1
+    source_field: F10
+    target_field: F11
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
+  - object_id: f11_transfer_object_v1
+    source_field: F11
+    target_field: F1
+    object_type: transfer_object
+    interface_contract: declared_input_output_schema_v1
+    status: OPEN
