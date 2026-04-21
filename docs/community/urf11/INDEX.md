@@ -37,3 +37,7 @@ Every accepted contribution must target either:
 ## Canonical policy locks
 - `PROMOTION_SCOPE_POLICY.md`
 - `PROMOTION_SEMANTICS.md`
+
+## Current-instance certificates
+- `CURRENT_INSTANCE_WEAK_INTERACTION_CERTIFICATE.md`
+- `CURRENT_INSTANCE_PROMOTION_STABILITY_CERTIFICATE.md`
