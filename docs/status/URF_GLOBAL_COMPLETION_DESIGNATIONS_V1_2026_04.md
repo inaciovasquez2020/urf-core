@@ -16,7 +16,12 @@ OPEN
 OPEN
 
 ### namespace_and_ci_integrity
-OPEN
+- `build/build`
+- `Lean Action CI/build`
+- `No Duplicate Namespace Check/check`
+- `verify/check`
+- `verify-surface/check`
+- `CI/test`
 
 ### community_and_bridge_surfaces
 - `docs/community/urf11/CURRENT_INSTANCE_REGISTRY_CLOSURE_CERTIFICATE.md`
