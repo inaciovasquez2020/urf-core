@@ -1,30 +1,58 @@
-URF-Core Quickstart
+# URF Core Quickstart
 
-Requirements:
-- git
-- bash
-- pinned toolchains as specified in the repository
+This is the shortest path from clone to a first successful local verification pass.
 
-Steps:
+## Requirements
 
-1. Clone
-   git clone https://github.com/inaciovasquez2020/urf-core.git
-   cd urf-core
+- `git`
+- `bash`
+- `python3`
+- Lean 4 with `lake`
+- repository-pinned toolchains as applicable
 
-2. Build (if applicable)
-   ./scripts/build.sh
+## 1. Clone
 
-3. Verify
-   ./scripts/verify.sh
+```bash
+git clone https://github.com/inaciovasquez2020/urf-core.git
+cd urf-core
+```
 
-4. Reproduce checksum
-   sha256sum artifacts/*
+## 2. Check tools
 
-Expected Result:
-Verification passes and hashes match published values.
+```bash
+python3 --version
+git --version
+lake --version
+lean --version
+```
 
-Notes:
-- No CI secrets required
-- No network access required after clone
-- Deterministic execution
+## 3. Build
 
+```bash
+lake build
+```
+
+If your current workflow depends on repository scripts, also run:
+
+```bash
+[ -x ./scripts/build.sh ] && ./scripts/build.sh
+```
+
+## 4. Verify
+
+```bash
+python3 -m pytest -q
+[ -x ./scripts/verify.sh ] && ./scripts/verify.sh
+```
+
+## 5. Reproduce checksums
+
+```bash
+sha256sum artifacts/* 2>/dev/null || true
+```
+
+## 6. Next steps
+
+- detailed environment instructions: `docs/SETUP_GUIDE.md`
+- contribution paths: `CONTRIBUTING.md`
+- public claims surface: `CLAIMS.md`
