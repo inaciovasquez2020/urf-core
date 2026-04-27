@@ -78,3 +78,7 @@ Current status:
 - Strongest verified theorem: none asserted at repository level
 - Weakest missing theorem: replace each load-bearing axiom/admit with a proof or quarantine it as an explicit assumption
 - Obligation inventory: `docs/status/OPEN_OBLIGATION_INVENTORY_2026_04_27.md`
+
+## External status
+
+This repository is governed by [`docs/status/EXTERNAL_STATUS_LOCK.md`](docs/status/EXTERNAL_STATUS_LOCK.md). Build success, CI success, dashboards, ledgers, axioms, admits, `sorry`, or placeholder witnesses do not constitute theorem-level closure.
