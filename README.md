@@ -60,3 +60,21 @@ Canonical whole-URF residual frontier: docs/status/URF_REMAINING_FRONTIER_CANONI
 - `legacy/urf-portfolio`
 - `legacy/urf-prefab-system`
 
+## Formal Status
+
+Status: Axiomatic Core / Trusted-Base Prototype
+
+Build status:
+- A successful build means the checked root target compiles.
+- It does not imply that axiom-dependent or admit-dependent results prove their headline targets.
+
+Theorem status:
+- This repository currently contains project-defined `axiom` declarations and `admit` proof holes.
+- `axiom` is a trusted assumption, not a proof.
+- `admit` is a proof hole.
+- Any result depending on project axioms or admitted obligations is Conditional.
+
+Current status:
+- Strongest verified theorem: none asserted at repository level
+- Weakest missing theorem: replace each load-bearing axiom/admit with a proof or quarantine it as an explicit assumption
+- Obligation inventory: `docs/status/OPEN_OBLIGATION_INVENTORY_2026_04_27.md`
