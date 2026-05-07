@@ -21,7 +21,7 @@ URF Core contains the foundational axioms, interfaces, and reference objects for
 ## Current State
 
 - axiomatic base: public
-- reference object: canonical
+- reference object: current reference
 - verification path: active
 - extension layers: external to core
 
