@@ -1,16 +1,16 @@
 # URF Prefab System
 
-Canonical prefab layer for the Unified Rigidity Framework (URF).
+Current reference prefab layer for the Unified Rigidity Framework (URF).
 
 This repository provides:
-- Frozen axiom prefab (URF Core Axioms 0.0–0.4)
+- Internally internally frozen axiom prefab (URF Core Axioms 0.0–0.4)
 - Executable JSON schemas
 - Deterministic verifier
 - Reproducible CI-ready structure
 
 Status:
-- Canonical
-- Frozen v1.0.0
+- Current reference
+- Internally internally frozen v1.0.0
 - Dependency-locked to URF Core
 
 Scope:
@@ -42,17 +42,17 @@ If you utilize this core logic in your research, please cite it using the follow
   year   = {2026},
   url    = {[https://github.com/inaciovasquez2020/urf-core](https://github.com/inaciovasquez2020/urf-core)}
 }
- (Cross-link scientific-infrastructure as canonical environment layer)
+ (Cross-link scientific-infrastructure as current reference environment layer)
 
 ## Repository role
 
-This repository is the canonical upstream for URF definitions, theorem statements, dependency ledgers, and closure claims.
+This repository is the current reference upstream for URF definitions, theorem statements, dependency ledgers, and closure claims.
 
-Community-additive examples, tests, implementations, and non-canonical extensions belong in `urf-core-community`.
+Community-additive examples, tests, implementations, and non-current reference extensions belong in `urf-core-community`.
 
 Exposition and release-facing documentation belong in `urf-textbook`.
 
-Canonical whole-URF residual frontier: docs/status/URF_REMAINING_FRONTIER_CANONICAL.md
+Current reference whole-URF residual frontier: docs/status/URF_REMAINING_FRONTIER_CANONICAL.md
 
 ## Consolidated modules
 
