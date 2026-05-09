@@ -1,5 +1,22 @@
 # URF Prefab System
 
+<!-- VERIFIED_FRONTIER_TRACKING_DOOR:BEGIN -->
+## Verified Frontier Tracking Definitions Layer
+
+This repository is the definitions layer for **Verified Frontier Tracking**.
+
+Its role is to hold the stable objects that other public layers refer to:
+
+| Object type | Role |
+|---|---|
+| Definitions | Names the structural objects used across URF artifacts |
+| Schemas | Fixes the shape of status, certificate, and verification data |
+| Verification artifacts | Supports reproducible checks of declared surfaces |
+| Claim boundaries | Prevents interfaces, conditions, and open frontiers from being promoted into solved theorems |
+
+Boundary: this repository provides trusted definitions and verification infrastructure. It does not claim theorem-level closure unless a theorem is explicitly formalized and its assumptions are discharged.
+<!-- VERIFIED_FRONTIER_TRACKING_DOOR:END -->
+
 Current reference prefab layer for the Unified Rigidity Framework (URF).
 
 This repository provides:
