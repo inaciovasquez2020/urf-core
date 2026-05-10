@@ -121,3 +121,11 @@ This repository is governed by [`docs/status/EXTERNAL_STATUS_LOCK.md`](docs/stat
 ## Lean proof portfolio classification
 
 This repository is governed by [`docs/status/LEAN_PROOF_PORTFOLIO_CLASSIFICATION.md`](docs/status/LEAN_PROOF_PORTFOLIO_CLASSIFICATION.md). Its role in the portfolio is explicitly classified as proof-facing, conditional frontier, infrastructure/documentation, or legacy/scaffold.
+
+<!-- PUBLIC_FRONTIER_STATUS_START -->
+## Public frontier status
+
+- [URF Core Public Frontier Status — 2026-05-10](docs/status/URF_CORE_PUBLIC_FRONTIER_STATUS_2026_05_10.md)
+
+Boundary: selected-domain Chronos/H4.1-FGL status only; no unrestricted H4.1/FGL closure; no UniversalFiberEntropyGap, Chronos-RR, P vs NP, or Clay-problem closure.
+<!-- PUBLIC_FRONTIER_STATUS_END -->
