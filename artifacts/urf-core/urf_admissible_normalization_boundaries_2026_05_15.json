@@ -1,0 +1,27 @@
+{
+  "status": "TEXTUAL_NONCOMPILED_ADMITS_REMOVED_EXPLICIT_ASSUMPTION_BOUNDARIES",
+  "repository": "urf-core",
+  "target_file": "admissible/lean/URFAdmissible.lean",
+  "removed_admits": 2,
+  "target_theorems": [
+    "TM_normalization",
+    "RAM_normalization"
+  ],
+  "replacement_assumptions": [
+    "TM_normalization_assumption",
+    "RAM_normalization_assumption"
+  ],
+  "theorem_closure": false,
+  "boundary": {
+    "converted_two_admits_to_explicit_assumptions": true,
+    "does_not_discharge_TM_normalization": true,
+    "does_not_discharge_RAM_normalization": true,
+    "does_not_close_whole_urf": true,
+    "does_not_close_chronos_rr": true,
+    "does_not_close_h4_1_fgl": true,
+    "does_not_close_p_vs_np": true,
+    "does_not_close_clay_problem": true,
+    "target_file_is_not_standalone_lean_compiled": true
+  },
+  "lean_compiled_target_file": false
+}

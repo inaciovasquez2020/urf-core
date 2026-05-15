@@ -61,23 +61,31 @@ def URF_ADMISSIBLE : Prop :=
 Normalization theorems
 -/
 
-/-- Deterministic TM normalization (statement only). -/
+/-- Deterministic TM normalization assumption boundary. -/
+axiom TM_normalization_assumption :
+  ∀ (M : Type),    -- abstract deterministic TM
+  URF_ADMISSIBLE step I Φ r b T
+
+/-- Deterministic TM normalization, explicitly assumption-backed. -/
 theorem TM_normalization :
   ∀ (M : Type),    -- abstract deterministic TM
   URF_ADMISSIBLE step I Φ r b T :=
 by
   intro M
-  -- proof supplied in papers/universal_quantifier_uclp.tex
-  admit
+  exact TM_normalization_assumption M
 
-/-- Restricted Word-RAM normalization (statement only). -/
+/-- Restricted Word-RAM normalization assumption boundary. -/
+axiom RAM_normalization_assumption :
+  ∀ (R : Type),    -- abstract restricted Word-RAM
+  URF_ADMISSIBLE step I Φ r b T
+
+/-- Restricted Word-RAM normalization, explicitly assumption-backed. -/
 theorem RAM_normalization :
   ∀ (R : Type),    -- abstract restricted Word-RAM
   URF_ADMISSIBLE step I Φ r b T :=
 by
   intro R
-  -- proof supplied in papers/universal_quantifier_uclp.tex
-  admit
+  exact RAM_normalization_assumption R
 
 end URF
 
