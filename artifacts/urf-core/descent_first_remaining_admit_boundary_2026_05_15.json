@@ -1,0 +1,25 @@
+{
+  "status": "TEXTUAL_NONCOMPILED_ADMIT_REMOVED_EXPLICIT_ASSUMPTION_BOUNDARY",
+  "repository": "urf-core",
+  "target_file": "lean/URF/DescentSystem.lean",
+  "removed_admits": 1,
+  "replacement_assumption": "descent_first_remaining_admit_assumption_2026_05_15",
+  "lean_compiled_target_file": false,
+  "theorem_closure": false,
+  "expected_obligation_counts": {
+    "axiom_count": 53,
+    "admit_count": 8,
+    "sorry_count": 0
+  },
+  "boundary": {
+    "converted_one_legacy_descent_admit_to_textual_assumption_boundary": true,
+    "target_file_is_not_standalone_lean_compiled": true,
+    "does_not_discharge_descent_assumption": true,
+    "does_not_close_whole_urf": true,
+    "does_not_close_chronos_rr": true,
+    "does_not_close_h4_1_fgl": true,
+    "does_not_close_p_vs_np": true,
+    "does_not_close_clay_problem": true
+  },
+  "descent_system_remaining_admits": 7
+}
