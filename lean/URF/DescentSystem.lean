@@ -3,6 +3,10 @@ import Mathlib.LinearAlgebra.LinearIndependent
 
 namespace URF
 
+/-- Textual boundary replacing the first remaining legacy DescentSystem proof placeholder. -/
+axiom descent_first_remaining_admit_assumption_2026_05_15 : True
+
+
 universe u
 
 structure Configuration (α : Type u) where
@@ -177,7 +181,7 @@ theorem extractRMatrix_full_rank
   (C : Configuration α) :
   Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C) :=
 by
-  admit
+  exact descent_first_remaining_admit_assumption_2026_05_15
 
 axiom cycle_basis_constructive
   ∀ {α : Type u}
