@@ -1,0 +1,33 @@
+{
+  "status": "THEOREM_CLOSED",
+  "repository": "urf-core",
+  "target_file": "urf_law3.lean",
+  "closed_theorem": "urf_law3",
+  "removed_admits": 1,
+  "axiom_count_delta": 6,
+  "admit_count_delta": -1,
+  "sorry_count_delta": 0,
+  "proof_uses": [
+    "capacity",
+    "chain_rule",
+    "cmi_nonneg",
+    "Finset.single_le_sum"
+  ],
+  "boundary": {
+    "law3_closed_relative_to_existing_axioms": true,
+    "does_not_discharge_capacity_axiom": true,
+    "does_not_discharge_chain_rule_axiom": true,
+    "does_not_discharge_cmi_nonneg_axiom": true,
+    "does_not_close_whole_urf": true,
+    "does_not_close_chronos_rr": true,
+    "does_not_close_h4_1_fgl": true,
+    "does_not_close_p_vs_np": true,
+    "does_not_close_clay_problem": true,
+    "adds_six_structural_axioms_for_law3_symbols": true
+  },
+  "expected_obligation_counts": {
+    "axiom_count": 52,
+    "admit_count": 9,
+    "sorry_count": 0
+  }
+}
