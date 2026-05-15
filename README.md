@@ -88,6 +88,7 @@ Community-additive examples, tests, implementations, and non-current reference e
 Exposition and release-facing documentation belong in `urf-textbook`.
 
 Current reference whole-URF residual frontier: docs/status/URF_REMAINING_FRONTIER_CANONICAL.md
+Current theorem-level closed surface: docs/status/URF_CORE_NO_STATUS_PROMOTION_THEOREM_CLOSURE_2026_05_15.md
 
 ## Consolidated modules
 
@@ -110,7 +111,7 @@ Theorem status:
 - Any result depending on project axioms or admitted obligations is Conditional.
 
 Current status:
-- Strongest verified theorem: none asserted at repository level
+- Strongest verified theorem: `URF.no_status_promotion_closed` in `URF/TheoremClosure/NoStatusPromotion.lean`
 - Weakest missing theorem: replace each load-bearing axiom/admit with a proof or quarantine it as an explicit assumption
 - Obligation inventory: `docs/status/OPEN_OBLIGATION_INVENTORY_2026_04_27.md`
 

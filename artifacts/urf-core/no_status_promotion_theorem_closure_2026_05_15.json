@@ -1,0 +1,23 @@
+{
+  "status": "THEOREM_CLOSED",
+  "repository": "urf-core",
+  "closed_theorem_surface": "no_status_promotion",
+  "formal_file": "URF/TheoremClosure/NoStatusPromotion.lean",
+  "closed_theorems": [
+    "no_status_promotion_closed",
+    "frontier_open_cannot_transfer_to_solved_closed",
+    "solved_target_requires_solved_source_rank_closed"
+  ],
+  "uses_axiom": false,
+  "uses_admit": false,
+  "uses_sorry": false,
+  "boundary": {
+    "no_whole_urf_theorem_closure": true,
+    "does_not_discharge_existing_axioms": true,
+    "does_not_discharge_existing_admits": true,
+    "no_chronos_rr_closure": true,
+    "no_h4_1_fgl_closure": true,
+    "no_p_vs_np_closure": true,
+    "no_clay_problem_closure": true
+  }
+}
