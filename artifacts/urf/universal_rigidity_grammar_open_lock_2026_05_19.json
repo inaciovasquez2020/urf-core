@@ -1,0 +1,32 @@
+{
+  "id": "universal_rigidity_grammar_open_lock_2026_05_19",
+  "status": "CONDITIONAL_DEFINITIONS_AND_OPEN_PROBLEM_LOCK",
+  "repo": "urf-core",
+  "date": "2026-05-19",
+  "lean_file": "lean/URF/Foundation/UniversalRigidityGrammarData.lean",
+  "defines": [
+    "UniversalRigidityGrammarData",
+    "AdmissibleDomainEncoder",
+    "AdmissibleDomainEncoder.range",
+    "UniversalTranslationTheorem",
+    "UnrestrictedUFEG",
+    "OpenProblemPromotionLock"
+  ],
+  "proves": [
+    "UniversalTranslationTheorem_conditional_on_equal_ranges",
+    "UnrestrictedUFEG_open_problem_lock"
+  ],
+  "terminal_missing_theorem": "UnrestrictedUFEG",
+  "promotion_lock": "frontierOpen",
+  "boundary": {
+    "does_not_prove": [
+      "existence of a universal RigidityGrammar",
+      "unconditional UniversalTranslationTheorem",
+      "unrestricted UniversalFiberEntropyGap",
+      "Chronos-RR",
+      "H4.1/FGL",
+      "P vs NP",
+      "any Clay problem"
+    ]
+  }
+}
