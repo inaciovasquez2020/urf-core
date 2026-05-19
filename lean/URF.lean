@@ -2,3 +2,5 @@ import URF.Foundation.UniversalTranslationTheorem\nimport URF.Foundation.Univers
 import URF.Foundation.UniversalTranslationMissingObjects
 
 import URF.Foundation.SharedRigidityCodeBijection
+
+import URF.Foundation.SharedRigidityCodeBijectionUnique
