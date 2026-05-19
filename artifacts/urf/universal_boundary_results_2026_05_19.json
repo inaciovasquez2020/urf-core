@@ -1,0 +1,33 @@
+{
+  "id": "universal_boundary_results_2026_05_19",
+  "status": "BOUNDARY_RESULTS_CLOSED",
+  "repo": "urf-core",
+  "date": "2026-05-19",
+  "lean_file": "lean/URF/Foundation/UniversalBoundaryResults.lean",
+  "proves": [
+    "TaggedUniversalRigidityGrammarExistence",
+    "TaggedUniversalGrammar_encode_injective",
+    "TaggedUniversalGrammar_predicate_factors",
+    "TaggedUniversalGrammar_relation_factors",
+    "UnitFalseEncoder_range_ne_BoolIdEncoder_range",
+    "no_Unit_equiv_Bool",
+    "not_unconditional_translation_from_injective_encoders",
+    "UnrestrictedUFEG_vanishing_gap_obstruction"
+  ],
+  "classification": {
+    "weak_tagged_universal_grammar": "SOLVED",
+    "unconditional_translation_from_injective_encoders": "REFUTED",
+    "unrestricted_ufeg_without_floor": "OBSTRUCTED"
+  },
+  "boundary": {
+    "does_not_prove": [
+      "strong universal RigidityGrammar existence",
+      "unconditional UniversalTranslationTheorem",
+      "unrestricted UniversalFiberEntropyGap",
+      "Chronos-RR",
+      "H4.1/FGL",
+      "P vs NP",
+      "any Clay problem"
+    ]
+  }
+}
