@@ -1,0 +1,23 @@
+{
+"name": "capacity_soundness_reduction",
+"date": "2026-05-19",
+"status": "CONDITIONAL",
+"closed_objects": [
+"Trace",
+"Adm",
+"Encodes",
+"C_adm",
+"AdmissibleTraceBound",
+"CapacitySoundness",
+"capacity_obstruction_contrapositive"
+],
+"unique_open_object": "StableGenAdmissibleTrace",
+"does_not_prove": [
+"StableGenAdmissibleTrace",
+"unrestricted UniversalFiberEntropyGap",
+"unrestricted Chronos-RR",
+"unrestricted H4.1/FGL",
+"P vs NP",
+"any Clay problem"
+]
+}
