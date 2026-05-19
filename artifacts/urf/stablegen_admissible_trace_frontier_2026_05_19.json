@@ -1,0 +1,25 @@
+{
+  "name": "stablegen_admissible_trace_frontier",
+  "date": "2026-05-19",
+  "status": "FRONTIER_OPEN / CERTIFICATE_INTERFACE_ONLY",
+  "closed_structural_steps": [
+    "StableTraceCertificate interface",
+    "StableTraceCertificateExists predicate",
+    "certificate implies StableGenAdmissibleTrace",
+    "certificate implies CapacitySoundness",
+    "certificate implies capacity obstruction contrapositive"
+  ],
+  "unique_open_objects": [
+    "StableTraceCertificateExists",
+    "StableGenAdmissibleTrace"
+  ],
+  "does_not_prove": [
+    "StableTraceCertificateExists",
+    "StableGenAdmissibleTrace",
+    "unrestricted UniversalFiberEntropyGap",
+    "unrestricted Chronos-RR",
+    "unrestricted H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ]
+}
