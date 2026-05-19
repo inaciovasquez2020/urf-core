@@ -20,3 +20,4 @@ import URF.Foundation.UniversalTranslationRangeExact
 
 import URF.Foundation.UniversalBoundaryResults
 import URF.Foundation.CapacitySoundnessReduction
+import URF.Foundation.StableGenAdmissibleTraceFrontier
