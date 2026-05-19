@@ -1,0 +1,28 @@
+{
+  "name": "stable_trace_certificate_equivalence",
+  "date": "2026-05-19",
+  "status": "CONDITIONAL / TRACE_INHABITED_EQUIVALENCE",
+  "formal_dependency": "Inhabited X.Trace",
+  "closed_structural_steps": [
+    "StableGenAdmissibleTrace implies StableTraceCertificateExists under Inhabited X.Trace",
+    "StableGenAdmissibleTrace iff StableTraceCertificateExists under Inhabited X.Trace",
+    "empty-trace countermodel to unconditional reverse implication"
+  ],
+  "countermodel": {
+    "Generator": "Unit",
+    "Trace": "Empty",
+    "StableGen": "fun _ => False",
+    "StableGenAdmissibleTrace": true,
+    "StableTraceCertificateExists": false
+  },
+  "does_not_prove": [
+    "unconditional StableTraceCertificateExists",
+    "unconditional StableGenAdmissibleTrace to StableTraceCertificateExists",
+    "unconditional StableGenAdmissibleTrace",
+    "unrestricted UniversalFiberEntropyGap",
+    "unrestricted Chronos-RR",
+    "unrestricted H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ]
+}
