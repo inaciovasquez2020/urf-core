@@ -12,3 +12,5 @@ import URF.Foundation.SharedRigidityCodeBijectionRangeIff
 import URF.Foundation.SharedRigidityCodeBijectionTrans
 
 import URF.Foundation.UniversalRigidityGrammarData
+
+import URF.Foundation.UniversalTranslationPreservation

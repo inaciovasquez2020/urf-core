@@ -1,0 +1,30 @@
+{
+  "id": "universal_translation_preservation_2026_05_19",
+  "status": "CONDITIONAL_TRANSLATION_PRESERVATION_CLOSED",
+  "repo": "urf-core",
+  "date": "2026-05-19",
+  "lean_file": "lean/URF/Foundation/UniversalTranslationPreservation.lean",
+  "depends_on": [
+    "UniversalRigidityGrammarData",
+    "SharedRigidityCodeBijection_two_sided",
+    "SharedRigidityCodeBijection_predicate",
+    "SharedRigidityCodeBijection_relation"
+  ],
+  "proves": [
+    "UniversalTranslationTheorem_two_sided_conditional_on_equal_ranges",
+    "UniversalTranslationTheorem_predicate_preservation",
+    "UniversalTranslationTheorem_relation_preservation"
+  ],
+  "condition": "Set.range EA.encode = Set.range EB.encode",
+  "boundary": {
+    "does_not_prove": [
+      "existence of a universal RigidityGrammar",
+      "unconditional UniversalTranslationTheorem",
+      "unrestricted UniversalFiberEntropyGap",
+      "Chronos-RR",
+      "H4.1/FGL",
+      "P vs NP",
+      "any Clay problem"
+    ]
+  }
+}
