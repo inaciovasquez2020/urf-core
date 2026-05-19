@@ -1,0 +1,21 @@
+{
+"name": "unconditional_stable_trace_no_go",
+"date": "2026-05-19",
+"status": "REFUTED_UNCONDITIONAL_TARGET",
+"closed_no_go_results": [
+"no unconditional StableGenAdmissibleTrace to StableTraceCertificateExists",
+"no unconditional StableTraceCertificateExists for all interfaces",
+"no unconditional StableGenAdmissibleTrace for all interfaces",
+"no unconditional joint solution"
+],
+"surviving_conditional_result": "[Inhabited X.Trace] -> StableGenAdmissibleTrace X iff StableTraceCertificateExists X",
+"does_not_prove": [
+"unconditional StableTraceCertificateExists",
+"unconditional StableGenAdmissibleTrace",
+"unrestricted UniversalFiberEntropyGap",
+"unrestricted Chronos-RR",
+"unrestricted H4.1/FGL",
+"P vs NP",
+"any Clay problem"
+]
+}
