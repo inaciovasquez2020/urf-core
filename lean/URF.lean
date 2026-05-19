@@ -1,2 +1,4 @@
 import URF.Foundation.UniversalTranslationTheorem\nimport URF.Foundation.UniversalTranslationMissingObjects\n
 import URF.Foundation.UniversalTranslationMissingObjects
+
+import URF.Foundation.SharedRigidityCodeBijection
