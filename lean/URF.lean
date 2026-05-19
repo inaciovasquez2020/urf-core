@@ -6,3 +6,5 @@ import URF.Foundation.SharedRigidityCodeBijection
 import URF.Foundation.SharedRigidityCodeBijectionUnique
 
 import URF.Foundation.SharedRigidityCodeBijectionTwoSided
+
+import URF.Foundation.SharedRigidityCodeBijectionRangeIff
