@@ -1,0 +1,62 @@
+{
+  "id": "UNIVERSAL_TRANSLATION_SPINE_V1_2026_05_19",
+  "status": "STRUCTURAL_UNIFICATION_SURFACE",
+  "theorem_promotion": false,
+  "pattern": "domain -> encoder -> rigidity_grammar_fragment -> invariant -> frontier_status",
+  "required_domain_fields": [
+    "domain",
+    "encoder",
+    "rigidity_grammar_fragment",
+    "invariant",
+    "frontier_status"
+  ],
+  "domains": [
+    {
+      "domain": "computation",
+      "encoder": "computation_to_rigidity_data",
+      "rigidity_grammar_fragment": "finite_state_locality_and_entropy_nonamplification",
+      "invariant": "information_boundary_width",
+      "frontier_status": "conditional_translation_surface"
+    },
+    {
+      "domain": "physics",
+      "encoder": "physical_process_to_operational_constraint_data",
+      "rigidity_grammar_fragment": "defect_coercivity_and_observable_boundary_control",
+      "invariant": "operational_rigidity_content",
+      "frontier_status": "conditional_translation_surface"
+    },
+    {
+      "domain": "geometry",
+      "encoder": "geometric_object_to_rigidity_carrier",
+      "rigidity_grammar_fragment": "normal_form_and_obstruction_tracking",
+      "invariant": "structural_obstruction_profile",
+      "frontier_status": "conditional_translation_surface"
+    },
+    {
+      "domain": "information",
+      "encoder": "information_flow_to_entropy_carrier",
+      "rigidity_grammar_fragment": "entropy_nonamplification_and_boundary_accounting",
+      "invariant": "entropy_balance_profile",
+      "frontier_status": "conditional_translation_surface"
+    },
+    {
+      "domain": "universal_translation",
+      "encoder": "domain_surface_to_translation_tuple",
+      "rigidity_grammar_fragment": "shared_rigidity_content",
+      "invariant": "translation_tuple_completeness",
+      "frontier_status": "registry_consistency_surface"
+    }
+  ],
+  "boundary": {
+    "does_not_prove": [
+      "UniversalTranslationTheorem",
+      "existence of a universal RigidityGrammar",
+      "canonical encoders for all domains",
+      "unrestricted UniversalFiberEntropyGap",
+      "Chronos-RR",
+      "H4.1/FGL",
+      "P vs NP",
+      "any Clay problem"
+    ]
+  }
+}
