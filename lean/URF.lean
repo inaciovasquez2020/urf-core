@@ -14,3 +14,5 @@ import URF.Foundation.SharedRigidityCodeBijectionTrans
 import URF.Foundation.UniversalRigidityGrammarData
 
 import URF.Foundation.UniversalTranslationPreservation
+
+import URF.Foundation.UniversalTranslationRangeExact

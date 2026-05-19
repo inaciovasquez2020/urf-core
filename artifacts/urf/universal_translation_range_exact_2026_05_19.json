@@ -1,0 +1,29 @@
+{
+  "id": "universal_translation_range_exact_2026_05_19",
+  "status": "CONDITIONAL_TRANSLATION_RANGE_EXACT_CLOSED",
+  "repo": "urf-core",
+  "date": "2026-05-19",
+  "lean_file": "lean/URF/Foundation/UniversalTranslationRangeExact.lean",
+  "depends_on": [
+    "UniversalTranslationPreservation",
+    "SharedRigidityCodeBijection_range_eq_of_exists",
+    "SharedRigidityCodeBijection_exists_iff_range_eq"
+  ],
+  "proves": [
+    "UniversalTranslationTheorem_range_eq_of_exists",
+    "UniversalTranslationTheorem_exists_iff_range_eq",
+    "UniversalTranslationTheorem_iff_range_exact"
+  ],
+  "condition": "equal encoder ranges",
+  "boundary": {
+    "does_not_prove": [
+      "existence of a universal RigidityGrammar",
+      "unconditional UniversalTranslationTheorem",
+      "unrestricted UniversalFiberEntropyGap",
+      "Chronos-RR",
+      "H4.1/FGL",
+      "P vs NP",
+      "any Clay problem"
+    ]
+  }
+}
