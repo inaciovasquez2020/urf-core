@@ -1,0 +1,18 @@
+{
+  "artifact": "universal_translation_theorem_equivalence_2026_05_19",
+  "status": "CONDITIONAL_EQUIVALENCE_SURFACE",
+  "defined_target": "UniversalTranslationTheorem",
+  "proved_surface": "computation_physics_equivalence_through_rigidity",
+  "condition": "SameRigidityContent (computationAsDomain C) (physicsAsDomain P) G",
+  "does_not_prove": [
+    "UniversalTranslationTheorem",
+    "existence of a universal RigidityGrammar",
+    "canonical domain encoders for all domains",
+    "computation-to-physics equivalence without a shared grammar input",
+    "unrestricted UniversalFiberEntropyGap",
+    "Chronos-RR",
+    "H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ]
+}
