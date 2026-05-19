@@ -1,3 +1,4 @@
+import URF.Foundation.CapacityObstructionSchema
 import URF.Foundation.UniversalTranslationTheorem\nimport URF.Foundation.UniversalTranslationMissingObjects\n
 import URF.Foundation.UniversalTranslationMissingObjects
 
