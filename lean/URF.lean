@@ -16,3 +16,5 @@ import URF.Foundation.UniversalRigidityGrammarData
 import URF.Foundation.UniversalTranslationPreservation
 
 import URF.Foundation.UniversalTranslationRangeExact
+
+import URF.Foundation.UniversalBoundaryResults
