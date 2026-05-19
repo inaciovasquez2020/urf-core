@@ -1,0 +1,18 @@
+{
+  "artifact": "urf_capacity_obstruction_axiom_schema",
+  "status": "CONDITIONAL",
+  "canonical_formula": "Adm(S) ∧ C_adm(S) < I(G) ⇒ ¬StableGen(S,G)",
+  "minimal_missing_lemma": "CapacitySoundness: ∀ S G, Adm(S) → StableGen(S,G) → I(G) ≤ C_adm(S)",
+  "proved_from_missing_lemma": [
+    "Contrapositive obstruction theorem",
+    "Stable generation requires admissible capacity",
+    "Capacity excess blocks stable generation"
+  ],
+  "does_not_prove": [
+    "unrestricted UniversalFiberEntropyGap",
+    "unrestricted Chronos-RR",
+    "unrestricted H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ]
+}
