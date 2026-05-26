@@ -6,7 +6,7 @@ This repository is a prototype trusted base for URF-style definitions and reduct
 It currently contains axioms, admits, or sorries and therefore should not be presented as a verified theorem repository.
 The correct claim is that it organizes the formal dependency graph and identifies missing proof obligations.
 
-Axiom count: 53
+Axiom count: 52
 Admit count: 8
 Sorry count: 0
 
@@ -44,7 +44,6 @@ Sorry count: 0
 - `legacy/urf-prefab-system/lean/URF_Prefab.lean:14` — `axiom I_c_nonneg (X Y Z : Var) : 0 ≤ I_c X Y Z`
 - `legacy/urf-prefab-system/lean/URF_Prefab.lean:16` — `axiom urf_cmi_subadditivity (A B C : Var) :`
 - `legacy/urf-prefab-system/lean/URF_Prefab.lean:29` — `axiom PCA (S : List Prefab) :`
-- `URF/Boundary/TreeToy.lean:7` — `axiom isTree : True`
 - `URF/Boundary/TreeToy.lean:8` — `axiom maxDegree : ℕ`
 - `URF/Boundary/TreeToy.lean:10` — `axiom degree_bound :`
 - `URF/Info/InfoAxioms.lean:4` — `axiom InfoStepBound : ℝ`
