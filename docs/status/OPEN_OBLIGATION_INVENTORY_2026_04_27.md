@@ -38,7 +38,6 @@ Sorry count: 0
 - `URFCore/Provenance.lean:32` — `axiom decodeSLSADigest : String → Option SLSADigest`
 - `URFCore/Provenance.lean:34` — `axiom decode_encode_prov : ∀ p, decodeProvenanceProj (encodeProvenanceProj p) = some p`
 - `URFCore/Provenance.lean:35` — `axiom decode_encode_slsa : ∀ d, decodeSLSADigest (encodeSLSADigest d) = some d`
-- `URFCore/BuildInvariant.lean:7` — `axiom BuildMerkleDeterministic : True`
 - `URFCore/CIIdempotence.lean:13` — `axiom Φ_idempotent : ∀ s, Φ (Φ s) = Φ s`
 - `legacy/urf-prefab-system/lean/URF_Prefab.lean:12` — `axiom H_nonneg  (X : Var) : 0 ≤ H X`
 - `legacy/urf-prefab-system/lean/URF_Prefab.lean:13` — `axiom I_nonneg  (X Y : Var) : 0 ≤ I X Y`
