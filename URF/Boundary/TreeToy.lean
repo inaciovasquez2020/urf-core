@@ -4,7 +4,8 @@ import URF.Boundary.VertexBoundary
 variable {V : Type} [DecidableEq V]
 variable (adj : V → Finset V)
 
-axiom isTree : True
+theorem isTree : True := by
+  trivial
 axiom maxDegree : ℕ
 
 axiom degree_bound :
