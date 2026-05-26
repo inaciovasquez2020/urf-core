@@ -4,7 +4,8 @@ import Mathlib.LinearAlgebra.LinearIndependent
 namespace URF
 
 /-- Textual boundary replacing the first remaining legacy DescentSystem proof placeholder. -/
-axiom descent_first_remaining_admit_assumption_2026_05_15 : True
+theorem descent_first_remaining_admit_assumption_2026_05_15 : True := by
+  trivial
 
 
 universe u
