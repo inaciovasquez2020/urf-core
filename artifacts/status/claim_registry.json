@@ -1,0 +1,32 @@
+{
+  "claims": [
+    {
+      "id": "example_claim",
+      "status": "INTERFACE_ONLY",
+      "public_claim": "This formalizes an interface surface.",
+      "boundary": [
+        "Does not prove theorem-level closure.",
+        "Does not prove unrestricted Chronos-RR.",
+        "Does not prove unrestricted H4.1/FGL.",
+        "Does not prove P vs NP.",
+        "Does not prove any Clay problem."
+      ],
+      "evidence": [
+        "Lean surface",
+        "JSON artifact",
+        "status document",
+        "Python verifier",
+        "pytest"
+      ],
+      "forbidden_promotions": [
+        "solves",
+        "proves unrestricted",
+        "completes",
+        "resolves",
+        "breakthrough",
+        "P vs NP",
+        "Clay problem"
+      ]
+    }
+  ]
+}
