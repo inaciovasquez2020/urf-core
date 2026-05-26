@@ -31,7 +31,7 @@ Sorry count: 0
 - `lean/URF/DescentSystem.lean:199` — `axiom poincare_inline_descent :`
 - `lean/URF/DescentSystem.lean:223` — `axiom canonical_edge_separation :`
 - `lean/URF/DescentSystem.lean:290` — `axiom greedy_pivot_separation :`
-- `URFCore/Reproducibility.lean:6` — `axiom DoubleBuildImpliesReproducible : True`
+
 - `URFCore/Provenance.lean:29` — `axiom encodeProvenanceProj : ProvenanceProj → String`
 - `URFCore/Provenance.lean:30` — `axiom decodeProvenanceProj : String → Option ProvenanceProj`
 - `URFCore/Provenance.lean:31` — `axiom encodeSLSADigest : SLSADigest → String`
