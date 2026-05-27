@@ -1,0 +1,24 @@
+{
+  "artifact": "finite_local_urf3_globalization_bridge",
+  "date": "2026-05-27",
+  "status": "FINITE_LOCAL_AND_ADMISSIBLE_GLOBAL_CLOSED_UNIVERSAL_REFUTED",
+  "lean_file": "finite_local_urf3_globalization_bridge.lean",
+  "closed_items": [
+    "FiniteLocalDataToCompleteURF3Package",
+    "FiniteLocalDataToFiniteLocalURF3Bound",
+    "LocalFiniteURF3ToGlobalURF3Bound",
+    "UnrestrictedURF3_from_globalization_bridge",
+    "AdmissibleGlobalURF3",
+    "no_universal_UnrestrictedURF3GlobalizationBridge"
+  ],
+  "does_not_prove": [
+    "unrestricted arbitrary-global URF Law 3",
+    "replacement of global cmi_nonneg",
+    "replacement of global chain_rule",
+    "replacement of global capacity",
+    "unrestricted Chronos-RR",
+    "unrestricted H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ]
+}
