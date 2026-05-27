@@ -1,0 +1,18 @@
+{
+  "date": "2026-05-26",
+  "status": "PROVENANCE_CODEC_INTERFACE_ONLY_CONDITIONAL",
+  "replaced_group": "provenance_codec",
+  "replaced_raw_axioms": 6,
+  "minimal_missing_lemma_for_concrete_codec": "∀ a b, decodePair (encodePair a b) = some (a, b)",
+  "does_not_prove": [
+    "existence of a concrete String pair codec",
+    "global URF theorem closure",
+    "descent-system obligation resolution",
+    "ChronosCert entropy/determinism obligation resolution",
+    "transport entropy-set obligation resolution",
+    "unrestricted Chronos-RR",
+    "unrestricted H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ]
+}

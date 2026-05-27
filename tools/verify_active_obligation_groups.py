@@ -114,7 +114,7 @@ def main() -> None:
             assert "legacy" not in parts
     assert data["total_active_obligations"] > 0
     assert "descent_system_structural_descent" in data["groups"]
-    assert "provenance_codec" in data["groups"]
+    assert "provenance_codec" not in data["groups"]
     assert data["status"].endswith("NO_THEOREM_CLOSURE")
 
     print("ACTIVE_OBLIGATION_GROUPS_OK")

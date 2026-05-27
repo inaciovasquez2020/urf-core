@@ -268,50 +268,6 @@
         "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean"
       ]
     },
-    "provenance_codec": {
-      "count": 6,
-      "items": [
-        {
-          "group": "provenance_codec",
-          "line": 29,
-          "path": "URFCore/Provenance.lean",
-          "text": "axiom encodeProvenanceProj : ProvenanceProj \u2192 String"
-        },
-        {
-          "group": "provenance_codec",
-          "line": 30,
-          "path": "URFCore/Provenance.lean",
-          "text": "axiom decodeProvenanceProj : String \u2192 Option ProvenanceProj"
-        },
-        {
-          "group": "provenance_codec",
-          "line": 31,
-          "path": "URFCore/Provenance.lean",
-          "text": "axiom encodeSLSADigest : SLSADigest \u2192 String"
-        },
-        {
-          "group": "provenance_codec",
-          "line": 32,
-          "path": "URFCore/Provenance.lean",
-          "text": "axiom decodeSLSADigest : String \u2192 Option SLSADigest"
-        },
-        {
-          "group": "provenance_codec",
-          "line": 34,
-          "path": "URFCore/Provenance.lean",
-          "text": "axiom decode_encode_prov : \u2200 p, decodeProvenanceProj (encodeProvenanceProj p) = some p"
-        },
-        {
-          "group": "provenance_codec",
-          "line": 35,
-          "path": "URFCore/Provenance.lean",
-          "text": "axiom decode_encode_slsa : \u2200 d, decodeSLSADigest (encodeSLSADigest d) = some d"
-        }
-      ],
-      "paths": [
-        "URFCore/Provenance.lean"
-      ]
-    },
     "psh_bounded_overlap_model": {
       "count": 3,
       "items": [
@@ -407,5 +363,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 49
+  "total_active_obligations": 43
 }
