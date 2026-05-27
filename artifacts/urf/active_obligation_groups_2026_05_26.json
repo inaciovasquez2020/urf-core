@@ -1,0 +1,411 @@
+{
+  "date": "2026-05-26",
+  "does_not_prove": [
+    "resolution of any axiom",
+    "resolution of any admit",
+    "resolution of any sorry",
+    "global URF theorem closure",
+    "unrestricted Chronos-RR",
+    "unrestricted H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ],
+  "excludes": [
+    ".git",
+    ".lake",
+    ".venv",
+    "__pycache__",
+    "legacy",
+    "node_modules",
+    "venv"
+  ],
+  "groups": {
+    "admissible_normalization": {
+      "count": 2,
+      "items": [
+        {
+          "group": "admissible_normalization",
+          "line": 65,
+          "path": "admissible/lean/URFAdmissible.lean",
+          "text": "axiom TM_normalization_assumption :"
+        },
+        {
+          "group": "admissible_normalization",
+          "line": 78,
+          "path": "admissible/lean/URFAdmissible.lean",
+          "text": "axiom RAM_normalization_assumption :"
+        }
+      ],
+      "paths": [
+        "admissible/lean/URFAdmissible.lean"
+      ]
+    },
+    "chronos_cert_entropy_determinism": {
+      "count": 3,
+      "items": [
+        {
+          "group": "chronos_cert_entropy_determinism",
+          "line": 12,
+          "path": "lean/chronos_cert/ChronosCert.lean",
+          "text": "axiom mi_le_entropy_answer :"
+        },
+        {
+          "group": "chronos_cert_entropy_determinism",
+          "line": 15,
+          "path": "lean/chronos_cert/ChronosCert.lean",
+          "text": "axiom determinism_identity :"
+        },
+        {
+          "group": "chronos_cert_entropy_determinism",
+          "line": 19,
+          "path": "lean/chronos_cert/ChronosCert.lean",
+          "text": "axiom entropy_drop_ceiling :"
+        }
+      ],
+      "paths": [
+        "lean/chronos_cert/ChronosCert.lean"
+      ]
+    },
+    "ci_idempotence_model": {
+      "count": 2,
+      "items": [
+        {
+          "group": "ci_idempotence_model",
+          "line": 12,
+          "path": "URFCore/CIIdempotence.lean",
+          "text": "-- Conditional: determinism/cleanliness hypothesis encoded as idempotence axiom"
+        },
+        {
+          "group": "ci_idempotence_model",
+          "line": 13,
+          "path": "URFCore/CIIdempotence.lean",
+          "text": "axiom \u03a6_idempotent : \u2200 s, \u03a6 (\u03a6 s) = \u03a6 s"
+        }
+      ],
+      "paths": [
+        "URFCore/CIIdempotence.lean"
+      ]
+    },
+    "descent_system_structural_descent": {
+      "count": 19,
+      "items": [
+        {
+          "group": "descent_system_structural_descent",
+          "line": 60,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom step_rank_drop :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 84,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom zero_rank_reached_within_rank"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 99,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom dependencyRich_nonempty_extractR :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 103,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom cycle_basis_F2 :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 109,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom extractR_matrix_full_rank :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 130,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom poincare_end_to_end_descent :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 135,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom explicit_F2_realization_and_step_compatibility :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 167,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom pivot_family"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 187,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom cycle_basis_constructive"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 202,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "admit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 204,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom poincare_inline_descent :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 228,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom canonical_edge_separation :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 254,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "admit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 291,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "admit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 295,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom greedy_pivot_separation :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 316,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "admit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 337,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "admit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 358,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "admit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 370,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "admit"
+        }
+      ],
+      "paths": [
+        "lean/URF/DescentSystem.lean"
+      ]
+    },
+    "info_step_model": {
+      "count": 4,
+      "items": [
+        {
+          "group": "info_step_model",
+          "line": 4,
+          "path": "URF/Info/InfoAxioms.lean",
+          "text": "axiom InfoStepBound : \u211d"
+        },
+        {
+          "group": "info_step_model",
+          "line": 5,
+          "path": "URF/Info/InfoAxioms.lean",
+          "text": "axiom info_step_nonneg : 0 \u2264 InfoStepBound"
+        },
+        {
+          "group": "info_step_model",
+          "line": 7,
+          "path": "URF/Info/InfoAxioms.lean",
+          "text": "axiom info_increment (t : \u2115) : \u211d"
+        },
+        {
+          "group": "info_step_model",
+          "line": 8,
+          "path": "URF/Info/InfoAxioms.lean",
+          "text": "axiom info_increment_le :"
+        }
+      ],
+      "paths": [
+        "URF/Info/InfoAxioms.lean"
+      ]
+    },
+    "other_active_obligation": {
+      "count": 3,
+      "items": [
+        {
+          "group": "other_active_obligation",
+          "line": 14,
+          "path": "finite_cmi_nonneg_from_kl.lean",
+          "text": "It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`."
+        },
+        {
+          "group": "other_active_obligation",
+          "line": 15,
+          "path": "finite_cmi_to_local_cmi_nonneg_interface.lean",
+          "text": "It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`."
+        },
+        {
+          "group": "other_active_obligation",
+          "line": 20,
+          "path": "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean",
+          "text": "This file is intended to become the local proof that replaces the interface axiom."
+        }
+      ],
+      "paths": [
+        "finite_cmi_nonneg_from_kl.lean",
+        "finite_cmi_to_local_cmi_nonneg_interface.lean",
+        "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean"
+      ]
+    },
+    "provenance_codec": {
+      "count": 6,
+      "items": [
+        {
+          "group": "provenance_codec",
+          "line": 29,
+          "path": "URFCore/Provenance.lean",
+          "text": "axiom encodeProvenanceProj : ProvenanceProj \u2192 String"
+        },
+        {
+          "group": "provenance_codec",
+          "line": 30,
+          "path": "URFCore/Provenance.lean",
+          "text": "axiom decodeProvenanceProj : String \u2192 Option ProvenanceProj"
+        },
+        {
+          "group": "provenance_codec",
+          "line": 31,
+          "path": "URFCore/Provenance.lean",
+          "text": "axiom encodeSLSADigest : SLSADigest \u2192 String"
+        },
+        {
+          "group": "provenance_codec",
+          "line": 32,
+          "path": "URFCore/Provenance.lean",
+          "text": "axiom decodeSLSADigest : String \u2192 Option SLSADigest"
+        },
+        {
+          "group": "provenance_codec",
+          "line": 34,
+          "path": "URFCore/Provenance.lean",
+          "text": "axiom decode_encode_prov : \u2200 p, decodeProvenanceProj (encodeProvenanceProj p) = some p"
+        },
+        {
+          "group": "provenance_codec",
+          "line": 35,
+          "path": "URFCore/Provenance.lean",
+          "text": "axiom decode_encode_slsa : \u2200 d, decodeSLSADigest (encodeSLSADigest d) = some d"
+        }
+      ],
+      "paths": [
+        "URFCore/Provenance.lean"
+      ]
+    },
+    "psh_bounded_overlap_model": {
+      "count": 3,
+      "items": [
+        {
+          "group": "psh_bounded_overlap_model",
+          "line": 7,
+          "path": "URF/PSH/BoundedOverlap.lean",
+          "text": "axiom PSH_bounded_overlap"
+        },
+        {
+          "group": "psh_bounded_overlap_model",
+          "line": 23,
+          "path": "URF/PSH/BoundedOverlap.lean",
+          "text": "local observations admit a finite key space."
+        },
+        {
+          "group": "psh_bounded_overlap_model",
+          "line": 25,
+          "path": "URF/PSH/BoundedOverlap.lean",
+          "text": "axiom PSH_finite_keys :"
+        }
+      ],
+      "paths": [
+        "URF/PSH/BoundedOverlap.lean"
+      ]
+    },
+    "transport_entropy_set": {
+      "count": 2,
+      "items": [
+        {
+          "group": "transport_entropy_set",
+          "line": 6,
+          "path": "chronos/Transport/VertexBoundaryTransport.lean",
+          "text": "axiom entropy_of_set : \u2115 \u2192 \u211d"
+        },
+        {
+          "group": "transport_entropy_set",
+          "line": 8,
+          "path": "chronos/Transport/VertexBoundaryTransport.lean",
+          "text": "axiom entropy_mul_card_bound"
+        }
+      ],
+      "paths": [
+        "chronos/Transport/VertexBoundaryTransport.lean"
+      ]
+    },
+    "tree_toy_boundary_model": {
+      "count": 2,
+      "items": [
+        {
+          "group": "tree_toy_boundary_model",
+          "line": 9,
+          "path": "URF/Boundary/TreeToy.lean",
+          "text": "axiom maxDegree : \u2115"
+        },
+        {
+          "group": "tree_toy_boundary_model",
+          "line": 11,
+          "path": "URF/Boundary/TreeToy.lean",
+          "text": "axiom degree_bound :"
+        }
+      ],
+      "paths": [
+        "URF/Boundary/TreeToy.lean"
+      ]
+    },
+    "urf_law3_global_information_axioms": {
+      "count": 3,
+      "items": [
+        {
+          "group": "urf_law3_global_information_axioms",
+          "line": 18,
+          "path": "urf_law3.lean",
+          "text": "axiom capacity : \u2200 T : \u2115, MI X Y \u2264 1"
+        },
+        {
+          "group": "urf_law3_global_information_axioms",
+          "line": 21,
+          "path": "urf_law3.lean",
+          "text": "axiom chain_rule : \u2200 T : \u2115,"
+        },
+        {
+          "group": "urf_law3_global_information_axioms",
+          "line": 25,
+          "path": "urf_law3.lean",
+          "text": "axiom cmi_nonneg : \u2200 t, 0 \u2264 CMI X (Y t) Y"
+        }
+      ],
+      "paths": [
+        "urf_law3.lean"
+      ]
+    }
+  },
+  "scope": "urf-core active repository files only",
+  "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
+  "total_active_obligations": 49
+}
