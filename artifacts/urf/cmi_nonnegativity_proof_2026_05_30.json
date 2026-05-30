@@ -1,0 +1,36 @@
+{
+  "id": "CMI_NONNEGATIVITY_PROOF_2026_05_30",
+  "status": "CMI_NONNEGATIVITY_INTERFACE_ONLY_NO_CHAIN_RULE_OR_CAPACITY_BOUND",
+  "date": "2026-05-30",
+  "object": "CMINonnegativityProof",
+  "lean_file": "lean/URF/Foundation/CMINonnegativityProof.lean",
+  "purpose": "Introduce the weakest numeric conditional-mutual-information nonnegativity interface after PROBABILISTIC_LOCAL_CMI_DEFINITION.",
+  "lean_statement": "theorem cmi_nonnegativity_proof (K : CMINonnegativityProof) (X Y Z : K.RandomVariable) : 0 ≤ K.localCMIValue X Y Z",
+  "mathematical_content": {
+    "value_map": "ConditionalMutualInformationValue : RandomVariable → RandomVariable → RandomVariable → ℝ",
+    "nonnegativity_slot": "cmi_nonneg : ∀ X Y Z, 0 ≤ ConditionalMutualInformationValue X Y Z",
+    "stripped_statement": "CMI(X;Y|Z) ≥ 0"
+  },
+  "verified_claims": [
+    "Lean-checked CMI nonnegativity package interface",
+    "Lean-checked theorem exposing the package-level nonnegativity field",
+    "CMI values are numeric real values"
+  ],
+  "excluded_claims": [
+    "NOT_FINITE_MUTUAL_INFORMATION_CHAIN_RULE_PROOF",
+    "NOT_CHANNEL_CAPACITY_BOUND_DERIVATION",
+    "NOT_GLOBAL_VALID_KERNEL_THEOREM",
+    "NOT_GLOBAL_URF_LAW3",
+    "NOT_INFORMATION_THEORETIC_DERIVATION_FROM_PROBABILITY_MEASURES",
+    "NOT_CHRONOS_RR",
+    "NOT_H4_1_FGL",
+    "NOT_P_VS_NP",
+    "NOT_CLAY"
+  ],
+  "minimal_missing_objects": [
+    "FINITE_MUTUAL_INFORMATION_CHAIN_RULE_PROOF",
+    "CHANNEL_CAPACITY_BOUND_DERIVATION",
+    "GLOBAL_VALID_KERNEL_THEOREM"
+  ],
+  "next_admissible_object": "FINITE_MUTUAL_INFORMATION_CHAIN_RULE_PROOF"
+}
