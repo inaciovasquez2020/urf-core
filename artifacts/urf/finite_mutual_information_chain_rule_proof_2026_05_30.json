@@ -1,0 +1,48 @@
+{
+  "id": "FINITE_MUTUAL_INFORMATION_CHAIN_RULE_PROOF_2026_05_30",
+  "status": "FINITE_CHAIN_RULE_INTERFACE_ONLY_NO_CAPACITY_BOUND_OR_GLOBAL_KERNEL",
+  "date": "2026-05-30",
+  "object": "FiniteMutualInformationChainRuleProof",
+  "lean_file": "lean/URF/Foundation/FiniteMutualInformationChainRuleProof.lean",
+  "purpose": "Introduce the weakest finite mutual-information chain-rule interface after CMI_NONNEGATIVITY_PROOF.",
+  "lean_statement": "theorem finite_mutual_information_chain_rule_proof (K : FiniteMutualInformationChainRuleProof) : K.totalMI = K.finiteLocalSum K.T K.localCMIValue",
+  "mathematical_content": {
+    "finite_chain_rule": "I_total = finiteLocalSum(T, CMI)",
+    "local_nonnegativity": "\u2200 t, 0 \u2264 CMI_t",
+    "stripped_statement": "totalMI = finite local sum of local CMI values"
+  },
+  "packaged_fields": {
+    "T": "finite horizon",
+    "RandomVariable": "random-variable carrier",
+    "X": "first random-variable family",
+    "Y": "second random-variable family",
+    "Z": "conditioning random-variable family",
+    "finiteLocalSum": "abstract finite local sum operator over a finite horizon",
+    "totalMI": "real-valued total mutual information",
+    "localCMIValue": "real-valued local CMI sequence",
+    "cmi_nonneg": "local CMI nonnegativity proof slot",
+    "finite_chain_rule": "finite chain-rule proof slot",
+    "capacity_bound_required": "remaining channel-capacity proof slot",
+    "global_kernel_required": "remaining global-kernel proof slot"
+  },
+  "verified_claims": [
+    "Lean-checked finite chain-rule package interface",
+    "Lean-checked theorem exposing the package-level finite_chain_rule field",
+    "Lean-checked theorem exposing package-level local CMI nonnegativity"
+  ],
+  "excluded_claims": [
+    "NOT_CHANNEL_CAPACITY_BOUND_DERIVATION",
+    "NOT_GLOBAL_VALID_KERNEL_THEOREM",
+    "NOT_GLOBAL_URF_LAW3",
+    "NOT_INFORMATION_THEORETIC_DERIVATION_FROM_PROBABILITY_MEASURES",
+    "NOT_CHRONOS_RR",
+    "NOT_H4_1_FGL",
+    "NOT_P_VS_NP",
+    "NOT_CLAY"
+  ],
+  "minimal_missing_objects": [
+    "CHANNEL_CAPACITY_BOUND_DERIVATION",
+    "GLOBAL_VALID_KERNEL_THEOREM"
+  ],
+  "next_admissible_object": "CHANNEL_CAPACITY_BOUND_DERIVATION"
+}

@@ -24,3 +24,4 @@ import URF.Foundation.StableGenAdmissibleTraceFrontier
 import URF.Foundation.StableTraceCertificateEquivalence
 import URF.Foundation.UnconditionalStableTraceNoGo
 import URF.Foundation.CMINonnegativityProof
+import URF.Foundation.FiniteMutualInformationChainRuleProof
