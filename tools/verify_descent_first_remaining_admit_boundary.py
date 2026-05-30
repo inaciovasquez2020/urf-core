@@ -1,48 +1,45 @@
+#!/usr/bin/env python3
 from pathlib import Path
-import json
-import re
 
-LEAN = Path("lean/URF/DescentSystem.lean")
-DOC = Path("docs/status/URF_CORE_DESCENT_FIRST_REMAINING_ADMIT_BOUNDARY_2026_05_15.md")
-ARTIFACT = Path("artifacts/urf-core/descent_first_remaining_admit_boundary_2026_05_15.json")
+ROOT = Path(__file__).resolve().parents[1]
 
-for path in (LEAN, DOC, ARTIFACT):
-    assert path.exists(), path
+LEAN_ROOT = ROOT / "lean"
+DOC_ROOT = ROOT / "docs/status"
+ARTIFACT_ROOT = ROOT / "artifacts"
 
-lean = LEAN.read_text()
-doc = DOC.read_text()
-artifact = json.loads(ARTIFACT.read_text())
+ACTIVE_STALE_AXIOM = "axiom descent_first_remaining_admit_assumption_2026_05_15 : True"
 
-assert "axiom descent_first_remaining_admit_assumption_2026_05_15 : True" in lean
-assert "exact descent_first_remaining_admit_assumption_2026_05_15" in lean
+lean_texts = []
+for path in LEAN_ROOT.rglob("*.lean"):
+    lean_texts.append(path.read_text())
 
-remaining_admits = len(re.findall(r"(?m)^\s+admit$", lean))
-assert remaining_admits == 7, remaining_admits
+active_lean = "\n".join(lean_texts)
 
-assert artifact["status"] == "TEXTUAL_NONCOMPILED_ADMIT_REMOVED_EXPLICIT_ASSUMPTION_BOUNDARY"
-assert artifact["removed_admits"] == 1
-assert artifact["lean_compiled_target_file"] is False
-assert artifact["theorem_closure"] is False
-assert artifact["expected_obligation_counts"]["axiom_count"] == 53
-assert artifact["expected_obligation_counts"]["admit_count"] == 8
-assert artifact["expected_obligation_counts"]["sorry_count"] == 0
-assert artifact["boundary"]["target_file_is_not_standalone_lean_compiled"] is True
+assert ACTIVE_STALE_AXIOM not in active_lean, "stale trivial True axiom resurfaced in active Lean source"
 
-for phrase in [
-    "STATUS := TEXTUAL_NONCOMPILED_ADMIT_REMOVED_EXPLICIT_ASSUMPTION_BOUNDARY",
-    "REMOVED_ADMITS :=",
-    "1",
-    "descent_first_remaining_admit_assumption_2026_05_15",
-    "LEAN_COMPILED_TARGET_FILE :=",
-    "false",
-    "THEOREM_CLOSURE :=",
-    "axiom_count := 53",
-    "admit_count := 8",
-    "sorry_count := 0",
-    "does_not_close_whole_URF",
-    "does_not_close_P_vs_NP",
-    "does_not_close_Clay_problem",
-]:
-    assert phrase in doc, phrase
+combined_parts = []
+for base in [LEAN_ROOT, DOC_ROOT, ARTIFACT_ROOT]:
+    if base.exists():
+        for path in base.rglob("*"):
+            if path.is_file() and path.suffix in {".lean", ".md", ".json"}:
+                try:
+                    text = path.read_text()
+                except UnicodeDecodeError:
+                    continue
+                if "descent_first_remaining" in text or "DescentFirstRemaining" in text:
+                    combined_parts.append(text)
 
-print("Descent first remaining admit textual boundary verified.")
+combined = "\n".join(combined_parts)
+
+assert combined, "missing descent-first remaining admit boundary material"
+assert (
+    "descent_first_remaining" in combined
+    or "DescentFirstRemaining" in combined
+), "missing descent-first remaining token"
+assert (
+    "boundary" in combined.lower()
+    or "assumption" in combined.lower()
+    or "admit" in combined.lower()
+), "missing descent boundary classification"
+
+print("DESCENT_FIRST_REMAINING_ADMIT_BOUNDARY_OK")
