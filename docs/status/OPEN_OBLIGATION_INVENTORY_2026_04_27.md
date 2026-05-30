@@ -6,7 +6,7 @@ This repository is a prototype trusted base for URF-style definitions and reduct
 It currently contains axioms, admits, or sorries and therefore should not be presented as a verified theorem repository.
 The correct claim is that it organizes the formal dependency graph and identifies missing proof obligations.
 
-Axiom count: 52
+Axiom count: 37
 Admit count: 8
 Sorry count: 0
 
