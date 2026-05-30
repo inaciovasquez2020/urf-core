@@ -1,27 +1,19 @@
 import URF.Foundation.CapacityObstructionSchema
 import URF.Foundation.UniversalTranslationTheorem\nimport URF.Foundation.UniversalTranslationMissingObjects\n
 import URF.Foundation.UniversalTranslationMissingObjects
-
 import URF.Foundation.SharedRigidityCodeBijection
-
 import URF.Foundation.SharedRigidityCodeBijectionUnique
-
 import URF.Foundation.SharedRigidityCodeBijectionTwoSided
-
 import URF.Foundation.SharedRigidityCodeBijectionRangeIff
-
 import URF.Foundation.SharedRigidityCodeBijectionTrans
-
 import URF.Foundation.UniversalRigidityGrammarData
-
 import URF.Foundation.UniversalTranslationPreservation
-
 import URF.Foundation.UniversalTranslationRangeExact
-
 import URF.Foundation.UniversalBoundaryResults
 import URF.Foundation.CapacitySoundnessReduction
 import URF.Foundation.StableGenAdmissibleTraceFrontier
 import URF.Foundation.StableTraceCertificateEquivalence
 import URF.Foundation.UnconditionalStableTraceNoGo
 import URF.Foundation.CMINonnegativityProof
-import URF.Foundation.FiniteMutualInformationChainRuleProof
+import URF.Foundation.FiniteMutualInformationChainRuleProof\n
+import URF.Foundation.ChannelCapacityBoundDerivation
