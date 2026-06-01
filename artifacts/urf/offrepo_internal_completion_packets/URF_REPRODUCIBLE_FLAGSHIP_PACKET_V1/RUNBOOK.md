@@ -1,0 +1,19 @@
+# URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1 Runbook
+
+Status: `DRAFT_OFF_REPO_NO_REPO_WRITE`
+
+Run:
+
+```zsh
+python3 tools/run_urf_reproducible_flagship_packet_v1.py
+python3 tools/verify_urf_reproducible_flagship_packet_v1.py
+python3 -m pytest -q tests/test_urf_reproducible_flagship_packet_v1.py
+Expected:
+URF_STATUS_TAXONOMY_V1_OK
+URF_GLOBAL_CLAIM_LEDGER_V1_OK
+URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_OK
+FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_OK
+URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET_OK
+URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_OK
+Boundary:
+No repository files are modified.

@@ -1,0 +1,116 @@
+{
+  "object_id": "EXTERNAL_VALIDATION_LAST_PHASE_READINESS",
+  "version": "1.0",
+  "date": "2026-05-30",
+  "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+  "purpose": "Record that the internal URF completion chain is staged off-repo and that remaining progress is external validation, not additional internal architecture.",
+  "internal_completion_chain": [
+    "URF_STATUS_TAXONOMY_V1",
+    "URF_GLOBAL_CLAIM_LEDGER_V1",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+    "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET",
+    "URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1"
+  ],
+  "internal_packets": {
+    "URF_STATUS_TAXONOMY_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z",
+    "URF_GLOBAL_CLAIM_LEDGER_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_GLOBAL_CLAIM_LEDGER_V1_20260531T011759Z",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_20260531T012035Z",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET": "/Users/inaciof.vasquez/urf_offrepo_stage/FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_20260531T012738Z",
+    "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET_20260531T014805Z",
+    "URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z"
+  },
+  "internal_completion_status": {
+    "internal_objects_completed_off_repo": 6,
+    "internal_completion_ceiling_before_external_validation": "84_PERCENT",
+    "internal_done_enough_gate": "SATISFIED_OFF_REPO",
+    "repo_write_status": "NO_REPO_WRITE",
+    "external_validation_status": "NOT_STARTED"
+  },
+  "external_objects_remaining": [
+    {
+      "object_id": "URF_EXTERNAL_REPRODUCTION_RECORD_V1",
+      "status": "BLOCKED_BY_EXTERNAL_ACTOR",
+      "required_evidence": [
+        "third-party clone or packet copy",
+        "third-party verifier run",
+        "third-party test output",
+        "public issue, fork, email, report, or signed note"
+      ],
+      "forbidden_interpretations": [
+        "internal self-run counts as external reproduction",
+        "clone traffic alone counts as reproduction",
+        "automated indexing alone counts as adoption"
+      ]
+    },
+    {
+      "object_id": "URF_EXPERT_EVALUATION_PACKET_V1",
+      "status": "BLOCKED_BY_EXTERNAL_ACTOR",
+      "required_evidence": [
+        "review by qualified mathematician, formal-methods researcher, theoretical computer scientist, physicist, or reproducibility expert",
+        "assessment of coherence, boundedness, reproducibility, claim discipline, and one sample technical path",
+        "explicit statement of what was and was not validated"
+      ],
+      "forbidden_interpretations": [
+        "expert evaluation validates all theorem branches",
+        "expert evaluation validates empirical physics",
+        "expert evaluation proves URF or downstream frontier claims"
+      ]
+    },
+    {
+      "object_id": "URF_PUBLIC_REVIEW_OR_CITATION_SIGNAL_V1",
+      "status": "BLOCKED_BY_EXTERNAL_ACTOR",
+      "required_evidence": [
+        "peer-review response",
+        "citation",
+        "public technical note",
+        "public issue discussion",
+        "public fork with substantive changes",
+        "independent CI or reproduction log"
+      ],
+      "forbidden_interpretations": [
+        "raw clone traffic equals citation",
+        "raw browser views equal expert adoption",
+        "Zenodo view equals scholarly validation"
+      ]
+    }
+  ],
+  "allowed_current_claims": [
+    "URF internal completion chain is staged off-repo.",
+    "The flagship packet verifies internally on the user's machine.",
+    "The internal ceiling before external validation is approximately 84 percent.",
+    "External validation remains intentionally unclaimed."
+  ],
+  "forbidden_overclaims": [
+    "external validation completed",
+    "independent reproduction completed",
+    "expert evaluation completed",
+    "peer-review acceptance completed",
+    "all URF domains unified",
+    "global URF Law 3 closure",
+    "global valid-kernel theorem",
+    "unrestricted channel-capacity theorem",
+    "Chronos-RR closure",
+    "H4.1/FGL closure",
+    "P vs NP closure",
+    "Clay-problem closure",
+    "new-gravity validation",
+    "DFM-MKC validation",
+    "Lambda-CDM failure"
+  ],
+  "global_boundary": [
+    "readiness packet only",
+    "no external contact made by this packet",
+    "no repository files modified",
+    "no git add",
+    "no git commit",
+    "no git push",
+    "not merged into any repository",
+    "not CI-verified",
+    "does not claim independent reproduction",
+    "does not claim expert review",
+    "does not claim peer-review acceptance",
+    "does not prove empirical truth"
+  ],
+  "next_admissible_object": "WAIT_FOR_EXTERNAL_VALIDATION_OR_REPO_WRITE_WINDOW"
+}

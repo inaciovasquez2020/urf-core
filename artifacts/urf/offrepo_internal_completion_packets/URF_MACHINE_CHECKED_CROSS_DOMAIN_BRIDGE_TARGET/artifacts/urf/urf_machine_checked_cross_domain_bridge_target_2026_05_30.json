@@ -1,0 +1,84 @@
+{
+  "object_id": "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET",
+  "version": "1.0",
+  "date": "2026-05-30",
+  "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+  "bridge_id": "FINITE_INFORMATION_TO_CLAIM_GOVERNANCE_BRIDGE",
+  "depends_on": [
+    "URF_STATUS_TAXONOMY_V1",
+    "URF_GLOBAL_CLAIM_LEDGER_V1",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET"
+  ],
+  "dependency_packets": {
+    "URF_STATUS_TAXONOMY_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z",
+    "URF_GLOBAL_CLAIM_LEDGER_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_GLOBAL_CLAIM_LEDGER_V1_20260531T011759Z",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_20260531T012035Z",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET": "/Users/inaciof.vasquez/urf_offrepo_stage/FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_20260531T012738Z"
+  },
+  "source_files": {
+    "lean_bridge_target": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET_20260531T014805Z/lean/URF/Foundation/FiniteInformationToClaimGovernanceBridge.lean",
+    "taxonomy": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z/artifacts/urf/urf_status_taxonomy_v1_2026_05_30.json",
+    "ledger": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_GLOBAL_CLAIM_LEDGER_V1_20260531T011759Z/artifacts/urf/urf_global_claim_ledger_v1_2026_05_30.json",
+    "dashboard_sync_certificate": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_20260531T012035Z/artifacts/urf/urf_dashboard_ledger_sync_certificate_2026_05_30.json",
+    "finite_component_artifact": "/Users/inaciof.vasquez/urf_offrepo_stage/FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_20260531T012738Z/artifacts/urf/finite_local_nonnegative_component_bound_target_2026_05_30.json",
+    "finite_component_lean": "/Users/inaciof.vasquez/urf_offrepo_stage/FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_20260531T012738Z/lean/URF/Foundation/FiniteLocalNonnegativeComponentBound.lean"
+  },
+  "repo_target": "urf-core",
+  "source_domain": "finite information structure",
+  "target_domain": "claim governance / admissible claim strength",
+  "bridge_statement": "A finite nonnegative local information decomposition bounded by a verified total capacity induces a bound on every local admissible claim-strength component.",
+  "machine_checked_target": "finite_information_to_claim_governance_bridge",
+  "bridge_package": "FiniteClaimGovernancePackage",
+  "uses_theorem_surface": "finite_local_nonnegative_component_bound",
+  "why_this_is_a_cross_domain_bridge": [
+    "source side is a finite information decomposition theorem",
+    "target side is an admissible claim-strength governance package",
+    "the proof transfers the finite bound into a claim-governance bound",
+    "the bridge is machine-checkable rather than rhetorical"
+  ],
+  "acceptable_completion_evidence": [
+    "Lean bridge theorem exists",
+    "Lean bridge theorem has no sorry",
+    "Lean bridge theorem has no axiom",
+    "Lean bridge theorem has no admit",
+    "bridge invokes finite_local_nonnegative_component_bound",
+    "verifier passes",
+    "pytest passes",
+    "status document preserves no-repo-write boundary"
+  ],
+  "current_evidence": [
+    "off-repo Lean bridge target drafted",
+    "off-repo verifier drafted",
+    "off-repo pytest drafted"
+  ],
+  "forbidden_overclaims": [
+    "all URF domains unified",
+    "global URF Law 3 closure",
+    "global valid-kernel theorem",
+    "unrestricted channel-capacity theorem",
+    "Chronos-RR closure",
+    "H4.1/FGL closure",
+    "P vs NP closure",
+    "Clay-problem closure",
+    "new-gravity validation",
+    "DFM-MKC validation",
+    "Lambda-CDM failure",
+    "external adoption",
+    "peer-review acceptance"
+  ],
+  "global_boundary": [
+    "off-repo bridge target only",
+    "no repository files modified",
+    "no git add",
+    "no git commit",
+    "no git push",
+    "not merged into urf-core",
+    "not CI-verified",
+    "no external validation",
+    "no peer-review acceptance",
+    "does not prove all URF domains are unified",
+    "does not prove empirical truth"
+  ],
+  "next_admissible_object": "URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1"
+}

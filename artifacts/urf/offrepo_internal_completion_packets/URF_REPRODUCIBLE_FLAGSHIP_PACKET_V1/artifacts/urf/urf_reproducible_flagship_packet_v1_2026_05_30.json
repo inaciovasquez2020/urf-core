@@ -1,0 +1,98 @@
+{
+  "object_id": "URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1",
+  "version": "1.0",
+  "date": "2026-05-30",
+  "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+  "purpose": "Bundle the internal URF completion objects into one off-repo reproducible flagship packet.",
+  "depends_on": [
+    "URF_STATUS_TAXONOMY_V1",
+    "URF_GLOBAL_CLAIM_LEDGER_V1",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+    "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET"
+  ],
+  "source_packets": {
+    "URF_STATUS_TAXONOMY_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z",
+    "URF_GLOBAL_CLAIM_LEDGER_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_GLOBAL_CLAIM_LEDGER_V1_20260531T011759Z",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_20260531T012035Z",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET": "/Users/inaciof.vasquez/urf_offrepo_stage/FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_20260531T012738Z",
+    "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET_20260531T014805Z"
+  },
+  "bundled_packets": {
+    "URF_STATUS_TAXONOMY_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/URF_STATUS_TAXONOMY_V1",
+    "URF_GLOBAL_CLAIM_LEDGER_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/URF_GLOBAL_CLAIM_LEDGER_V1",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+    "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET"
+  },
+  "flagship_chain": [
+    "taxonomy defines claim-status vocabulary",
+    "ledger records claims, nonclaims, statuses, missing objects, and dashboard requirements",
+    "dashboard sync certificate checks dashboard candidate against ledger and taxonomy",
+    "finite theorem target proves a nonnegative finite local component bound",
+    "cross-domain bridge transfers finite information bounding into claim-governance admissibility"
+  ],
+  "machine_checked_objects": [
+    {
+      "object_id": "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+      "lean_theorem": "finite_local_nonnegative_component_bound",
+      "expected_verifier_message": "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_OK"
+    },
+    {
+      "object_id": "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET",
+      "lean_theorem": "finite_information_to_claim_governance_bridge",
+      "expected_verifier_message": "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET_OK"
+    }
+  ],
+  "reproducibility_entrypoint": "tools/run_urf_reproducible_flagship_packet_v1.py",
+  "acceptable_completion_evidence": [
+    "all bundled dependency verifiers pass",
+    "all bundled dependency pytest suites pass",
+    "flagship verifier passes",
+    "flagship pytest passes",
+    "finite Lean theorem checks",
+    "bridge Lean theorem checks",
+    "status document preserves no-repo-write boundary"
+  ],
+  "forbidden_overclaims": [
+    "external validation",
+    "peer-review acceptance",
+    "independent reproduction",
+    "all URF domains unified",
+    "global URF Law 3 closure",
+    "global valid-kernel theorem",
+    "unrestricted channel-capacity theorem",
+    "Chronos-RR closure",
+    "H4.1/FGL closure",
+    "P vs NP closure",
+    "Clay-problem closure",
+    "new-gravity validation",
+    "DFM-MKC validation",
+    "Lambda-CDM failure"
+  ],
+  "global_boundary": [
+    "off-repo reproducible flagship packet only",
+    "no repository files modified",
+    "no git add",
+    "no git commit",
+    "no git push",
+    "not merged into any repository",
+    "not CI-verified",
+    "no external validation",
+    "no peer-review acceptance",
+    "no independent reproduction claimed",
+    "does not prove all URF domains are unified",
+    "does not prove empirical truth"
+  ],
+  "internal_completion_effect": {
+    "internal_objects_completed_off_repo": 6,
+    "internal_ceiling_before_external_validation": "approximately 84 percent",
+    "remaining_external_objects": [
+      "URF_EXTERNAL_REPRODUCTION_RECORD_V1",
+      "URF_EXPERT_EVALUATION_PACKET_V1",
+      "peer-review or citation signal",
+      "third-party issue/fork/build/adoption signal"
+    ]
+  },
+  "next_admissible_object": "EXTERNAL_VALIDATION_LAST_PHASE"
+}

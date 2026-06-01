@@ -1,0 +1,77 @@
+{
+  "object_id": "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+  "version": "1.0",
+  "date": "2026-05-30",
+  "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+  "selected_route": "finite chain-rule / local nonnegativity",
+  "depends_on": [
+    "URF_STATUS_TAXONOMY_V1",
+    "URF_GLOBAL_CLAIM_LEDGER_V1",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE"
+  ],
+  "dependency_packets": {
+    "URF_STATUS_TAXONOMY_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z",
+    "URF_GLOBAL_CLAIM_LEDGER_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_GLOBAL_CLAIM_LEDGER_V1_20260531T011759Z",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_20260531T012035Z"
+  },
+  "source_files": {
+    "lean_target": "/Users/inaciof.vasquez/urf_offrepo_stage/FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET_20260531T012738Z/lean/URF/Foundation/FiniteLocalNonnegativeComponentBound.lean",
+    "taxonomy": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z/artifacts/urf/urf_status_taxonomy_v1_2026_05_30.json",
+    "ledger": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_GLOBAL_CLAIM_LEDGER_V1_20260531T011759Z/artifacts/urf/urf_global_claim_ledger_v1_2026_05_30.json",
+    "dashboard_sync_certificate": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_20260531T012035Z/artifacts/urf/urf_dashboard_ledger_sync_certificate_2026_05_30.json"
+  },
+  "repo_target": "urf-core",
+  "domain": "finite information structure",
+  "claim_statement": "For a finite family of nonnegative local contributions whose total sum is bounded by C, each local contribution is bounded by C.",
+  "mathematical_shape": {
+    "given": [
+      "T : Nat with NeZero T",
+      "localCMI : Fin T -> Real",
+      "totalMI C : Real",
+      "forall t, 0 <= localCMI t",
+      "totalMI = sum over Fin T of localCMI",
+      "totalMI <= C"
+    ],
+    "prove": [
+      "forall t, localCMI t <= C"
+    ]
+  },
+  "lean_theorem_name": "finite_local_nonnegative_component_bound",
+  "acceptable_completion_evidence": [
+    "Lean theorem exists",
+    "theorem contains no sorry",
+    "theorem contains no axiom",
+    "theorem contains no admit",
+    "verifier passes",
+    "pytest passes",
+    "status document preserves no-repo-write boundary"
+  ],
+  "current_evidence": [
+    "off-repo Lean target drafted",
+    "off-repo verifier drafted",
+    "off-repo pytest drafted"
+  ],
+  "forbidden_overclaims": [
+    "global URF Law 3 closure",
+    "global valid-kernel theorem",
+    "unrestricted channel-capacity theorem",
+    "Chronos-RR closure",
+    "H4.1/FGL closure",
+    "P vs NP closure",
+    "Clay-problem closure",
+    "new-gravity validation",
+    "Lambda-CDM failure"
+  ],
+  "global_boundary": [
+    "off-repo theorem target only",
+    "no repository files modified",
+    "no git add",
+    "no git commit",
+    "no git push",
+    "not merged into urf-core",
+    "not CI-verified",
+    "no external validation",
+    "no peer-review acceptance"
+  ],
+  "next_admissible_object": "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET"
+}
