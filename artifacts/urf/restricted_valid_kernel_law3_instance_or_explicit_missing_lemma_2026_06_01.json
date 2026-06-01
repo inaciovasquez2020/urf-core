@@ -1,0 +1,38 @@
+{
+  "artifact": "RESTRICTED_VALID_KERNEL_LAW3_INSTANCE_OR_EXPLICIT_MISSING_LEMMA_2026_06_01",
+  "object": "RESTRICTED_VALID_KERNEL_LAW3_INSTANCE_OR_EXPLICIT_MISSING_LEMMA",
+  "status": "EXPLICIT_MISSING_LEMMA_RECORDED_NO_LEAN_INSTANCE_SUPPLIED",
+  "decision": "PASS",
+  "depends_on": [
+    "GLOBAL_URF_LAW3_RESTRICTED_VALID_KERNEL_INSTANCE_2026_06_01"
+  ],
+  "lean_checked_restricted_instance_supplied": false,
+  "restricted_valid_kernel_law3_closed": false,
+  "explicit_missing_lemma_supplied": true,
+  "missing_lemma": {
+    "name": "RestrictedValidKernelDomainBindingAndLaw3Consequence",
+    "weakest_form": "Given a restricted valid-kernel domain, a binding from that domain to the existing global valid-kernel theorem hypotheses, finite local CMI nonnegativity, finite chain-rule binding, and capacity-bound binding, derive the restricted Law 3 consequence as a Lean-checked instance.",
+    "required_bindings": [
+      "restricted_valid_kernel_domain",
+      "valid_kernel_assumption_binding",
+      "finite_local_cmi_nonnegativity_binding",
+      "finite_chain_rule_binding",
+      "capacity_bound_binding",
+      "restricted_law3_consequence_statement"
+    ]
+  },
+  "certified_non_claims": [
+    "no Lean-checked restricted valid-kernel Law 3 instance supplied",
+    "no restricted valid-kernel Law 3 closure",
+    "no unrestricted global URF Law 3",
+    "no unconditional valid-kernel theorem",
+    "no information-theoretic derivation from probability measures",
+    "no unconditional channel-capacity theorem",
+    "no Chronos-RR closure",
+    "no H4.1/FGL closure",
+    "no P vs NP claim",
+    "no Clay-problem claim"
+  ],
+  "next_admissible_object": "LEAN_CHECKED_RESTRICTED_VALID_KERNEL_LAW3_INSTANCE",
+  "weakest_sufficient_next_input": "Lean file proving RestrictedValidKernelDomainBindingAndLaw3Consequence from existing URF-core theorem surfaces"
+}
