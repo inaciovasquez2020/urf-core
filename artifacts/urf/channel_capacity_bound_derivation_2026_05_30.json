@@ -1,0 +1,47 @@
+{
+  "id": "CHANNEL_CAPACITY_BOUND_DERIVATION_2026_05_30",
+  "status": "CHANNEL_CAPACITY_BOUND_DERIVATION_CLOSED_CONDITIONAL_ON_FINITE_CAPACITY_BOUND_NO_GLOBAL_KERNEL",
+  "date": "2026-05-30",
+  "object": "ChannelCapacityBoundDerivation",
+  "lean_file": "lean/URF/Foundation/ChannelCapacityBoundDerivation.lean",
+  "purpose": "Introduce the weakest channel-capacity bound derivation above FINITE_MUTUAL_INFORMATION_CHAIN_RULE_PROOF_2026_05_30.",
+  "depends_on": [
+    "FINITE_MUTUAL_INFORMATION_CHAIN_RULE_PROOF_2026_05_30"
+  ],
+  "lean_statement": "theorem channel_capacity_bound_derivation (K : ChannelCapacityBoundDerivation) : K.finiteChain.totalMI \u2264 K.channelCapacity",
+  "mathematical_content": {
+    "finite_chain_rule": "totalMI = finiteLocalSum(T, localCMIValue)",
+    "finite_capacity_bound": "finiteLocalSum(T, localCMIValue) \u2264 channelCapacity",
+    "derived_capacity_bound": "totalMI \u2264 channelCapacity",
+    "derivation": "rewrite totalMI by the finite chain rule, then apply the finite capacity bound"
+  },
+  "packaged_fields": {
+    "finiteChain": "finite mutual-information chain-rule package",
+    "channelCapacity": "real-valued channel-capacity bound",
+    "finite_capacity_bound": "finite local-sum-to-channel-capacity proof slot",
+    "global_kernel_required": "remaining global-kernel proof slot",
+    "law3_required": "remaining global URF Law 3 proof slot"
+  },
+  "verified_claims": [
+    "Lean-checked channel-capacity bound derivation from finite chain rule plus finite capacity bound",
+    "Lean-checked exposure of inherited local CMI nonnegativity"
+  ],
+  "conditional_inputs": [
+    "finite_capacity_bound"
+  ],
+  "excluded_claims": [
+    "NOT_GLOBAL_VALID_KERNEL_THEOREM",
+    "NOT_GLOBAL_URF_LAW3",
+    "NOT_INFORMATION_THEORETIC_DERIVATION_FROM_PROBABILITY_MEASURES",
+    "NOT_UNCONDITIONAL_CHANNEL_CAPACITY_THEOREM",
+    "NOT_CHRONOS_RR",
+    "NOT_H4_1_FGL",
+    "NOT_P_VS_NP",
+    "NOT_CLAY"
+  ],
+  "minimal_missing_objects": [
+    "GLOBAL_VALID_KERNEL_THEOREM",
+    "INFORMATION_THEORETIC_DERIVATION_FROM_PROBABILITY_MEASURES"
+  ],
+  "next_admissible_object": "GLOBAL_VALID_KERNEL_THEOREM"
+}
