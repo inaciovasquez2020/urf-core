@@ -9,6 +9,9 @@ DOC = ROOT / "docs/status/GLOBAL_VALID_KERNEL_THEOREM_TARGET_2026_06_01.md"
 LEAN = ROOT / "lean/URF/Foundation/GlobalValidKernelTheoremTarget.lean"
 ROOT_IMPORT = ROOT / "lean/URF.lean"
 
+for path in [ARTIFACT, DOC, LEAN, ROOT_IMPORT]:
+    assert path.exists(), f"missing required file: {path}"
+
 data = json.loads(ARTIFACT.read_text())
 doc = DOC.read_text()
 lean = LEAN.read_text()
