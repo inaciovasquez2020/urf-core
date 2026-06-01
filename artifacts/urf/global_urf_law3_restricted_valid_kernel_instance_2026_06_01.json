@@ -1,0 +1,45 @@
+{
+  "artifact": "GLOBAL_URF_LAW3_RESTRICTED_VALID_KERNEL_INSTANCE_2026_06_01",
+  "object": "GLOBAL_URF_LAW3_RESTRICTED_VALID_KERNEL_INSTANCE",
+  "status": "TARGET_OPEN_RESTRICTED_VALID_KERNEL_INSTANCE_NOT_SUPPLIED",
+  "decision": "PASS",
+  "restricted_valid_kernel_instance_supplied": false,
+  "global_urf_law3_closed": false,
+  "unconditional_theorem_claimed": false,
+  "depends_on": [
+    "FINITE_MUTUAL_INFORMATION_CHAIN_RULE_PROOF",
+    "CHANNEL_CAPACITY_BOUND_DERIVATION",
+    "GLOBAL_VALID_KERNEL_THEOREM",
+    "URF_INTERNAL_COMPLETION_REPOSITORY_STAGING_PACKET"
+  ],
+  "required_inputs": [
+    "restricted_valid_kernel_domain",
+    "valid_kernel_assumption_binding",
+    "finite_local_cmi_nonnegativity_binding",
+    "finite_chain_rule_binding",
+    "capacity_bound_binding",
+    "restricted_law3_consequence_statement",
+    "lean_checked_instance_or_explicit_missing_lemma"
+  ],
+  "missing_inputs": [
+    "restricted_valid_kernel_domain",
+    "valid_kernel_assumption_binding",
+    "finite_local_cmi_nonnegativity_binding",
+    "finite_chain_rule_binding",
+    "capacity_bound_binding",
+    "restricted_law3_consequence_statement",
+    "lean_checked_instance_or_explicit_missing_lemma"
+  ],
+  "certified_non_claims": [
+    "no unrestricted global URF Law 3",
+    "no unconditional valid-kernel theorem",
+    "no information-theoretic derivation from probability measures",
+    "no unconditional channel-capacity theorem",
+    "no Chronos-RR closure",
+    "no H4.1/FGL closure",
+    "no P vs NP claim",
+    "no Clay-problem claim"
+  ],
+  "next_admissible_object": "RESTRICTED_VALID_KERNEL_LAW3_INSTANCE_OR_EXPLICIT_MISSING_LEMMA",
+  "weakest_sufficient_next_input": "LeanCheckedRestrictedValidKernelLaw3Instance"
+}
