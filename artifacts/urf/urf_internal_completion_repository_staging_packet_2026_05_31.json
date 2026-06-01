@@ -1,0 +1,64 @@
+{
+  "object_id": "URF_INTERNAL_COMPLETION_REPOSITORY_STAGING_PACKET",
+  "version": "1.0",
+  "date": "2026-05-31",
+  "status": "FORMAL_CERTIFICATE_CLOSED",
+  "purpose": "Repository-stage the internally completed URF packet chain and import the finite theorem plus cross-domain bridge into urf-core.",
+  "repo": "urf-core",
+  "internal_objects_staged": [
+    "URF_STATUS_TAXONOMY_V1",
+    "URF_GLOBAL_CLAIM_LEDGER_V1",
+    "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+    "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+    "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET",
+    "URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1",
+    "EXTERNAL_VALIDATION_LAST_PHASE_READINESS"
+  ],
+  "repository_native_lean_modules": [
+    "URF.Foundation.FiniteLocalNonnegativeComponentBound",
+    "URF.Foundation.FiniteInformationToClaimGovernanceBridge"
+  ],
+  "repository_native_theorems": [
+    "finite_local_nonnegative_component_bound",
+    "finite_information_to_claim_governance_bridge"
+  ],
+  "internal_completion_ceiling_before_external_validation": "84_PERCENT",
+  "external_validation_status": "NOT_STARTED",
+  "allowed_claims": [
+    "URF internal completion chain is repository-staged.",
+    "The finite local nonnegative component bound is Lean-checkable in urf-core.",
+    "The finite information to claim-governance bridge is Lean-checkable in urf-core.",
+    "External validation remains intentionally unclaimed."
+  ],
+  "forbidden_overclaims": [
+    "external validation completed",
+    "independent reproduction completed",
+    "expert evaluation completed",
+    "peer-review acceptance completed",
+    "all URF domains unified",
+    "global URF Law 3 closure",
+    "global valid-kernel theorem",
+    "unrestricted channel-capacity theorem",
+    "Chronos-RR closure",
+    "H4.1/FGL closure",
+    "P vs NP closure",
+    "Clay-problem closure",
+    "new-gravity validation",
+    "DFM-MKC validation",
+    "Lambda-CDM failure"
+  ],
+  "boundary": [
+    "repository staging packet only",
+    "internal completion only",
+    "no external validation",
+    "no independent reproduction",
+    "no expert review",
+    "no peer-review acceptance",
+    "no unrestricted Chronos-RR closure",
+    "no H4.1/FGL closure",
+    "no P vs NP closure",
+    "no Clay-problem closure",
+    "no empirical physics validation"
+  ],
+  "next_admissible_object": "EXTERNAL_VALIDATION_LAST_PHASE_OR_REPO_STAGED_DASHBOARD_SYNC"
+}

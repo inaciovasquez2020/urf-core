@@ -1,0 +1,334 @@
+{
+  "object_id": "URF_GLOBAL_CLAIM_LEDGER_V1",
+  "version": "1.0",
+  "date": "2026-05-30",
+  "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+  "depends_on": [
+    "URF_STATUS_TAXONOMY_V1"
+  ],
+  "dependency_packets": {
+    "URF_STATUS_TAXONOMY_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z"
+  },
+  "taxonomy_artifact": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z/artifacts/urf/urf_status_taxonomy_v1_2026_05_30.json",
+  "global_boundary": [
+    "ledger only",
+    "no repository files modified",
+    "does not prove listed claims",
+    "does not validate empirical branches",
+    "does not imply external adoption",
+    "does not update dashboard by itself",
+    "does not claim peer-review acceptance",
+    "does not close Chronos-RR",
+    "does not close H4.1/FGL",
+    "does not close P vs NP",
+    "does not close any Clay problem"
+  ],
+  "claim_schema": {
+    "claim_id": "string",
+    "repo": "string",
+    "domain": "string",
+    "status": "taxonomy_status",
+    "claim_statement": "string",
+    "allowed_interpretation": "array[string]",
+    "forbidden_interpretation": "array[string]",
+    "primary_artifact": "string_or_null",
+    "proof_or_verifier": "string_or_null",
+    "test": "string_or_null",
+    "missing_object": "string_or_null",
+    "last_verified_commit": "string_or_null",
+    "dashboard_required": "boolean"
+  },
+  "claims": [
+    {
+      "claim_id": "URF_FRAMEWORK_GOAL",
+      "repo": "cross-repo",
+      "domain": "framework",
+      "status": "OPEN",
+      "claim_statement": "URF is a verification-governed framework for unifying domains through bounded claims, admissible objects, reductions, bridge laws, boundary locks, executable artifacts, reproducible tests, missing-object registries, and continuable proof or validation pathways.",
+      "allowed_interpretation": [
+        "URF is the central unifying framework target",
+        "URF can be internally advanced before external validation",
+        "URF success does not require solving every downstream frontier"
+      ],
+      "forbidden_interpretation": [
+        "all final theorems are solved",
+        "external adoption is established",
+        "peer-review acceptance is established",
+        "empirical physics branches are validated"
+      ],
+      "primary_artifact": null,
+      "proof_or_verifier": null,
+      "test": null,
+      "missing_object": "URF_INTERNAL_DONE_ENOUGH_PACKET",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "URF_STATUS_TAXONOMY_V1",
+      "repo": "cross-repo",
+      "domain": "claim governance",
+      "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+      "claim_statement": "A shared claim-status vocabulary exists as an off-repo verified packet for all URF-linked repositories.",
+      "allowed_interpretation": [
+        "taxonomy packet exists outside repositories",
+        "local off-repo verifier passed",
+        "future repository insertion can standardize statuses"
+      ],
+      "forbidden_interpretation": [
+        "taxonomy is merged",
+        "dashboard already consumes taxonomy",
+        "all repository statuses are already normalized",
+        "external validation exists"
+      ],
+      "primary_artifact": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z/artifacts/urf/urf_status_taxonomy_v1_2026_05_30.json",
+      "proof_or_verifier": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z/tools/verify_urf_status_taxonomy_v1.py",
+      "test": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z/tests/test_urf_status_taxonomy_v1.py",
+      "missing_object": "REPOSITORY_STAGED_URF_STATUS_TAXONOMY_V1",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "URF_GLOBAL_CLAIM_LEDGER_V1",
+      "repo": "cross-repo",
+      "domain": "claim governance",
+      "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+      "claim_statement": "A global claim ledger is drafted to centralize statuses, boundaries, artifacts, tests, and missing objects.",
+      "allowed_interpretation": [
+        "ledger draft exists outside repositories",
+        "claim and nonclaim map is machine-checkable",
+        "ledger depends on the status taxonomy"
+      ],
+      "forbidden_interpretation": [
+        "all repositories consume this ledger",
+        "dashboard is automatically synchronized",
+        "external validation exists",
+        "ledger proves listed claims"
+      ],
+      "primary_artifact": "artifacts/urf/urf_global_claim_ledger_v1_2026_05_30.json",
+      "proof_or_verifier": "tools/verify_urf_global_claim_ledger_v1.py",
+      "test": "tests/test_urf_global_claim_ledger_v1.py",
+      "missing_object": "REPOSITORY_STAGED_URF_GLOBAL_CLAIM_LEDGER_V1",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+      "repo": "frontier-status-dashboard",
+      "domain": "public status synchronization",
+      "status": "BLOCKED_BY_MISSING_OBJECT",
+      "claim_statement": "A dashboard sync certificate is required to ensure dashboard rows match the global claim ledger and taxonomy.",
+      "allowed_interpretation": [
+        "sync certificate is the next internal trust object",
+        "dashboard staleness is treated as a formal risk"
+      ],
+      "forbidden_interpretation": [
+        "dashboard is already synchronized",
+        "dashboard proves theorem closure",
+        "dashboard validates empirical claims"
+      ],
+      "primary_artifact": "artifacts/urf/urf_dashboard_ledger_sync_certificate_2026_05_30.json",
+      "proof_or_verifier": "tools/verify_urf_dashboard_ledger_sync_certificate.py",
+      "test": "tests/test_urf_dashboard_ledger_sync_certificate.py",
+      "missing_object": "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "URF_CORE_FINITE_MI_CHAIN_RULE_LOCAL_NONNEGATIVITY_ROUTE",
+      "repo": "urf-core",
+      "domain": "formal information structure",
+      "status": "CONDITIONAL",
+      "claim_statement": "The finite chain-rule/local nonnegativity route is selected as the preferred non-toy theorem path for internal URF completion.",
+      "allowed_interpretation": [
+        "theorem route is selected",
+        "route is closer than full empirical validation",
+        "route can support a non-toy formal flagship object"
+      ],
+      "forbidden_interpretation": [
+        "global URF Law 3 is closed",
+        "global valid-kernel theorem is closed",
+        "unrestricted channel-capacity theorem is closed",
+        "P vs NP is closed"
+      ],
+      "primary_artifact": "lean/URF/Foundation/FiniteMutualInformationChainRuleProof.lean",
+      "proof_or_verifier": null,
+      "test": null,
+      "missing_object": "URF_ONE_CLOSED_NONTOY_THEOREM_OR_VALIDATION_RESULT",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+      "repo": "urf-core",
+      "domain": "formal information structure",
+      "status": "OPEN",
+      "claim_statement": "A Lean theorem target should prove that each nonnegative finite local contribution is bounded by the verified total capacity bound.",
+      "allowed_interpretation": [
+        "non-toy theorem target is defined",
+        "target can become the internal flagship theorem",
+        "target is finite and scoped"
+      ],
+      "forbidden_interpretation": [
+        "the theorem is already closed by this ledger",
+        "global URF Law 3 is closed",
+        "Chronos-RR is closed",
+        "Clay problems are closed"
+      ],
+      "primary_artifact": "lean/URF/Foundation/FiniteLocalNonnegativeComponentBound.lean",
+      "proof_or_verifier": "tools/verify_finite_local_nonnegative_component_bound.py",
+      "test": "tests/test_finite_local_nonnegative_component_bound.py",
+      "missing_object": "LEAN_CLOSED_FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_TARGET",
+      "repo": "urf-core",
+      "domain": "cross-domain unification",
+      "status": "OPEN",
+      "claim_statement": "A machine-checkable bridge target is defined from finite information structure to URF claim-governance admissibility.",
+      "allowed_interpretation": [
+        "bridge target is defined",
+        "bridge is intended to mechanically demonstrate URF unification",
+        "source domain is finite information structure and target domain is claim governance"
+      ],
+      "forbidden_interpretation": [
+        "bridge theorem is already closed",
+        "all domains are unified",
+        "Chronos-RR is proved",
+        "P vs NP is proved"
+      ],
+      "primary_artifact": "lean/URF/Foundation/FiniteInformationToClaimGovernanceBridge.lean",
+      "proof_or_verifier": "tools/verify_urf_machine_checked_cross_domain_bridge_v1.py",
+      "test": "tests/test_urf_machine_checked_cross_domain_bridge_v1.py",
+      "missing_object": "MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_PROOF",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1",
+      "repo": "cross-repo",
+      "domain": "reproducibility",
+      "status": "BLOCKED_BY_MISSING_OBJECT",
+      "claim_statement": "A reproducible flagship packet must bundle taxonomy, ledger, dashboard sync, one closed non-toy theorem or validation result, and one machine-checked bridge.",
+      "allowed_interpretation": [
+        "flagship packet target is defined",
+        "packet comes after theorem and bridge closure",
+        "packet is an internal reproducibility object"
+      ],
+      "forbidden_interpretation": [
+        "flagship packet already exists",
+        "external reproduction exists",
+        "expert validation exists"
+      ],
+      "primary_artifact": "artifacts/urf/urf_reproducible_flagship_packet_v1_2026_05_30.json",
+      "proof_or_verifier": "tools/verify_urf_reproducible_flagship_packet_v1.py",
+      "test": "tests/test_urf_reproducible_flagship_packet_v1.py",
+      "missing_object": "URF_ONE_CLOSED_NONTOY_THEOREM_OR_VALIDATION_RESULT_AND_URF_MACHINE_CHECKED_CROSS_DOMAIN_BRIDGE_V1",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "CHRONOS_RR_UNRESTRICTED_CLOSURE",
+      "repo": "chronos-urf-rr",
+      "domain": "Chronos/RR frontier",
+      "status": "OPEN",
+      "claim_statement": "Unrestricted Chronos-RR remains open.",
+      "allowed_interpretation": [
+        "frontier is explicitly tracked",
+        "conditional and restricted objects may exist"
+      ],
+      "forbidden_interpretation": [
+        "unrestricted Chronos-RR is proved",
+        "H4.1/FGL is closed",
+        "P vs NP is closed",
+        "Clay problems are closed"
+      ],
+      "primary_artifact": null,
+      "proof_or_verifier": null,
+      "test": null,
+      "missing_object": "UNRESTRICTED_CHRONOS_RR_PROOF_OR_COUNTERMODEL",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "DFM_MKC_EMPIRICAL_VALIDATION",
+      "repo": "dfm-mkc-cosmology",
+      "domain": "cosmology empirical validation",
+      "status": "EMPIRICAL_PIPELINE_ONLY",
+      "claim_statement": "DFM-MKC empirical validation remains a pipeline/frontier unless authentic prediction vectors, baseline comparison, execution logs, and interpretation boundaries are supplied.",
+      "allowed_interpretation": [
+        "pipeline infrastructure exists",
+        "phenomenological and empirical objects can be tracked"
+      ],
+      "forbidden_interpretation": [
+        "Lambda-CDM failure is proved",
+        "dark matter is replaced",
+        "cosmology is empirically validated",
+        "new physics is confirmed"
+      ],
+      "primary_artifact": null,
+      "proof_or_verifier": null,
+      "test": null,
+      "missing_object": "AUTHENTIC_PREDICTION_VECTOR_AND_BASELINE_COMPARISON_RESULT",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "GRAVITY_MASCON_VALIDATION",
+      "repo": "chronos-urf-rr",
+      "domain": "gravity empirical validation",
+      "status": "EMPIRICAL_PIPELINE_ONLY",
+      "claim_statement": "Gravity/MASCON validation remains a pipeline unless authentic comparison metrics, unit equivalence, and time-dependent source-to-MASCON operators are supplied.",
+      "allowed_interpretation": [
+        "validation route exists",
+        "missing empirical objects are named"
+      ],
+      "forbidden_interpretation": [
+        "new gravity is validated",
+        "GR failure is established",
+        "dark matter is replaced",
+        "Lambda-CDM failure is established"
+      ],
+      "primary_artifact": null,
+      "proof_or_verifier": null,
+      "test": null,
+      "missing_object": "AUTHENTIC_MASCON_COMPARISON_METRIC_AND_UNIT_EQUIVALENCE_CERTIFICATE",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    },
+    {
+      "claim_id": "EXTERNAL_VALIDATION_DEFERRED",
+      "repo": "cross-repo",
+      "domain": "external validation",
+      "status": "BLOCKED_BY_MISSING_OBJECT",
+      "claim_statement": "External validation is intentionally deferred until internal URF completion objects are created.",
+      "allowed_interpretation": [
+        "external validation is not part of the current internal sprint",
+        "internal ceiling before external validation is approximately 84 percent"
+      ],
+      "forbidden_interpretation": [
+        "external review has occurred",
+        "expert adoption has occurred",
+        "peer-review acceptance has occurred",
+        "third-party reproduction has occurred"
+      ],
+      "primary_artifact": null,
+      "proof_or_verifier": null,
+      "test": null,
+      "missing_object": "URF_EXTERNAL_REPRODUCTION_RECORD_V1_AND_URF_EXPERT_EVALUATION_PACKET_V1",
+      "last_verified_commit": null,
+      "dashboard_required": true
+    }
+  ],
+  "ledger_invariants": [
+    "Every claim must use a status from URF_STATUS_TAXONOMY_V1.",
+    "Every OPEN or BLOCKED_BY_MISSING_OBJECT claim must name a missing object.",
+    "Every empirical claim must forbid overclaiming beyond supplied data.",
+    "Every closed claim must include proof, verifier, or test evidence.",
+    "Every dashboard-required claim must be synchronizable to dashboard data.",
+    "No claim may assert external validation before external validation objects exist.",
+    "No claim may assert Clay-problem, P vs NP, Chronos-RR, H4.1/FGL, new-gravity, or Lambda-CDM-failure closure unless a corresponding closed theorem or empirical validation object is listed."
+  ],
+  "next_admissible_object": "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE"
+}

@@ -1,0 +1,87 @@
+{
+  "acceptable_completion_evidence": [
+    "certificate JSON exists",
+    "dashboard candidate JSON exists",
+    "verifier passes against taxonomy, ledger, and dashboard candidate",
+    "pytest coverage passes",
+    "status document preserves no-repo-write boundary"
+  ],
+  "certificate_output": {
+    "expected_pass_message": "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE_OK",
+    "result_fields": [
+      "checked_rows",
+      "ledger_required_claims",
+      "matched_claims",
+      "missing_dashboard_rows",
+      "undefined_statuses",
+      "overclaim_flags",
+      "missing_object_visibility_failures",
+      "decision"
+    ]
+  },
+  "date": "2026-05-30",
+  "dependency_packets": {
+    "URF_GLOBAL_CLAIM_LEDGER_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_GLOBAL_CLAIM_LEDGER_V1_20260531T011759Z",
+    "URF_STATUS_TAXONOMY_V1": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_STATUS_TAXONOMY_V1_20260531T010638Z"
+  },
+  "depends_on": [
+    "URF_STATUS_TAXONOMY_V1",
+    "URF_GLOBAL_CLAIM_LEDGER_V1"
+  ],
+  "global_boundary": [
+    "sync certificate only",
+    "candidate dashboard only",
+    "no repository files modified",
+    "does not update frontier-status-dashboard",
+    "does not prove mathematical claims",
+    "does not validate empirical claims",
+    "does not imply external adoption",
+    "does not imply peer-review acceptance",
+    "does not close Chronos-RR",
+    "does not close H4.1/FGL",
+    "does not close P vs NP",
+    "does not close any Clay problem"
+  ],
+  "next_admissible_object": "FINITE_LOCAL_NONNEGATIVE_COMPONENT_BOUND_TARGET",
+  "object_id": "URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE",
+  "purpose": "Certify that a dashboard candidate is exactly synchronized to the global claim ledger and status taxonomy.",
+  "source_artifacts": {
+    "dashboard_candidate": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/URF_DASHBOARD_LEDGER_SYNC_CERTIFICATE/artifacts/urf/urf_dashboard_candidate_from_ledger_2026_05_30.json",
+    "ledger": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/URF_GLOBAL_CLAIM_LEDGER_V1/artifacts/urf/urf_global_claim_ledger_v1_2026_05_30.json",
+    "taxonomy": "/Users/inaciof.vasquez/urf_offrepo_stage/URF_REPRODUCIBLE_FLAGSHIP_PACKET_V1_20260531T015133Z/bundled_packets/URF_STATUS_TAXONOMY_V1/artifacts/urf/urf_status_taxonomy_v1_2026_05_30.json"
+  },
+  "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+  "sync_rules": [
+    {
+      "description": "Every dashboard candidate status must be a valid taxonomy status.",
+      "failure_status": "FAIL_UNDEFINED_DASHBOARD_STATUS",
+      "rule_id": "DASHBOARD_STATUS_IN_TAXONOMY"
+    },
+    {
+      "description": "Every dashboard candidate row must map to exactly one ledger claim.",
+      "failure_status": "FAIL_DASHBOARD_ROW_NOT_IN_LEDGER",
+      "rule_id": "DASHBOARD_ROW_HAS_LEDGER_CLAIM"
+    },
+    {
+      "description": "Every ledger claim with dashboard_required=true must appear in the dashboard candidate.",
+      "failure_status": "FAIL_LEDGER_REQUIRED_CLAIM_MISSING_FROM_DASHBOARD",
+      "rule_id": "LEDGER_REQUIRED_CLAIM_VISIBLE"
+    },
+    {
+      "description": "Dashboard candidate boundary language must include every forbidden interpretation from the ledger claim.",
+      "failure_status": "FAIL_DASHBOARD_OVERCLAIM",
+      "rule_id": "NO_DASHBOARD_OVERCLAIM"
+    },
+    {
+      "description": "Every OPEN, CONDITIONAL, EMPIRICAL_PIPELINE_ONLY, or BLOCKED_BY_MISSING_OBJECT row must display its missing object.",
+      "failure_status": "FAIL_MISSING_OBJECT_NOT_VISIBLE",
+      "rule_id": "MISSING_OBJECT_VISIBLE_FOR_OPEN_FRONTIERS"
+    },
+    {
+      "description": "Every dashboard candidate row must carry last_verified_commit, allowing explicit null for off-repo or unmerged objects.",
+      "failure_status": "FAIL_LAST_VERIFIED_COMMIT_FIELD",
+      "rule_id": "LAST_VERIFIED_COMMIT_OR_EXPLICIT_NULL"
+    }
+  ],
+  "version": "1.0"
+}

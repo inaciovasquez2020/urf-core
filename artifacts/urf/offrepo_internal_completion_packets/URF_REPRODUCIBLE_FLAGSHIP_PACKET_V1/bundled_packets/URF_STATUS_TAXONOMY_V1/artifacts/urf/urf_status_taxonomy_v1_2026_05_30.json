@@ -1,0 +1,315 @@
+{
+  "object_id": "URF_STATUS_TAXONOMY_V1",
+  "version": "1.0",
+  "date": "2026-05-30",
+  "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+  "scope": [
+    "urf-core",
+    "chronos-urf-rr",
+    "urf-textbook",
+    "dfm-mkc-cosmology",
+    "frontier-status-dashboard",
+    "vasquez-index",
+    "urf-spine-public",
+    "fo4-constraint-isolation",
+    "urf-11-translation-subproblem-registry"
+  ],
+  "global_boundary": [
+    "taxonomy only",
+    "no theorem closure produced by taxonomy",
+    "no empirical validation produced by taxonomy",
+    "no external adoption claimed",
+    "no peer-review acceptance claimed",
+    "no repository files modified"
+  ],
+  "statuses": [
+    {
+      "status": "THEOREM_CLOSED",
+      "meaning": "A formal theorem or proof object is closed under the stated assumptions in the referenced proof system or manuscript.",
+      "allowed_claim_strength": [
+        "the stated theorem is closed",
+        "the theorem depends only on listed assumptions",
+        "the result holds only at the declared scope"
+      ],
+      "required_evidence": [
+        "formal proof file or proof manuscript",
+        "explicit theorem statement",
+        "assumption list",
+        "successful verifier or build record"
+      ],
+      "forbidden_interpretations": [
+        "all related frontier problems are solved",
+        "all applications are validated",
+        "unrestricted versions are proved unless explicitly stated"
+      ],
+      "promotion_requires": [
+        "proof artifact",
+        "assumption inventory",
+        "boundary statement",
+        "successful local verification"
+      ]
+    },
+    {
+      "status": "FORMAL_CERTIFICATE_CLOSED",
+      "meaning": "A finite or bounded certificate has been checked by executable or formal means.",
+      "allowed_claim_strength": [
+        "the certificate validates the finite or bounded object",
+        "the certificate is closed only for the encoded instance"
+      ],
+      "required_evidence": [
+        "certificate artifact",
+        "checker or verifier",
+        "test output",
+        "bounded scope statement"
+      ],
+      "forbidden_interpretations": [
+        "universal theorem closure",
+        "empirical validation",
+        "external adoption"
+      ],
+      "promotion_requires": [
+        "machine-checkable certificate",
+        "verifier",
+        "negative boundary list"
+      ]
+    },
+    {
+      "status": "CONDITIONAL",
+      "meaning": "The result follows if listed assumptions, hypotheses, or missing objects are supplied.",
+      "allowed_claim_strength": [
+        "conditional implication established",
+        "dependency chain is explicit"
+      ],
+      "required_evidence": [
+        "conditional theorem or verifier",
+        "complete missing-object list",
+        "assumption labels"
+      ],
+      "forbidden_interpretations": [
+        "unconditional theorem",
+        "final closure",
+        "empirical confirmation"
+      ],
+      "promotion_requires": [
+        "discharge of every listed assumption",
+        "updated proof or verifier"
+      ]
+    },
+    {
+      "status": "INTERFACE_ONLY",
+      "meaning": "The object defines input/output slots, required fields, or admissibility conditions without supplying the object required to close the claim.",
+      "allowed_claim_strength": [
+        "interface exists",
+        "required fields are specified",
+        "future closure path is defined"
+      ],
+      "required_evidence": [
+        "schema or interface file",
+        "field list",
+        "missing-object statement"
+      ],
+      "forbidden_interpretations": [
+        "object supplied",
+        "theorem closed",
+        "pipeline executed"
+      ],
+      "promotion_requires": [
+        "actual supplied object",
+        "validation or proof artifact"
+      ]
+    },
+    {
+      "status": "SCHEMA_ONLY",
+      "meaning": "A data structure or validation schema exists, but no substantive mathematical or empirical object is supplied.",
+      "allowed_claim_strength": [
+        "schema exists",
+        "future object shape is constrained"
+      ],
+      "required_evidence": [
+        "schema file",
+        "schema verifier",
+        "example-valid and example-invalid cases"
+      ],
+      "forbidden_interpretations": [
+        "real data validated",
+        "mathematical claim proved",
+        "empirical conclusion established"
+      ],
+      "promotion_requires": [
+        "valid object instance",
+        "schema execution against supplied object"
+      ]
+    },
+    {
+      "status": "EMPIRICAL_PIPELINE_ONLY",
+      "meaning": "An empirical pipeline is specified or partially staged, but the decisive authentic run or comparison is not complete.",
+      "allowed_claim_strength": [
+        "pipeline route exists",
+        "inputs and expected outputs are specified",
+        "missing empirical objects are named"
+      ],
+      "required_evidence": [
+        "pipeline script or protocol",
+        "input requirements",
+        "comparison metric definition",
+        "boundary lock"
+      ],
+      "forbidden_interpretations": [
+        "empirical validation",
+        "model confirmation",
+        "standard theory failure",
+        "new physics"
+      ],
+      "promotion_requires": [
+        "authentic data binding",
+        "execution log",
+        "comparison result",
+        "interpretation boundary"
+      ]
+    },
+    {
+      "status": "EMPIRICALLY_VALIDATED_RESTRICTED",
+      "meaning": "A restricted empirical claim has been executed against authentic data under a declared protocol.",
+      "allowed_claim_strength": [
+        "restricted empirical result obtained",
+        "result applies only to the declared dataset or protocol"
+      ],
+      "required_evidence": [
+        "authentic data provenance",
+        "hashes",
+        "execution logs",
+        "comparison metric",
+        "result artifact",
+        "interpretation boundary"
+      ],
+      "forbidden_interpretations": [
+        "universal empirical truth",
+        "replacement of standard theory",
+        "external replication unless independently supplied"
+      ],
+      "promotion_requires": [
+        "independent reproduction",
+        "multiple datasets or expert review for stronger claims"
+      ]
+    },
+    {
+      "status": "REFUTED",
+      "meaning": "The stated unrestricted or proposed claim has a counterexample, failed verifier, or formal obstruction.",
+      "allowed_claim_strength": [
+        "the specified claim is not valid as stated",
+        "a restricted or repaired version may remain possible"
+      ],
+      "required_evidence": [
+        "counterexample",
+        "failed proof target",
+        "negative certificate",
+        "scope of refutation"
+      ],
+      "forbidden_interpretations": [
+        "all neighboring claims are false",
+        "entire framework is refuted unless explicitly shown"
+      ],
+      "promotion_requires": [
+        "restricted replacement claim",
+        "new admissibility condition",
+        "new proof target"
+      ]
+    },
+    {
+      "status": "OPEN",
+      "meaning": "The object is not closed, refuted, or validated; it remains a declared frontier.",
+      "allowed_claim_strength": [
+        "open target exists",
+        "missing object is known or under search"
+      ],
+      "required_evidence": [
+        "open target statement",
+        "missing-object list",
+        "no-closure boundary"
+      ],
+      "forbidden_interpretations": [
+        "solved",
+        "validated",
+        "accepted",
+        "proved"
+      ],
+      "promotion_requires": [
+        "proof, counterexample, certificate, or empirical execution"
+      ]
+    },
+    {
+      "status": "BLOCKED_BY_MISSING_OBJECT",
+      "meaning": "Progress is blocked by a specifically named unsupplied object.",
+      "allowed_claim_strength": [
+        "blocker identified",
+        "next admissible object named"
+      ],
+      "required_evidence": [
+        "missing-object name",
+        "dependency statement",
+        "blocked claim list"
+      ],
+      "forbidden_interpretations": [
+        "claim closure",
+        "failure of the entire program",
+        "empirical or theorem validation"
+      ],
+      "promotion_requires": [
+        "supply or refute the missing object"
+      ]
+    },
+    {
+      "status": "DRAFT_OFF_REPO_NO_REPO_WRITE",
+      "meaning": "The object is staged outside repositories and has not modified public repository state.",
+      "allowed_claim_strength": [
+        "draft exists",
+        "object is ready for later repository staging"
+      ],
+      "required_evidence": [
+        "draft file or text",
+        "no repository modification statement"
+      ],
+      "forbidden_interpretations": [
+        "merged",
+        "published",
+        "CI-verified",
+        "externally reviewed"
+      ],
+      "promotion_requires": [
+        "repo insertion",
+        "verifier",
+        "test",
+        "status document",
+        "clean repository check"
+      ]
+    }
+  ],
+  "reserved_terms": {
+    "closed": "Must be qualified as theorem-closed, certificate-closed, schema-closed, repo-check-closed, or empirically validated restricted.",
+    "validated": "Must not be used for empirical claims unless authentic data execution and comparison are supplied.",
+    "proved": "Must not be used unless a proof artifact or accepted proof manuscript is referenced.",
+    "adopted": "Must not be used without external user, citation, fork, issue, reproduction, or institutional evidence."
+  },
+  "dashboard_rule": {
+    "dashboard_status_must_reference_taxonomy_status": true,
+    "dashboard_rows_must_not_use_freeform_status_labels": true,
+    "dashboard_must_include_last_verified_commit": true,
+    "dashboard_must_include_missing_object_when_status_is_open_or_blocked": true
+  },
+  "verification_requirements": [
+    "Every claim object must use a status from this taxonomy.",
+    "Every object with theorem-like language must be THEOREM_CLOSED, CONDITIONAL, OPEN, REFUTED, or BLOCKED_BY_MISSING_OBJECT.",
+    "Every object with empirical language must be EMPIRICAL_PIPELINE_ONLY or EMPIRICALLY_VALIDATED_RESTRICTED.",
+    "Every dashboard row must map to exactly one taxonomy status.",
+    "Every closed status must include a scope boundary."
+  ],
+  "forbidden_outputs": [
+    "URF_SOLVED",
+    "URF_EXTERNALLY_VALIDATED",
+    "CHRONOS_RR_CLOSED",
+    "P_VS_NP_CLOSED",
+    "CLAY_CLOSED",
+    "NEW_GRAVITY_VALIDATED"
+  ],
+  "next_admissible_object": "URF_GLOBAL_CLAIM_LEDGER_V1"
+}
