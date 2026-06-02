@@ -1,0 +1,35 @@
+{
+  "boundary": [
+    "bounded finite-state Markov-kernel composition theorem only",
+    "does not construct a bundled FinKernel unless separately requested",
+    "does not solve unrestricted URF law closure",
+    "does not solve empirical gravity validation",
+    "does not solve plasma physics",
+    "does not solve Hodge theory",
+    "does not solve P vs NP",
+    "does not solve any Clay problem"
+  ],
+  "claim_class": "BOUNDED_UNCONDITIONAL_SCIENCE_DOMAIN_THEOREM",
+  "date": "2026-06-02",
+  "decision": "PASS",
+  "definitions": [
+    "composedKernelProb"
+  ],
+  "depends_on": [
+    "FiniteStochasticKernelMassConservationTheorem",
+    "FlagshipFiniteKernelTheoremSurface"
+  ],
+  "field": "finite stochastic systems / finite Markov processes",
+  "lean_file": "lean/URF/Foundation/FiniteMarkovKernelCompositionPreservesStochasticityTheorem.lean",
+  "lean_module": "URF.Foundation.FiniteMarkovKernelCompositionPreservesStochasticityTheorem",
+  "next_admissible_object": "MergeFiniteMarkovKernelCompositionPreservesStochasticityTheoremOrStop",
+  "object": "FiniteMarkovKernelCompositionPreservesStochasticityTheorem",
+  "repo": "urf-core",
+  "solved_statement": "The finite composition formula for two finite stochastic kernels has nonnegative transition weights and preserves total outgoing probability mass.",
+  "theorems": [
+    "finite_markov_kernel_composition_nonnegative",
+    "finite_markov_kernel_composition_total_mass",
+    "finite_markov_kernel_composition_preserves_stochasticity"
+  ],
+  "unconditional": true
+}
