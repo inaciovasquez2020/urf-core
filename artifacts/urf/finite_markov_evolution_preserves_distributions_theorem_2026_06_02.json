@@ -1,0 +1,36 @@
+{
+  "boundary": [
+    "bounded finite-state Markov-evolution theorem only",
+    "does not solve unrestricted URF law closure",
+    "does not solve empirical gravity validation",
+    "does not solve plasma physics",
+    "does not solve Hodge theory",
+    "does not solve P vs NP",
+    "does not solve any Clay problem"
+  ],
+  "claim_class": "BOUNDED_UNCONDITIONAL_SCIENCE_DOMAIN_THEOREM",
+  "date": "2026-06-02",
+  "decision": "PASS",
+  "definitions": [
+    "FinDistribution",
+    "pushProb",
+    "pushDistribution"
+  ],
+  "depends_on": [
+    "FiniteStochasticKernelMassConservationTheorem",
+    "FlagshipFiniteKernelTheoremSurface"
+  ],
+  "field": "finite stochastic systems / finite Markov processes",
+  "lean_file": "lean/URF/Foundation/FiniteMarkovEvolutionPreservesDistributionsTheorem.lean",
+  "lean_module": "URF.Foundation.FiniteMarkovEvolutionPreservesDistributionsTheorem",
+  "next_admissible_object": "MergeFiniteMarkovEvolutionPreservesDistributionsTheoremOrStop",
+  "object": "FiniteMarkovEvolutionPreservesDistributionsTheorem",
+  "repo": "urf-core",
+  "solved_statement": "A finite probability distribution evolved through a finite stochastic kernel remains a finite probability distribution: all evolved probabilities are nonnegative and total mass is preserved.",
+  "theorems": [
+    "finite_markov_evolution_nonnegative",
+    "finite_markov_evolution_total_mass",
+    "finite_markov_evolution_preserves_probability_distribution"
+  ],
+  "unconditional": true
+}
