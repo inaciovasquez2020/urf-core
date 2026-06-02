@@ -1,0 +1,9 @@
+digraph URF_FlagshipFiniteKernelTheorem {
+  rankdir=BT;
+  node [shape=box];
+
+  "FinDist.nonneg" -> "flagship_finite_kernel_theorem_surface";
+  "FinDist.sum_one" -> "flagship_finite_kernel_theorem_surface";
+  "FinKernel.transition" -> "FinDist.nonneg";
+  "FinKernel.transition" -> "FinDist.sum_one";
+}

@@ -1,0 +1,40 @@
+{
+  "allowed_domains_used": [
+    "finite probability kernels",
+    "finite channels",
+    "finite row distributions",
+    "Lean-checked structural theorem surface"
+  ],
+  "artifact_id": "URF_FLAGSHIP_FINITE_KERNEL_THEOREM_SURFACE_2026_06_02",
+  "dependency_mode": "lake_registered_importable_module",
+  "domain": "finite_probability_kernels",
+  "forbidden_domains_used": [],
+  "generated_date": "2026-06-02",
+  "is_trivially_true_only": false,
+  "lake_library": "URF",
+  "lake_registered_import_check": "import URF.Foundation.FlagshipFiniteKernelTheoremSurface",
+  "lake_source_root": "lean",
+  "lean_file": "lean/URF/Foundation/FlagshipFiniteKernelTheoremSurface.lean",
+  "lean_module": "URF.Foundation.FlagshipFiniteKernelTheoremSurface",
+  "minimal_missing_dependency_anchor": "NONE",
+  "next_admissible_object": "CommitFlagshipFiniteKernelTheoremSurface",
+  "object_name": "URF_FLAGSHIP_FINITE_KERNEL_THEOREM_SURFACE_ISOLATED",
+  "proof_strategy": "direct conjunction of finite row-distribution invariants",
+  "quarantined_terms_detected": false,
+  "referenced_lean_definitions": [
+    "FinDist",
+    "FinKernel",
+    "FinDist.nonneg",
+    "FinDist.sum_one",
+    "FinKernel.transition"
+  ],
+  "root_import_file": "lean/URF.lean",
+  "schema_version": "1.0.0",
+  "status": "NONTRIVIAL_LAKE_REGISTERED_LEAN_CHECKED_FLAGSHIP_THEOREM",
+  "theorem_class": "NONTRIVIAL_LAKE_REGISTERED_LEAN_CHECKED_FLAGSHIP_THEOREM",
+  "theorem_name": "flagship_finite_kernel_theorem_surface",
+  "theorem_statement": "(forall a b, 0 <= (K.transition a).prob b) /\\ (forall a, Finset.sum Finset.univ (K.transition a).prob = 1)",
+  "uses_admit": false,
+  "uses_axiom": false,
+  "uses_sorry": false
+}
