@@ -1,0 +1,30 @@
+{
+  "boundary": [
+    "bounded finite-state stochastic-kernel theorem only",
+    "does not solve unrestricted URF law closure",
+    "does not solve empirical gravity validation",
+    "does not solve plasma physics",
+    "does not solve Hodge theory",
+    "does not solve P vs NP",
+    "does not solve any Clay problem"
+  ],
+  "claim_class": "BOUNDED_UNCONDITIONAL_SCIENCE_DOMAIN_THEOREM",
+  "date": "2026-06-02",
+  "decision": "PASS",
+  "depends_on": [
+    "URF.Foundation.FlagshipFiniteKernelTheoremSurface.flagship_finite_kernel_theorem_surface"
+  ],
+  "field": "finite stochastic systems / finite Markov kernels",
+  "lean_file": "lean/URF/Foundation/FiniteStochasticKernelMassConservationTheorem.lean",
+  "lean_module": "URF.Foundation.FiniteStochasticKernelMassConservationTheorem",
+  "next_admissible_object": "MergeFiniteStochasticKernelMassConservationTheoremOrStop",
+  "object": "FiniteStochasticKernelMassConservationTheorem",
+  "repo": "urf-core",
+  "solved_statement": "Every finite stochastic kernel represented by FinKernel has nonnegative transition weights and preserves total probability mass on every source state.",
+  "theorems": [
+    "finite_stochastic_kernel_nonnegative_transition",
+    "finite_stochastic_kernel_mass_conservation",
+    "finite_stochastic_kernel_science_field_solution"
+  ],
+  "unconditional": true
+}
