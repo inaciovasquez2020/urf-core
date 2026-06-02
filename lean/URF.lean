@@ -7,3 +7,4 @@ import URF.Foundation.RestrictedValidKernelLaw3Instance
 
 import URF.Foundation.FlagshipFiniteKernelTheoremSurface
 import URF.Foundation.FiniteStochasticKernelMassConservationTheorem
+import URF.Foundation.FiniteMarkovEvolutionPreservesDistributionsTheorem
