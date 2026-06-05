@@ -1,0 +1,20 @@
+{
+  "artifact": "THEOREM_CLOSURE_CLASSIFIER_EXTERNAL_REFERENCE_2026_06_05",
+  "status": "EXTERNAL_METHOD_REFERENCE_ONLY",
+  "repository": "https://github.com/inaciovasquez2020/theorem-closure-classifier",
+  "release": "https://github.com/inaciovasquez2020/theorem-closure-classifier/releases/tag/v0.1.1",
+  "version": "v0.1.1",
+  "local_commit": "70ac7d5",
+  "verification": {
+    "pytest": "8 passed",
+    "control_suite": "7 / 7 controls pass"
+  },
+  "boundary": {
+    "method_artifact_only": true,
+    "new_theorem_claim": false,
+    "benchmark_theorems_reproved": false,
+    "semantic_soundness_relative_to_trusted_verifier": true,
+    "zenodo_doi_recorded": false
+  },
+  "next_admissible_object": "ZenodoArchiveOrExternalReview"
+}
