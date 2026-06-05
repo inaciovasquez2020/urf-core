@@ -2,9 +2,9 @@
 
 Status: `EXTERNAL_METHOD_REFERENCE_ONLY`
 
-Repository: https://github.com/inaciovasquez2020/theorem-closure-classifier  
-Release: https://github.com/inaciovasquez2020/theorem-closure-classifier/releases/tag/v0.1.1  
-Version: `v0.1.1`  
+Repository: https://github.com/inaciovasquez2020/theorem-closure-classifier
+Release: https://github.com/inaciovasquez2020/theorem-closure-classifier/releases/tag/v0.1.1
+Version: `v0.1.1`
 Local commit recorded: `70ac7d5`
 
 Verification recorded from the released artifact:
@@ -21,3 +21,9 @@ Boundary:
 - Zenodo DOI is not yet recorded.
 
 Next admissible object: `ZenodoArchiveOrExternalReview`.
+
+## Zenodo Archive
+
+Release: `v0.1.3`
+DOI: `10.5281/zenodo.20561778`
+Record: https://zenodo.org/records/20561778

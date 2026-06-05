@@ -11,6 +11,10 @@ assert data["verification"]["control_suite"] == "7 / 7 controls pass"
 assert data["boundary"]["method_artifact_only"] is True
 assert data["boundary"]["new_theorem_claim"] is False
 assert data["boundary"]["benchmark_theorems_reproved"] is False
-assert data["boundary"]["zenodo_doi_recorded"] is False
+assert data["boundary"]["zenodo_doi_recorded"] is True
+assert data["zenodo"]["archived"] is True
+assert data["zenodo"]["release"] == "v0.1.3"
+assert data["zenodo"]["doi"] == "10.5281/zenodo.20561778"
+assert data["zenodo"]["record"] == "https://zenodo.org/records/20561778"
 
 print("THEOREM_CLOSURE_CLASSIFIER_EXTERNAL_REFERENCE_OK")
