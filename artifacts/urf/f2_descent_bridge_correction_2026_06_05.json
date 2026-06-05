@@ -1,0 +1,28 @@
+{
+  "artifact": "f2_descent_bridge_correction_2026_06_05",
+  "status": "CONDITIONAL_BRIDGE_TARGET_ONLY",
+  "closed_if_compiles": [
+    "eliminateCol_clears_selected_column",
+    "eliminateCol_preserves_cleared_column",
+    "applyPivot.cleared_zero",
+    "applyPivot.uncleared_nonzero",
+    "ConcreteF2DescentRankStrictlyDrops",
+    "CanonicalPivotSelectionExists"
+  ],
+  "not_closed": [
+    "F2DescentTerminates",
+    "DescentSystem.step_rank_drop",
+    "DescentSystem.zero_rank_reached_within_rank"
+  ],
+  "minimal_missing_theorem": "AbstractStepRealizesCanonicalF2Pivot",
+  "conditional_dependencies": [
+    "ConcreteRankAgreement",
+    "AbstractStepRealizesCanonicalF2Pivot"
+  ],
+  "does_not_prove": [
+    "Chronos-RR",
+    "H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ]
+}
