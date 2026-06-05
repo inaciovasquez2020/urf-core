@@ -6,4 +6,6 @@ def test_theorem_closure_classifier_external_reference_boundary():
     assert data["status"] == "EXTERNAL_METHOD_REFERENCE_ONLY"
     assert data["boundary"]["new_theorem_claim"] is False
     assert data["boundary"]["benchmark_theorems_reproved"] is False
-    assert data["boundary"]["zenodo_doi_recorded"] is False
+    assert data["boundary"]["zenodo_doi_recorded"] is True
+    assert data["zenodo"]["archived"] is True
+    assert data["zenodo"]["doi"] == "10.5281/zenodo.20561778"
