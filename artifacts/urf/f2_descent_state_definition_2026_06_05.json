@@ -1,0 +1,24 @@
+{
+"artifact": "f2_descent_state_definition_2026_06_05",
+"status": "F2_DESCENT_STATE_DEFINED",
+"closed_object": "F2DescentStateDefinition",
+"definition": "F2DescentState n m",
+"fields": [
+"matrix : Matrix (Fin n) (Fin m) (ZMod 2)",
+"rank : Nat"
+],
+"role": "Concrete codomain carrier for Configuration alpha -> F2DescentState n m",
+"not_closed": [
+"ConcretePhiDefinitionUsingExtractRMatrix",
+"ConcreteRankAgreement",
+"AbstractStepRealizesCanonicalF2Pivot",
+"DescentSystem.step_rank_drop",
+"DescentSystem.zero_rank_reached_within_rank",
+"F2DescentTerminatesFullIteration",
+"Chronos-RR",
+"H4.1/FGL",
+"P vs NP",
+"any Clay problem"
+],
+"next_admissible_object": "ConcretePhiDefinitionUsingExtractRMatrix"
+}
