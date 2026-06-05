@@ -1,0 +1,48 @@
+{
+  "artifact": "concrete_phi_using_extractrmatrix_target_2026_06_05",
+  "status": "TARGET_REGISTERED_NOT_PROVED",
+  "closed_object": "ConcretePhiTargetRegistrationOnly",
+  "target_definition": "phi : Configuration alpha -> F2DescentState n m using SupportEncoding and extractRMatrix",
+  "nearest_existing_objects": [
+    "SupportEncoding",
+    "extractRMatrix",
+    "ClosedKernelData",
+    "ExtractRData",
+    "pivot_family",
+    "canonical_edge_separation",
+    "greedy_pivot_separation",
+    "identity_submatrix_construction",
+    "full_rank_from_identity"
+  ],
+  "required_obligations": [
+    {
+      "name": "ConcretePhiDefinition",
+      "status": "OPEN",
+      "role": "Define phi explicitly from Configuration alpha to F2DescentState n m using extractRMatrix / SupportEncoding"
+    },
+    {
+      "name": "ConcreteRankAgreement",
+      "status": "OPEN",
+      "formula": "forall C, C.rank = descentRank (phi C)"
+    },
+    {
+      "name": "AbstractStepRealizesCanonicalF2Pivot",
+      "status": "OPEN",
+      "formula": "forall C, not terminal C -> exists j p hj hp, phi (D.step C) = applyPivot (phi C) j p hj hp"
+    }
+  ],
+  "conditional_consequences_if_obligations_closed": [
+    "step_rank_drop_from_bridge",
+    "zero_rank_reached_within_rank_from_bridge"
+  ],
+  "not_closed": [
+    "F2DescentTerminatesFullIteration",
+    "DescentSystem.step_rank_drop",
+    "DescentSystem.zero_rank_reached_within_rank",
+    "Chronos-RR",
+    "H4.1/FGL",
+    "P vs NP",
+    "any Clay problem"
+  ],
+  "minimal_missing_object": "ConcretePhiDefinitionUsingExtractRMatrix"
+}
