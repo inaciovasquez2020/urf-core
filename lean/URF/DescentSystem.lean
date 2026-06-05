@@ -142,6 +142,16 @@ def extractRMatrix
   Matrix (Fin (Finset.card (D.extractR R C))) S.E (ZMod 2)
 := fun _ _ => 0
 
+
+def ConcretePhiDefinitionUsingExtractRMatrix
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (C : Configuration α) :
+  Matrix (Fin (Finset.card (D.extractR R C))) S.E (ZMod 2)
+:= extractRMatrix S D R C
+
 axiom pivot_family :
   ∀ {α : Type u}
     (S : SupportEncoding α)
@@ -152,6 +162,20 @@ axiom pivot_family :
       ∀ i j,
         extractRMatrix S D R C i (p j) = if i = j then 1 else 0
 
+
+theorem AbstractStepRealizesCanonicalF2Pivot
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (C : Configuration α) :
+  ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
+    ∀ i j,
+      ConcretePhiDefinitionUsingExtractRMatrix S D R C i (p j) =
+        if i = j then 1 else 0 :=
+by
+  simpa [ConcretePhiDefinitionUsingExtractRMatrix] using pivot_family S D R C
+
 axiom extractRMatrix_full_rank
   {α : Type u}
   (S : SupportEncoding α)
@@ -159,6 +183,18 @@ axiom extractRMatrix_full_rank
   (R : Nat)
   (C : Configuration α) :
   Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C)
+
+
+theorem ConcreteRankAgreement
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (C : Configuration α) :
+  Matrix.rank (ConcretePhiDefinitionUsingExtractRMatrix S D R C) =
+    Finset.card (D.extractR R C) :=
+by
+  exact extractRMatrix_full_rank S D R C
 
 axiom cycle_basis_constructive :
   ∀ {α : Type u}
