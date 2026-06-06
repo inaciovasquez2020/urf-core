@@ -53,6 +53,9 @@ structure DescentSystem (α : Type u) where
   terminal_iff_zero_rank :
     ∀ C, terminal C ↔ C.rank = 0
 
+  terminal_step_terminal :
+    ∀ C, terminal C → terminal (step C)
+
   nstep_zero :
     ∀ C, nstep 0 C = C
 
@@ -141,9 +144,10 @@ theorem nstep_rank_monotone_from_terminal_step_rank_zero
   exact nstep_rank_monotone_from_terminal_step_nonincrease D
     (terminal_step_nonincrease_of_terminal_step_rank_zero D hterminal_step_rank_zero)
 
-axiom terminal_step_terminal
+theorem terminal_step_terminal
   {α : Type u} (D : DescentSystem α) :
-  ∀ C, D.terminal C → D.terminal (D.step C)
+  ∀ C, D.terminal C → D.terminal (D.step C) := by
+  exact D.terminal_step_terminal
 
 theorem terminal_step_rank_zero
   {α : Type u} (D : DescentSystem α) :
