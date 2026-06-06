@@ -225,7 +225,8 @@ by
   exact zero_rank_reached_within_rank_axiom D
 
 
-axiom poincare_end_to_end_descent : True
+theorem poincare_end_to_end_descent : True := by
+  trivial
 
 
 axiom explicit_F2_realization_and_step_compatibility : True
