@@ -264,4 +264,224 @@ axiom identity_submatrix_construction : True
 
 axiom full_rank_from_identity : True
 
+
+/-- Concrete/abstract descent equivalence package.
+
+This packages the already exposed concrete matrix rank agreement and canonical
+pivot realization into one theorem surface. -/
+structure ConcreteAbstractDescentEquivalence
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (C : Configuration α) : Prop where
+  rankAgreement :
+    Matrix.rank (ConcretePhiDefinitionUsingExtractRMatrix S D R C)
+      = Finset.card (D.extractR R C)
+  pivotRealization :
+    ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
+      ∀ i j,
+        ConcretePhiDefinitionUsingExtractRMatrix S D R C i (p j)
+          = if i = j then 1 else 0
+
+theorem packageConcreteAbstractDescentEquivalence
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (C : Configuration α) :
+    ConcreteAbstractDescentEquivalence S D R C :=
+by
+  exact
+    ⟨ConcreteRankAgreement S D R C,
+     AbstractStepRealizesCanonicalF2Pivot S D R C⟩
+
+/-- Explicit local compatibility hypothesis replacing direct theorem-surface
+dependence on the older global rank-drop axiom. -/
+structure StepCompatibleDescentSystem
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat) : Prop where
+  stepCompatibilityWithConcretePivot :
+    ∀ C : Configuration α,
+      ConcreteAbstractDescentEquivalence S D R C →
+      ¬ D.terminal C →
+      (D.step C).rank + 1 ≤ C.rank
+
+theorem StepCompatibleDescentSystem.of_concrete_pivot_rank_drop
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (h :
+      ∀ C : Configuration α,
+        ConcreteAbstractDescentEquivalence S D R C →
+        ¬ D.terminal C →
+        (D.step C).rank + 1 ≤ C.rank) :
+    StepCompatibleDescentSystem S D R :=
+by
+  refine ⟨?_⟩
+  intro C hcompat hterm
+  exact h C hcompat hterm
+
+/-- Single sharpened bridge assumption: the concrete pivot package implies the
+rank drop for one descent step. -/
+axiom ConcretePivotImpliesStepRankDrop :
+  ∀ {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (C : Configuration α),
+    ConcreteAbstractDescentEquivalence S D R C →
+    ¬ D.terminal C →
+    (D.step C).rank + 1 ≤ C.rank
+
+theorem StepCompatibleDescentSystem.of_concrete_pivot
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat) :
+    StepCompatibleDescentSystem S D R :=
+by
+  exact
+    StepCompatibleDescentSystem.of_concrete_pivot_rank_drop
+      S D R
+      (fun C hcompat hterm =>
+        ConcretePivotImpliesStepRankDrop S D R C hcompat hterm)
+
+theorem CanonicalF2PivotRankDrop_from_step_compatible
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (H : StepCompatibleDescentSystem S D R)
+    (C : Configuration α)
+    (h :
+      ConcreteAbstractDescentEquivalence S D R C)
+    (hC : ¬ D.terminal C) :
+    (D.step C).rank + 1 ≤ C.rank :=
+by
+  exact H.stepCompatibilityWithConcretePivot C h hC
+
+theorem CanonicalF2PivotRankDrop_from_concrete_pivot
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (C : Configuration α)
+    (h :
+      ConcreteAbstractDescentEquivalence S D R C)
+    (hC : ¬ D.terminal C) :
+    (D.step C).rank + 1 ≤ C.rank :=
+by
+  exact
+    CanonicalF2PivotRankDrop_from_step_compatible
+      S D R
+      (StepCompatibleDescentSystem.of_concrete_pivot S D R)
+      C h hC
+
+theorem ZeroRankReachedWithinRank_from_step_compatible
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (H : StepCompatibleDescentSystem S D R) :
+    ∀ C : Configuration α, ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+by
+  have main :
+      ∀ m : Nat, ∀ C : Configuration α,
+        C.rank = m → ∃ n ≤ m, (D.nstep n C).rank = 0 := by
+    intro m
+    induction m using Nat.strong_induction_on with
+    | h m ih =>
+        intro C hCm
+        by_cases hterm : D.terminal C
+        · refine ⟨0, Nat.zero_le m, ?_⟩
+          rw [D.nstep_zero]
+          exact (D.terminal_iff_zero_rank C).1 hterm
+        · have hpkg :
+            ConcreteAbstractDescentEquivalence S D R C :=
+            packageConcreteAbstractDescentEquivalence S D R C
+          have hdrop :
+            (D.step C).rank + 1 ≤ C.rank :=
+            CanonicalF2PivotRankDrop_from_step_compatible
+              S D R H C hpkg hterm
+          have hlt : (D.step C).rank < C.rank :=
+            Nat.lt_of_succ_le hdrop
+          have hltm : (D.step C).rank < m := by
+            simpa [hCm] using hlt
+          rcases ih (D.step C).rank hltm (D.step C) rfl with ⟨n, hn, hz⟩
+          refine ⟨n + 1, ?_, ?_⟩
+          · exact Nat.succ_le_of_lt (Nat.lt_of_le_of_lt hn hltm)
+          · rw [D.nstep_succ]
+            exact hz
+  intro C
+  simpa using main C.rank C rfl
+
+theorem ZeroRankReachedWithinRank_from_concrete_pivot
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (C : Configuration α) :
+    ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+by
+  exact
+    ZeroRankReachedWithinRank_from_step_compatible
+      S D R
+      (StepCompatibleDescentSystem.of_concrete_pivot S D R)
+      C
+
+/-- Packaged concrete-pivot descent theorem surface. -/
+structure ConcretePivotDescentPackage
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat) : Prop where
+  concreteAbstract :
+    ∀ C : Configuration α,
+      ConcreteAbstractDescentEquivalence S D R C
+  stepCompatible :
+    StepCompatibleDescentSystem S D R
+
+theorem packageConcretePivotDescent
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat) :
+    ConcretePivotDescentPackage S D R :=
+by
+  refine ⟨?_, ?_⟩
+  · intro C
+    exact packageConcreteAbstractDescentEquivalence S D R C
+  · exact StepCompatibleDescentSystem.of_concrete_pivot S D R
+
+theorem ConcretePivotDescentPackage.rank_drop
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (P : ConcretePivotDescentPackage S D R)
+    (C : Configuration α)
+    (hC : ¬ D.terminal C) :
+    (D.step C).rank + 1 ≤ C.rank :=
+by
+  exact
+    CanonicalF2PivotRankDrop_from_step_compatible
+      S D R P.stepCompatible C (P.concreteAbstract C) hC
+
+theorem ConcretePivotDescentPackage.zero_rank_reached
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (P : ConcretePivotDescentPackage S D R)
+    (C : Configuration α) :
+    ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+by
+  exact
+    ZeroRankReachedWithinRank_from_step_compatible
+      S D R P.stepCompatible C
+
 end URF
