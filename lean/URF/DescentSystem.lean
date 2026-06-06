@@ -31,7 +31,7 @@ structure Witness (α : Type u) where
 -- abstract F₂ vector model (placeholder type)
 abbrev F2 := Bool
 
-def cycleRankF2 {α : Type u} (v : α) : Nat := 1
+def cycleRankF2 {α : Type u} (_v : α) : Nat := 1
 
 structure DescentSystem (α : Type u) where
   extractR : Nat → Configuration α → Finset (Witness α)
@@ -45,7 +45,7 @@ structure DescentSystem (α : Type u) where
     ∀ w, witnessContribution w = cycleRankF2 (witnessVector w)
 
   extractR_independent :
-    ∀ (R : Nat) (C : Configuration α), True
+    ∀ (_R : Nat) (_C : Configuration α), True
 
   positive_contribution_on_extractR :
     ∀ R C w, w ∈ extractR R C → 0 < witnessContribution w
@@ -209,10 +209,10 @@ axiom dependencyRich_nonempty_extractR :
     DependencyRich D R C → (D.extractR R C).Nonempty
 
 axiom cycle_basis_F2 :
-  ∀ {α : Type u} (D : DescentSystem α) (w : Witness α), True
+  ∀ {α : Type u} (_D : DescentSystem α) (_w : Witness α), True
 
 axiom extractR_matrix_full_rank :
-  ∀ {α : Type u} (D : DescentSystem α) (R : Nat) (C : Configuration α), True
+  ∀ {α : Type u} (_D : DescentSystem α) (_R : Nat) (_C : Configuration α), True
 
 theorem zero_rank_reached_within_rank
   {α : Type u} (D : DescentSystem α) :
@@ -299,8 +299,8 @@ by
 
 axiom cycle_basis_constructive :
   ∀ {α : Type u}
-    (S : SupportEncoding α)
-    (w : Witness α), True
+    (_S : SupportEncoding α)
+    (_w : Witness α), True
 
 axiom cycleRankF2_eq_basis_card : True
 
@@ -316,7 +316,9 @@ structure ClosedKernelData (α : Type u) where
   pivotEdge : ∀ R C, Fin (Finset.card (extractRWitnesses R C)) ↪ E
   pivot_spec :
     ∀ R C i j,
-      ((pivotEdge R C j) ∈ (witnessSupportEdges ((extractRWitnesses R C).toList.get ⟨i.1, by simpa using i.2⟩)))
+      ((pivotEdge R C j) ∈ (witnessSupportEdges ((extractRWitnesses R C).toList.get ⟨i.1, by
+            rw [Finset.length_toList]
+            exact i.2⟩)))
         ↔ i = j
   poincare_descent : True
 
@@ -337,9 +339,9 @@ structure ExtractRData (α : Type u) where
   extractR : Nat → Configuration α → Finset (Witness α)
   witnessVector : Witness α → α
   edge_disjoint :
-    ∀ (R : Nat) (C : Configuration α), True
+    ∀ (_R : Nat) (_C : Configuration α), True
   extractR_independent :
-    ∀ (R : Nat) (C : Configuration α), True
+    ∀ (_R : Nat) (_C : Configuration α), True
 
 axiom cycle_F2_layer_closure : True
 
