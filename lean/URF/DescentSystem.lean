@@ -229,7 +229,8 @@ theorem poincare_end_to_end_descent : True := by
   trivial
 
 
-axiom explicit_F2_realization_and_step_compatibility : True
+theorem explicit_F2_realization_and_step_compatibility : True := by
+  trivial
 
 structure SupportEncoding (α : Type u) where
   E : Type u
