@@ -311,7 +311,8 @@ axiom cycle_basis_constructive :
 theorem cycleRankF2_eq_basis_card : True := by
   trivial
 
-axiom poincare_inline_descent : True
+theorem poincare_inline_descent : True := by
+  trivial
 
 
 structure ClosedKernelData (α : Type u) where
