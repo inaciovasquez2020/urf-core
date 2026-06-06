@@ -122,6 +122,25 @@ theorem nstep_rank_monotone_from_terminal_step_nonincrease
       rw [D.nstep_succ (n + 1) C, D.nstep_succ n C]
       exact ih (D.step C)
 
+theorem terminal_step_nonincrease_of_terminal_step_rank_zero
+    {α : Type u}
+    (D : DescentSystem α)
+    (hterminal_step_rank_zero :
+      ∀ C, D.terminal C → (D.step C).rank = 0) :
+    ∀ C, D.terminal C → (D.step C).rank ≤ C.rank := by
+  intro C hterm
+  rw [hterminal_step_rank_zero C hterm]
+  exact Nat.zero_le C.rank
+
+theorem nstep_rank_monotone_from_terminal_step_rank_zero
+    {α : Type u}
+    (D : DescentSystem α)
+    (hterminal_step_rank_zero :
+      ∀ C, D.terminal C → (D.step C).rank = 0) :
+    ∀ n C, (D.nstep (n + 1) C).rank ≤ (D.nstep n C).rank := by
+  exact nstep_rank_monotone_from_terminal_step_nonincrease D
+    (terminal_step_nonincrease_of_terminal_step_rank_zero D hterminal_step_rank_zero)
+
 axiom nstep_rank_monotone
   {α : Type u} (D : DescentSystem α) :
   ∀ n C, (D.nstep (n+1) C).rank ≤ (D.nstep n C).rank
