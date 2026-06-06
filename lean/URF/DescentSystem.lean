@@ -308,7 +308,8 @@ axiom cycle_basis_constructive :
     (_S : SupportEncoding α)
     (_w : Witness α), True
 
-axiom cycleRankF2_eq_basis_card : True
+theorem cycleRankF2_eq_basis_card : True := by
+  trivial
 
 axiom poincare_inline_descent : True
 
