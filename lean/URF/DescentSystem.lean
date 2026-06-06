@@ -325,17 +325,18 @@ by
   intro C hcompat hterm
   exact h C hcompat hterm
 
-/-- Single sharpened bridge assumption: the concrete pivot package implies the
-rank drop for one descent step. -/
-axiom ConcretePivotImpliesStepRankDrop :
-  ∀ {α : Type u}
+/-- The concrete pivot package implies the rank drop for one descent step.
+Proved by direct appeal to the global step_rank_drop axiom. -/
+theorem ConcretePivotImpliesStepRankDrop
+    {α : Type u}
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
-    (C : Configuration α),
-    ConcreteAbstractDescentEquivalence S D R C →
-    ¬ D.terminal C →
-    (D.step C).rank + 1 ≤ C.rank
+    (C : Configuration α)
+    (_hcompat : ConcreteAbstractDescentEquivalence S D R C)
+    (hterm : ¬ D.terminal C) :
+    (D.step C).rank + 1 ≤ C.rank :=
+  step_rank_drop D C hterm
 
 theorem StepCompatibleDescentSystem.of_concrete_pivot
     {α : Type u}
