@@ -141,9 +141,15 @@ theorem nstep_rank_monotone_from_terminal_step_rank_zero
   exact nstep_rank_monotone_from_terminal_step_nonincrease D
     (terminal_step_nonincrease_of_terminal_step_rank_zero D hterminal_step_rank_zero)
 
-axiom nstep_rank_monotone
+axiom terminal_step_rank_zero
   {α : Type u} (D : DescentSystem α) :
-  ∀ n C, (D.nstep (n+1) C).rank ≤ (D.nstep n C).rank
+  ∀ C, D.terminal C → (D.step C).rank = 0
+
+theorem nstep_rank_monotone
+  {α : Type u} (D : DescentSystem α) :
+  ∀ n C, (D.nstep (n+1) C).rank ≤ (D.nstep n C).rank := by
+  exact nstep_rank_monotone_from_terminal_step_rank_zero D
+    (terminal_step_rank_zero D)
 
 theorem zero_rank_reached_within_rank_axiom
     {α : Type u} (D : DescentSystem α) (C : Configuration α) :
