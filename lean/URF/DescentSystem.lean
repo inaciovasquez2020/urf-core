@@ -92,6 +92,36 @@ theorem nstep_rank_monotone_from_iterated_step_formula
   · exact hterminal_step_nonincrease (D.nstep n C) hterm
   · exact Nat.le_of_succ_le (step_rank_drop D (D.nstep n C) hterm)
 
+theorem step_rank_nonincrease_of_terminal_step_nonincrease
+    {α : Type u}
+    (D : DescentSystem α)
+    (hterminal_step_nonincrease :
+      ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+    ∀ C, (D.step C).rank ≤ C.rank := by
+  intro C
+  by_cases hterm : D.terminal C
+  · exact hterminal_step_nonincrease C hterm
+  · exact Nat.le_of_succ_le (step_rank_drop D C hterm)
+
+theorem nstep_rank_monotone_from_terminal_step_nonincrease
+    {α : Type u}
+    (D : DescentSystem α)
+    (hterminal_step_nonincrease :
+      ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+    ∀ n C, (D.nstep (n + 1) C).rank ≤ (D.nstep n C).rank := by
+  intro n
+  induction n with
+  | zero =>
+      intro C
+      rw [D.nstep_succ 0 C]
+      rw [D.nstep_zero (D.step C), D.nstep_zero C]
+      exact step_rank_nonincrease_of_terminal_step_nonincrease D
+        hterminal_step_nonincrease C
+  | succ n ih =>
+      intro C
+      rw [D.nstep_succ (n + 1) C, D.nstep_succ n C]
+      exact ih (D.step C)
+
 axiom nstep_rank_monotone
   {α : Type u} (D : DescentSystem α) :
   ∀ n C, (D.nstep (n+1) C).rank ≤ (D.nstep n C).rank
