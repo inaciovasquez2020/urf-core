@@ -96,9 +96,34 @@ axiom nstep_rank_monotone
   {α : Type u} (D : DescentSystem α) :
   ∀ n C, (D.nstep (n+1) C).rank ≤ (D.nstep n C).rank
 
-axiom zero_rank_reached_within_rank_axiom :
-  ∀ {α : Type u} (D : DescentSystem α) (C : Configuration α),
-    ∃ n ≤ C.rank, (D.nstep n C).rank = 0
+theorem zero_rank_reached_within_rank_axiom
+    {α : Type u} (D : DescentSystem α) (C : Configuration α) :
+    ∃ n ≤ C.rank, (D.nstep n C).rank = 0 := by
+  have hmain :
+      ∀ r, ∀ C : Configuration α, C.rank = r →
+        ∃ n ≤ C.rank, (D.nstep n C).rank = 0 := by
+    intro r
+    induction r using Nat.strongRecOn with
+    | _ r ih =>
+      intro C hCr
+      by_cases hterm : D.terminal C
+      · refine ⟨0, Nat.zero_le _, ?_⟩
+        have hz : C.rank = 0 := (D.terminal_iff_zero_rank C).1 hterm
+        simp [D.nstep_zero C, hz]
+      · have hdrop : (D.step C).rank + 1 ≤ C.rank :=
+          step_rank_drop D C hterm
+        have hlt : (D.step C).rank < r := by
+          have hltC : (D.step C).rank < C.rank :=
+            Nat.lt_of_succ_le hdrop
+          omega
+        rcases ih (D.step C).rank hlt (D.step C) rfl with
+          ⟨n, hnle, hnzero⟩
+        refine ⟨n + 1, ?_, ?_⟩
+        · calc n + 1 ≤ (D.step C).rank + 1 := Nat.succ_le_succ hnle
+               _ ≤ C.rank := hdrop
+        · rw [D.nstep_succ n C]
+          exact hnzero
+  exact hmain C.rank C rfl
 
 theorem termination
   {α : Type u} (D : DescentSystem α) :
