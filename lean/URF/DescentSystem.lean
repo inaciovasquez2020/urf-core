@@ -78,6 +78,20 @@ theorem rank_strict_decrease
 by
   exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) (step_rank_drop D C h)
 
+theorem nstep_rank_monotone_from_iterated_step_formula
+    {α : Type u}
+    (D : DescentSystem α)
+    (hstep_iter :
+      ∀ n C, D.nstep (n + 1) C = D.step (D.nstep n C))
+    (hterminal_step_nonincrease :
+      ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+    ∀ n C, (D.nstep (n + 1) C).rank ≤ (D.nstep n C).rank := by
+  intro n C
+  rw [hstep_iter n C]
+  by_cases hterm : D.terminal (D.nstep n C)
+  · exact hterminal_step_nonincrease (D.nstep n C) hterm
+  · exact Nat.le_of_succ_le (step_rank_drop D (D.nstep n C) hterm)
+
 axiom nstep_rank_monotone
   {α : Type u} (D : DescentSystem α) :
   ∀ n C, (D.nstep (n+1) C).rank ≤ (D.nstep n C).rank
