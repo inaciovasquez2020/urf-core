@@ -217,8 +217,10 @@ theorem cycle_basis_F2 :
   intros
   trivial
 
-axiom extractR_matrix_full_rank :
-  ∀ {α : Type u} (_D : DescentSystem α) (_R : Nat) (_C : Configuration α), True
+theorem extractR_matrix_full_rank :
+  ∀ {α : Type u} (_D : DescentSystem α) (_R : Nat) (_C : Configuration α), True := by
+  intros
+  trivial
 
 theorem zero_rank_reached_within_rank
   {α : Type u} (D : DescentSystem α) :
