@@ -253,4 +253,31 @@ theorem h1_locality_from_concrete_repository_native_fok_witness_component_carrie
   exact h1_locality_from_concrete_repository_native_fok_witness_instance_value
     (concrete_repository_native_fok_witness_instance_value_from_component_carrier C)
 
+
+/--
+Open problem frontier for the H1 repository-native FO^k route.
+
+A proof of this proposition requires an actual inhabitant of
+`ConcreteRepositoryNativeFOkWitnessComponents`, including the universal
+FO^k admissibility proof
+
+`∀ R : I.RefinementProcedure, I.FOkAdmissible R`.
+
+The repository search found semantic/witness candidates but no universal
+FO^k admissibility proof candidate, so this remains the exact open frontier.
+-/
+def ConcreteRepositoryNativeFOkWitnessComponentsValueOpenProblem : Prop :=
+  Nonempty ConcreteRepositoryNativeFOkWitnessComponents
+
+theorem concrete_repository_native_fok_witness_components_value_open_problem_exact :
+    ConcreteRepositoryNativeFOkWitnessComponentsValueOpenProblem ↔
+      Nonempty ConcreteRepositoryNativeFOkWitnessComponents := by
+  rfl
+
+theorem h1_locality_from_concrete_repository_native_fok_witness_components_value_open_problem
+    (h : ConcreteRepositoryNativeFOkWitnessComponentsValueOpenProblem) :
+    H1Locality := by
+  rcases h with ⟨C⟩
+  exact h1_locality_from_concrete_repository_native_fok_witness_component_carrier C
+
 end URF
