@@ -74,12 +74,35 @@ axiom step_rank_drop :
   ∀ {α : Type u} (D : DescentSystem α) (C : Configuration α),
     ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank
 
+/-- Explicit per-system certificate replacing direct use of the global
+`step_rank_drop` axiom at conditional theorem surfaces. -/
+structure StepRankDropCertificate
+  {α : Type u}
+  (D : DescentSystem α) : Prop where
+  step_rank_drop_certified :
+    ∀ C : Configuration α,
+      ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank
+
 theorem rank_strict_decrease
   {α : Type u} (D : DescentSystem α) (C : Configuration α)
   (h : ¬ D.terminal C) :
   (D.step C).rank < C.rank :=
 by
   exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) (step_rank_drop D C h)
+
+/-- Certificate-local rank strict decrease.  This does not remove the
+global `step_rank_drop` axiom; it creates the weakest conditional replacement
+surface for downstream migration. -/
+theorem rank_strict_decrease_from_certificate
+  {α : Type u} (D : DescentSystem α)
+  (cert : StepRankDropCertificate D)
+  (C : Configuration α)
+  (h : ¬ D.terminal C) :
+  (D.step C).rank < C.rank :=
+by
+  exact Nat.lt_of_lt_of_le
+    (Nat.lt_succ_self _)
+    (cert.step_rank_drop_certified C h)
 
 theorem nstep_rank_monotone_from_iterated_step_formula
     {α : Type u}
