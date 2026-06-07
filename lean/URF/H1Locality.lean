@@ -170,4 +170,54 @@ theorem h1_locality_from_concrete_repository_native_fok_witness_instance_value
   rcases hV with ⟨X⟩
   exact h1_locality_from_concrete_repository_native_fok_witness_instance X
 
+/--
+Build the concrete repository-native FO^k witness value from explicitly supplied
+components.
+
+Correction: `ConcreteRepositoryNativeFOkWitnessInstanceValue` is a `Nonempty`
+gate, so the constructed instance is wrapped in `⟨...⟩`.
+
+This does not choose the components. It only records the exact component list
+needed to prove the value gate.
+-/
+theorem concrete_repository_native_fok_witness_instance_value_from_components
+    (I : FOkAdmissibleRefinementInterface)
+    (procedure : I.RefinementProcedure)
+    (all_admissible : ∀ R : I.RefinementProcedure, I.FOkAdmissible R)
+    (RepositoryNativeSemanticBinding : Type)
+    (semantic_binding_witness : RepositoryNativeSemanticBinding)
+    (nonvacuous_semantic_content : Prop)
+    (content_proof : nonvacuous_semantic_content) :
+    ConcreteRepositoryNativeFOkWitnessInstanceValue := by
+  exact ⟨{
+    construction := {
+      concrete_witness := {
+        I := I
+        procedure := procedure
+        all_admissible := all_admissible
+      }
+      semantic_witness := {
+        RepositoryNativeSemanticBinding := RepositoryNativeSemanticBinding
+        semantic_binding_witness := semantic_binding_witness
+        nonvacuous_semantic_content := nonvacuous_semantic_content
+        content_proof := content_proof
+      }
+    }
+  }⟩
+
+theorem h1_locality_from_concrete_repository_native_fok_witness_components
+    (I : FOkAdmissibleRefinementInterface)
+    (procedure : I.RefinementProcedure)
+    (all_admissible : ∀ R : I.RefinementProcedure, I.FOkAdmissible R)
+    (RepositoryNativeSemanticBinding : Type)
+    (semantic_binding_witness : RepositoryNativeSemanticBinding)
+    (nonvacuous_semantic_content : Prop)
+    (content_proof : nonvacuous_semantic_content) :
+    H1Locality := by
+  exact h1_locality_from_concrete_repository_native_fok_witness_instance_value
+    (concrete_repository_native_fok_witness_instance_value_from_components
+      I procedure all_admissible
+      RepositoryNativeSemanticBinding semantic_binding_witness
+      nonvacuous_semantic_content content_proof)
+
 end URF
