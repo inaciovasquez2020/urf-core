@@ -370,7 +370,8 @@ theorem greedy_edge_separation_lemma : True := by
 
 
 /-- Boundary placeholder for malformed `greedy_pivot_selection` proof surface. -/
-axiom greedy_pivot_selection : True
+theorem greedy_pivot_selection : True := by
+  trivial
 
 
 /-- Boundary placeholder for malformed `identity_submatrix_construction` proof surface. -/
