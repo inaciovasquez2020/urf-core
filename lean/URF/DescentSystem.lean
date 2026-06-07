@@ -656,6 +656,25 @@ by
       (fun C hcompat hterm =>
         ConcretePivotImpliesStepRankDrop S D R C hcompat hterm)
 
+/-- Certificate-local concrete-pivot compatibility witness.
+
+This avoids the direct route through the global `step_rank_drop` axiom by
+requiring an explicit `StepRankDropCertificate D`. -/
+theorem StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (cert : StepRankDropCertificate D) :
+    StepCompatibleDescentSystem S D R :=
+by
+  exact
+    StepCompatibleDescentSystem.of_concrete_pivot_rank_drop
+      S D R
+      (fun C hcompat hterm =>
+        ConcretePivotImpliesStepRankDrop_from_certificate
+          S D R cert C hcompat hterm)
+
 theorem CanonicalF2PivotRankDrop_from_step_compatible
     {α : Type u}
     (S : SupportEncoding α)
