@@ -133,4 +133,24 @@ theorem h1_locality_from_repository_native_construction
   exact h1_locality_from_nonvacuous_fok_interface
     (nonvacuous_fok_interface_from_repository_native_construction C)
 
+/--
+First-class target object for a concrete repository-native FO^k witness instance.
+
+This deliberately does not fabricate an instance. It only names the next
+repository-native object whose supplied construction would imply H1.
+-/
+structure ConcreteRepositoryNativeFOkWitnessInstance where
+  construction : RepositoryNativeConstructionOfConcreteFOkAdmissibleRefinementInterfaceWitness
+
+def repository_native_construction_from_concrete_repository_native_fok_witness_instance
+    (X : ConcreteRepositoryNativeFOkWitnessInstance) :
+    RepositoryNativeConstructionOfConcreteFOkAdmissibleRefinementInterfaceWitness :=
+  X.construction
+
+theorem h1_locality_from_concrete_repository_native_fok_witness_instance
+    (X : ConcreteRepositoryNativeFOkWitnessInstance) :
+    H1Locality := by
+  exact h1_locality_from_repository_native_construction
+    (repository_native_construction_from_concrete_repository_native_fok_witness_instance X)
+
 end URF
