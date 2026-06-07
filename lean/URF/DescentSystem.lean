@@ -300,6 +300,44 @@ noncomputable def candidateExtractRMatrix
       e
 
 
+theorem candidateExtractRMatrix_entry_one
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (C : Configuration α)
+  (i : Fin (Finset.card (D.extractR R C)))
+  (e : S.E) :
+  candidateExtractRMatrix S D R C i e = 1 := by
+  unfold candidateExtractRMatrix
+  exact (S.support_spec _ e).2 trivial
+
+/-- The current `SupportEncoding.support_spec` forces every candidate matrix
+entry to be `1`, so a pivot identity law is impossible whenever two row indices
+are distinct. -/
+theorem candidateExtractRMatrix_pivot_identity_obstruction
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (C : Configuration α)
+  (i j : Fin (Finset.card (D.extractR R C)))
+  (hij : i ≠ j)
+  (p : Fin (Finset.card (D.extractR R C)) ↪ S.E)
+  (hp :
+    ∀ a b,
+      candidateExtractRMatrix S D R C a (p b) =
+        if a = b then 1 else 0) :
+  False := by
+  have hone : candidateExtractRMatrix S D R C i (p j) = 1 :=
+    candidateExtractRMatrix_entry_one S D R C i (p j)
+  have hzero : candidateExtractRMatrix S D R C i (p j) = 0 := by
+    simpa [hij] using hp i j
+  have h01 : (1 : ZMod 2) = 0 := by
+    exact hone.symm.trans hzero
+  exact one_ne_zero h01
+
+
 def ConcretePhiDefinitionUsingExtractRMatrix
   {α : Type u}
   (S : SupportEncoding α)
