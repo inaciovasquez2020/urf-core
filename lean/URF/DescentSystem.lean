@@ -341,7 +341,8 @@ axiom canonical_edge_separation :
 
 
 /-- Boundary placeholder for malformed constructive cycle F₂ closure surface. -/
-axiom constructive_cycle_F2_closure : True
+theorem constructive_cycle_F2_closure : True := by
+  trivial
 
 structure ExtractRData (α : Type u) where
   extractR : Nat → Configuration α → Finset (Witness α)
