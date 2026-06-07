@@ -627,6 +627,22 @@ theorem ConcretePivotImpliesStepRankDrop
     (D.step C).rank + 1 ≤ C.rank :=
   step_rank_drop D C hterm
 
+/-- Certificate-local concrete pivot rank drop.
+
+This migrates one direct dependent of the global `step_rank_drop` axiom
+to the explicit `StepRankDropCertificate` surface. -/
+theorem ConcretePivotImpliesStepRankDrop_from_certificate
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (cert : StepRankDropCertificate D)
+    (C : Configuration α)
+    (_hcompat : ConcreteAbstractDescentEquivalence S D R C)
+    (hterm : ¬ D.terminal C) :
+    (D.step C).rank + 1 ≤ C.rank :=
+  cert.step_rank_drop_certified C hterm
+
 theorem StepCompatibleDescentSystem.of_concrete_pivot
     {α : Type u}
     (S : SupportEncoding α)
