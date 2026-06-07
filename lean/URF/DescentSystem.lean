@@ -302,6 +302,23 @@ axiom pivot_family :
         extractRMatrix S D R C i (p j) = if i = j then 1 else 0
 
 
+
+/-- With the current zero-matrix definition of `extractRMatrix`, `pivot_family`
+is inconsistent whenever `extractR` is nonempty. -/
+theorem pivot_family_obstruction_from_nonempty_extractR
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (C : Configuration α)
+  (hn : (D.extractR R C).Nonempty) :
+  False := by
+  rcases pivot_family S D R C with ⟨p, hp⟩
+  have hpos : 0 < Finset.card (D.extractR R C) := Finset.card_pos.mpr hn
+  let i : Fin (Finset.card (D.extractR R C)) := ⟨0, hpos⟩
+  have hdiag := hp i i
+  simp [extractRMatrix, i] at hdiag
+
 theorem AbstractStepRealizesCanonicalF2Pivot
   {α : Type u}
   (S : SupportEncoding α)
