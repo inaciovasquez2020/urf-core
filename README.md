@@ -130,3 +130,23 @@ This repository is governed by [`docs/status/LEAN_PROOF_PORTFOLIO_CLASSIFICATION
 
 Boundary: selected-domain Chronos/H4.1-FGL status only; no unrestricted H4.1/FGL closure; no UniversalFiberEntropyGap, Chronos-RR, P vs NP, or Clay-problem closure.
 <!-- PUBLIC_FRONTIER_STATUS_END -->
+
+## Container: `urf-sg-verifier`
+
+The `urf-sg-verifier` container provides a reproducible command-line wrapper around `verification/verify.py`.
+
+```bash
+docker pull ghcr.io/inaciovasquez2020/urf-sg-verifier:latest
+docker run --rm -v "$PWD:/work" ghcr.io/inaciovasquez2020/urf-sg-verifier:latest /work/path/to/certificate.json
+Immutable pulls should use a sha-* tag or digest instead of latest.
+Boundary: this container verifies URF spectral-gap certificate artifacts accepted by the verifier. It does not assert theorem-level closure unless the referenced theorem is formalized and all assumptions are discharged.
+
+## Container: `urf-sg-verifier`
+
+The `urf-sg-verifier` container provides a reproducible command-line wrapper around `verification/verify.py`.
+
+```bash
+docker pull ghcr.io/inaciovasquez2020/urf-sg-verifier:latest
+docker run --rm -v "$PWD:/work" ghcr.io/inaciovasquez2020/urf-sg-verifier:latest /work/path/to/certificate.json
+Immutable pulls should use a sha-* tag or digest instead of latest.
+Boundary: this container verifies URF spectral-gap certificate artifacts accepted by the verifier. It does not assert theorem-level closure unless the referenced theorem is formalized and all assumptions are discharged.

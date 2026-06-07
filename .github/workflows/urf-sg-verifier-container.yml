@@ -1,0 +1,91 @@
+name: urf-sg-verifier container
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths:
+      - Dockerfile
+      - requirements-sg-verifier.txt
+      - verification/verify.py
+      - standards/URF-SG.json
+      - .github/workflows/urf-sg-verifier-container.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+  attestations: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: inaciovasquez2020/urf-sg-verifier
+
+jobs:
+  build-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Set build date
+        run: echo "BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract image metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,prefix=sha-
+            type=ref,event=tag
+          labels: |
+            org.opencontainers.image.title=urf-sg-verifier
+            org.opencontainers.image.description=Deterministic verifier for URF spectral-gap certificate JSON artifacts.
+            org.opencontainers.image.source=https://github.com/inaciovasquez2020/urf-core
+            org.opencontainers.image.licenses=MIT
+
+      - name: Build smoke-test image
+        run: |
+          docker build \
+            --build-arg VCS_REF="${GITHUB_SHA}" \
+            --build-arg BUILD_DATE="${BUILD_DATE}" \
+            --build-arg VERSION="${GITHUB_REF_NAME}" \
+            -t urf-sg-verifier:smoke .
+
+          (docker run --rm urf-sg-verifier:smoke 2>&1 || true) | grep -F "Usage: python verification/verify.py"
+
+      - name: Build and publish image
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            VCS_REF=${{ github.sha }}
+            BUILD_DATE=${{ env.BUILD_DATE }}
+            VERSION=${{ github.ref_name }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          sbom: true
+          provenance: mode=max
+
+      - name: Attest image provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
