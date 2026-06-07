@@ -153,4 +153,21 @@ theorem h1_locality_from_concrete_repository_native_fok_witness_instance
   exact h1_locality_from_repository_native_construction
     (repository_native_construction_from_concrete_repository_native_fok_witness_instance X)
 
+/--
+Value gate for the concrete repository-native FO^k witness instance.
+
+This is intentionally only a `Nonempty` gate. It does not fabricate a
+`Unit`/`True` instance and does not supply repository-native semantic content.
+A proof of this proposition must provide an actual inhabitant of
+`ConcreteRepositoryNativeFOkWitnessInstance`.
+-/
+def ConcreteRepositoryNativeFOkWitnessInstanceValue : Prop :=
+  Nonempty ConcreteRepositoryNativeFOkWitnessInstance
+
+theorem h1_locality_from_concrete_repository_native_fok_witness_instance_value
+    (hV : ConcreteRepositoryNativeFOkWitnessInstanceValue) :
+    H1Locality := by
+  rcases hV with ⟨X⟩
+  exact h1_locality_from_concrete_repository_native_fok_witness_instance X
+
 end URF
