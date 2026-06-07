@@ -212,8 +212,10 @@ axiom dependencyRich_nonempty_extractR :
   ∀ {α : Type u} (D : DescentSystem α) (R : Nat) (C : Configuration α),
     DependencyRich D R C → (D.extractR R C).Nonempty
 
-axiom cycle_basis_F2 :
-  ∀ {α : Type u} (_D : DescentSystem α) (_w : Witness α), True
+theorem cycle_basis_F2 :
+  ∀ {α : Type u} (_D : DescentSystem α) (_w : Witness α), True := by
+  intros
+  trivial
 
 axiom extractR_matrix_full_rank :
   ∀ {α : Type u} (_D : DescentSystem α) (_R : Nat) (_C : Configuration α), True
