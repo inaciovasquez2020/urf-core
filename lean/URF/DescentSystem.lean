@@ -212,6 +212,21 @@ axiom dependencyRich_nonempty_extractR :
   ∀ {α : Type u} (D : DescentSystem α) (R : Nat) (C : Configuration α),
     DependencyRich D R C → (D.extractR R C).Nonempty
 
+
+/-- Since `DependencyRich` is currently definitionally `True`, it cannot imply
+nonempty `extractR` without an additional extractR nonemptiness invariant. -/
+theorem dependencyRich_nonempty_extractR_obstruction
+  {α : Type u} (D : DescentSystem α) (R : Nat) (C : Configuration α)
+  (hempty : D.extractR R C = ∅) :
+  ¬ (DependencyRich D R C → (D.extractR R C).Nonempty) := by
+  intro h
+  have hdep : DependencyRich D R C := by
+    trivial
+  have hn : (D.extractR R C).Nonempty := h hdep
+  rw [hempty] at hn
+  rcases hn with ⟨w, hw⟩
+  simp at hw
+
 theorem cycle_basis_F2 :
   ∀ {α : Type u} (_D : DescentSystem α) (_w : Witness α), True := by
   intros
