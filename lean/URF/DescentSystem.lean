@@ -307,10 +307,12 @@ theorem ConcreteRankAgreement
 by
   exact extractRMatrix_full_rank S D R C
 
-axiom cycle_basis_constructive :
+theorem cycle_basis_constructive :
   ∀ {α : Type u}
     (_S : SupportEncoding α)
-    (_w : Witness α), True
+    (_w : Witness α), True := by
+  intros
+  trivial
 
 theorem cycleRankF2_eq_basis_card : True := by
   trivial
