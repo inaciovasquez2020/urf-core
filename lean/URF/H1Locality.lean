@@ -32,6 +32,17 @@ def NonVacuousFOkAdmissibleRefinementInterface : Prop :=
     ∀ R : I.RefinementProcedure, I.FOkAdmissible R
 
 /--
+Concrete witness data for the next non-vacuous H1 step.
+
+The `procedure` field prevents the next target from being satisfied by an
+empty refinement-procedure type.
+-/
+structure ConcreteFOkAdmissibleRefinementInterfaceWitness where
+  I : FOkAdmissibleRefinementInterface
+  procedure : I.RefinementProcedure
+  all_admissible : ∀ R : I.RefinementProcedure, I.FOkAdmissible R
+
+/--
 Boundary marker: H1 is now named as a Lean target, but remains only a target
 until the FO^k-admissibility interface is supplied.
 -/
@@ -49,6 +60,11 @@ theorem h1_locality_from_fok_interface
     (hI : ∀ R : I.RefinementProcedure, I.FOkAdmissible R) :
     H1Locality := by
   exact ⟨I, hI⟩
+
+theorem nonvacuous_fok_interface_from_concrete_witness
+    (W : ConcreteFOkAdmissibleRefinementInterfaceWitness) :
+    NonVacuousFOkAdmissibleRefinementInterface := by
+  exact ⟨W.I, W.all_admissible⟩
 
 theorem h1_locality_from_nonvacuous_fok_interface
     (h : NonVacuousFOkAdmissibleRefinementInterface) :
