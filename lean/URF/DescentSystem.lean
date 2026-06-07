@@ -686,6 +686,22 @@ by
   intro C
   simpa using main C.rank C rfl
 
+
+/-- Conditional zero-rank reachability surface.
+
+This is the axiom-separated theorem surface: it depends only on an explicit
+`StepCompatibleDescentSystem` witness and does not use
+`StepCompatibleDescentSystem.of_concrete_pivot`.
+-/
+theorem ZeroRankReachedWithinRank_conditional_from_step_compatible
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (H : StepCompatibleDescentSystem S D R) :
+  ∀ C : Configuration α, ∃ n ≤ C.rank, (D.nstep n C).rank = 0 := by
+  exact ZeroRankReachedWithinRank_from_step_compatible S D R H
+
 theorem ZeroRankReachedWithinRank_from_concrete_pivot
     {α : Type u}
     (S : SupportEncoding α)
