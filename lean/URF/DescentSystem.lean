@@ -375,7 +375,8 @@ theorem greedy_pivot_selection : True := by
 
 
 /-- Boundary placeholder for malformed `identity_submatrix_construction` proof surface. -/
-axiom identity_submatrix_construction : True
+theorem identity_submatrix_construction : True := by
+  trivial
 
 axiom full_rank_from_identity : True
 
