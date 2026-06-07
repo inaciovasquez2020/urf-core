@@ -227,6 +227,19 @@ theorem dependencyRich_nonempty_extractR_obstruction
   rcases hn with ⟨w, hw⟩
   simp at hw
 
+
+/-- Explicit invariant needed to turn `DependencyRich` into extractR nonemptiness
+under the current definition `DependencyRich := True`. -/
+def ExtractRNonemptyInvariant {α : Type u} (D : DescentSystem α) : Prop :=
+  ∀ R C, (D.extractR R C).Nonempty
+
+theorem dependencyRich_nonempty_extractR_from_extractR_nonempty_invariant
+  {α : Type u} (D : DescentSystem α)
+  (h : ExtractRNonemptyInvariant D) :
+  ∀ R C, DependencyRich D R C → (D.extractR R C).Nonempty := by
+  intro R C _hdep
+  exact h R C
+
 theorem cycle_basis_F2 :
   ∀ {α : Type u} (_D : DescentSystem α) (_w : Witness α), True := by
   intros
