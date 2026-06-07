@@ -364,7 +364,8 @@ axiom greedy_pivot_separation :
 
 
 /-- Boundary placeholder for malformed `greedy_edge_separation_lemma` proof surface. -/
-axiom greedy_edge_separation_lemma : True
+theorem greedy_edge_separation_lemma : True := by
+  trivial
 
 
 
