@@ -99,4 +99,16 @@ theorem h1_locality_missing_formal_interface :
     H1LocalityMissingFormalInterface := by
   trivial
 
+/-- Conditional non-vacuous H1 bridge.
+
+The repository-native semantic binding witness records the non-vacuity object.
+The proof-bearing admissibility assumption remains the fixed-k FO admissibility
+interface; this theorem does not construct that interface.
+-/
+theorem h1_locality_from_nonvacuous_fok_interface_and_repository_native_witness
+    (hI : NonVacuousFOkAdmissibleRefinementInterface)
+    (_W : NonVacuousRepositoryNativeSemanticBindingWitness) :
+    H1Locality := by
+  exact h1_locality_from_nonvacuous_fok_interface hI
+
 end URF
