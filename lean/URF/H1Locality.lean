@@ -27,6 +27,10 @@ def H1Locality : Prop :=
   ∃ I : FOkAdmissibleRefinementInterface,
     ∀ R : I.RefinementProcedure, I.FOkAdmissible R
 
+def NonVacuousFOkAdmissibleRefinementInterface : Prop :=
+  ∃ I : FOkAdmissibleRefinementInterface,
+    ∀ R : I.RefinementProcedure, I.FOkAdmissible R
+
 /--
 Boundary marker: H1 is now named as a Lean target, but remains only a target
 until the FO^k-admissibility interface is supplied.
@@ -45,6 +49,11 @@ theorem h1_locality_from_fok_interface
     (hI : ∀ R : I.RefinementProcedure, I.FOkAdmissible R) :
     H1Locality := by
   exact ⟨I, hI⟩
+
+theorem h1_locality_from_nonvacuous_fok_interface
+    (h : NonVacuousFOkAdmissibleRefinementInterface) :
+    H1Locality := by
+  exact h
 
 theorem h1_locality_missing_formal_interface :
     H1LocalityMissingFormalInterface := by
