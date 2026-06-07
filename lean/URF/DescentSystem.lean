@@ -760,6 +760,27 @@ theorem ZeroRankReachedWithinRank_conditional_from_step_compatible
   ∀ C : Configuration α, ∃ n ≤ C.rank, (D.nstep n C).rank = 0 := by
   exact ZeroRankReachedWithinRank_from_step_compatible S D R H
 
+/-- Certificate-local zero-rank reachability theorem.
+
+This routes zero-rank reachability through an explicit
+`StepRankDropCertificate D` instead of the global `step_rank_drop` axiom.
+-/
+theorem ZeroRankReachedWithinRank_from_step_rank_drop_certificate
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (cert : StepRankDropCertificate D)
+    (C : Configuration α) :
+    ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+by
+  exact
+    ZeroRankReachedWithinRank_from_step_compatible
+      S D R
+      (StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
+        S D R cert)
+      C
+
 theorem ZeroRankReachedWithinRank_from_concrete_pivot
     {α : Type u}
     (S : SupportEncoding α)
