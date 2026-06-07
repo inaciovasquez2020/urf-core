@@ -795,6 +795,36 @@ by
       (StepCompatibleDescentSystem.of_concrete_pivot S D R)
       C
 
+/-- Certificate-local packaged concrete-pivot descent theorem surface. -/
+structure ConcretePivotDescentPackageFromCertificate
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (cert : StepRankDropCertificate D) : Prop where
+  reachesZeroRank :
+    ∀ C : Configuration α,
+      ∃ n ≤ C.rank, (D.nstep n C).rank = 0
+  stepCompatible :
+    StepCompatibleDescentSystem S D R
+
+/-- Build the certificate-local packaged descent theorem surface. -/
+theorem ConcretePivotDescentPackage_from_step_rank_drop_certificate
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (cert : StepRankDropCertificate D) :
+    ConcretePivotDescentPackageFromCertificate S D R cert :=
+by
+  refine ⟨?_, ?_⟩
+  · intro C
+    exact ZeroRankReachedWithinRank_from_step_rank_drop_certificate
+      S D R cert C
+  · exact StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
+      S D R cert
+
+
 /-- Packaged concrete-pivot descent theorem surface. -/
 structure ConcretePivotDescentPackage
     {α : Type u}
