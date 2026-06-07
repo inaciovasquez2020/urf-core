@@ -54,6 +54,19 @@ structure RepositoryNativeNondegenerateFOkWitnessCriteria where
   binding_nonempty : Nonempty RepositoryNativeSemanticBinding
 
 /--
+Stricter missing object required before the repository-native semantic binding
+criterion can be used non-vacuously.
+
+A bare `Nonempty RepositoryNativeSemanticBinding` is insufficient, since it can
+be discharged by `Unit`.
+-/
+structure NonVacuousRepositoryNativeSemanticBindingWitness where
+  RepositoryNativeSemanticBinding : Type
+  semantic_binding_witness : RepositoryNativeSemanticBinding
+  nonvacuous_semantic_content : Prop
+  content_proof : nonvacuous_semantic_content
+
+/--
 Boundary marker: H1 is now named as a Lean target, but remains only a target
 until the FO^k-admissibility interface is supplied.
 -/
