@@ -111,4 +111,26 @@ theorem h1_locality_from_nonvacuous_fok_interface_and_repository_native_witness
     H1Locality := by
   exact h1_locality_from_nonvacuous_fok_interface hI
 
+/--
+Repository-native construction certificate for the concrete FO^k admissibility
+witness.
+
+This corrects the inadmissible generic `RepositoryNativeData` template by using
+only objects already present in this file.
+-/
+structure RepositoryNativeConstructionOfConcreteFOkAdmissibleRefinementInterfaceWitness where
+  concrete_witness : ConcreteFOkAdmissibleRefinementInterfaceWitness
+  semantic_witness : NonVacuousRepositoryNativeSemanticBindingWitness
+
+theorem nonvacuous_fok_interface_from_repository_native_construction
+    (C : RepositoryNativeConstructionOfConcreteFOkAdmissibleRefinementInterfaceWitness) :
+    NonVacuousFOkAdmissibleRefinementInterface := by
+  exact nonvacuous_fok_interface_from_concrete_witness C.concrete_witness
+
+theorem h1_locality_from_repository_native_construction
+    (C : RepositoryNativeConstructionOfConcreteFOkAdmissibleRefinementInterfaceWitness) :
+    H1Locality := by
+  exact h1_locality_from_nonvacuous_fok_interface
+    (nonvacuous_fok_interface_from_repository_native_construction C)
+
 end URF
