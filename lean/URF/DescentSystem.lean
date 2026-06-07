@@ -282,6 +282,24 @@ def extractRMatrix
 := fun _ _ => 0
 
 
+/-- Candidate nonzero extractR matrix surface using the declared witness encoding.
+This is not yet substituted for `extractRMatrix`; it records the replacement
+surface blocked by the missing pivot-column identity property. -/
+noncomputable def candidateExtractRMatrix
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (C : Configuration α) :
+  Matrix (Fin (Finset.card (D.extractR R C))) S.E (ZMod 2) :=
+  fun i e =>
+    S.encode
+      ((D.extractR R C).toList.get ⟨i.1, by
+        rw [Finset.length_toList]
+        exact i.2⟩)
+      e
+
+
 def ConcretePhiDefinitionUsingExtractRMatrix
   {α : Type u}
   (S : SupportEncoding α)
