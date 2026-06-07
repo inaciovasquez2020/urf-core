@@ -220,4 +220,37 @@ theorem h1_locality_from_concrete_repository_native_fok_witness_components
       RepositoryNativeSemanticBinding semantic_binding_witness
       nonvacuous_semantic_content content_proof)
 
+/--
+First-class carrier for the concrete repository-native FO^k witness components.
+
+Correction: this is the component package. It is not itself the resulting
+`ConcreteRepositoryNativeFOkWitnessInstanceValue`.
+-/
+structure ConcreteRepositoryNativeFOkWitnessComponents where
+  I : FOkAdmissibleRefinementInterface
+  procedure : I.RefinementProcedure
+  all_admissible : ∀ R : I.RefinementProcedure, I.FOkAdmissible R
+  RepositoryNativeSemanticBinding : Type
+  semantic_binding_witness : RepositoryNativeSemanticBinding
+  nonvacuous_semantic_content : Prop
+  content_proof : nonvacuous_semantic_content
+
+theorem concrete_repository_native_fok_witness_instance_value_from_component_carrier
+    (C : ConcreteRepositoryNativeFOkWitnessComponents) :
+    ConcreteRepositoryNativeFOkWitnessInstanceValue := by
+  exact concrete_repository_native_fok_witness_instance_value_from_components
+    C.I
+    C.procedure
+    C.all_admissible
+    C.RepositoryNativeSemanticBinding
+    C.semantic_binding_witness
+    C.nonvacuous_semantic_content
+    C.content_proof
+
+theorem h1_locality_from_concrete_repository_native_fok_witness_component_carrier
+    (C : ConcreteRepositoryNativeFOkWitnessComponents) :
+    H1Locality := by
+  exact h1_locality_from_concrete_repository_native_fok_witness_instance_value
+    (concrete_repository_native_fok_witness_instance_value_from_component_carrier C)
+
 end URF
