@@ -352,7 +352,8 @@ structure ExtractRData (α : Type u) where
   extractR_independent :
     ∀ (_R : Nat) (_C : Configuration α), True
 
-axiom cycle_F2_layer_closure : True
+theorem cycle_F2_layer_closure : True := by
+  trivial
 
 axiom greedy_pivot_separation :
   ∀ {α : Type u} (K : ClosedKernelData α) (R : Nat) (C : Configuration α),
