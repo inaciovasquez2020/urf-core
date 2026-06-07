@@ -438,13 +438,55 @@ structure ClosedKernelData (α : Type u) where
   poincare_descent : True
 
 
-axiom canonical_edge_separation :
+noncomputable def finCardEquivExtractRWitnessSubtype
+  {α : Type u} (K : ClosedKernelData α) (R : Nat) (C : Configuration α) :
+  Fin (Finset.card (K.extractRWitnesses R C)) ≃
+    {w // w ∈ K.extractRWitnesses R C} :=
+by
+  classical
+  let s := K.extractRWitnesses R C
+  let l := s.toList
+  let hlen : l.length = s.card := Finset.length_toList s
+  let f :
+      Fin s.card → {w // w ∈ s} :=
+    fun i =>
+      ⟨l.get (Fin.cast hlen.symm i), by
+        rw [← Finset.mem_toList]
+        exact List.get_mem l (Fin.cast hlen.symm i)⟩
+  refine Equiv.ofBijective f ?_
+  constructor
+  · intro i j hij
+    have hget :
+        l.get (Fin.cast hlen.symm i) =
+          l.get (Fin.cast hlen.symm j) := by
+      exact Subtype.ext_iff.mp hij
+    have hcast :
+        Fin.cast hlen.symm i = Fin.cast hlen.symm j := by
+      exact (List.Nodup.get_inj_iff (Finset.nodup_toList s)).mp hget
+    exact Fin.cast_injective hlen.symm hcast
+  · intro w
+    have hwlist : w.1 ∈ l := by
+      rw [Finset.mem_toList]
+      exact w.2
+    rcases List.mem_iff_get.mp hwlist with ⟨n, hn⟩
+    refine ⟨Fin.cast hlen n, ?_⟩
+    apply Subtype.ext
+    change l.get (Fin.cast hlen.symm (Fin.cast hlen n)) = w.1
+    simpa using hn
+
+theorem canonical_edge_separation :
   ∀ {α : Type u} (K : ClosedKernelData α) (R : Nat) (C : Configuration α),
     ∃ (ι : Fin (Finset.card (K.extractRWitnesses R C)) ≃ {w // w ∈ K.extractRWitnesses R C})
       (pivotEdge : Fin (Finset.card (K.extractRWitnesses R C)) → K.E),
       ∀ i j,
         pivotEdge j ∈ K.witnessSupportEdges (ι i)
-          ↔ i = j
+          ↔ i = j :=
+by
+  intro α K R C
+  refine ⟨finCardEquivExtractRWitnessSubtype K R C, K.pivotEdge R C, ?_⟩
+  intro i j
+  unfold finCardEquivExtractRWitnessSubtype
+  simpa [List.get_eq_getElem] using K.pivot_spec R C i j
 
 
 /-- Boundary placeholder for malformed constructive cycle F₂ closure surface. -/
