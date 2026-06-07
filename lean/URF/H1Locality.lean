@@ -43,6 +43,17 @@ structure ConcreteFOkAdmissibleRefinementInterfaceWitness where
   all_admissible : ∀ R : I.RefinementProcedure, I.FOkAdmissible R
 
 /--
+Repository-native nondegeneracy criteria for a future concrete FO^k witness.
+
+This blocks vacuous witnesses such as `Unit` with predicate `True` by requiring
+an external repository-native semantic binding object.
+-/
+structure RepositoryNativeNondegenerateFOkWitnessCriteria where
+  W : ConcreteFOkAdmissibleRefinementInterfaceWitness
+  RepositoryNativeSemanticBinding : Type
+  binding_nonempty : Nonempty RepositoryNativeSemanticBinding
+
+/--
 Boundary marker: H1 is now named as a Lean target, but remains only a target
 until the FO^k-admissibility interface is supplied.
 -/
