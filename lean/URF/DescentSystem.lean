@@ -1555,4 +1555,38 @@ theorem ConcreteDomainSpecificSLVedMathematicalProof :
   ⟨ConcretePlanarSLVedPayload⟩
 
 
+
+/-- Bounded scientific closure for the concrete planar forbidden-minor obstruction-count payload.
+
+Boundary:
+`PLANAR_FORBIDDEN_MINOR_OBSTRUCTION_COUNT_ONLY`.
+This is not Wagner's theorem, not planarity completeness, not Robertson-Seymour,
+not unrestricted SLVed closure, not P vs NP, and not a Clay claim.
+-/
+noncomputable def ConcretePlanarScientificDescentInstance :
+    IntendedScientificDescentSystemInstance (Finset PlanarForbiddenMinorObstruction) :=
+  IntendedScientificDescentSystemInstance_witness_from_concrete_SLVed ConcretePlanarSLVedPayload
+
+/-- The concrete planar descent system induced by the bounded payload. -/
+noncomputable def ConcretePlanarScientificDescentSystem :
+    DescentSystem (Finset PlanarForbiddenMinorObstruction) :=
+  ConcretePlanarScientificDescentInstance.D
+
+/-- Final bounded closure: every configuration in the concrete planar obstruction-count
+descent system reaches terminal zero-rank state in finitely many steps. -/
+theorem ConcretePlanarSLVedPayload_scientific_closure :
+    ∀ C : Configuration (Finset PlanarForbiddenMinorObstruction),
+      ∃ n,
+        ConcretePlanarScientificDescentSystem.terminal
+          (ConcretePlanarScientificDescentSystem.nstep n C) := by
+  exact termination ConcretePlanarScientificDescentSystem
+
+/-- Stronger bounded form: termination occurs within the initial registered rank. -/
+theorem ConcretePlanarSLVedPayload_scientific_closure_with_bound :
+    ∀ C : Configuration (Finset PlanarForbiddenMinorObstruction),
+      ∃ n ≤ C.rank,
+        (ConcretePlanarScientificDescentSystem.nstep n C).rank = 0 := by
+  intro C
+  exact zero_rank_reached_within_rank ConcretePlanarScientificDescentSystem C
+
 end URF
