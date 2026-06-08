@@ -118,6 +118,26 @@ theorem nstep_rank_monotone_from_iterated_step_formula
   · exact hterminal_step_nonincrease (D.nstep n C) hterm
   · exact Nat.le_of_succ_le (step_rank_drop D (D.nstep n C) hterm)
 
+/-- Certificate-local version of `nstep_rank_monotone_from_iterated_step_formula`.
+
+This replaces the internal appeal to the global `step_rank_drop` axiom with
+an explicit `StepRankDropCertificate D` hypothesis. -/
+theorem nstep_rank_monotone_from_iterated_step_formula_from_certificate
+    {α : Type u}
+    (D : DescentSystem α)
+    (cert : StepRankDropCertificate D)
+    (hstep_iter :
+      ∀ n C, D.nstep (n + 1) C = D.step (D.nstep n C))
+    (hterminal_step_nonincrease :
+      ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+    ∀ n C, (D.nstep (n + 1) C).rank ≤ (D.nstep n C).rank := by
+  intro n C
+  rw [hstep_iter n C]
+  by_cases hterm : D.terminal (D.nstep n C)
+  · exact hterminal_step_nonincrease (D.nstep n C) hterm
+  · exact Nat.le_of_succ_le
+      (cert.step_rank_drop_certified (D.nstep n C) hterm)
+
 theorem step_rank_nonincrease_of_terminal_step_nonincrease
     {α : Type u}
     (D : DescentSystem α)
