@@ -1,4 +1,25 @@
-# URF Prefab System
+# URF Core — Formal Verification Infrastructure
+## Scope and Status
+
+URF Core is a Lean formalization and certificate-boundary repository.
+
+The repository currently contains verified bounded witnesses, reusable certificate layers, theorem surfaces, and explicit frontier records. Many underlying mathematical components are elementary or previously known; the repository contribution is the formalization architecture, reproducible verification trail, and boundary discipline.
+
+Current boundary:
+
+- No unrestricted graph-class theorem is claimed.
+- No unrestricted intended-configuration theorem is claimed.
+- No P vs NP, Clay-problem, or major open-problem closure is claimed.
+- Repository-native Path5 R1/R2/R3 closure is a finite non-toy witness only.
+
+Recent closed bounded objects:
+
+- `URF.R1R2R3Path5.rich_closed_nonToy_exists`
+- `URF.R1R2R3Path5.path5_rich_R1_R2_R3_certificate`
+- `URF.R1R2R3RepositoryNative.path5_repositoryNativeIntendedConfigurationInstance`
+- `URF.R1R2R3RepositoryNative.path5_repositoryNativeIntendedConfiguration_certificate`
+- `URF.R1R2R3RepositoryNative.repositoryNativeIntendedConfiguration_path5_closed`
+
 
 <!-- VERIFIED_FRONTIER_TRACKING_DEFINITIONS:BEGIN -->
 ## Verified Frontier Tracking Definitions Layer
