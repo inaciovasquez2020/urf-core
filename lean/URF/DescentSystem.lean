@@ -1415,4 +1415,23 @@ def IntendedScientificDescentSystemInstance_witness_from_finite_obstruction_payl
     intro C h
     exact (FiniteObstructionDescentSystem Obstruction P.selector).step_rank_drop_field C h
 
+
+/-- `SLVed` is the named external mathematical payload needed to instantiate the
+finite-obstruction scientific descent route.
+
+Boundary: this is a naming/target surface only. It does not construct the
+domain-specific obstruction type, selector, or non-toy scientific certificates. -/
+abbrev SLVedPayload
+    (Obstruction : Type u) [DecidableEq Obstruction] :=
+  FiniteObstructionScientificPayload Obstruction
+
+/-- Constructor from the named `SLVed` payload into the intended scientific
+descent-system witness. -/
+def IntendedScientificDescentSystemInstance_witness_from_SLVed
+    (Obstruction : Type u) [DecidableEq Obstruction]
+    (SLVed : SLVedPayload Obstruction) :
+    IntendedScientificDescentSystemInstance (Finset Obstruction) :=
+  IntendedScientificDescentSystemInstance_witness_from_finite_obstruction_payload
+    Obstruction SLVed
+
 end URF
