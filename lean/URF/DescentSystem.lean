@@ -1141,4 +1141,31 @@ def canonical_F2_pivot_step_constructor_from_concrete_operation {α : Type u}
   intro C hC
   exact op.realizes_canonical_F2_pivot C hC
 
+
+/-- Repository-native construction of the concrete F₂ pivot-elimination operation
+from the current `DescentSystem` fields.
+
+Boundary: this uses the existing abstract pivot-realization surface and the
+`step_rank_drop_field` already stored in `DescentSystem`. It does not add a new
+domain-specific scientific step beyond `D.step`.
+-/
+def concrete_F2_pivot_elimination_operation_from_descent_field {α : Type u}
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) :
+    ConcreteF2PivotEliminationOperationOnConfiguration S D R := by
+  refine ⟨D.step, ?_, ?_⟩
+  · intro C _hC
+    exact AbstractStepRealizesCanonicalF2Pivot S D R C
+  · intro C hC
+    exact D.step_rank_drop_field C hC
+
+/-- The repository-native concrete F₂ pivot-elimination operation induces the
+canonical F₂ pivot step constructor. -/
+def canonical_F2_pivot_step_constructor_from_descent_field {α : Type u}
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) :
+    CanonicalF2PivotStepConstructor S D R :=
+  canonical_F2_pivot_step_constructor_from_concrete_operation
+    S D R
+    (concrete_F2_pivot_elimination_operation_from_descent_field S D R)
+    rfl
+
 end URF
