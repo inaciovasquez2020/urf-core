@@ -1300,4 +1300,119 @@ def concrete_MoLcKInput_witness_from_intended_scientific_instance
     MoLcKInput α :=
   concrete_MoLcKInput_witness_from_repository_native_descent_field I.D
 
+
+/-- Selector data for a finite obstruction set.
+
+Boundary: this supplies a concrete finite-obstruction carrier and a removable obstruction selector.
+The scientific meaning of `Obstruction` remains external input. -/
+structure FiniteObstructionSelector (Obstruction : Type u) [DecidableEq Obstruction] where
+  choose : ∀ s : Finset Obstruction, s ≠ ∅ → Obstruction
+  choose_mem : ∀ s h, choose s h ∈ s
+
+/-- One-step finite-obstruction descent.
+
+The data field removes one selected obstruction when one is available.
+The repository-native rank field decreases by one. -/
+def finiteObstructionDescentStep
+    {Obstruction : Type u} [DecidableEq Obstruction]
+    (selector : FiniteObstructionSelector Obstruction)
+    (C : Configuration (Finset Obstruction)) :
+    Configuration (Finset Obstruction) :=
+  if h : C.data = ∅ then
+    { data := C.data, rank := C.rank - 1 }
+  else
+    { data := C.data.erase (selector.choose C.data h), rank := C.rank - 1 }
+
+/-- Iterated finite-obstruction descent. -/
+def finiteObstructionDescentNstep
+    {Obstruction : Type u} [DecidableEq Obstruction]
+    (selector : FiniteObstructionSelector Obstruction) :
+    Nat → Configuration (Finset Obstruction) → Configuration (Finset Obstruction)
+  | 0, C => C
+  | n + 1, C => finiteObstructionDescentNstep selector n
+      (finiteObstructionDescentStep selector C)
+
+/-- Concrete finite-obstruction `DescentSystem`.
+
+Boundary: this is a finite-obstruction descent witness for the current repository-native
+`Configuration` API. Scientific adequacy requires the caller to supply the intended
+domain-specific `Obstruction` type and non-toy certificates. -/
+def FiniteObstructionDescentSystem
+    (Obstruction : Type u) [DecidableEq Obstruction]
+    (selector : FiniteObstructionSelector Obstruction) :
+    DescentSystem (Finset Obstruction) where
+  extractR := fun _ _ => ∅
+  witnessVector := fun _ => ∅
+  witnessContribution := fun _ => 1
+  step := finiteObstructionDescentStep selector
+  nstep := finiteObstructionDescentNstep selector
+  terminal := fun C => C.rank = 0
+  contribution_eq_cycleRank := by
+    intro w
+    rfl
+  extractR_independent := by
+    intro R C
+    trivial
+  positive_contribution_on_extractR := by
+    intro R C w hw
+    simp at hw
+  terminal_iff_zero_rank := by
+    intro C
+    rfl
+  terminal_step_terminal := by
+    intro C h
+    unfold finiteObstructionDescentStep
+    by_cases hd : C.data = ∅
+    · simp [hd, h]
+    · simp [hd, h]
+  step_rank_drop_field := by
+    intro C h
+    unfold finiteObstructionDescentStep
+    cases hr : C.rank with
+    | zero =>
+        exact False.elim (h hr)
+    | succ n =>
+        by_cases hd : C.data = ∅
+        · simp [hd]
+        · simp [hd]
+  nstep_zero := by
+    intro C
+    rfl
+  nstep_succ := by
+    intro n C
+    rfl
+
+/-- Payload needed to turn the finite-obstruction descent system into the intended
+scientific instance target. -/
+structure FiniteObstructionScientificPayload
+    (Obstruction : Type u) [DecidableEq Obstruction] where
+  selector : FiniteObstructionSelector Obstruction
+  scientific_non_toy_type_certificate : Prop
+  scientific_non_toy_type_certificate_proof :
+    scientific_non_toy_type_certificate
+  scientific_step_not_toy_rank_decrement_certificate : Prop
+  scientific_step_not_toy_rank_decrement_certificate_proof :
+    scientific_step_not_toy_rank_decrement_certificate
+
+/-- Conditional constructor for the missing intended scientific witness.
+
+Boundary: closes the formal target only after a real domain-specific obstruction type,
+selector, and non-toy certificates are supplied. -/
+def IntendedScientificDescentSystemInstance_witness_from_finite_obstruction_payload
+    (Obstruction : Type u) [DecidableEq Obstruction]
+    (P : FiniteObstructionScientificPayload Obstruction) :
+    IntendedScientificDescentSystemInstance (Finset Obstruction) where
+  D := FiniteObstructionDescentSystem Obstruction P.selector
+  scientific_non_toy_type_certificate :=
+    P.scientific_non_toy_type_certificate
+  scientific_non_toy_type_certificate_proof :=
+    P.scientific_non_toy_type_certificate_proof
+  scientific_step_not_toy_rank_decrement_certificate :=
+    P.scientific_step_not_toy_rank_decrement_certificate
+  scientific_step_not_toy_rank_decrement_certificate_proof :=
+    P.scientific_step_not_toy_rank_decrement_certificate_proof
+  domain_specific_step_rank_drop := by
+    intro C h
+    exact (FiniteObstructionDescentSystem Obstruction P.selector).step_rank_drop_field C h
+
 end URF
