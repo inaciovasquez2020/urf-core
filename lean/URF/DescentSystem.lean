@@ -1070,4 +1070,36 @@ by
     ZeroRankReachedWithinRank_from_step_compatible
       S D R P.stepCompatible C
 
+
+/-- Repository-native constructor for the current canonical F₂ pivot step surface.
+
+Boundary: this packages `D.step` together with the existing abstract pivot-realization
+surface. It does not prove that `D.step` is a concrete F₂ pivot-elimination operation
+on `Configuration α`.
+-/
+structure CanonicalF2PivotStepConstructor {α : Type u}
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) : Type u where
+  step : Configuration α → Configuration α
+  step_eq_system_step : step = D.step
+  realizes_canonical_F2_pivot :
+    ∀ C : Configuration α,
+      C.rank ≠ 0 →
+        ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
+          ∀ i j,
+            ConcretePhiDefinitionUsingExtractRMatrix S D R C i (p j) =
+              if i = j then 1 else 0
+
+/-- Build the canonical F₂ pivot step constructor from the current repository-native
+abstract pivot surface.
+
+Boundary: conditional/interface constructor only; no concrete pivot-elimination
+operation is supplied here.
+-/
+def canonical_F2_pivot_step_constructor {α : Type u}
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) :
+    CanonicalF2PivotStepConstructor S D R := by
+  refine ⟨D.step, rfl, ?_⟩
+  intro C _hC
+  exact AbstractStepRealizesCanonicalF2Pivot S D R C
+
 end URF
