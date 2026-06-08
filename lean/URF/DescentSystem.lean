@@ -1102,4 +1102,43 @@ def canonical_F2_pivot_step_constructor {α : Type u}
   intro C _hC
   exact AbstractStepRealizesCanonicalF2Pivot S D R C
 
+
+/-- Target object for a genuine concrete F₂ pivot-elimination operation on
+`Configuration α`.
+
+Boundary: this is a non-vacuous target surface. It does not construct the operation.
+To close it, one must supply an actual `step` function and prove that it realizes
+the repository-native canonical F₂ pivot package for every nonzero-rank
+configuration.
+-/
+structure ConcreteF2PivotEliminationOperationOnConfiguration {α : Type u}
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) : Type u where
+  step : Configuration α → Configuration α
+  realizes_canonical_F2_pivot :
+    ∀ C : Configuration α,
+      C.rank ≠ 0 →
+        ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
+          ∀ i j,
+            ConcretePhiDefinitionUsingExtractRMatrix S D R C i (p j) =
+              if i = j then 1 else 0
+  rank_strict_decrease :
+    ∀ C : Configuration α,
+      ¬ D.terminal C →
+        (step C).rank + 1 ≤ C.rank
+
+/-- A supplied concrete F₂ pivot-elimination operation induces the current
+canonical step-constructor surface.
+
+Boundary: conditional bridge only; the concrete operation is an input, not
+constructed here.
+-/
+def canonical_F2_pivot_step_constructor_from_concrete_operation {α : Type u}
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat)
+    (op : ConcreteF2PivotEliminationOperationOnConfiguration S D R)
+    (hstep : op.step = D.step) :
+    CanonicalF2PivotStepConstructor S D R := by
+  refine ⟨op.step, hstep, ?_⟩
+  intro C hC
+  exact op.realizes_canonical_F2_pivot C hC
+
 end URF
