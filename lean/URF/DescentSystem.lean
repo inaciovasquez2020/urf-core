@@ -1168,4 +1168,92 @@ def canonical_F2_pivot_step_constructor_from_descent_field {α : Type u}
     (concrete_F2_pivot_elimination_operation_from_descent_field S D R)
     rfl
 
+
+/-- Repository-native `MoLcKInput` witness obtained by repackaging an existing
+`DescentSystem`.
+
+Boundary: this does not supply a new domain-specific scientific system. It
+constructs a `MoLcKInput` only from an already supplied `DescentSystem` whose
+fields already include `step`, `terminal`, `nstep`, and `step_rank_drop_field`.
+-/
+def concrete_MoLcKInput_witness_from_repository_native_descent_field {α : Type u}
+    (D : DescentSystem α) : MoLcKInput α where
+  extractR := D.extractR
+  witnessVector := D.witnessVector
+  witnessContribution := D.witnessContribution
+  step := D.step
+  nstep := D.nstep
+  terminal := D.terminal
+  contribution_eq_cycleRank := D.contribution_eq_cycleRank
+  extractR_independent := D.extractR_independent
+  positive_contribution_on_extractR := D.positive_contribution_on_extractR
+  terminal_iff_zero_rank := D.terminal_iff_zero_rank
+  terminal_step_terminal := D.terminal_step_terminal
+  intended_scientific_rank_strict_decrease_proof := D.step_rank_drop_field
+  nstep_zero := D.nstep_zero
+  nstep_succ := D.nstep_succ
+
+/-- The repository-native `MoLcKInput` witness recovers the step-rank-drop
+certificate through the existing MoLcK route.
+
+Boundary: conditional on an already supplied `DescentSystem`; not a new
+domain-specific scientific instantiation.
+-/
+theorem StepRankDropCertificate_from_repository_native_moLcK_descent_field
+    {α : Type u} (D : DescentSystem α) :
+    StepRankDropCertificate
+      (IntendedScientificDescentSystem_from_moLcK
+        (concrete_MoLcKInput_witness_from_repository_native_descent_field D)) :=
+  StepRankDropCertificate_from_moLcK
+    (concrete_MoLcKInput_witness_from_repository_native_descent_field D)
+
+
+/-- Scientific actual-number descent test target.
+
+This is not the toy numeric test.  It requires a supplied non-toy scientific
+certificate, an actual configuration of rank `3`, an actual one-step rank value
+`2`, and an actual canonical F₂ pivot witness at that configuration.
+-/
+structure ScientificActualNumberDescentTest (α : Type u) : Type (u+2) where
+  S : SupportEncoding α
+  D : DescentSystem α
+  R : Nat
+  C0 : Configuration α
+  scientific_non_toy_certificate : Prop
+  scientific_non_toy_certificate_proof : scientific_non_toy_certificate
+  nonterminal_actual_number : ¬ D.terminal C0
+  initial_rank_actual_number : C0.rank = 3
+  step_rank_actual_number : (D.step C0).rank = 2
+  pivot_realization_actual_number :
+    ∃ p : Fin (Finset.card (D.extractR R C0)) ↪ S.E,
+      ∀ i j,
+        ConcretePhiDefinitionUsingExtractRMatrix S D R C0 i (p j) =
+          if i = j then 1 else 0
+
+/-- Actual-number strict-drop proof forced by the scientific test values:
+`2 + 1 ≤ 3`. -/
+theorem scientificActualNumberDescentTest_strict_drop
+    {α : Type u} (T : ScientificActualNumberDescentTest α) :
+    (T.D.step T.C0).rank + 1 ≤ T.C0.rank := by
+  rw [T.step_rank_actual_number, T.initial_rank_actual_number]
+
+/-- The scientific actual-number test also agrees with the repository-native
+descent-field strict-drop certificate at the tested configuration. -/
+theorem scientificActualNumberDescentTest_descent_field_drop
+    {α : Type u} (T : ScientificActualNumberDescentTest α) :
+    (T.D.step T.C0).rank + 1 ≤ T.C0.rank :=
+  T.D.step_rank_drop_field T.C0 T.nonterminal_actual_number
+
+/-- A scientific actual-number test induces the current repository-native
+concrete F₂ pivot-elimination operation, still conditional on the supplied
+`DescentSystem` fields.
+
+Boundary: this does not manufacture the scientific system; it records the exact
+non-toy numerical payload needed to test one scientific descent step.
+-/
+def concrete_F2_pivot_elimination_operation_from_scientific_actual_number_test
+    {α : Type u} (T : ScientificActualNumberDescentTest α) :
+    ConcreteF2PivotEliminationOperationOnConfiguration T.S T.D T.R :=
+  concrete_F2_pivot_elimination_operation_from_descent_field T.S T.D T.R
+
 end URF
