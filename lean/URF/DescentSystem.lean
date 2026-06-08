@@ -102,6 +102,58 @@ by
   intro C h
   exact D.step_rank_drop_field C h
 
+/-- Toy descent step used only as an instantiation sanity check.
+
+This is not the intended scientific `DescentSystem`. -/
+def toyDescentStep (C : Configuration Unit) : Configuration Unit :=
+  { data := (), rank := C.rank - 1 }
+
+/-- Toy iterated descent step used only as an instantiation sanity check. -/
+def toyDescentNstep : Nat → Configuration Unit → Configuration Unit
+  | 0, C => C
+  | n + 1, C => toyDescentNstep n (toyDescentStep C)
+
+/-- Toy concrete `DescentSystem` instance.
+
+Boundary: instantiation sanity check only; not the intended scientific carrier. -/
+def ToyConcreteDescentSystem : DescentSystem Unit where
+  extractR := fun _ _ => ∅
+  witnessVector := fun _ => ()
+  witnessContribution := fun _ => 1
+  step := toyDescentStep
+  nstep := toyDescentNstep
+  terminal := fun C => C.rank = 0
+  contribution_eq_cycleRank := by
+    intro w
+    rfl
+  extractR_independent := by
+    intro R C
+    trivial
+  positive_contribution_on_extractR := by
+    intro R C w hw
+    simp at hw
+  terminal_iff_zero_rank := by
+    intro C
+    rfl
+  terminal_step_terminal := by
+    intro C h
+    simp [toyDescentStep, h]
+  step_rank_drop_field := by
+    intro C h
+    simp [toyDescentStep]
+    omega
+  nstep_zero := by
+    intro C
+    rfl
+  nstep_succ := by
+    intro n C
+    rfl
+
+/-- The toy concrete system supplies a step-rank-drop certificate by field projection. -/
+theorem ToyConcreteDescentSystem_step_rank_drop_certificate :
+    StepRankDropCertificate ToyConcreteDescentSystem :=
+  StepRankDropCertificate_from_descent_system_field ToyConcreteDescentSystem
+
 theorem rank_strict_decrease
   {α : Type u} (D : DescentSystem α) (C : Configuration α)
   (h : ¬ D.terminal C) :
