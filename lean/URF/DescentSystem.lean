@@ -1434,4 +1434,29 @@ def IntendedScientificDescentSystemInstance_witness_from_SLVed
   IntendedScientificDescentSystemInstance_witness_from_finite_obstruction_payload
     Obstruction SLVed
 
+
+/-- Concrete named carrier for the external `SLVed` payload.
+
+Boundary: this packages the missing external mathematical payload as a single
+repository-native object. It does not manufacture the domain-specific mathematics. -/
+structure ConcreteSLVedPayload where
+  Obstruction : Type u
+  decidableEq : DecidableEq Obstruction
+  SLVed : @SLVedPayload Obstruction decidableEq
+
+/-- A concrete `SLVed` payload closes the intended scientific descent-system
+witness target through the finite-obstruction route. -/
+def IntendedScientificDescentSystemInstance_witness_from_concrete_SLVed
+    (P : ConcreteSLVedPayload.{u}) :
+    IntendedScientificDescentSystemInstance (Finset P.Obstruction) :=
+  @IntendedScientificDescentSystemInstance_witness_from_SLVed
+    P.Obstruction P.decidableEq P.SLVed
+
+/-- Open target: supply a concrete `SLVed` payload.
+
+Boundary: this is the exact remaining mathematical object. -/
+abbrev ConcreteSLVedPayloadTarget : Prop :=
+  Nonempty ConcreteSLVedPayload.{u}
+
+
 end URF
