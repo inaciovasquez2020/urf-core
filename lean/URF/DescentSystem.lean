@@ -1207,4 +1207,53 @@ theorem StepRankDropCertificate_from_repository_native_moLcK_descent_field
   StepRankDropCertificate_from_moLcK
     (concrete_MoLcKInput_witness_from_repository_native_descent_field D)
 
+
+/-- Scientific actual-number descent test target.
+
+This is not the toy numeric test.  It requires a supplied non-toy scientific
+certificate, an actual configuration of rank `3`, an actual one-step rank value
+`2`, and an actual canonical F₂ pivot witness at that configuration.
+-/
+structure ScientificActualNumberDescentTest (α : Type u) : Type (u+2) where
+  S : SupportEncoding α
+  D : DescentSystem α
+  R : Nat
+  C0 : Configuration α
+  scientific_non_toy_certificate : Prop
+  scientific_non_toy_certificate_proof : scientific_non_toy_certificate
+  nonterminal_actual_number : ¬ D.terminal C0
+  initial_rank_actual_number : C0.rank = 3
+  step_rank_actual_number : (D.step C0).rank = 2
+  pivot_realization_actual_number :
+    ∃ p : Fin (Finset.card (D.extractR R C0)) ↪ S.E,
+      ∀ i j,
+        ConcretePhiDefinitionUsingExtractRMatrix S D R C0 i (p j) =
+          if i = j then 1 else 0
+
+/-- Actual-number strict-drop proof forced by the scientific test values:
+`2 + 1 ≤ 3`. -/
+theorem scientificActualNumberDescentTest_strict_drop
+    {α : Type u} (T : ScientificActualNumberDescentTest α) :
+    (T.D.step T.C0).rank + 1 ≤ T.C0.rank := by
+  rw [T.step_rank_actual_number, T.initial_rank_actual_number]
+
+/-- The scientific actual-number test also agrees with the repository-native
+descent-field strict-drop certificate at the tested configuration. -/
+theorem scientificActualNumberDescentTest_descent_field_drop
+    {α : Type u} (T : ScientificActualNumberDescentTest α) :
+    (T.D.step T.C0).rank + 1 ≤ T.C0.rank :=
+  T.D.step_rank_drop_field T.C0 T.nonterminal_actual_number
+
+/-- A scientific actual-number test induces the current repository-native
+concrete F₂ pivot-elimination operation, still conditional on the supplied
+`DescentSystem` fields.
+
+Boundary: this does not manufacture the scientific system; it records the exact
+non-toy numerical payload needed to test one scientific descent step.
+-/
+def concrete_F2_pivot_elimination_operation_from_scientific_actual_number_test
+    {α : Type u} (T : ScientificActualNumberDescentTest α) :
+    ConcreteF2PivotEliminationOperationOnConfiguration T.S T.D T.R :=
+  concrete_F2_pivot_elimination_operation_from_descent_field T.S T.D T.R
+
 end URF
