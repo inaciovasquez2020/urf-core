@@ -1459,4 +1459,32 @@ abbrev ConcreteSLVedPayloadTarget : Prop :=
   Nonempty ConcreteSLVedPayload.{u}
 
 
+
+/-- Open mathematical target.
+
+This theorem is intentionally not proved in this repository.
+
+The `sorry` below stands for exactly one missing external mathematical object:
+a concrete `ConcreteSLVedPayload`, namely a domain-specific obstruction type,
+a proved finite-obstruction selector, and non-vacuous scientific certificates.
+
+Do not close this target with a toy payload, an arbitrary finite type, a vacuous
+certificate, or `True` as a scientific certificate.
+
+Boundary:
+`OPEN_TARGET_ONLY`.
+`NO_CONCRETE_SLVED_PAYLOAD`.
+`NO_FINAL_SCIENTIFIC_CLOSURE`.
+`NO_P_VS_NP_CLAIM`.
+`NO_CLAY_CLAIM`. -/
+theorem ProofOfConcreteSLVedPayloadTarget :
+    ConcreteSLVedPayloadTarget := by
+  -- OPEN MATHEMATICAL TARGET.
+  -- Missing: concrete domain-specific `Obstruction` type.
+  -- Missing: proved `FiniteObstructionSelector`.
+  -- Missing: non-vacuous `scientific_non_toy_type_certificate_proof`.
+  -- Missing: non-vacuous `scientific_step_not_toy_rank_decrement_certificate_proof`.
+  sorry
+
+
 end URF
