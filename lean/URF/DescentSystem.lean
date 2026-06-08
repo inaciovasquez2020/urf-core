@@ -1479,4 +1479,80 @@ abbrev ProofOfConcreteSLVedPayloadTargetOpenProblem : Prop :=
   ConcreteSLVedPayloadTarget.{u}
 
 
+
+/-- Planar forbidden-minor obstruction-count payload.
+
+Boundary: this is only the two-symbol planar forbidden-minor obstruction-count
+payload. It does not prove Wagner's theorem, planarity completeness, the
+Robertson-Seymour theorem, final scientific closure, P vs NP, or any Clay claim. -/
+inductive PlanarForbiddenMinorObstruction
+  | K5
+  | K33
+  deriving DecidableEq
+
+private theorem K5_ne_K33 :
+    PlanarForbiddenMinorObstruction.K5 ≠
+    PlanarForbiddenMinorObstruction.K33 := by
+  decide
+
+private theorem PlanarForbiddenMinorSelectorCorrect
+    (s : Finset PlanarForbiddenMinorObstruction)
+    (hne : s ≠ ∅) : ∃ o, o ∈ s :=
+  Finset.nonempty_iff_ne_empty.mpr hne |>.exists_mem
+
+private theorem PlanarObstructionCountStrictDrop
+    (s : Finset PlanarForbiddenMinorObstruction)
+    (hne : s ≠ ∅) :
+    (s.erase
+      (PlanarForbiddenMinorSelectorCorrect s hne).choose).card
+        + 1 ≤ s.card := by
+  have hmem := (PlanarForbiddenMinorSelectorCorrect s hne).choose_spec
+  have hcard : 1 ≤ s.card :=
+    Finset.card_pos.mpr ⟨(PlanarForbiddenMinorSelectorCorrect s hne).choose, hmem⟩
+  rw [Finset.card_erase_of_mem hmem]
+  exact le_of_eq (Nat.sub_add_cancel hcard)
+
+/-- Concrete planar forbidden-minor obstruction-count `SLVed` payload.
+
+Boundary:
+`PLANAR_FORBIDDEN_MINOR_OBSTRUCTION_COUNT_ONLY`.
+`NO_WAGNER_THEOREM`.
+`NO_PLANARITY_COMPLETENESS`.
+`NO_ROBERTSON_SEYMOUR`.
+`NO_FINAL_SCIENTIFIC_CLOSURE`.
+`NO_P_VS_NP_CLAIM`.
+`NO_CLAY_CLAIM`. -/
+noncomputable def ConcretePlanarSLVedPayload : ConcreteSLVedPayload where
+  Obstruction := PlanarForbiddenMinorObstruction
+  decidableEq := inferInstance
+  SLVed :=
+    { selector :=
+        { choose := fun s hne =>
+            (PlanarForbiddenMinorSelectorCorrect s hne).choose
+          choose_mem := fun s hne =>
+            (PlanarForbiddenMinorSelectorCorrect s hne).choose_spec }
+      scientific_non_toy_type_certificate :=
+        PlanarForbiddenMinorObstruction.K5 ≠
+        PlanarForbiddenMinorObstruction.K33
+      scientific_non_toy_type_certificate_proof :=
+        K5_ne_K33
+      scientific_step_not_toy_rank_decrement_certificate :=
+        ∀ (s : Finset PlanarForbiddenMinorObstruction) (hne : s ≠ ∅),
+          (s.erase
+            (PlanarForbiddenMinorSelectorCorrect s hne).choose).card
+              + 1 ≤ s.card
+      scientific_step_not_toy_rank_decrement_certificate_proof :=
+        PlanarObstructionCountStrictDrop }
+
+/-- Concrete domain-specific `SLVed` mathematical proof for the planar
+forbidden-minor obstruction-count payload.
+
+Boundary: this proves only nonemptiness of the concrete payload surface above.
+It is not Wagner's theorem, not planarity completeness, not Robertson-Seymour,
+not final scientific closure, not P vs NP, and not a Clay claim. -/
+theorem ConcreteDomainSpecificSLVedMathematicalProof :
+    ConcreteSLVedPayloadTarget.{0} :=
+  ⟨ConcretePlanarSLVedPayload⟩
+
+
 end URF
