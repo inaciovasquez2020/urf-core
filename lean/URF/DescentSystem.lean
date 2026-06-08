@@ -149,6 +149,23 @@ theorem step_rank_nonincrease_of_terminal_step_nonincrease
   · exact hterminal_step_nonincrease C hterm
   · exact Nat.le_of_succ_le (step_rank_drop D C hterm)
 
+/-- Certificate-local version of `step_rank_nonincrease_of_terminal_step_nonincrease`.
+
+This replaces the nonterminal branch's appeal to the global `step_rank_drop`
+axiom with an explicit `StepRankDropCertificate D` hypothesis. -/
+theorem step_rank_nonincrease_of_terminal_step_nonincrease_from_certificate
+    {α : Type u}
+    (D : DescentSystem α)
+    (cert : StepRankDropCertificate D)
+    (hterminal_step_nonincrease :
+      ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+    ∀ C, (D.step C).rank ≤ C.rank := by
+  intro C
+  by_cases hterm : D.terminal C
+  · exact hterminal_step_nonincrease C hterm
+  · exact Nat.le_of_succ_le
+      (cert.step_rank_drop_certified C hterm)
+
 theorem nstep_rank_monotone_from_terminal_step_nonincrease
     {α : Type u}
     (D : DescentSystem α)
