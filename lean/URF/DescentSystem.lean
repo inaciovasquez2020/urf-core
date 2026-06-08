@@ -91,6 +91,17 @@ structure StepRankDropCertificate
     ∀ C : Configuration α,
       ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank
 
+/-- Every `DescentSystem` now supplies a `StepRankDropCertificate`
+by projection from its `step_rank_drop_field`. -/
+theorem StepRankDropCertificate_from_descent_system_field
+    {α : Type u}
+    (D : DescentSystem α) :
+    StepRankDropCertificate D :=
+by
+  refine ⟨?_⟩
+  intro C h
+  exact D.step_rank_drop_field C h
+
 theorem rank_strict_decrease
   {α : Type u} (D : DescentSystem α) (C : Configuration α)
   (h : ¬ D.terminal C) :
