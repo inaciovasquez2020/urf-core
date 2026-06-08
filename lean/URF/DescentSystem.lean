@@ -154,6 +154,74 @@ theorem ToyConcreteDescentSystem_step_rank_drop_certificate :
     StepRankDropCertificate ToyConcreteDescentSystem :=
   StepRankDropCertificate_from_descent_system_field ToyConcreteDescentSystem
 
+/-- Conditional MoLcK input interface.
+
+Boundary: this structure is only an input conduit.  No concrete scientific
+witness is supplied here. -/
+structure MoLcKInput (α : Type u) where
+  extractR : Nat → Configuration α → Finset (Witness α)
+  witnessVector : Witness α → α
+  witnessContribution : Witness α → Nat
+  step : Configuration α → Configuration α
+  nstep : Nat → Configuration α → Configuration α
+  terminal : Configuration α → Prop
+
+  contribution_eq_cycleRank :
+    ∀ w, witnessContribution w = cycleRankF2 (witnessVector w)
+
+  extractR_independent :
+    ∀ (_R : Nat) (_C : Configuration α), True
+
+  positive_contribution_on_extractR :
+    ∀ R C w, w ∈ extractR R C → 0 < witnessContribution w
+
+  terminal_iff_zero_rank :
+    ∀ C, terminal C ↔ C.rank = 0
+
+  terminal_step_terminal :
+    ∀ C, terminal C → terminal (step C)
+
+  intended_scientific_rank_strict_decrease_proof :
+    ∀ C, ¬ terminal C → (step C).rank + 1 ≤ C.rank
+
+  nstep_zero :
+    ∀ C, nstep 0 C = C
+
+  nstep_succ :
+    ∀ n C, nstep (n + 1) C = nstep n (step C)
+
+/-- Build a `DescentSystem` from a conditional MoLcK input witness. -/
+def IntendedScientificDescentSystem_from_moLcK
+    {α : Type u}
+    (M : MoLcKInput α) : DescentSystem α where
+  extractR := M.extractR
+  witnessVector := M.witnessVector
+  witnessContribution := M.witnessContribution
+  step := M.step
+  nstep := M.nstep
+  terminal := M.terminal
+  contribution_eq_cycleRank := M.contribution_eq_cycleRank
+  extractR_independent := M.extractR_independent
+  positive_contribution_on_extractR := M.positive_contribution_on_extractR
+  terminal_iff_zero_rank := M.terminal_iff_zero_rank
+  terminal_step_terminal := M.terminal_step_terminal
+  step_rank_drop_field := M.intended_scientific_rank_strict_decrease_proof
+  nstep_zero := M.nstep_zero
+  nstep_succ := M.nstep_succ
+
+/-- Certificate derivation from a `MoLcKInput` witness.
+
+If a concrete `MoLcKInput α` is supplied, the full
+`StepRankDropCertificate` is immediate by projection. -/
+theorem StepRankDropCertificate_from_moLcK
+    {α : Type u}
+    (M : MoLcKInput α) :
+    StepRankDropCertificate (IntendedScientificDescentSystem_from_moLcK M) :=
+by
+  refine ⟨?_⟩
+  intro C h
+  exact M.intended_scientific_rank_strict_decrease_proof C h
+
 theorem rank_strict_decrease
   {α : Type u} (D : DescentSystem α) (C : Configuration α)
   (h : ¬ D.terminal C) :
