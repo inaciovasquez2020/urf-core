@@ -56,6 +56,10 @@ structure DescentSystem (α : Type u) where
   terminal_step_terminal :
     ∀ C, terminal C → terminal (step C)
 
+  /-- The step function strictly decreases rank on non-terminal configurations. -/
+  step_rank_drop_field :
+    ∀ C, ¬ terminal C → (step C).rank + 1 ≤ C.rank
+
   nstep_zero :
     ∀ C, nstep 0 C = C
 
@@ -70,9 +74,13 @@ class CycleSpaceModel (α : Type u) where
   contribution_eq_rank :
     ∀ w, witnessContribution w = cycleRankF2 w
 
-axiom step_rank_drop :
+/-- Rank drop is now a field projection of `DescentSystem`, not a global axiom. -/
+theorem step_rank_drop :
   ∀ {α : Type u} (D : DescentSystem α) (C : Configuration α),
-    ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank
+    ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank :=
+by
+  intro α D C h
+  exact D.step_rank_drop_field C h
 
 /-- Explicit per-system certificate replacing direct use of the global
 `step_rank_drop` axiom at conditional theorem surfaces. -/
