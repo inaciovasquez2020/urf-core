@@ -1256,4 +1256,48 @@ def concrete_F2_pivot_elimination_operation_from_scientific_actual_number_test
     ConcreteF2PivotEliminationOperationOnConfiguration T.S T.D T.R :=
   concrete_F2_pivot_elimination_operation_from_descent_field T.S T.D T.R
 
+
+/-- Target surface for the intended scientific `DescentSystem` instance.
+
+Boundary: this does not construct the intended scientific system. It records the
+exact non-toy payload required before the scientific actual-number witness can be
+built.
+-/
+structure IntendedScientificDescentSystemInstance (α : Type u) : Type (u+2) where
+  D : DescentSystem α
+  scientific_non_toy_type_certificate : Prop
+  scientific_non_toy_type_certificate_proof :
+    scientific_non_toy_type_certificate
+  scientific_step_not_toy_rank_decrement_certificate : Prop
+  scientific_step_not_toy_rank_decrement_certificate_proof :
+    scientific_step_not_toy_rank_decrement_certificate
+  domain_specific_step_rank_drop :
+    ∀ C : Configuration α,
+      ¬ D.terminal C →
+        (D.step C).rank + 1 ≤ C.rank
+
+/-- The intended scientific instance target supplies the strict rank-drop proof
+required by the descent-system route.
+
+Boundary: target-surface projection only; no intended scientific instance is
+constructed here.
+-/
+theorem intendedScientificDescentSystemInstance_rank_drop
+    {α : Type u} (I : IntendedScientificDescentSystemInstance α) :
+    ∀ C : Configuration α,
+      ¬ I.D.terminal C →
+        (I.D.step C).rank + 1 ≤ C.rank :=
+  I.domain_specific_step_rank_drop
+
+/-- An intended scientific instance target induces the repository-native
+MoLcK witness route only after its `DescentSystem` has already been supplied.
+
+Boundary: this repackages the supplied `DescentSystem`; it does not manufacture
+the non-toy scientific system.
+-/
+def concrete_MoLcKInput_witness_from_intended_scientific_instance
+    {α : Type u} (I : IntendedScientificDescentSystemInstance α) :
+    MoLcKInput α :=
+  concrete_MoLcKInput_witness_from_repository_native_descent_field I.D
+
 end URF
