@@ -1168,4 +1168,43 @@ def canonical_F2_pivot_step_constructor_from_descent_field {α : Type u}
     (concrete_F2_pivot_elimination_operation_from_descent_field S D R)
     rfl
 
+
+/-- Repository-native `MoLcKInput` witness obtained by repackaging an existing
+`DescentSystem`.
+
+Boundary: this does not supply a new domain-specific scientific system. It
+constructs a `MoLcKInput` only from an already supplied `DescentSystem` whose
+fields already include `step`, `terminal`, `nstep`, and `step_rank_drop_field`.
+-/
+def concrete_MoLcKInput_witness_from_repository_native_descent_field {α : Type u}
+    (D : DescentSystem α) : MoLcKInput α where
+  extractR := D.extractR
+  witnessVector := D.witnessVector
+  witnessContribution := D.witnessContribution
+  step := D.step
+  nstep := D.nstep
+  terminal := D.terminal
+  contribution_eq_cycleRank := D.contribution_eq_cycleRank
+  extractR_independent := D.extractR_independent
+  positive_contribution_on_extractR := D.positive_contribution_on_extractR
+  terminal_iff_zero_rank := D.terminal_iff_zero_rank
+  terminal_step_terminal := D.terminal_step_terminal
+  intended_scientific_rank_strict_decrease_proof := D.step_rank_drop_field
+  nstep_zero := D.nstep_zero
+  nstep_succ := D.nstep_succ
+
+/-- The repository-native `MoLcKInput` witness recovers the step-rank-drop
+certificate through the existing MoLcK route.
+
+Boundary: conditional on an already supplied `DescentSystem`; not a new
+domain-specific scientific instantiation.
+-/
+theorem StepRankDropCertificate_from_repository_native_moLcK_descent_field
+    {α : Type u} (D : DescentSystem α) :
+    StepRankDropCertificate
+      (IntendedScientificDescentSystem_from_moLcK
+        (concrete_MoLcKInput_witness_from_repository_native_descent_field D)) :=
+  StepRankDropCertificate_from_moLcK
+    (concrete_MoLcKInput_witness_from_repository_native_descent_field D)
+
 end URF
