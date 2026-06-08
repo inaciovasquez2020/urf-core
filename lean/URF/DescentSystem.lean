@@ -837,6 +837,24 @@ by
         S D R cert)
       C
 
+/-- Zero-rank reachability derived from the `DescentSystem` rank-drop field.
+
+This closes the route from the promoted field to the certificate-local
+zero-rank theorem without reintroducing a global axiom. -/
+theorem ZeroRankReachedWithinRank_from_descent_system_field
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (C : Configuration α) :
+    ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+by
+  exact
+    ZeroRankReachedWithinRank_from_step_rank_drop_certificate
+      S D R
+      (StepRankDropCertificate_from_descent_system_field D)
+      C
+
 theorem ZeroRankReachedWithinRank_from_concrete_pivot
     {α : Type u}
     (S : SupportEncoding α)
