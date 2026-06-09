@@ -14,3 +14,4 @@ import URF.Foundation.BundledFiniteMarkovKernelCompositionTheorem
 import URF.Frontier.R1R2R3Path5NonToy
 
 import URF.Frontier.R1R2R3RepositoryNativeIntendedConfiguration
+import URF.Frontier.RepositoryNativeBoundedStatusCertificate
