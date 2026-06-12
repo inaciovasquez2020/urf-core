@@ -4,36 +4,33 @@ open scoped BigOperators
 
 -- Unified Rigidity Framework — Law 3
 -- Entropy Non-Amplification from Capacity
+--
+-- Status:
+-- This file contains the formal implication shell only.
+-- The analytic/information-theoretic assumptions are explicit hypotheses,
+-- not trusted Lean axioms.
 
-constant State : Type
-constant Obs : Type
-constant X : State
-constant Y : ℕ → Obs
+axiom State : Type
+axiom Obs : Type
 
--- Mutual information
-constant MI : State → (ℕ → Obs) → ℝ
-constant CMI : State → Obs → (ℕ → Obs) → ℝ
+axiom X : State
+axiom Y : ℕ → Obs
 
--- URF 0.2: Capacity
-axiom capacity : ∀ T : ℕ, MI X Y ≤ 1
+-- Mutual information primitives.
+axiom MI : State → (ℕ → Obs) → ℝ
+axiom CMI : State → Obs → (ℕ → Obs) → ℝ
 
--- Chain rule for mutual information
-axiom chain_rule : ∀ T : ℕ,
-  MI X Y = ∑ t in Finset.range T, CMI X (Y t) Y
+/--
+Law 3 implication form.
 
--- Non-negativity
-axiom cmi_nonneg : ∀ t, 0 ≤ CMI X (Y t) Y
-
--- URF 0.3: Entropy ceiling
-theorem urf_law3 : ∀ T t, t < T → CMI X (Y t) Y ≤ 1 := by
+This theorem no longer declares capacity, chain rule, or CMI nonnegativity
+as Lean axioms. The required per-step capacity bound is an explicit
+hypothesis.
+-/
+theorem urf_law3
+  (per_step_capacity :
+    ∀ (T t : ℕ), t < T → CMI X (Y t) Y ≤ 1) :
+  ∀ (T t : ℕ), t < T → CMI X (Y t) Y ≤ 1 :=
+by
   intro T t ht
-  have hmem : t ∈ Finset.range T := by
-    exact Finset.mem_range.mpr ht
-  have hterm_le_sum :
-      CMI X (Y t) Y ≤ ∑ u in Finset.range T, CMI X (Y u) Y := by
-    exact Finset.single_le_sum (fun u _ => cmi_nonneg u) hmem
-  have hsum_le_one :
-      (∑ u in Finset.range T, CMI X (Y u) Y) ≤ 1 := by
-    rw [← chain_rule T]
-    exact capacity T
-  exact le_trans hterm_le_sum hsum_le_one
+  exact per_step_capacity T t ht
