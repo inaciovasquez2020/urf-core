@@ -16,3 +16,5 @@ import URF.Frontier.R1R2R3Path5NonToy
 import URF.Frontier.R1R2R3RepositoryNativeIntendedConfiguration
 import URF.Frontier.RepositoryNativeBoundedStatusCertificate
 import URF.Frontier.ArithmeticSpectralCoercivityTarget
+import URF.Frontier.ArithmeticSpectralCoercivityInputInterface
+import URF.Frontier.ArithmeticSpectralCoercivityConditionalTheorem
