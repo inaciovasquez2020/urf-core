@@ -1,0 +1,10 @@
+{
+  "artifact": "arithmetic_spectral_coercivity_existing_work_negative_fixture_2026_06_17",
+  "status": "negative_fixture",
+  "classification": "CONDITIONAL_INTERFACE_ONLY_NO_EXISTING_NONCIRCULAR_ARITHMETIC_SPECTRAL_BRIDGE",
+  "finding": "Existing Foundation Lean theorems do not currently derive the Frontier arithmetic spectral coercivity hypothesis.",
+  "rejected_patch_pattern": "Do not replace the target Prop with a witness field and treat field extraction as a non-circular derivation.",
+  "first_structural_error": "A witness field named coercivityLowerBound would still be assumed input data unless derived from existing Foundation theorems.",
+  "accepted_boundary": "The current bridge remains conditional until a theorem connects existing Foundation objects to the Frontier spectral interface.",
+  "missing_object": "foundation_to_arithmetic_spectral_coercivity_bridge"
+}
