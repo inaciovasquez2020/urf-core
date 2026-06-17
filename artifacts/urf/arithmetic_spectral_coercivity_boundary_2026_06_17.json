@@ -1,0 +1,22 @@
+{
+  "artifact_id": "ARITHMETIC_SPECTRAL_COERCIVITY_BOUNDARY_2026_06_17",
+  "object": "ArithmeticSpectralCoercivity",
+  "status": "open_boundary",
+  "date": "2026-06-17",
+  "scope": "scoped status artifact only",
+  "theorem_closure_claimed": false,
+  "claim_boundary": {
+    "closed": [],
+    "open": [
+      "unconditional ArithmeticSpectralCoercivity proof",
+      "global URF theorem closure"
+    ],
+    "not_claimed": [
+      "unrestricted graph-class theorem",
+      "unrestricted intended-configuration theorem",
+      "P vs NP closure",
+      "Clay problem closure"
+    ]
+  },
+  "next_missing_object": "ArithmeticSpectralCoercivity proof or externally checkable certificate"
+}
