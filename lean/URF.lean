@@ -20,3 +20,4 @@ import URF.Frontier.ArithmeticSpectralCoercivityInputInterface
 import URF.Frontier.ArithmeticSpectralCoercivityConditionalTheorem
 import URF.Frontier.ArithmeticSpectralCoercivityBridgeHypothesisInterface
 import URF.Frontier.ArithmeticSpectralCoercivityBridgeToInputLemma
+import URF.Frontier.ArithmeticSpectralCoercivityFireX
