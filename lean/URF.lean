@@ -22,3 +22,5 @@ import URF.Frontier.ArithmeticSpectralCoercivityBridgeHypothesisInterface
 import URF.Frontier.ArithmeticSpectralCoercivityBridgeToInputLemma
 import URF.Frontier.ArithmeticSpectralCoercivityFireX
 import URF.Frontier.ArithmeticSpectralCoercivityFireXSupplyRuleSource
+import URF.Frontier.EmergentMetricClassicalLimitSource
+import URF.Frontier.EmergentMetricEinsteinLimitObligation
