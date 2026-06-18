@@ -48,3 +48,5 @@ import URF.Frontier.EmergentMetricClassicalLimitSource
 import URF.Frontier.EmergentMetricEinsteinLimitObligation
 import URF.Frontier.ScalingLimitToEmergentMetricObligation
 import URF.Frontier.GeometricObservableConvergenceObligation
+
+import URF.Frontier.MetricLikeCandidateConstructionObligation
