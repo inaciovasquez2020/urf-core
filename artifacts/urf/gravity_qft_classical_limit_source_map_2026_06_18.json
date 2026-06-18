@@ -1,0 +1,96 @@
+{
+  "artifact_id": "GRAVITY_QFT_CLASSICAL_LIMIT_SOURCE_MAP_2026_06_18",
+  "status": "conditional_source_map_only",
+  "boundary": "BOUNDARY := \u00ac solved_quantum_gravity",
+  "does_not_claim": {
+    "solves_gravity": false,
+    "quantum_gravity_closed": false,
+    "Einstein_limit_proved": false,
+    "experimental_confirmation": false
+  },
+  "allowed_classifications": [
+    "formalization_template",
+    "semiclassical_limit_input",
+    "curved_spacetime_context",
+    "emergent_metric_target",
+    "approximation_method"
+  ],
+  "references": [
+    {
+      "key": "douglas_hoback_mei_nissim_2026_formalization_qft",
+      "title": "Formalization of QFT",
+      "classification": "formalization_template",
+      "citation": {
+        "arxiv_id": "2603.15770v1",
+        "url": "https://arxiv.org/html/2603.15770v1"
+      },
+      "use": "Lean/formalization workflow template for rigorous QFT source surfaces.",
+      "boundary": "Does not provide a quantum gravity closure theorem or Einstein-limit proof."
+    },
+    {
+      "key": "hutsalyuk_lajer_mussardo_stampiggi_2026_variational_qft",
+      "title": "Variational method in quantum field theory",
+      "classification": "approximation_method",
+      "citation": {
+        "doi": "10.1007/JHEP05(2026)269",
+        "url": "https://link.springer.com/article/10.1007/JHEP05(2026)269"
+      },
+      "use": "Approximation-method source for non-integrable QFT via variational/integrable-model inputs.",
+      "boundary": "Two-dimensional QFT approximation material only; no gravity closure."
+    },
+    {
+      "key": "qft_curved_spacetime_lisbon_2026",
+      "title": "Avenues of Quantum Field Theory in Curved Spacetime 2026, Lisbon, Portugal",
+      "classification": "curved_spacetime_context",
+      "citation": {
+        "url": "https://hyperspace.uni-frankfurt.de/2026/05/09/avenues-of-quantum-field-theory-in-curved-spacetime-2026-lisbon-portugal/"
+      },
+      "use": "Literature-context source for QFT on fixed/background curved spacetime.",
+      "boundary": "Context only; no dynamical quantum spacetime construction."
+    },
+    {
+      "key": "helland_parthasarathy_2026_theoretical_variables",
+      "title": "Theoretical Variables: Quantum Theory, Relativistic Quantum Field Theory, and Quantum Gravity",
+      "classification": "curved_spacetime_context",
+      "citation": {
+        "doi": "10.1201/9781003726470",
+        "url": "https://www.taylorfrancis.com/books/mono/10.1201/9781003726470/theoretical-variables-quantum-theory-relativistic-quantum-field-theory-quantum-gravity-inge-helland-harish-parthasarathy"
+      },
+      "use": "Survey/context source for theoretical-variable framing across quantum theory, QFT, and quantum gravity.",
+      "boundary": "Survey/source object only; no repository theorem closure."
+    },
+    {
+      "key": "coarse_grained_classical_limit_2025",
+      "title": "The classical limit of quantum mechanics through coarse-grained measurements",
+      "classification": "semiclassical_limit_input",
+      "citation": {
+        "arxiv_id": "2503.15642v2",
+        "url": "https://arxiv.org/html/2503.15642v2"
+      },
+      "use": "Semiclassical/classical-limit input for coarse-grained quantum-to-classical recovery obligations.",
+      "boundary": "Quantum-to-classical mechanics input only; no Einstein-limit proof."
+    },
+    {
+      "key": "nagy_2025_classical_limit_scalar_qft",
+      "title": "Classical limit of a scalar quantum field theory",
+      "classification": "semiclassical_limit_input",
+      "citation": {
+        "doi": "10.1103/8z4q-kwth",
+        "url": "https://journals.aps.org/prd/abstract/10.1103/8z4q-kwth"
+      },
+      "use": "Semiclassical-limit input for scalar QFT classicality via decoherence/fluctuation-suppression conditions.",
+      "boundary": "Scalar-QFT classical-limit input only; no gravity closure."
+    },
+    {
+      "key": "volovik_2026_quantum_classical_mechanics_vs_qft",
+      "title": "Quantum and Classical mechanics vs QFT",
+      "classification": "emergent_metric_target",
+      "citation": {
+        "arxiv_id": "2602.21243",
+        "url": "https://arxiv.org/pdf/2602.21243"
+      },
+      "use": "Emergent-metric target source for pregeometric/QFT-to-metric obligation framing.",
+      "boundary": "Speculative target surface only; no accepted solved quantum-gravity result."
+    }
+  ]
+}
