@@ -1,0 +1,54 @@
+{
+  "artifact_id": "EMERGENT_METRIC_EINSTEIN_LIMIT_OBLIGATION_2026_06_18",
+  "status": "open_obligation_only",
+  "boundary": "BOUNDARY := \u00ac Einstein_limit_proved",
+  "depends_on": [
+    "GRAVITY_QFT_CLASSICAL_LIMIT_SOURCE_MAP_2026_06_18"
+  ],
+  "purpose": "Record the missing bridge from emergent-metric and semiclassical/classical-limit helper sources to an Einstein or Einstein-Cartan classical-limit target without asserting that the bridge has been proved.",
+  "source_inputs": [
+    {
+      "role": "formalization_template",
+      "contributes": "QFTState and formal source-surface discipline",
+      "claim_status": "source_role_only"
+    },
+    {
+      "role": "semiclassical_limit_input",
+      "contributes": "ScalingLimit and classical-limit candidate regime",
+      "claim_status": "source_role_only"
+    },
+    {
+      "role": "curved_spacetime_context",
+      "contributes": "background/context vocabulary for QFT on curved spacetime",
+      "claim_status": "source_role_only"
+    },
+    {
+      "role": "emergent_metric_target",
+      "contributes": "metric-like target obligation",
+      "claim_status": "source_role_only"
+    },
+    {
+      "role": "approximation_method",
+      "contributes": "ApproximationRegime and leading-order-error vocabulary",
+      "claim_status": "source_role_only"
+    }
+  ],
+  "missing_bridge": {
+    "name": "EmergentMetricEinsteinLimitObligation",
+    "weakest_missing_object": "a constructive map from QFT/emergent-metric source data to a dynamical Lorentzian metric candidate whose leading-order classical equation is proven to satisfy an Einstein or Einstein-Cartan target equation",
+    "sub_obligations": [
+      "construct a ScalingLimit from QFTState to an EmergentMetric candidate",
+      "prove nondegenerate Lorentzian or Einstein-Cartan-compatible geometric structure where required",
+      "identify stress-energy and cosmological terms from source data",
+      "prove LeadingOrderEinsteinLimit in an explicitly bounded approximation regime",
+      "recheck all boundary guards after any attempted discharge"
+    ]
+  },
+  "does_not_claim": {
+    "Einstein_limit_proved": false,
+    "field_equations_derived": false,
+    "gravity_solved": false,
+    "quantum_gravity_closed": false,
+    "experimental_confirmation": false
+  }
+}
