@@ -1,0 +1,35 @@
+{
+  "artifact_id": "SCALING_LIMIT_TO_EMERGENT_METRIC_OBLIGATION_2026_06_18",
+  "status": "open_obligation_only",
+  "boundary": "BOUNDARY := \u00ac emergent_metric_constructed",
+  "depends_on": [
+    "GRAVITY_QFT_CLASSICAL_LIMIT_SOURCE_MAP_2026_06_18",
+    "EMERGENT_METRIC_EINSTEIN_LIMIT_OBLIGATION_2026_06_18"
+  ],
+  "purpose": "Record the missing bridge from QFT-side source data and a scaling-limit procedure to an emergent metric candidate without asserting that such a metric has been constructed.",
+  "source_roles": [
+    "formalization_template",
+    "semiclassical_limit_input",
+    "emergent_metric_target",
+    "approximation_method"
+  ],
+  "missing_bridge": {
+    "name": "ScalingLimitToEmergentMetricObligation",
+    "weakest_missing_object": "a constructive controlled scaling-limit map from QFTState-like source data to a metric-like candidate with explicit convergence, covariance, nondegeneracy, signature, and error-control obligations",
+    "sub_obligations": [
+      "define QFT-side source data sufficient to generate candidate geometric observables",
+      "define a scaling-limit procedure with explicit regime parameters",
+      "prove convergence or controlled approximation of the geometric observables",
+      "prove the resulting candidate is metric-like in the required low-energy regime",
+      "record that Einstein-limit and field-equation derivation remain separate later obligations"
+    ]
+  },
+  "does_not_claim": {
+    "emergent_metric_constructed": false,
+    "scaling_limit_converges": false,
+    "Lorentzian_signature_proved": false,
+    "Einstein_limit_proved": false,
+    "field_equations_derived": false,
+    "gravity_solved": false
+  }
+}
