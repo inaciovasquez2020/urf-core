@@ -1,6 +1,5 @@
 import URF.Foundation.GlobalValidKernelTheorem
 import URF.Foundation.ChannelCapacityBoundDerivation
-import URF.Foundation.FiniteMutualInformationChainRuleProof
 
 namespace URF.Foundation
 
