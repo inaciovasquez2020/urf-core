@@ -3,7 +3,7 @@ import URF.Foundation.UniversalRigidityGrammarData
 universe u v w
 
 /-- Conditional universal translation with two-sided code preservation. -/
-noncomputable theorem UniversalTranslationTheorem_two_sided_conditional_on_equal_ranges
+theorem UniversalTranslationTheorem_two_sided_conditional_on_equal_ranges
     (G : UniversalRigidityGrammarData.{u})
     (A : Type v) (B : Type w)
     (EA : AdmissibleDomainEncoder G A)
@@ -20,7 +20,7 @@ noncomputable theorem UniversalTranslationTheorem_two_sided_conditional_on_equal
     h_range
 
 /-- Conditional universal translation preserves grammar-level predicates. -/
-noncomputable theorem UniversalTranslationTheorem_predicate_preservation
+theorem UniversalTranslationTheorem_predicate_preservation
     (G : UniversalRigidityGrammarData.{u})
     (A : Type v) (B : Type w)
     (EA : AdmissibleDomainEncoder G A)
@@ -39,7 +39,7 @@ noncomputable theorem UniversalTranslationTheorem_predicate_preservation
     P
 
 /-- Conditional universal translation preserves grammar-level binary relations. -/
-noncomputable theorem UniversalTranslationTheorem_relation_preservation
+theorem UniversalTranslationTheorem_relation_preservation
     (G : UniversalRigidityGrammarData.{u})
     (A : Type v) (B : Type w)
     (EA : AdmissibleDomainEncoder G A)
