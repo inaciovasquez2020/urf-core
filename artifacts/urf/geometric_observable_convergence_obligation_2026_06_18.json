@@ -1,0 +1,29 @@
+{
+  "artifact_id": "GEOMETRIC_OBSERVABLE_CONVERGENCE_OBLIGATION_2026_06_18",
+  "status": "open_obligation_only",
+  "boundary": "BOUNDARY := \u00ac geometric_observable_convergence_proved",
+  "depends_on": [
+    "SCALING_LIMIT_TO_EMERGENT_METRIC_OBLIGATION_2026_06_18"
+  ],
+  "purpose": "Record the missing bridge from named QFT-side geometric observables and a scaling-limit procedure to controlled convergence toward a metric-like candidate, without asserting convergence or metric construction.",
+  "missing_bridge": {
+    "name": "GeometricObservableConvergenceObligation",
+    "weakest_missing_object": "a controlled convergence estimate for QFT-side geometric observables under an explicit scaling-limit procedure, with covariance, stability, and approximation-error obligations separated from metric construction and Einstein-limit recovery",
+    "sub_obligations": [
+      "define the geometric observables extracted from QFT-side source data",
+      "define the topology or norm in which convergence is measured",
+      "state the scaling regime and approximation parameters",
+      "prove or bound convergence of the observables in that regime",
+      "record that emergent metric construction and Einstein-limit recovery remain separate later obligations"
+    ]
+  },
+  "does_not_claim": {
+    "geometric_observable_convergence_proved": false,
+    "emergent_metric_constructed": false,
+    "scaling_limit_converges": false,
+    "Lorentzian_signature_proved": false,
+    "Einstein_limit_proved": false,
+    "field_equations_derived": false,
+    "gravity_solved": false
+  }
+}
