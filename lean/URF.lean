@@ -50,3 +50,5 @@ import URF.Frontier.ScalingLimitToEmergentMetricObligation
 import URF.Frontier.GeometricObservableConvergenceObligation
 
 import URF.Frontier.MetricLikeCandidateConstructionObligation
+
+import URF.Frontier.MetricCandidateCompatibilityWithScalingLimitObligation
