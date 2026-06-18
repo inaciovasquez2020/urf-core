@@ -12,7 +12,7 @@ theorem SharedRigidityCodeBijection_inverse_code
   rw [← h (e.symm b), e.apply_symm_apply]
 
 /-- The shared rigidity code bijection may be chosen with both forward and inverse code preservation. -/
-noncomputable theorem SharedRigidityCodeBijection_two_sided
+theorem SharedRigidityCodeBijection_two_sided
     (α : A → Γ) (β : B → Γ)
     (hα : Function.Injective α)
     (hβ : Function.Injective β)
