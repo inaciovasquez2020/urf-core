@@ -53,7 +53,7 @@ theorem finite_markov_evolution_total_mass
           intro a _
           rw [finite_stochastic_kernel_mass_conservation K a]
     _ = 1 := by
-          simpa [μ.total_mass]
+          simp [μ.total_mass]
 
 def pushDistribution
     {α β : Type u} [DecidableEq α] [Fintype α] [DecidableEq β] [Fintype β]
