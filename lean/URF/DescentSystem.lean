@@ -2,15 +2,7 @@ import Mathlib.Data.Finset.Basic
 import Mathlib.Data.Matrix.Basic
 import Mathlib.Data.ZMod.Basic
 import Mathlib.LinearAlgebra.LinearIndependent.Basic
-
-namespace Matrix
-
-/-- Boundary placeholder for the descent-system matrix-rank surface. -/
-noncomputable def rank {m n R : Type*} (_M : Matrix m n R) : Nat :=
-  0
-
-end Matrix
-
+import Mathlib.LinearAlgebra.Matrix.Rank
 
 namespace URF
 
@@ -470,6 +462,9 @@ structure SupportEncoding (α : Type u) where
   encode : Witness α → E → ZMod 2
   support_spec :
     ∀ w e, encode w e = 1 ↔ True
+
+instance SupportEncoding.instFintypeE {α : Type u} (S : SupportEncoding α) : Fintype S.E :=
+  S.fintypeE
 
 def extractRMatrix
   {α : Type u}
