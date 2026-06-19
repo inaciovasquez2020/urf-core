@@ -9,7 +9,7 @@ namespace StableTraceCertificateEquivalence
 open CapacitySoundnessReduction
 open StableGenAdmissibleTraceFrontier
 
-noncomputable theorem stableGenAdmissibleTrace_to_certificate
+theorem stableGenAdmissibleTrace_to_certificate
     {X : CapacityInterface.{u, v, w}}
     [Inhabited X.Trace]
     (h : StableGenAdmissibleTrace X) :
@@ -35,7 +35,7 @@ noncomputable theorem stableGenAdmissibleTrace_to_certificate
     rw [hf]
     exact (Classical.choose_spec (h g hg)).2
 
-noncomputable theorem stableGenAdmissibleTrace_iff_certificateExists
+theorem stableGenAdmissibleTrace_iff_certificateExists
     {X : CapacityInterface.{u, v, w}}
     [Inhabited X.Trace] :
     StableGenAdmissibleTrace X ↔ StableTraceCertificateExists X := by
@@ -43,7 +43,7 @@ noncomputable theorem stableGenAdmissibleTrace_iff_certificateExists
   · exact stableGenAdmissibleTrace_to_certificate
   · exact stableGenAdmissibleTrace_from_certificate_exists
 
-noncomputable theorem stableTraceCertificateExists_iff_stableGenAdmissibleTrace
+theorem stableTraceCertificateExists_iff_stableGenAdmissibleTrace
     {X : CapacityInterface.{u, v, w}}
     [Inhabited X.Trace] :
     StableTraceCertificateExists X ↔ StableGenAdmissibleTrace X := by

@@ -18,7 +18,7 @@ theorem SharedRigidityCodeBijection_range_eq_of_exists
     exact ⟨e.symm b, SharedRigidityCodeBijection_inverse_code α β e he b⟩
 
 /-- Equal ranges exactly characterize existence of a shared rigidity code bijection. -/
-noncomputable theorem SharedRigidityCodeBijection_exists_iff_range_eq
+theorem SharedRigidityCodeBijection_exists_iff_range_eq
     (α : A → Γ) (β : B → Γ)
     (hα : Function.Injective α)
     (hβ : Function.Injective β) :

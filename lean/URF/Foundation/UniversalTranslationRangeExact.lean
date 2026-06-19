@@ -16,7 +16,7 @@ theorem UniversalTranslationTheorem_range_eq_of_exists
     h
 
 /-- Equal encoder ranges exactly characterize conditional universal translation. -/
-noncomputable theorem UniversalTranslationTheorem_exists_iff_range_eq
+theorem UniversalTranslationTheorem_exists_iff_range_eq
     (G : UniversalRigidityGrammarData.{u})
     (A : Type v) (B : Type w)
     (EA : AdmissibleDomainEncoder G A)
@@ -30,7 +30,7 @@ noncomputable theorem UniversalTranslationTheorem_exists_iff_range_eq
     EB.injective_encode
 
 /-- The conditional universal translation proposition is definitionally the range-exact implication. -/
-noncomputable theorem UniversalTranslationTheorem_iff_range_exact
+theorem UniversalTranslationTheorem_iff_range_exact
     (G : UniversalRigidityGrammarData.{u})
     (A : Type v) (B : Type w)
     (EA : AdmissibleDomainEncoder G A)

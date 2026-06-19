@@ -16,14 +16,14 @@ theorem finite_local_nonnegative_component_bound
   have h_sum_split :
       Finset.univ.sum localCMI =
         localCMI t + ((Finset.univ : Finset (Fin T)).erase t).sum localCMI := by
-    simpa using
-      (Finset.sum_eq_add_sum_diff_singleton
-        (ι := Fin T)
-        (M := ℝ)
-        (i := t)
-        (h := h_mem)
-        (s := (Finset.univ : Finset (Fin T)))
-        (f := localCMI))
+    rw [Finset.sum_eq_add_sum_diff_singleton
+      (ι := Fin T)
+      (M := ℝ)
+      (i := t)
+      (h := h_mem)
+      (s := (Finset.univ : Finset (Fin T)))
+      (f := localCMI)]
+    simp
   have h_tail_nonneg :
       0 ≤ ((Finset.univ : Finset (Fin T)).erase t).sum localCMI := by
     exact Finset.sum_nonneg (fun x _ => h_nonneg x)

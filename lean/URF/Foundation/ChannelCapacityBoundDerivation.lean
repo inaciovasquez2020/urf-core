@@ -1,21 +1,6 @@
-import Mathlib.Data.Real.Basic
+import URF.Foundation.FiniteMutualInformationChainRuleProof
 
 namespace URF
-
-structure FiniteMutualInformationChainRuleProof where
-  T : Nat
-  RandomVariable : Type
-  X : Nat → RandomVariable
-  Y : Nat → RandomVariable
-  Z : Nat → RandomVariable
-  finiteLocalSum : Nat → (Nat → ℝ) → ℝ
-  totalMI : ℝ
-  localCMIValue : Nat → ℝ
-  cmi_nonneg : ∀ t : Nat, 0 ≤ localCMIValue t
-  finite_chain_rule :
-    totalMI = finiteLocalSum T localCMIValue
-  capacity_bound_required : Prop
-  global_kernel_required : Prop
 
 structure ChannelCapacityBoundDerivation where
   finiteChain : FiniteMutualInformationChainRuleProof

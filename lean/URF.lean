@@ -7,6 +7,7 @@ import URF.Foundation.SharedRigidityCodeBijection
 import URF.Foundation.SharedRigidityCodeBijectionUnique
 import URF.Foundation.SharedRigidityCodeBijectionTwoSided
 import URF.Foundation.SharedRigidityCodeBijectionRangeIff
+import URF.Foundation.SharedRigidityCodeBijectionDependencyCertificate
 import URF.Foundation.SharedRigidityCodeBijectionTrans
 import URF.Foundation.UniversalRigidityGrammarData
 import URF.Foundation.UniversalTranslationPreservation

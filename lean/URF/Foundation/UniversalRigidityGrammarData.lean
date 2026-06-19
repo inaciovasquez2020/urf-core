@@ -35,7 +35,7 @@ def UniversalTranslationTheorem
     ∃ e : A ≃ B, ∀ a : A, EB.encode (e a) = EA.encode a
 
 /-- The conditional universal translation theorem follows from the local shared-code bijection theorem. -/
-noncomputable theorem UniversalTranslationTheorem_conditional_on_equal_ranges
+theorem UniversalTranslationTheorem_conditional_on_equal_ranges
     (G : UniversalRigidityGrammarData.{u})
     (A : Type v) (B : Type w)
     (EA : AdmissibleDomainEncoder G A)

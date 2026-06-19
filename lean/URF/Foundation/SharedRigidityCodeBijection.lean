@@ -3,7 +3,7 @@ import Mathlib.Logic.Equiv.Basic
 
 variable {A B Γ : Type*}
 
-noncomputable theorem SharedRigidityCodeBijection
+theorem SharedRigidityCodeBijection
     (α : A → Γ) (β : B → Γ)
     (hα : Function.Injective α)
     (hβ : Function.Injective β)
@@ -44,7 +44,7 @@ noncomputable theorem SharedRigidityCodeBijection
       β (f (g b)) = α (g b) := hf (g b)
       _ = β b := hg b
 
-noncomputable theorem SharedRigidityCodeBijection_predicate
+theorem SharedRigidityCodeBijection_predicate
     (α : A → Γ) (β : B → Γ)
     (hα : Function.Injective α)
     (hβ : Function.Injective β)
@@ -59,7 +59,7 @@ noncomputable theorem SharedRigidityCodeBijection_predicate
   intro a
   rw [he a]
 
-noncomputable theorem SharedRigidityCodeBijection_relation
+theorem SharedRigidityCodeBijection_relation
     (α : A → Γ) (β : B → Γ)
     (hα : Function.Injective α)
     (hβ : Function.Injective β)
