@@ -1,0 +1,38 @@
+{
+  "status": "CSLIB_FMT_FULL_FORMULA_RADIUS_EXTERNAL_STATUS_SIGNAL",
+  "date": "2026-06-21",
+  "source_repo": "https://github.com/inaciovasquez2020/cslib-fmt",
+  "source_repo_role": "external_formal_infrastructure_source",
+  "source_commits": {
+    "full_formula_radius_construction": "e352dfa",
+    "downstream_old_boundary_audit": "936a562",
+    "historical_boundary_supersession_notes": "08eb890"
+  },
+  "source_objects": [
+    "full_formula_radius_construction",
+    "full_formula_radius_construction_closed",
+    "full_formula_radius_construction_status",
+    "full_formula_radius_construction_status_closed",
+    "full_formula_radius_downstream_old_boundary_audit",
+    "full_formula_radius_historical_boundary_supersession_notes"
+  ],
+  "source_validation": {
+    "lean_check": "passed",
+    "full_formula_radius_construction_verifier": "FULL_FORMULA_RADIUS_CONSTRUCTION_OK",
+    "downstream_old_boundary_audit_verifier": "FULL_FORMULA_RADIUS_DOWNSTREAM_OLD_BOUNDARY_AUDIT_OK",
+    "historical_boundary_supersession_notes_verifier": "FULL_FORMULA_RADIUS_HISTORICAL_BOUNDARY_SUPERSESSION_NOTES_OK",
+    "noncomputable_audit": "NONCOMPUTABLE_AUDIT_OK",
+    "pytest": "230 passed"
+  },
+  "urf_core_interpretation": "Records an external cslib-fmt formal-infrastructure milestone: the repository-internal formula-radius construction object is now closed in cslib-fmt, with audit and supersession notes for old boundary records.",
+  "urf_core_effect": "status_signal_only",
+  "does_not_import": [
+    "Lean proof object from cslib-fmt",
+    "full unguarded FO locality theorem",
+    "Fagin theorem",
+    "0-1 Law",
+    "URF core theorem closure",
+    "URF maturity upgrade"
+  ],
+  "boundary": "external status signal only; no cross-repo proof import; no URF-core theorem status change; no external finite-model-theory closure claim"
+}
