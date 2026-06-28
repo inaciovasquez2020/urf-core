@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 225
+TEXT := global `step_rank_drop` axiom; it creates the weakest conditional replacement
+
+215:   exact M.intended_scientific_rank_strict_decrease_proof C h
+216: 
+217: theorem rank_strict_decrease
+218:   {α : Type u} (D : DescentSystem α) (C : Configuration α)
+219:   (h : ¬ D.terminal C) :
+220:   (D.step C).rank < C.rank :=
+221: by
+222:   exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) (step_rank_drop D C h)
+223: 
+224: /-- Certificate-local rank strict decrease.  This does not remove the
+225: global `step_rank_drop` axiom; it creates the weakest conditional replacement
+226: surface for downstream migration. -/
+227: theorem rank_strict_decrease_from_certificate
+228:   {α : Type u} (D : DescentSystem α)
+229:   (cert : StepRankDropCertificate D)
+230:   (C : Configuration α)
+231:   (h : ¬ D.terminal C) :
+232:   (D.step C).rank < C.rank :=
+233: by
+234:   exact Nat.lt_of_lt_of_le
+235:     (Nat.lt_succ_self _)
+236:     (cert.step_rank_drop_certified C h)
+237: 
+238: theorem nstep_rank_monotone_from_iterated_step_formula
+239:     {α : Type u}
+240:     (D : DescentSystem α)
+241:     (hstep_iter :
+242:       ∀ n C, D.nstep (n + 1) C = D.step (D.nstep n C))
+243:     (hterminal_step_nonincrease :
+244:       ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+245:     ∀ n C, (D.nstep (n + 1) C).rank ≤ (D.nstep n C).rank := by
+246:   intro n C
+247:   rw [hstep_iter n C]
+248:   by_cases hterm : D.terminal (D.nstep n C)
+249:   · exact hterminal_step_nonincrease (D.nstep n C) hterm
+250:   · exact Nat.le_of_succ_le (step_rank_drop D (D.nstep n C) hterm)

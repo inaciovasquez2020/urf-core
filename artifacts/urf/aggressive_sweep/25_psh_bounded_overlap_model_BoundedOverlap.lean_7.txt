@@ -1,0 +1,37 @@
+GROUP := psh_bounded_overlap_model
+PATH := URF/PSH/BoundedOverlap.lean
+LINE := 7
+TEXT := axiom PSH_bounded_overlap
+
+1: import Mathlib
+2: import Mathlib.Data.Finset.Basic
+3: import Mathlib.Data.Fintype.Basic
+4: import URF.Boundary.VertexBoundary
+5: 
+6: /-- PSH-style bounded overlap stated directly at the vertex-boundary level. -/
+7: axiom PSH_bounded_overlap
+8:   {V : Type} [DecidableEq V]
+9:   (adj : V → Finset V) (k Δ : ℕ) :
+10:   ∃ C : ℕ, ∀ (S : Finset V),
+11:     (vertexBoundary adj S).card ≤ C * S.card
+12: 
+13: namespace URF
+14: 
+15: variable {V : Type} [DecidableEq V] [Fintype V]
+16: 
+17: /-- Local observation with finite support. -/
+18: structure LocalObs :=
+19: (supp : Finset V)
+20: 
+21: /--
+22: Abstract PSH finiteness principle:
+23: local observations admit a finite key space.
+24: -/
+25: axiom PSH_finite_keys :
+26:   ∃ (K : Type) (_ : Fintype K) (key : LocalObs (V := V) → K), True
+27: 
+28: /--
+29: Trivial boundedness consequence: any finite key space
+30: admits a uniform cardinal bound.
+31: This is the *only* thing used downstream.
+32: -/

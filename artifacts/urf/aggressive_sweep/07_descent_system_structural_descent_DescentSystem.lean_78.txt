@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 78
+TEXT := `step_rank_drop` axiom at conditional theorem surfaces. -/
+
+68: 
+69: /-- Rank drop is now a field projection of `DescentSystem`, not a global axiom. -/
+70: theorem step_rank_drop :
+71:   ∀ {α : Type u} (D : DescentSystem α) (C : Configuration α),
+72:     ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank :=
+73: by
+74:   intro α D C h
+75:   exact D.step_rank_drop_field C h
+76: 
+77: /-- Explicit per-system certificate replacing direct use of the global
+78: `step_rank_drop` axiom at conditional theorem surfaces. -/
+79: structure StepRankDropCertificate
+80:   {α : Type u}
+81:   (D : DescentSystem α) : Prop where
+82:   step_rank_drop_certified :
+83:     ∀ C : Configuration α,
+84:       ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank
+85: 
+86: /-- Every `DescentSystem` now supplies a `StepRankDropCertificate`
+87: by projection from its `step_rank_drop_field`. -/
+88: theorem StepRankDropCertificate_from_descent_system_field
+89:     {α : Type u}
+90:     (D : DescentSystem α) :
+91:     StepRankDropCertificate D :=
+92: by
+93:   refine ⟨?_⟩
+94:   intro C h
+95:   exact D.step_rank_drop_field C h
+96: 
+97: /-- Toy descent step used only as an instantiation sanity check.
+98: 
+99: This is not the intended scientific `DescentSystem`. -/
+100: def toyDescentStep (C : Configuration Unit) : Configuration Unit :=
+101:   { data := (), rank := C.rank - 1 }
+102: 
+103: /-- Toy iterated descent step used only as an instantiation sanity check. -/

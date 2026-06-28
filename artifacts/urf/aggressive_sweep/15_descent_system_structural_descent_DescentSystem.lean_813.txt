@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 813
+TEXT := Proved by direct appeal to the global step_rank_drop axiom. -/
+
+803:     (R : Nat) : Prop where
+804:   stepCompatibilityWithConcretePivot :
+805:     ∀ C : Configuration α,
+806:       ConcreteAbstractDescentEquivalence S D R C →
+807:       ¬ D.terminal C →
+808:       (D.step C).rank + 1 ≤ C.rank
+809: 
+810: theorem StepCompatibleDescentSystem.of_concrete_pivot_rank_drop
+811:     {α : Type u}
+812:     (S : SupportEncoding α)
+813:     (D : DescentSystem α)
+814:     (R : Nat)
+815:     (h :
+816:       ∀ C : Configuration α,
+817:         ConcreteAbstractDescentEquivalence S D R C →
+818:         ¬ D.terminal C →
+819:         (D.step C).rank + 1 ≤ C.rank) :
+820:     StepCompatibleDescentSystem S D R :=
+821: by
+822:   refine ⟨?_⟩
+823:   intro C hcompat hterm
+824:   exact h C hcompat hterm
+825: 
+826: /-- The concrete pivot package implies the rank drop for one descent step.
+827: Proved by direct appeal to the global step_rank_drop axiom. -/
+828: theorem ConcretePivotImpliesStepRankDrop
+829:     {α : Type u}
+830:     (S : SupportEncoding α)
+831:     (D : DescentSystem α)
+832:     (R : Nat)
+833:     (C : Configuration α)
+834:     (_hcompat : ConcreteAbstractDescentEquivalence S D R C)
+835:     (hterm : ¬ D.terminal C) :
+836:     (D.step C).rank + 1 ≤ C.rank :=
+837:   step_rank_drop D C hterm
+838: 

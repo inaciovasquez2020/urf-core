@@ -1,0 +1,135 @@
+01 GROUP := admissible_normalization
+   PATH  := admissible/lean/URFAdmissible.lean
+   LINE  := 65
+   TEXT  := axiom TM_normalization_assumption :
+
+02 GROUP := admissible_normalization
+   PATH  := admissible/lean/URFAdmissible.lean
+   LINE  := 78
+   TEXT  := axiom RAM_normalization_assumption :
+
+03 GROUP := chronos_cert_entropy_determinism
+   PATH  := lean/chronos_cert/ChronosCert.lean
+   LINE  := 12
+   TEXT  := axiom mi_le_entropy_answer :
+
+04 GROUP := chronos_cert_entropy_determinism
+   PATH  := lean/chronos_cert/ChronosCert.lean
+   LINE  := 15
+   TEXT  := axiom determinism_identity :
+
+05 GROUP := chronos_cert_entropy_determinism
+   PATH  := lean/chronos_cert/ChronosCert.lean
+   LINE  := 19
+   TEXT  := axiom entropy_drop_ceiling :
+
+06 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 69
+   TEXT  := /-- Rank drop is now a field projection of `DescentSystem`, not a global axiom. -/
+
+07 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 78
+   TEXT  := `step_rank_drop` axiom at conditional theorem surfaces. -/
+
+08 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 225
+   TEXT  := global `step_rank_drop` axiom; it creates the weakest conditional replacement
+
+09 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 254
+   TEXT  := This replaces the internal appeal to the global `step_rank_drop` axiom with
+
+10 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 286
+   TEXT  := axiom with an explicit `StepRankDropCertificate D` hypothesis. -/
+
+11 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 547
+   TEXT  := axiom pivot_family :
+
+12 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 588
+   TEXT  := axiom extractRMatrix_full_rank
+
+13 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 725
+   TEXT  := axiom greedy_pivot_separation :
+
+14 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 784
+   TEXT  := dependence on the older global rank-drop axiom. -/
+
+15 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 813
+   TEXT  := Proved by direct appeal to the global step_rank_drop axiom. -/
+
+16 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 827
+   TEXT  := This migrates one direct dependent of the global `step_rank_drop` axiom
+
+17 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 856
+   TEXT  := This avoids the direct route through the global `step_rank_drop` axiom by
+
+18 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 945
+   TEXT  := This is the axiom-separated theorem surface: it depends only on an explicit
+
+19 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 961
+   TEXT  := `StepRankDropCertificate D` instead of the global `step_rank_drop` axiom.
+
+20 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 982
+   TEXT  := zero-rank theorem without reintroducing a global axiom. -/
+
+21 GROUP := descent_system_structural_descent
+   PATH  := lean/URF/DescentSystem.lean
+   LINE  := 1482
+   TEXT  := /-- Open mathematical target, recorded without `sorry`.
+
+22 GROUP := other_active_obligation
+   PATH  := finite_cmi_nonneg_from_kl.lean
+   LINE  := 14
+   TEXT  := It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+
+23 GROUP := other_active_obligation
+   PATH  := finite_cmi_to_local_cmi_nonneg_interface.lean
+   LINE  := 15
+   TEXT  := It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+
+24 GROUP := other_active_obligation
+   PATH  := spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean
+   LINE  := 20
+   TEXT  := This file is intended to become the local proof that replaces the interface axiom.
+
+25 GROUP := psh_bounded_overlap_model
+   PATH  := URF/PSH/BoundedOverlap.lean
+   LINE  := 7
+   TEXT  := axiom PSH_bounded_overlap
+
+26 GROUP := psh_bounded_overlap_model
+   PATH  := URF/PSH/BoundedOverlap.lean
+   LINE  := 23
+   TEXT  := local observations admit a finite key space.
+
+27 GROUP := psh_bounded_overlap_model
+   PATH  := URF/PSH/BoundedOverlap.lean
+   LINE  := 25
+   TEXT  := axiom PSH_finite_keys :
+

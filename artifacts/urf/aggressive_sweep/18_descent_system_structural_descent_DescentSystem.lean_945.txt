@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 945
+TEXT := This is the axiom-separated theorem surface: it depends only on an explicit
+
+935:           rw [D.nstep_zero]
+936:           exact (D.terminal_iff_zero_rank C).1 hterm
+937:         · have hpkg :
+938:             ConcreteAbstractDescentEquivalence S D R C :=
+939:             packageConcreteAbstractDescentEquivalence S D R C
+940:           have hdrop :
+941:             (D.step C).rank + 1 ≤ C.rank :=
+942:             CanonicalF2PivotRankDrop_from_step_compatible
+943:               S D R H C hpkg hterm
+944:           have hlt : (D.step C).rank < C.rank :=
+945:             Nat.lt_of_succ_le hdrop
+946:           have hltm : (D.step C).rank < m := by
+947:             simpa [hCm] using hlt
+948:           rcases ih (D.step C).rank hltm (D.step C) rfl with ⟨n, hn, hz⟩
+949:           refine ⟨n + 1, ?_, ?_⟩
+950:           · exact Nat.succ_le_of_lt (Nat.lt_of_le_of_lt hn hltm)
+951:           · rw [D.nstep_succ]
+952:             exact hz
+953:   intro C
+954:   simpa using main C.rank C rfl
+955: 
+956: 
+957: /-- Conditional zero-rank reachability surface.
+958: 
+959: This is the axiom-separated theorem surface: it depends only on an explicit
+960: `StepCompatibleDescentSystem` witness and does not use
+961: `StepCompatibleDescentSystem.of_concrete_pivot`.
+962: -/
+963: theorem ZeroRankReachedWithinRank_conditional_from_step_compatible
+964:   {α : Type u}
+965:   (S : SupportEncoding α)
+966:   (D : DescentSystem α)
+967:   (R : Nat)
+968:   (H : StepCompatibleDescentSystem S D R) :
+969:   ∀ C : Configuration α, ∃ n ≤ C.rank, (D.nstep n C).rank = 0 := by
+970:   exact ZeroRankReachedWithinRank_from_step_compatible S D R H

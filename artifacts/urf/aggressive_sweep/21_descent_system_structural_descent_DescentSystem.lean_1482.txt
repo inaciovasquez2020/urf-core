@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 1482
+TEXT := /-- Open mathematical target, recorded without `sorry`.
+
+1472: 
+1473: Boundary: this packages the missing external mathematical payload as a single
+1474: repository-native object. It does not manufacture the domain-specific mathematics. -/
+1475: structure ConcreteSLVedPayload where
+1476:   Obstruction : Type u
+1477:   decidableEq : DecidableEq Obstruction
+1478:   SLVed : @SLVedPayload Obstruction decidableEq
+1479: 
+1480: /-- A concrete `SLVed` payload closes the intended scientific descent-system
+1481: witness target through the finite-obstruction route. -/
+1482: def IntendedScientificDescentSystemInstance_witness_from_concrete_SLVed
+1483:     (P : ConcreteSLVedPayload.{u}) :
+1484:     IntendedScientificDescentSystemInstance (Finset P.Obstruction) :=
+1485:   @IntendedScientificDescentSystemInstance_witness_from_SLVed
+1486:     P.Obstruction P.decidableEq P.SLVed
+1487: 
+1488: /-- Open target: supply a concrete `SLVed` payload.
+1489: 
+1490: Boundary: this is the exact remaining mathematical object. -/
+1491: abbrev ConcreteSLVedPayloadTarget : Prop :=
+1492:   Nonempty ConcreteSLVedPayload.{u}
+1493: 
+1494: 
+1495: 
+1496: /-- Open mathematical target, recorded without `sorry`.
+1497: 
+1498: A proof of this proposition is exactly the missing external mathematical object:
+1499: a concrete `ConcreteSLVedPayload`, namely a domain-specific obstruction type,
+1500: a proved finite-obstruction selector, and non-vacuous scientific certificates.
+1501: 
+1502: Do not close this target with a toy payload, an arbitrary finite type, a vacuous
+1503: certificate, or `True` as a scientific certificate.
+1504: 
+1505: Boundary:
+1506: `OPEN_TARGET_ONLY`.
+1507: `NO_CONCRETE_SLVED_PAYLOAD`.

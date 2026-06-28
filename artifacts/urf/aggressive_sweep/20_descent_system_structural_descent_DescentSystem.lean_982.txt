@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 982
+TEXT := zero-rank theorem without reintroducing a global axiom. -/
+
+972: /-- Certificate-local zero-rank reachability theorem.
+973: 
+974: This routes zero-rank reachability through an explicit
+975: `StepRankDropCertificate D` instead of the global `step_rank_drop` axiom.
+976: -/
+977: theorem ZeroRankReachedWithinRank_from_step_rank_drop_certificate
+978:     {α : Type u}
+979:     (S : SupportEncoding α)
+980:     (D : DescentSystem α)
+981:     (R : Nat)
+982:     (cert : StepRankDropCertificate D)
+983:     (C : Configuration α) :
+984:     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+985: by
+986:   exact
+987:     ZeroRankReachedWithinRank_from_step_compatible
+988:       S D R
+989:       (StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
+990:         S D R cert)
+991:       C
+992: 
+993: /-- Zero-rank reachability derived from the `DescentSystem` rank-drop field.
+994: 
+995: This closes the route from the promoted field to the certificate-local
+996: zero-rank theorem without reintroducing a global axiom. -/
+997: theorem ZeroRankReachedWithinRank_from_descent_system_field
+998:     {α : Type u}
+999:     (S : SupportEncoding α)
+1000:     (D : DescentSystem α)
+1001:     (R : Nat)
+1002:     (C : Configuration α) :
+1003:     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+1004: by
+1005:   exact
+1006:     ZeroRankReachedWithinRank_from_step_rank_drop_certificate
+1007:       S D R

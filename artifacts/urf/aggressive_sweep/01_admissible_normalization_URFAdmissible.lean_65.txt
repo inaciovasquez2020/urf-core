@@ -1,0 +1,41 @@
+GROUP := admissible_normalization
+PATH := admissible/lean/URFAdmissible.lean
+LINE := 65
+TEXT := axiom TM_normalization_assumption :
+
+55:   Locality step r ∧
+56:   Capacity I b ∧
+57:   Accounting Φ b T ∧
+58:   Uniformity step
+59: 
+60: /-
+61: Normalization theorems
+62: -/
+63: 
+64: /-- Deterministic TM normalization assumption boundary. -/
+65: axiom TM_normalization_assumption :
+66:   ∀ (M : Type),    -- abstract deterministic TM
+67:   URF_ADMISSIBLE step I Φ r b T
+68: 
+69: /-- Deterministic TM normalization, explicitly assumption-backed. -/
+70: theorem TM_normalization :
+71:   ∀ (M : Type),    -- abstract deterministic TM
+72:   URF_ADMISSIBLE step I Φ r b T :=
+73: by
+74:   intro M
+75:   exact TM_normalization_assumption M
+76: 
+77: /-- Restricted Word-RAM normalization assumption boundary. -/
+78: axiom RAM_normalization_assumption :
+79:   ∀ (R : Type),    -- abstract restricted Word-RAM
+80:   URF_ADMISSIBLE step I Φ r b T
+81: 
+82: /-- Restricted Word-RAM normalization, explicitly assumption-backed. -/
+83: theorem RAM_normalization :
+84:   ∀ (R : Type),    -- abstract restricted Word-RAM
+85:   URF_ADMISSIBLE step I Φ r b T :=
+86: by
+87:   intro R
+88:   exact RAM_normalization_assumption R
+89: 
+90: end URF

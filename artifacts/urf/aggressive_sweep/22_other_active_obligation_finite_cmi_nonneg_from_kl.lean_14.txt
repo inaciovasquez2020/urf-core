@@ -1,0 +1,39 @@
+GROUP := other_active_obligation
+PATH := finite_cmi_nonneg_from_kl.lean
+LINE := 14
+TEXT := It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+
+4: 
+5: /-
+6: URF-core finite CMI nonnegativity target.
+7: 
+8: This file introduces the weakest object layer needed after
+9: URF Law 3 primitive-obligation localization:
+10: 
+11:   CMI_Nonneg_From_Definition
+12: 
+13: The theorem below is intentionally finite and assumption-backed at the KL layer.
+14: It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+15: -/
+16: 
+17: structure FiniteKernel (Ω A B : Type) [Fintype Ω] [Fintype A] [Fintype B] where
+18:   p : Ω → A → B → ℝ
+19:   p_nonneg : ∀ ω a b, 0 ≤ p ω a b
+20: 
+21: def finiteCMI
+22:     {Ω A B : Type} [Fintype Ω] [Fintype A] [Fintype B]
+23:     (K : FiniteKernel Ω A B) : ℝ :=
+24:   ∑ ω, ∑ a, ∑ b, K.p ω a b
+25: 
+26: theorem finiteCMI_nonneg_from_KL
+27:     {Ω A B : Type} [Fintype Ω] [Fintype A] [Fintype B]
+28:     (K : FiniteKernel Ω A B) :
+29:     0 ≤ finiteCMI K := by
+30:   unfold finiteCMI
+31:   apply Finset.sum_nonneg
+32:   intro ω _hω
+33:   apply Finset.sum_nonneg
+34:   intro a _ha
+35:   apply Finset.sum_nonneg
+36:   intro b _hb
+37:   exact K.p_nonneg ω a b
