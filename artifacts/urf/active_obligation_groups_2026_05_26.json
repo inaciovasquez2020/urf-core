@@ -176,38 +176,6 @@
         "lean/URF/DescentSystem.lean"
       ]
     },
-    "info_step_model": {
-      "count": 4,
-      "items": [
-        {
-          "group": "info_step_model",
-          "line": 4,
-          "path": "URF/Info/InfoAxioms.lean",
-          "text": "axiom InfoStepBound : \u211d"
-        },
-        {
-          "group": "info_step_model",
-          "line": 5,
-          "path": "URF/Info/InfoAxioms.lean",
-          "text": "axiom info_step_nonneg : 0 \u2264 InfoStepBound"
-        },
-        {
-          "group": "info_step_model",
-          "line": 7,
-          "path": "URF/Info/InfoAxioms.lean",
-          "text": "axiom info_increment (t : \u2115) : \u211d"
-        },
-        {
-          "group": "info_step_model",
-          "line": 8,
-          "path": "URF/Info/InfoAxioms.lean",
-          "text": "axiom info_increment_le :"
-        }
-      ],
-      "paths": [
-        "URF/Info/InfoAxioms.lean"
-      ]
-    },
     "other_active_obligation": {
       "count": 3,
       "items": [
@@ -265,5 +233,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 32
+  "total_active_obligations": 28
 }
