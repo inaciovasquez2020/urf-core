@@ -301,29 +301,9 @@
       "paths": [
         "chronos/Transport/VertexBoundaryTransport.lean"
       ]
-    },
-    "tree_toy_boundary_model": {
-      "count": 2,
-      "items": [
-        {
-          "group": "tree_toy_boundary_model",
-          "line": 9,
-          "path": "URF/Boundary/TreeToy.lean",
-          "text": "axiom maxDegree : \u2115"
-        },
-        {
-          "group": "tree_toy_boundary_model",
-          "line": 11,
-          "path": "URF/Boundary/TreeToy.lean",
-          "text": "axiom degree_bound :"
-        }
-      ],
-      "paths": [
-        "URF/Boundary/TreeToy.lean"
-      ]
     }
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 38
+  "total_active_obligations": 36
 }

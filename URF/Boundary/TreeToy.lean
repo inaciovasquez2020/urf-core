@@ -6,12 +6,10 @@ variable (adj : V → Finset V)
 
 theorem isTree : True := by
   trivial
-axiom maxDegree : ℕ
-
-axiom degree_bound :
-  ∀ v : V, (adj v).card ≤ maxDegree
 
 lemma tree_vertexBoundary_bound
+  (maxDegree : ℕ)
+  (degree_bound : ∀ v : V, (adj v).card ≤ maxDegree)
   (S : Finset V) :
   (vertexBoundary adj S).card ≤ maxDegree * S.card := by
   classical
