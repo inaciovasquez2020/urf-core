@@ -11,30 +11,30 @@ without assuming any unverified computational equivalences.
 
 namespace URF
 
-/-- Size parameter -/
+/- Size parameter -/
 variable (n : ℕ)
 
 /-- Abstract process state indexed by input size -/
 structure State (n : ℕ) where
   repr : Type
 
-/-- Step relation -/
+/- Step relation -/
 variable {n : ℕ}
 variable (step : State n → State n)
 
-/-- Injected information per step (in bits) -/
+/- Injected information per step (in bits) -/
 variable (I : State n → ℕ)
 
-/-- Progress functional -/
+/- Progress functional -/
 variable (Φ : State n → ℝ)
 
-/-- Toolkit constants -/
+/- Toolkit constants -/
 variable (r : ℕ)                 -- locality radius
 variable (b : ℕ → ℕ)             -- capacity bound
 variable (T : ℕ → ℕ)             -- time horizon
 
 /-- Locality constraint -/
-def Locality : Prop :=
+def Locality (_step : State n → State n) (_r : ℕ) : Prop :=
   True  -- locality witnessed externally (schema / certificate)
 
 /-- Capacity constraint -/
@@ -47,7 +47,7 @@ def Accounting : Prop :=
     Φ sT - Φ s₀ ≤ (T n : ℝ) * (b n : ℝ)
 
 /-- Uniformity constraint -/
-def Uniformity : Prop :=
+def Uniformity (_step : State n → State n) : Prop :=
   True  -- enforced by construction
 
 /-- URF-ADMISSIBLE predicate -/
@@ -64,30 +64,32 @@ Normalization theorems
 /-- Explicit invariant carrying the deterministic TM normalization payload. -/
 structure TMNormalizationInvariant : Prop where
   normalization :
-    ∀ (M : Type),    -- abstract deterministic TM
+    ∀ (_M : Type),    -- abstract deterministic TM
     URF_ADMISSIBLE step I Φ r b T
 
 /-- Conditional theorem exposing deterministic TM normalization from the invariant. -/
 theorem TM_normalization_from_invariant
-    (h : TMNormalizationInvariant) :
-    ∀ (M : Type),    -- abstract deterministic TM
+    (h : TMNormalizationInvariant step I Φ r b T) :
+    ∀ (_M : Type),    -- abstract deterministic TM
     URF_ADMISSIBLE step I Φ r b T :=
 by
   intro M
   exact h.normalization M
 
-/-- Restricted Word-RAM normalization assumption boundary. -/
-axiom RAM_normalization_assumption :
-  ∀ (R : Type),    -- abstract restricted Word-RAM
-  URF_ADMISSIBLE step I Φ r b T
+/-- Explicit invariant carrying the restricted Word-RAM normalization payload. -/
+structure RAMNormalizationInvariant : Prop where
+  normalization :
+    ∀ (_R : Type),    -- abstract restricted Word-RAM
+    URF_ADMISSIBLE step I Φ r b T
 
-/-- Restricted Word-RAM normalization, explicitly assumption-backed. -/
-theorem RAM_normalization :
-  ∀ (R : Type),    -- abstract restricted Word-RAM
-  URF_ADMISSIBLE step I Φ r b T :=
+/-- Conditional theorem exposing restricted Word-RAM normalization from the invariant. -/
+theorem RAM_normalization_from_invariant
+    (h : RAMNormalizationInvariant step I Φ r b T) :
+    ∀ (_R : Type),    -- abstract restricted Word-RAM
+    URF_ADMISSIBLE step I Φ r b T :=
 by
   intro R
-  exact RAM_normalization_assumption R
+  exact h.normalization R
 
 end URF
 

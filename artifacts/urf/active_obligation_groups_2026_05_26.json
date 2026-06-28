@@ -19,23 +19,8 @@
     "node_modules",
     "venv"
   ],
-  "groups": {
-    "admissible_normalization": {
-      "count": 1,
-      "items": [
-        {
-          "group": "admissible_normalization",
-          "line": 80,
-          "path": "admissible/lean/URFAdmissible.lean",
-          "text": "axiom RAM_normalization_assumption :"
-        }
-      ],
-      "paths": [
-        "admissible/lean/URFAdmissible.lean"
-      ]
-    }
-  },
+  "groups": {},
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 1
+  "total_active_obligations": 0
 }
