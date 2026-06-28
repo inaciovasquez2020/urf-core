@@ -87,121 +87,109 @@
       ]
     },
     "descent_system_structural_descent": {
-      "count": 19,
+      "count": 17,
       "items": [
         {
           "group": "descent_system_structural_descent",
-          "line": 60,
+          "line": 69,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom step_rank_drop :"
+          "text": "/-- Rank drop is now a field projection of `DescentSystem`, not a global axiom. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 84,
+          "line": 78,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom zero_rank_reached_within_rank"
+          "text": "`step_rank_drop` axiom at conditional theorem surfaces. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 99,
+          "line": 225,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom dependencyRich_nonempty_extractR :"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 103,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom cycle_basis_F2 :"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 109,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom extractR_matrix_full_rank :"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 130,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom poincare_end_to_end_descent :"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 135,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom explicit_F2_realization_and_step_compatibility :"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 167,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom pivot_family"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 187,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom cycle_basis_constructive"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 202,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "admit"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 204,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom poincare_inline_descent :"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 228,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom canonical_edge_separation :"
+          "text": "global `step_rank_drop` axiom; it creates the weakest conditional replacement"
         },
         {
           "group": "descent_system_structural_descent",
           "line": 254,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "admit"
+          "text": "This replaces the internal appeal to the global `step_rank_drop` axiom with"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 291,
+          "line": 286,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "admit"
+          "text": "axiom with an explicit `StepRankDropCertificate D` hypothesis. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 295,
+          "line": 402,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom dependencyRich_nonempty_extractR :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 544,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom pivot_family :"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 585,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom extractRMatrix_full_rank"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 701,
           "path": "lean/URF/DescentSystem.lean",
           "text": "axiom greedy_pivot_separation :"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 316,
+          "line": 760,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "admit"
+          "text": "dependence on the older global rank-drop axiom. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 337,
+          "line": 789,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "admit"
+          "text": "Proved by direct appeal to the global step_rank_drop axiom. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 358,
+          "line": 803,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "admit"
+          "text": "This migrates one direct dependent of the global `step_rank_drop` axiom"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 370,
+          "line": 832,
           "path": "lean/URF/DescentSystem.lean",
-          "text": "admit"
+          "text": "This avoids the direct route through the global `step_rank_drop` axiom by"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 921,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "This is the axiom-separated theorem surface: it depends only on an explicit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 937,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "`StepRankDropCertificate D` instead of the global `step_rank_drop` axiom."
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 958,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "zero-rank theorem without reintroducing a global axiom. -/"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 1458,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "/-- Open mathematical target, recorded without `sorry`."
         }
       ],
       "paths": [
@@ -335,25 +323,43 @@
       ]
     },
     "urf_law3_global_information_axioms": {
-      "count": 3,
+      "count": 6,
       "items": [
         {
           "group": "urf_law3_global_information_axioms",
-          "line": 18,
+          "line": 13,
           "path": "urf_law3.lean",
-          "text": "axiom capacity : \u2200 T : \u2115, MI X Y \u2264 1"
+          "text": "axiom State : Type"
+        },
+        {
+          "group": "urf_law3_global_information_axioms",
+          "line": 14,
+          "path": "urf_law3.lean",
+          "text": "axiom Obs : Type"
+        },
+        {
+          "group": "urf_law3_global_information_axioms",
+          "line": 16,
+          "path": "urf_law3.lean",
+          "text": "axiom X : State"
+        },
+        {
+          "group": "urf_law3_global_information_axioms",
+          "line": 17,
+          "path": "urf_law3.lean",
+          "text": "axiom Y : \u2115 \u2192 Obs"
+        },
+        {
+          "group": "urf_law3_global_information_axioms",
+          "line": 20,
+          "path": "urf_law3.lean",
+          "text": "axiom MI : State \u2192 (\u2115 \u2192 Obs) \u2192 \u211d"
         },
         {
           "group": "urf_law3_global_information_axioms",
           "line": 21,
           "path": "urf_law3.lean",
-          "text": "axiom chain_rule : \u2200 T : \u2115,"
-        },
-        {
-          "group": "urf_law3_global_information_axioms",
-          "line": 25,
-          "path": "urf_law3.lean",
-          "text": "axiom cmi_nonneg : \u2200 t, 0 \u2264 CMI X (Y t) Y"
+          "text": "axiom CMI : State \u2192 Obs \u2192 (\u2115 \u2192 Obs) \u2192 \u211d"
         }
       ],
       "paths": [
@@ -363,5 +369,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 43
+  "total_active_obligations": 44
 }
