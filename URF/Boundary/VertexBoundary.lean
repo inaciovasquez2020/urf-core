@@ -7,31 +7,35 @@ open scoped BigOperators
 
 variable {V : Type} [DecidableEq V]
 
-/-- Adjacency given as a finitary neighborhood map. -/
+/- Adjacency given as a finitary neighborhood map. -/
 variable (adj : V → Finset V)
 
 /-- Vertex boundary defined via adjacency lists. -/
 def vertexBoundary (S : Finset V) : Finset V :=
-  S.bind (fun v => (adj v).filter (fun u => u ∉ S))
+  S.biUnion (fun v => (adj v).filter (fun u => u ∉ S))
 
 lemma vertexBoundary_subset_neighbors (S : Finset V) :
-  vertexBoundary adj S ⊆ S.bind adj := by
+  vertexBoundary adj S ⊆ S.biUnion adj := by
   intro x hx
-  simpa [vertexBoundary] using hx
+  simp [vertexBoundary] at hx ⊢
+  rcases hx with ⟨a, haS, hxa, _⟩
+  exact ⟨a, haS, hxa⟩
 
 namespace URF
 
-/-- Adjacency given as a binary relation. -/
+/- Adjacency given as a binary relation. -/
 variable (E : V → V → Prop)
-variable [DecidablePred (fun p : V × V => E p.1 p.2)]
 
 /-- Vertex boundary defined relationally. -/
-def vertex_boundary (S : Finset V) : Finset V :=
-  S.filter (fun v => ∃ u : V, E v u ∧ u ∉ S)
+noncomputable def vertex_boundary (E : V → V → Prop) (S : Finset V) : Finset V := by
+  classical
+  exact S.filter (fun v => ∃ u : V, E v u ∧ u ∉ S)
 
+omit [DecidableEq V] in
 lemma mem_vertex_boundary {S : Finset V} {v : V} :
-  v ∈ vertex_boundary (E := E) S
+  v ∈ vertex_boundary E S
     ↔ v ∈ S ∧ ∃ u : V, E v u ∧ u ∉ S := by
+  classical
   simp [vertex_boundary]
 
 end URF

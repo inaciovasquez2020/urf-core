@@ -33,35 +33,9 @@
       "paths": [
         "admissible/lean/URFAdmissible.lean"
       ]
-    },
-    "psh_bounded_overlap_model": {
-      "count": 3,
-      "items": [
-        {
-          "group": "psh_bounded_overlap_model",
-          "line": 7,
-          "path": "URF/PSH/BoundedOverlap.lean",
-          "text": "axiom PSH_bounded_overlap"
-        },
-        {
-          "group": "psh_bounded_overlap_model",
-          "line": 23,
-          "path": "URF/PSH/BoundedOverlap.lean",
-          "text": "local observations admit a finite key space."
-        },
-        {
-          "group": "psh_bounded_overlap_model",
-          "line": 25,
-          "path": "URF/PSH/BoundedOverlap.lean",
-          "text": "axiom PSH_finite_keys :"
-        }
-      ],
-      "paths": [
-        "URF/PSH/BoundedOverlap.lean"
-      ]
     }
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 20
+  "total_active_obligations": 1
 }
