@@ -21,14 +21,8 @@
   ],
   "groups": {
     "descent_system_structural_descent": {
-      "count": 6,
+      "count": 5,
       "items": [
-        {
-          "group": "descent_system_structural_descent",
-          "line": 875,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "This migrates one direct dependent of the global `step_rank_drop` axiom"
-        },
         {
           "group": "descent_system_structural_descent",
           "line": 904,
@@ -67,5 +61,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 6
+  "total_active_obligations": 5
 }
