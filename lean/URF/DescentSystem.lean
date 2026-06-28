@@ -743,13 +743,24 @@ structure ExtractRData (α : Type u) where
 theorem cycle_F2_layer_closure : True := by
   trivial
 
-axiom greedy_pivot_separation :
-  ∀ {α : Type u} (K : ClosedKernelData α) (R : Nat) (C : Configuration α),
-    ∃ (ι : Fin (Finset.card (K.extractRWitnesses R C)) ≃ {w // w ∈ K.extractRWitnesses R C})
+/-- Explicit invariant carrying the greedy pivot separation payload. -/
+structure GreedyPivotSeparationInvariant {α : Type u}
+    (K : ClosedKernelData α) (R : Nat) (C : Configuration α) : Prop where
+  separation :
+    ∃ (ι : Fin (Finset.card (K.extractRWitnesses R C)) ≃
+        {w // w ∈ K.extractRWitnesses R C})
       (p : Fin (Finset.card (K.extractRWitnesses R C)) ↪ K.E),
-      ∀ i j,
-        (p j ∈ K.witnessSupportEdges (ι i).1) ↔ i = j
+      ∀ i j, (p j ∈ K.witnessSupportEdges (ι i).1) ↔ i = j
 
+/-- Conditional theorem exposing greedy pivot separation from the invariant. -/
+theorem greedy_pivot_separation_from_invariant {α : Type u}
+    (K : ClosedKernelData α) (R : Nat) (C : Configuration α)
+    (h : GreedyPivotSeparationInvariant K R C) :
+    ∃ (ι : Fin (Finset.card (K.extractRWitnesses R C)) ≃
+        {w // w ∈ K.extractRWitnesses R C})
+      (p : Fin (Finset.card (K.extractRWitnesses R C)) ↪ K.E),
+      ∀ i j, (p j ∈ K.witnessSupportEdges (ι i).1) ↔ i = j := by
+  exact h.separation
 
 /-- Boundary placeholder for malformed `greedy_edge_separation_lemma` proof surface. -/
 theorem greedy_edge_separation_lemma : True := by
