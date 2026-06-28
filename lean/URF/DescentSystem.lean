@@ -1013,7 +1013,7 @@ theorem ZeroRankReachedWithinRank_conditional_from_step_compatible
 /-- Certificate-local zero-rank reachability theorem.
 
 This routes zero-rank reachability through an explicit
-`StepRankDropCertificate D` instead of the global `step_rank_drop` axiom.
+`StepRankDropCertificate D` instead of the global `step_rank_drop` primitive.
 -/
 theorem ZeroRankReachedWithinRank_from_step_rank_drop_certificate
     {α : Type u}
