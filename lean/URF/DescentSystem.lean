@@ -593,6 +593,14 @@ axiom extractRMatrix_full_rank
   (C : Configuration α) :
   Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C)
 
+def ExtractRMatrixFullRankInvariant
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat) : Prop :=
+  ∀ C : Configuration α,
+    Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C)
+
 
 theorem ConcreteRankAgreement
   {α : Type u}
