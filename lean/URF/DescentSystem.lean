@@ -613,6 +613,19 @@ theorem ConcreteRankAgreement
 by
   exact extractRMatrix_full_rank S D R C
 
+
+theorem ConcreteRankAgreement_from_full_rank_invariant
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (hFullRank : ExtractRMatrixFullRankInvariant S D R)
+  (C : Configuration α) :
+  Matrix.rank (ConcretePhiDefinitionUsingExtractRMatrix S D R C) =
+    Finset.card (D.extractR R C) :=
+by
+  simpa [ConcretePhiDefinitionUsingExtractRMatrix] using hFullRank C
+
 theorem cycle_basis_constructive :
   ∀ {α : Type u}
     (_S : SupportEncoding α)
