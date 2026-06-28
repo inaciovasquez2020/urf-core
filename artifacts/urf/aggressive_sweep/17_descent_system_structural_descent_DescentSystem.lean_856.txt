@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 856
+TEXT := This avoids the direct route through the global `step_rank_drop` axiom by
+
+846:     (D : DescentSystem α)
+847:     (R : Nat)
+848:     (cert : StepRankDropCertificate D)
+849:     (C : Configuration α)
+850:     (_hcompat : ConcreteAbstractDescentEquivalence S D R C)
+851:     (hterm : ¬ D.terminal C) :
+852:     (D.step C).rank + 1 ≤ C.rank :=
+853:   cert.step_rank_drop_certified C hterm
+854: 
+855: theorem StepCompatibleDescentSystem.of_concrete_pivot
+856:     {α : Type u}
+857:     (S : SupportEncoding α)
+858:     (D : DescentSystem α)
+859:     (R : Nat) :
+860:     StepCompatibleDescentSystem S D R :=
+861: by
+862:   exact
+863:     StepCompatibleDescentSystem.of_concrete_pivot_rank_drop
+864:       S D R
+865:       (fun C hcompat hterm =>
+866:         ConcretePivotImpliesStepRankDrop S D R C hcompat hterm)
+867: 
+868: /-- Certificate-local concrete-pivot compatibility witness.
+869: 
+870: This avoids the direct route through the global `step_rank_drop` axiom by
+871: requiring an explicit `StepRankDropCertificate D`. -/
+872: theorem StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
+873:     {α : Type u}
+874:     (S : SupportEncoding α)
+875:     (D : DescentSystem α)
+876:     (R : Nat)
+877:     (cert : StepRankDropCertificate D) :
+878:     StepCompatibleDescentSystem S D R :=
+879: by
+880:   exact
+881:     StepCompatibleDescentSystem.of_concrete_pivot_rank_drop

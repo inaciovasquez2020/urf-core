@@ -585,14 +585,6 @@ theorem AbstractStepRealizesCanonicalF2Pivot
 by
   simpa [ConcretePhiDefinitionUsingExtractRMatrix] using pivot_family S D R C
 
-axiom extractRMatrix_full_rank
-  {α : Type u}
-  (S : SupportEncoding α)
-  (D : DescentSystem α)
-  (R : Nat)
-  (C : Configuration α) :
-  Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C)
-
 def ExtractRMatrixFullRankInvariant
   {α : Type u}
   (S : SupportEncoding α)
@@ -601,17 +593,30 @@ def ExtractRMatrixFullRankInvariant
   ∀ C : Configuration α,
     Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C)
 
+theorem extractRMatrix_full_rank
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (hFullRank : ExtractRMatrixFullRankInvariant S D R)
+  (C : Configuration α) :
+  Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C) :=
+by
+  exact hFullRank C
+
 
 theorem ConcreteRankAgreement
   {α : Type u}
   (S : SupportEncoding α)
   (D : DescentSystem α)
   (R : Nat)
+  (hFullRank : ExtractRMatrixFullRankInvariant S D R)
   (C : Configuration α) :
   Matrix.rank (ConcretePhiDefinitionUsingExtractRMatrix S D R C) =
     Finset.card (D.extractR R C) :=
 by
-  exact extractRMatrix_full_rank S D R C
+  simpa [ConcretePhiDefinitionUsingExtractRMatrix] using
+    extractRMatrix_full_rank S D R hFullRank C
 
 
 theorem ConcreteRankAgreement_from_full_rank_invariant
@@ -773,12 +778,26 @@ theorem packageConcreteAbstractDescentEquivalence
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ConcreteAbstractDescentEquivalence S D R C :=
 by
   exact
-    ⟨ConcreteRankAgreement S D R C,
+    ⟨ConcreteRankAgreement S D R hFullRank C,
      AbstractStepRealizesCanonicalF2Pivot S D R C⟩
+
+
+theorem packageConcreteAbstractDescentEquivalence_from_full_rank_invariant
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R)
+    (C : Configuration α) :
+    ConcreteAbstractDescentEquivalence S D R C :=
+by
+  exact
+    packageConcreteAbstractDescentEquivalence S D R hFullRank C
 
 /-- Explicit local compatibility hypothesis replacing direct theorem-surface
 dependence on the older global rank-drop axiom. -/
@@ -906,7 +925,10 @@ theorem ZeroRankReachedWithinRank_from_step_compatible
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
-    (H : StepCompatibleDescentSystem S D R) :
+    (H : StepCompatibleDescentSystem S D R)
+    (hConcreteAbstract :
+      ∀ C : Configuration α,
+        ConcreteAbstractDescentEquivalence S D R C) :
     ∀ C : Configuration α, ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
 by
   have main :
@@ -922,7 +944,7 @@ by
           exact (D.terminal_iff_zero_rank C).1 hterm
         · have hpkg :
             ConcreteAbstractDescentEquivalence S D R C :=
-            packageConcreteAbstractDescentEquivalence S D R C
+            hConcreteAbstract C
           have hdrop :
             (D.step C).rank + 1 ≤ C.rank :=
             CanonicalF2PivotRankDrop_from_step_compatible
@@ -951,9 +973,13 @@ theorem ZeroRankReachedWithinRank_conditional_from_step_compatible
   (S : SupportEncoding α)
   (D : DescentSystem α)
   (R : Nat)
-  (H : StepCompatibleDescentSystem S D R) :
+  (H : StepCompatibleDescentSystem S D R)
+  (hConcreteAbstract :
+    ∀ C : Configuration α,
+      ConcreteAbstractDescentEquivalence S D R C) :
   ∀ C : Configuration α, ∃ n ≤ C.rank, (D.nstep n C).rank = 0 := by
-  exact ZeroRankReachedWithinRank_from_step_compatible S D R H
+  exact ZeroRankReachedWithinRank_from_step_compatible
+    S D R H hConcreteAbstract
 
 /-- Certificate-local zero-rank reachability theorem.
 
@@ -966,6 +992,7 @@ theorem ZeroRankReachedWithinRank_from_step_rank_drop_certificate
     (D : DescentSystem α)
     (R : Nat)
     (cert : StepRankDropCertificate D)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
 by
@@ -974,6 +1001,7 @@ by
       S D R
       (StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
         S D R cert)
+      (fun C => packageConcreteAbstractDescentEquivalence S D R hFullRank C)
       C
 
 /-- Zero-rank reachability derived from the `DescentSystem` rank-drop field.
@@ -985,6 +1013,7 @@ theorem ZeroRankReachedWithinRank_from_descent_system_field
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
 by
@@ -992,6 +1021,7 @@ by
     ZeroRankReachedWithinRank_from_step_rank_drop_certificate
       S D R
       (StepRankDropCertificate_from_descent_system_field D)
+      hFullRank
       C
 
 theorem ZeroRankReachedWithinRank_from_concrete_pivot
@@ -999,6 +1029,7 @@ theorem ZeroRankReachedWithinRank_from_concrete_pivot
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
 by
@@ -1006,6 +1037,7 @@ by
     ZeroRankReachedWithinRank_from_step_compatible
       S D R
       (StepCompatibleDescentSystem.of_concrete_pivot S D R)
+      (fun C => packageConcreteAbstractDescentEquivalence S D R hFullRank C)
       C
 
 /-- Certificate-local packaged concrete-pivot descent theorem surface. -/
@@ -1027,16 +1059,16 @@ theorem ConcretePivotDescentPackage_from_step_rank_drop_certificate
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
-    (cert : StepRankDropCertificate D) :
+    (cert : StepRankDropCertificate D)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R) :
     ConcretePivotDescentPackageFromCertificate S D R cert :=
 by
   refine ⟨?_, ?_⟩
   · intro C
     exact ZeroRankReachedWithinRank_from_step_rank_drop_certificate
-      S D R cert C
+      S D R cert hFullRank C
   · exact StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
       S D R cert
-
 
 /-- Packaged concrete-pivot descent theorem surface. -/
 structure ConcretePivotDescentPackage
@@ -1054,13 +1086,25 @@ theorem packageConcretePivotDescent
     {α : Type u}
     (S : SupportEncoding α)
     (D : DescentSystem α)
-    (R : Nat) :
+    (R : Nat)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R) :
     ConcretePivotDescentPackage S D R :=
 by
   refine ⟨?_, ?_⟩
   · intro C
-    exact packageConcreteAbstractDescentEquivalence S D R C
+    exact packageConcreteAbstractDescentEquivalence S D R hFullRank C
   · exact StepCompatibleDescentSystem.of_concrete_pivot S D R
+
+
+theorem ConcretePivotDescentPackage_from_full_rank_invariant
+    {α : Type u}
+    (S : SupportEncoding α)
+    (D : DescentSystem α)
+    (R : Nat)
+    (hFullRank : ExtractRMatrixFullRankInvariant S D R) :
+    ConcretePivotDescentPackage S D R :=
+by
+  exact packageConcretePivotDescent S D R hFullRank
 
 theorem ConcretePivotDescentPackage.rank_drop
     {α : Type u}
@@ -1087,7 +1131,7 @@ theorem ConcretePivotDescentPackage.zero_rank_reached
 by
   exact
     ZeroRankReachedWithinRank_from_step_compatible
-      S D R P.stepCompatible C
+      S D R P.stepCompatible P.concreteAbstract C
 
 
 /-- Repository-native constructor for the current canonical F₂ pivot step surface.

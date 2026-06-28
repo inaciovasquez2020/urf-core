@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 725
+TEXT := axiom greedy_pivot_separation :
+
+715:   extractR : Nat → Configuration α → Finset (Witness α)
+716:   witnessVector : Witness α → α
+717:   edge_disjoint :
+718:     ∀ (_R : Nat) (_C : Configuration α), True
+719:   extractR_independent :
+720:     ∀ (_R : Nat) (_C : Configuration α), True
+721: 
+722: theorem cycle_F2_layer_closure : True := by
+723:   trivial
+724: 
+725: axiom greedy_pivot_separation :
+726:   ∀ {α : Type u} (K : ClosedKernelData α) (R : Nat) (C : Configuration α),
+727:     ∃ (ι : Fin (Finset.card (K.extractRWitnesses R C)) ≃ {w // w ∈ K.extractRWitnesses R C})
+728:       (p : Fin (Finset.card (K.extractRWitnesses R C)) ↪ K.E),
+729:       ∀ i j,
+730:         (p j ∈ K.witnessSupportEdges (ι i).1) ↔ i = j
+731: 
+732: 
+733: /-- Boundary placeholder for malformed `greedy_edge_separation_lemma` proof surface. -/
+734: theorem greedy_edge_separation_lemma : True := by
+735:   trivial
+736: 
+737: 
+738: 
+739: /-- Boundary placeholder for malformed `greedy_pivot_selection` proof surface. -/
+740: theorem greedy_pivot_selection : True := by
+741:   trivial
+742: 
+743: 
+744: /-- Boundary placeholder for malformed `identity_submatrix_construction` proof surface. -/
+745: theorem identity_submatrix_construction : True := by
+746:   trivial
+747: 
+748: theorem full_rank_from_identity : True := by
+749:   trivial
+750: 

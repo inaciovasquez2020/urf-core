@@ -1,0 +1,39 @@
+GROUP := other_active_obligation
+PATH := finite_cmi_to_local_cmi_nonneg_interface.lean
+LINE := 15
+TEXT := It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+
+5: /-
+6: URF-core finite CMI to local CMI nonnegativity interface.
+7: 
+8: This file introduces the weakest bridge after the finite CMI target:
+9: 
+10:   FiniteCMI_To_LocalCMINonneg_Interface
+11: 
+12: It is intentionally self-contained because root-level Lean files in this repo are
+13: checked directly with `lake env lean <file>.lean`, not imported as Lake modules.
+14: 
+15: It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+16: -/
+17: 
+18: structure LocalFiniteCMIData (Ω A B : Type) [Fintype Ω] [Fintype A] [Fintype B] where
+19:   p : Ω → A → B → ℝ
+20:   p_nonneg : ∀ ω a b, 0 ≤ p ω a b
+21: 
+22: def localCMI
+23:     {Ω A B : Type} [Fintype Ω] [Fintype A] [Fintype B]
+24:     (K : LocalFiniteCMIData Ω A B) : ℝ :=
+25:   ∑ ω, ∑ a, ∑ b, K.p ω a b
+26: 
+27: theorem localCMI_nonneg_from_finite_interface
+28:     {Ω A B : Type} [Fintype Ω] [Fintype A] [Fintype B]
+29:     (K : LocalFiniteCMIData Ω A B) :
+30:     0 ≤ localCMI K := by
+31:   unfold localCMI
+32:   apply Finset.sum_nonneg
+33:   intro ω _hω
+34:   apply Finset.sum_nonneg
+35:   intro a _ha
+36:   apply Finset.sum_nonneg
+37:   intro b _hb
+38:   exact K.p_nonneg ω a b

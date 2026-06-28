@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 286
+TEXT := axiom with an explicit `StepRankDropCertificate D` hypothesis. -/
+
+276:       ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+277:     ∀ C, (D.step C).rank ≤ C.rank := by
+278:   intro C
+279:   by_cases hterm : D.terminal C
+280:   · exact hterminal_step_nonincrease C hterm
+281:   · exact Nat.le_of_succ_le (step_rank_drop D C hterm)
+282: 
+283: /-- Certificate-local version of `step_rank_nonincrease_of_terminal_step_nonincrease`.
+284: 
+285: This replaces the nonterminal branch's appeal to the global `step_rank_drop`
+286: axiom with an explicit `StepRankDropCertificate D` hypothesis. -/
+287: theorem step_rank_nonincrease_of_terminal_step_nonincrease_from_certificate
+288:     {α : Type u}
+289:     (D : DescentSystem α)
+290:     (cert : StepRankDropCertificate D)
+291:     (hterminal_step_nonincrease :
+292:       ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+293:     ∀ C, (D.step C).rank ≤ C.rank := by
+294:   intro C
+295:   by_cases hterm : D.terminal C
+296:   · exact hterminal_step_nonincrease C hterm
+297:   · exact Nat.le_of_succ_le
+298:       (cert.step_rank_drop_certified C hterm)
+299: 
+300: theorem nstep_rank_monotone_from_terminal_step_nonincrease
+301:     {α : Type u}
+302:     (D : DescentSystem α)
+303:     (hterminal_step_nonincrease :
+304:       ∀ C, D.terminal C → (D.step C).rank ≤ C.rank) :
+305:     ∀ n C, (D.nstep (n + 1) C).rank ≤ (D.nstep n C).rank := by
+306:   intro n
+307:   induction n with
+308:   | zero =>
+309:       intro C
+310:       rw [D.nstep_succ 0 C]
+311:       rw [D.nstep_zero (D.step C), D.nstep_zero C]

@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 784
+TEXT := dependence on the older global rank-drop axiom. -/
+
+774:     (D : DescentSystem α)
+775:     (R : Nat)
+776:     (C : Configuration α) :
+777:     ConcreteAbstractDescentEquivalence S D R C :=
+778: by
+779:   exact
+780:     ⟨ConcreteRankAgreement S D R C,
+781:      AbstractStepRealizesCanonicalF2Pivot S D R C⟩
+782: 
+783: 
+784: theorem packageConcreteAbstractDescentEquivalence_from_full_rank_invariant
+785:     {α : Type u}
+786:     (S : SupportEncoding α)
+787:     (D : DescentSystem α)
+788:     (R : Nat)
+789:     (hFullRank : ExtractRMatrixFullRankInvariant S D R)
+790:     (C : Configuration α) :
+791:     ConcreteAbstractDescentEquivalence S D R C :=
+792: by
+793:   exact
+794:     ⟨ConcreteRankAgreement_from_full_rank_invariant S D R hFullRank C,
+795:      AbstractStepRealizesCanonicalF2Pivot S D R C⟩
+796: 
+797: /-- Explicit local compatibility hypothesis replacing direct theorem-surface
+798: dependence on the older global rank-drop axiom. -/
+799: structure StepCompatibleDescentSystem
+800:     {α : Type u}
+801:     (S : SupportEncoding α)
+802:     (D : DescentSystem α)
+803:     (R : Nat) : Prop where
+804:   stepCompatibilityWithConcretePivot :
+805:     ∀ C : Configuration α,
+806:       ConcreteAbstractDescentEquivalence S D R C →
+807:       ¬ D.terminal C →
+808:       (D.step C).rank + 1 ≤ C.rank
+809: 

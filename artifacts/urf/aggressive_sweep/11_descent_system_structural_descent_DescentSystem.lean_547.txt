@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 547
+TEXT := axiom pivot_family :
+
+537: 
+538: def ConcretePhiDefinitionUsingExtractRMatrix
+539:   {α : Type u}
+540:   (S : SupportEncoding α)
+541:   (D : DescentSystem α)
+542:   (R : Nat)
+543:   (C : Configuration α) :
+544:   Matrix (Fin (Finset.card (D.extractR R C))) S.E (ZMod 2)
+545: := extractRMatrix S D R C
+546: 
+547: axiom pivot_family :
+548:   ∀ {α : Type u}
+549:     (S : SupportEncoding α)
+550:     (D : DescentSystem α)
+551:     (R : Nat)
+552:     (C : Configuration α),
+553:     ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
+554:       ∀ i j,
+555:         extractRMatrix S D R C i (p j) = if i = j then 1 else 0
+556: 
+557: 
+558: 
+559: /-- With the current zero-matrix definition of `extractRMatrix`, `pivot_family`
+560: is inconsistent whenever `extractR` is nonempty. -/
+561: theorem pivot_family_obstruction_from_nonempty_extractR
+562:   {α : Type u}
+563:   (S : SupportEncoding α)
+564:   (D : DescentSystem α)
+565:   (R : Nat)
+566:   (C : Configuration α)
+567:   (hn : (D.extractR R C).Nonempty) :
+568:   False := by
+569:   rcases pivot_family S D R C with ⟨p, hp⟩
+570:   have hpos : 0 < Finset.card (D.extractR R C) := Finset.card_pos.mpr hn
+571:   let i : Fin (Finset.card (D.extractR R C)) := ⟨0, hpos⟩
+572:   have hdiag := hp i i

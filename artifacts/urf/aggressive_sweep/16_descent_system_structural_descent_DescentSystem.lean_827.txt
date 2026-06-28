@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 827
+TEXT := This migrates one direct dependent of the global `step_rank_drop` axiom
+
+817:         ConcreteAbstractDescentEquivalence S D R C →
+818:         ¬ D.terminal C →
+819:         (D.step C).rank + 1 ≤ C.rank) :
+820:     StepCompatibleDescentSystem S D R :=
+821: by
+822:   refine ⟨?_⟩
+823:   intro C hcompat hterm
+824:   exact h C hcompat hterm
+825: 
+826: /-- The concrete pivot package implies the rank drop for one descent step.
+827: Proved by direct appeal to the global step_rank_drop axiom. -/
+828: theorem ConcretePivotImpliesStepRankDrop
+829:     {α : Type u}
+830:     (S : SupportEncoding α)
+831:     (D : DescentSystem α)
+832:     (R : Nat)
+833:     (C : Configuration α)
+834:     (_hcompat : ConcreteAbstractDescentEquivalence S D R C)
+835:     (hterm : ¬ D.terminal C) :
+836:     (D.step C).rank + 1 ≤ C.rank :=
+837:   step_rank_drop D C hterm
+838: 
+839: /-- Certificate-local concrete pivot rank drop.
+840: 
+841: This migrates one direct dependent of the global `step_rank_drop` axiom
+842: to the explicit `StepRankDropCertificate` surface. -/
+843: theorem ConcretePivotImpliesStepRankDrop_from_certificate
+844:     {α : Type u}
+845:     (S : SupportEncoding α)
+846:     (D : DescentSystem α)
+847:     (R : Nat)
+848:     (cert : StepRankDropCertificate D)
+849:     (C : Configuration α)
+850:     (_hcompat : ConcreteAbstractDescentEquivalence S D R C)
+851:     (hterm : ¬ D.terminal C) :
+852:     (D.step C).rank + 1 ≤ C.rank :=

@@ -67,7 +67,7 @@
       ]
     },
     "descent_system_structural_descent": {
-      "count": 16,
+      "count": 15,
       "items": [
         {
           "group": "descent_system_structural_descent",
@@ -107,61 +107,55 @@
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 588,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom extractRMatrix_full_rank"
-        },
-        {
-          "group": "descent_system_structural_descent",
-          "line": 725,
+          "line": 730,
           "path": "lean/URF/DescentSystem.lean",
           "text": "axiom greedy_pivot_separation :"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 784,
+          "line": 803,
           "path": "lean/URF/DescentSystem.lean",
           "text": "dependence on the older global rank-drop axiom. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 813,
+          "line": 832,
           "path": "lean/URF/DescentSystem.lean",
           "text": "Proved by direct appeal to the global step_rank_drop axiom. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 827,
+          "line": 846,
           "path": "lean/URF/DescentSystem.lean",
           "text": "This migrates one direct dependent of the global `step_rank_drop` axiom"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 856,
+          "line": 875,
           "path": "lean/URF/DescentSystem.lean",
           "text": "This avoids the direct route through the global `step_rank_drop` axiom by"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 945,
+          "line": 967,
           "path": "lean/URF/DescentSystem.lean",
           "text": "This is the axiom-separated theorem surface: it depends only on an explicit"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 961,
+          "line": 987,
           "path": "lean/URF/DescentSystem.lean",
           "text": "`StepRankDropCertificate D` instead of the global `step_rank_drop` axiom."
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 982,
+          "line": 1010,
           "path": "lean/URF/DescentSystem.lean",
           "text": "zero-rank theorem without reintroducing a global axiom. -/"
         },
         {
           "group": "descent_system_structural_descent",
-          "line": 1482,
+          "line": 1526,
           "path": "lean/URF/DescentSystem.lean",
           "text": "/-- Open mathematical target, recorded without `sorry`."
         }
@@ -227,5 +221,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 27
+  "total_active_obligations": 26
 }

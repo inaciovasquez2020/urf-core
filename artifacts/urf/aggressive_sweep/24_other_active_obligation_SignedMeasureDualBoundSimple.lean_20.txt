@@ -1,0 +1,27 @@
+GROUP := other_active_obligation
+PATH := spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean
+LINE := 20
+TEXT := This file is intended to become the local proof that replaces the interface axiom.
+
+10: 
+11: variable {α : Type*} [MeasurableSpace α]
+12: 
+13: /--
+14: Simple function version of the TV dual bound.
+15: 
+16: Target inequality for a real-valued measurable simple function `f`:
+17: 
+18: |∫ f d s| ≤ ∫ |f| d (s.totalVariation)
+19: 
+20: This file is intended to become the local proof that replaces the interface axiom.
+21: For now it provides a lemma statement in the correct shape, with the proof delegated
+22: to the repository interface lemma.
+23: -/
+24: theorem SignedMeasure_dual_norm_bound_simple
+25:   (s : SignedMeasure α)
+26:   (f : MeasureTheory.SimpleFunc α ℝ)
+27:   (hf : Integrable f s.totalVariation) :
+28:   |∫ x, f x ∂s.toMeasure| ≤ ∫ x, |f x| ∂(s.totalVariation) := by
+29:   simpa using URF.SignedMeasure_dual_norm_bound (s := s) (f := f) hf
+30: 
+31: end URF

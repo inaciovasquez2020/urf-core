@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 961
+TEXT := `StepRankDropCertificate D` instead of the global `step_rank_drop` axiom.
+
+951:           · rw [D.nstep_succ]
+952:             exact hz
+953:   intro C
+954:   simpa using main C.rank C rfl
+955: 
+956: 
+957: /-- Conditional zero-rank reachability surface.
+958: 
+959: This is the axiom-separated theorem surface: it depends only on an explicit
+960: `StepCompatibleDescentSystem` witness and does not use
+961: `StepCompatibleDescentSystem.of_concrete_pivot`.
+962: -/
+963: theorem ZeroRankReachedWithinRank_conditional_from_step_compatible
+964:   {α : Type u}
+965:   (S : SupportEncoding α)
+966:   (D : DescentSystem α)
+967:   (R : Nat)
+968:   (H : StepCompatibleDescentSystem S D R) :
+969:   ∀ C : Configuration α, ∃ n ≤ C.rank, (D.nstep n C).rank = 0 := by
+970:   exact ZeroRankReachedWithinRank_from_step_compatible S D R H
+971: 
+972: /-- Certificate-local zero-rank reachability theorem.
+973: 
+974: This routes zero-rank reachability through an explicit
+975: `StepRankDropCertificate D` instead of the global `step_rank_drop` axiom.
+976: -/
+977: theorem ZeroRankReachedWithinRank_from_step_rank_drop_certificate
+978:     {α : Type u}
+979:     (S : SupportEncoding α)
+980:     (D : DescentSystem α)
+981:     (R : Nat)
+982:     (cert : StepRankDropCertificate D)
+983:     (C : Configuration α) :
+984:     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
+985: by
+986:   exact

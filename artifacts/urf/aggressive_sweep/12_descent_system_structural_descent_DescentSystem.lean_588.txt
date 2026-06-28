@@ -1,0 +1,41 @@
+GROUP := descent_system_structural_descent
+PATH := lean/URF/DescentSystem.lean
+LINE := 588
+TEXT := axiom extractRMatrix_full_rank
+
+578:   (D : DescentSystem α)
+579:   (R : Nat)
+580:   (C : Configuration α) :
+581:   ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
+582:     ∀ i j,
+583:       ConcretePhiDefinitionUsingExtractRMatrix S D R C i (p j) =
+584:         if i = j then 1 else 0 :=
+585: by
+586:   simpa [ConcretePhiDefinitionUsingExtractRMatrix] using pivot_family S D R C
+587: 
+588: axiom extractRMatrix_full_rank
+589:   {α : Type u}
+590:   (S : SupportEncoding α)
+591:   (D : DescentSystem α)
+592:   (R : Nat)
+593:   (C : Configuration α) :
+594:   Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C)
+595: 
+596: def ExtractRMatrixFullRankInvariant
+597:   {α : Type u}
+598:   (S : SupportEncoding α)
+599:   (D : DescentSystem α)
+600:   (R : Nat) : Prop :=
+601:   ∀ C : Configuration α,
+602:     Matrix.rank (extractRMatrix S D R C) = Finset.card (D.extractR R C)
+603: 
+604: 
+605: theorem ConcreteRankAgreement
+606:   {α : Type u}
+607:   (S : SupportEncoding α)
+608:   (D : DescentSystem α)
+609:   (R : Nat)
+610:   (C : Configuration α) :
+611:   Matrix.rank (ConcretePhiDefinitionUsingExtractRMatrix S D R C) =
+612:     Finset.card (D.extractR R C) :=
+613: by
