@@ -261,29 +261,9 @@
       "paths": [
         "URF/PSH/BoundedOverlap.lean"
       ]
-    },
-    "transport_entropy_set": {
-      "count": 2,
-      "items": [
-        {
-          "group": "transport_entropy_set",
-          "line": 6,
-          "path": "chronos/Transport/VertexBoundaryTransport.lean",
-          "text": "axiom entropy_of_set : \u2115 \u2192 \u211d"
-        },
-        {
-          "group": "transport_entropy_set",
-          "line": 8,
-          "path": "chronos/Transport/VertexBoundaryTransport.lean",
-          "text": "axiom entropy_mul_card_bound"
-        }
-      ],
-      "paths": [
-        "chronos/Transport/VertexBoundaryTransport.lean"
-      ]
     }
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 34
+  "total_active_obligations": 32
 }
