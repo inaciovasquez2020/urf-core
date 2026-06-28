@@ -21,14 +21,8 @@
   ],
   "groups": {
     "descent_system_structural_descent": {
-      "count": 9,
+      "count": 8,
       "items": [
-        {
-          "group": "descent_system_structural_descent",
-          "line": 286,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "axiom with an explicit `StepRankDropCertificate D` hypothesis. -/"
-        },
         {
           "group": "descent_system_structural_descent",
           "line": 832,
@@ -85,5 +79,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 9
+  "total_active_obligations": 8
 }
