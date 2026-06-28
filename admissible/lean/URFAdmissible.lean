@@ -61,18 +61,20 @@ def URF_ADMISSIBLE : Prop :=
 Normalization theorems
 -/
 
-/-- Deterministic TM normalization assumption boundary. -/
-axiom TM_normalization_assumption :
-  ∀ (M : Type),    -- abstract deterministic TM
-  URF_ADMISSIBLE step I Φ r b T
+/-- Explicit invariant carrying the deterministic TM normalization payload. -/
+structure TMNormalizationInvariant : Prop where
+  normalization :
+    ∀ (M : Type),    -- abstract deterministic TM
+    URF_ADMISSIBLE step I Φ r b T
 
-/-- Deterministic TM normalization, explicitly assumption-backed. -/
-theorem TM_normalization :
-  ∀ (M : Type),    -- abstract deterministic TM
-  URF_ADMISSIBLE step I Φ r b T :=
+/-- Conditional theorem exposing deterministic TM normalization from the invariant. -/
+theorem TM_normalization_from_invariant
+    (h : TMNormalizationInvariant) :
+    ∀ (M : Type),    -- abstract deterministic TM
+    URF_ADMISSIBLE step I Φ r b T :=
 by
   intro M
-  exact TM_normalization_assumption M
+  exact h.normalization M
 
 /-- Restricted Word-RAM normalization assumption boundary. -/
 axiom RAM_normalization_assumption :
