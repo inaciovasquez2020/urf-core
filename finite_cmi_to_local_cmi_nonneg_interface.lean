@@ -12,7 +12,7 @@ This file introduces the weakest bridge after the finite CMI target:
 It is intentionally self-contained because root-level Lean files in this repo are
 checked directly with `lake env lean <file>.lean`, not imported as Lake modules.
 
-It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+It does not replace the global `cmi_nonneg` primitive in `urf_law3.lean`.
 -/
 
 structure LocalFiniteCMIData (Ω A B : Type) [Fintype Ω] [Fintype A] [Fintype B] where
