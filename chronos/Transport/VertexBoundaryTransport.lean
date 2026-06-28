@@ -3,14 +3,13 @@ import URF.Boundary.VertexBoundary
 import URF.PSH.BoundedOverlap
 import URF.Info.InfoAxioms
 
-axiom entropy_of_set : ℕ → ℝ
-
-axiom entropy_mul_card_bound
-  (C n : ℕ) :
-  entropy_of_set (C * n) ≤ entropy_of_set n + (C * InfoStepBound)
-
 lemma transport_entropy_bound
   {V : Type} [DecidableEq V]
+  (entropy_of_set : ℕ → ℝ)
+  (entropy_monotone : ∀ {m n : ℕ}, m ≤ n → entropy_of_set m ≤ entropy_of_set n)
+  (entropy_mul_card_bound :
+    ∀ C n : ℕ,
+      entropy_of_set (C * n) ≤ entropy_of_set n + (C * InfoStepBound))
   (adj : V → Finset V)
   (k Δ : ℕ) :
   ∃ C, ∀ S : Finset V,
