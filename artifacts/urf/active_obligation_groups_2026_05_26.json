@@ -34,34 +34,6 @@
         "admissible/lean/URFAdmissible.lean"
       ]
     },
-    "other_active_obligation": {
-      "count": 3,
-      "items": [
-        {
-          "group": "other_active_obligation",
-          "line": 14,
-          "path": "finite_cmi_nonneg_from_kl.lean",
-          "text": "It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`."
-        },
-        {
-          "group": "other_active_obligation",
-          "line": 15,
-          "path": "finite_cmi_to_local_cmi_nonneg_interface.lean",
-          "text": "It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`."
-        },
-        {
-          "group": "other_active_obligation",
-          "line": 20,
-          "path": "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean",
-          "text": "This file is intended to become the local proof that replaces the interface axiom."
-        }
-      ],
-      "paths": [
-        "finite_cmi_nonneg_from_kl.lean",
-        "finite_cmi_to_local_cmi_nonneg_interface.lean",
-        "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean"
-      ]
-    },
     "psh_bounded_overlap_model": {
       "count": 3,
       "items": [
