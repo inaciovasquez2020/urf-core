@@ -34,32 +34,6 @@
         "admissible/lean/URFAdmissible.lean"
       ]
     },
-    "chronos_cert_entropy_determinism": {
-      "count": 3,
-      "items": [
-        {
-          "group": "chronos_cert_entropy_determinism",
-          "line": 12,
-          "path": "lean/chronos_cert/ChronosCert.lean",
-          "text": "axiom mi_le_entropy_answer :"
-        },
-        {
-          "group": "chronos_cert_entropy_determinism",
-          "line": 15,
-          "path": "lean/chronos_cert/ChronosCert.lean",
-          "text": "axiom determinism_identity :"
-        },
-        {
-          "group": "chronos_cert_entropy_determinism",
-          "line": 19,
-          "path": "lean/chronos_cert/ChronosCert.lean",
-          "text": "axiom entropy_drop_ceiling :"
-        }
-      ],
-      "paths": [
-        "lean/chronos_cert/ChronosCert.lean"
-      ]
-    },
     "descent_system_structural_descent": {
       "count": 13,
       "items": [
@@ -203,5 +177,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 23
+  "total_active_obligations": 20
 }
