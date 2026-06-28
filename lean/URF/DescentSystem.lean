@@ -829,7 +829,7 @@ by
     packageConcreteAbstractDescentEquivalence S D R hPivot hFullRank C
 
 /-- Explicit local compatibility hypothesis replacing direct theorem-surface
-dependence on the older global rank-drop axiom. -/
+dependence on the older global rank-drop primitive. -/
 structure StepCompatibleDescentSystem
     {α : Type u}
     (S : SupportEncoding α)
