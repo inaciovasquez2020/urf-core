@@ -222,7 +222,7 @@ by
   exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) (step_rank_drop D C h)
 
 /-- Certificate-local rank strict decrease.  This does not remove the
-global `step_rank_drop` axiom; it creates the weakest conditional replacement
+global `step_rank_drop` primitive; it creates the weakest conditional replacement
 surface for downstream migration. -/
 theorem rank_strict_decrease_from_certificate
   {α : Type u} (D : DescentSystem α)
