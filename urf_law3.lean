@@ -10,16 +10,6 @@ open scoped BigOperators
 -- The analytic/information-theoretic assumptions are explicit hypotheses,
 -- not trusted Lean axioms.
 
-axiom State : Type
-axiom Obs : Type
-
-axiom X : State
-axiom Y : ℕ → Obs
-
--- Mutual information primitives.
-axiom MI : State → (ℕ → Obs) → ℝ
-axiom CMI : State → Obs → (ℕ → Obs) → ℝ
-
 /--
 Law 3 implication form.
 
@@ -28,6 +18,10 @@ as Lean axioms. The required per-step capacity bound is an explicit
 hypothesis.
 -/
 theorem urf_law3
+  {State Obs : Type}
+  (X : State)
+  (Y : ℕ → Obs)
+  (CMI : State → Obs → (ℕ → Obs) → ℝ)
   (per_step_capacity :
     ∀ (T t : ℕ), t < T → CMI X (Y t) Y ≤ 1) :
   ∀ (T t : ℕ), t < T → CMI X (Y t) Y ≤ 1 :=
