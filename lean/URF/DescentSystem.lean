@@ -872,7 +872,7 @@ theorem ConcretePivotImpliesStepRankDrop
 
 /-- Certificate-local concrete pivot rank drop.
 
-This migrates one direct dependent of the global `step_rank_drop` axiom
+This migrates one direct dependent of the global `step_rank_drop` primitive
 to the explicit `StepRankDropCertificate` surface. -/
 theorem ConcretePivotImpliesStepRankDrop_from_certificate
     {α : Type u}
