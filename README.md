@@ -152,3 +152,21 @@ docker run --rm -v "$PWD:/work" ghcr.io/inaciovasquez2020/urf-sg-verifier:latest
 Immutable pulls should use a `sha-*` tag or digest instead of `latest`.
 
 Boundary: this container verifies URF spectral-gap certificate artifacts accepted by the verifier. It does not assert theorem-level closure unless the referenced theorem is formalized and all assumptions are discharged.
+
+<!-- URF_ACTIVE_OBLIGATION_STATUS_START -->
+## Active obligation status
+
+As of PR #494 / commit `e6f3c96`, the active-obligation ledger has reached the zero-obligation terminal state:
+
+```text
+ACTIVE_OBLIGATION_GROUPS_OK
+{
+  "groups": {},
+  "total_active_obligations": 0
+}
+```
+
+This is a repository-hygiene and verifier-status milestone. It means the tracked active obligation marker ledger is empty, the verifier accepts that terminal state, the active-obligation tests pass, and the Lean build succeeds.
+
+Boundary: this status does not claim theorem closure, solve an external mathematical problem, or assert completion of any future research target. It records only the current verified state of the active-obligation ledger.
+<!-- URF_ACTIVE_OBLIGATION_STATUS_END -->
