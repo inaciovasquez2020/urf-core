@@ -75,7 +75,7 @@ by
   exact D.step_rank_drop_field C h
 
 /-- Explicit per-system certificate replacing direct use of the global
-`step_rank_drop` axiom at conditional theorem surfaces. -/
+`step_rank_drop` primitive at conditional theorem surfaces. -/
 structure StepRankDropCertificate
   {α : Type u}
   (D : DescentSystem α) : Prop where
