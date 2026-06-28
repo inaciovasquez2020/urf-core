@@ -105,23 +105,9 @@
       "paths": [
         "lean/URF/DescentSystem.lean"
       ]
-    },
-    "other_active_obligation": {
-      "count": 1,
-      "items": [
-        {
-          "group": "other_active_obligation",
-          "line": 20,
-          "path": "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean",
-          "text": "This file is intended to become the local proof that replaces the interface axiom."
-        }
-      ],
-      "paths": [
-        "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean"
-      ]
     }
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 14
+  "total_active_obligations": 13
 }
