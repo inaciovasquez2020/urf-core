@@ -107,14 +107,8 @@
       ]
     },
     "other_active_obligation": {
-      "count": 2,
+      "count": 1,
       "items": [
-        {
-          "group": "other_active_obligation",
-          "line": 15,
-          "path": "finite_cmi_to_local_cmi_nonneg_interface.lean",
-          "text": "It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`."
-        },
         {
           "group": "other_active_obligation",
           "line": 20,
@@ -123,12 +117,11 @@
         }
       ],
       "paths": [
-        "finite_cmi_to_local_cmi_nonneg_interface.lean",
         "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean"
       ]
     }
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 15
+  "total_active_obligations": 14
 }
