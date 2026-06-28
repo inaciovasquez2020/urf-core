@@ -858,7 +858,7 @@ by
   exact h C hcompat hterm
 
 /-- The concrete pivot package implies the rank drop for one descent step.
-Proved by direct appeal to the global step_rank_drop axiom. -/
+Proved by direct appeal to the global step_rank_drop primitive. -/
 theorem ConcretePivotImpliesStepRankDrop
     {α : Type u}
     (S : SupportEncoding α)
