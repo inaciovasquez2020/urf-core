@@ -993,7 +993,7 @@ by
 
 /-- Conditional zero-rank reachability surface.
 
-This is the axiom-separated theorem surface: it depends only on an explicit
+This is the primitive-separated theorem surface: it depends only on an explicit
 `StepCompatibleDescentSystem` witness and does not use
 `StepCompatibleDescentSystem.of_concrete_pivot`.
 -/
