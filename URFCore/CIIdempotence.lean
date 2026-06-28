@@ -4,12 +4,14 @@ universe u
 variable {State : Type u}
 
 -- abstract clean+build operator
-constant clean : State → State
-constant build : State → State
+def Φ (clean build : State → State) : State → State := build ∘ clean
 
-def Φ : State → State := build ∘ clean
-
--- Conditional: determinism/cleanliness hypothesis encoded as idempotence axiom
-axiom Φ_idempotent : ∀ s, Φ (Φ s) = Φ s
+-- Conditional: determinism/cleanliness hypothesis parameterized explicitly
+theorem Φ_idempotent
+    (clean build : State → State)
+    (hΦ : ∀ s : State, Φ clean build (Φ clean build s) = Φ clean build s)
+    (s : State) :
+    Φ clean build (Φ clean build s) = Φ clean build s :=
+  hΦ s
 
 end URFCore
