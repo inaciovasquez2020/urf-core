@@ -19,8 +19,137 @@
     "node_modules",
     "venv"
   ],
-  "groups": {},
+  "groups": {
+    "descent_system_structural_descent": {
+      "count": 13,
+      "items": [
+        {
+          "group": "descent_system_structural_descent",
+          "line": 69,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "/-- Rank drop is now a field projection of `DescentSystem`, not a global axiom. -/"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 78,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "`step_rank_drop` axiom at conditional theorem surfaces. -/"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 225,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "global `step_rank_drop` axiom; it creates the weakest conditional replacement"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 254,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "This replaces the internal appeal to the global `step_rank_drop` axiom with"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 286,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "axiom with an explicit `StepRankDropCertificate D` hypothesis. -/"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 832,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "dependence on the older global rank-drop axiom. -/"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 861,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "Proved by direct appeal to the global step_rank_drop axiom. -/"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 875,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "This migrates one direct dependent of the global `step_rank_drop` axiom"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 904,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "This avoids the direct route through the global `step_rank_drop` axiom by"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 996,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "This is the axiom-separated theorem surface: it depends only on an explicit"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 1016,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "`StepRankDropCertificate D` instead of the global `step_rank_drop` axiom."
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 1040,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "zero-rank theorem without reintroducing a global axiom. -/"
+        },
+        {
+          "group": "descent_system_structural_descent",
+          "line": 1566,
+          "path": "lean/URF/DescentSystem.lean",
+          "text": "/-- Open mathematical target, recorded without `sorry`."
+        }
+      ],
+      "paths": [
+        "lean/URF/DescentSystem.lean"
+      ]
+    },
+    "other_active_obligation": {
+      "count": 3,
+      "items": [
+        {
+          "group": "other_active_obligation",
+          "line": 14,
+          "path": "finite_cmi_nonneg_from_kl.lean",
+          "text": "It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`."
+        },
+        {
+          "group": "other_active_obligation",
+          "line": 15,
+          "path": "finite_cmi_to_local_cmi_nonneg_interface.lean",
+          "text": "It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`."
+        },
+        {
+          "group": "other_active_obligation",
+          "line": 20,
+          "path": "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean",
+          "text": "This file is intended to become the local proof that replaces the interface axiom."
+        }
+      ],
+      "paths": [
+        "finite_cmi_nonneg_from_kl.lean",
+        "finite_cmi_to_local_cmi_nonneg_interface.lean",
+        "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean"
+      ]
+    },
+    "psh_bounded_overlap_model": {
+      "count": 1,
+      "items": [
+        {
+          "group": "psh_bounded_overlap_model",
+          "line": 29,
+          "path": "URF/PSH/BoundedOverlap.lean",
+          "text": "local observations admit a finite key space."
+        }
+      ],
+      "paths": [
+        "URF/PSH/BoundedOverlap.lean"
+      ]
+    }
+  },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 0
+  "total_active_obligations": 17
 }
