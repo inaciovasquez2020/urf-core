@@ -66,26 +66,6 @@
         "lean/chronos_cert/ChronosCert.lean"
       ]
     },
-    "ci_idempotence_model": {
-      "count": 2,
-      "items": [
-        {
-          "group": "ci_idempotence_model",
-          "line": 12,
-          "path": "URFCore/CIIdempotence.lean",
-          "text": "-- Conditional: determinism/cleanliness hypothesis encoded as idempotence axiom"
-        },
-        {
-          "group": "ci_idempotence_model",
-          "line": 13,
-          "path": "URFCore/CIIdempotence.lean",
-          "text": "axiom \u03a6_idempotent : \u2200 s, \u03a6 (\u03a6 s) = \u03a6 s"
-        }
-      ],
-      "paths": [
-        "URFCore/CIIdempotence.lean"
-      ]
-    },
     "descent_system_structural_descent": {
       "count": 17,
       "items": [
@@ -305,5 +285,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 36
+  "total_active_obligations": 34
 }
