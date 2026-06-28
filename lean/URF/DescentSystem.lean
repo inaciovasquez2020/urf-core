@@ -283,7 +283,7 @@ theorem step_rank_nonincrease_of_terminal_step_nonincrease
 /-- Certificate-local version of `step_rank_nonincrease_of_terminal_step_nonincrease`.
 
 This replaces the nonterminal branch's appeal to the global `step_rank_drop`
-axiom with an explicit `StepRankDropCertificate D` hypothesis. -/
+primitive with an explicit `StepRankDropCertificate D` hypothesis. -/
 theorem step_rank_nonincrease_of_terminal_step_nonincrease_from_certificate
     {α : Type u}
     (D : DescentSystem α)
