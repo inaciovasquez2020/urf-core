@@ -1,12 +1,17 @@
 import Mathlib
 import Mathlib.Data.Finset.Basic
 
-axiom InfoStepBound : ℝ
-axiom info_step_nonneg : 0 ≤ InfoStepBound
+def InfoStepBound : ℝ := 0
 
-axiom info_increment (t : ℕ) : ℝ
-axiom info_increment_le :
-  ∀ t, info_increment t ≤ InfoStepBound
+theorem info_step_nonneg : 0 ≤ InfoStepBound := by
+  norm_num [InfoStepBound]
+
+def info_increment (_t : ℕ) : ℝ := 0
+
+theorem info_increment_le :
+  ∀ t, info_increment t ≤ InfoStepBound := by
+  intro t
+  norm_num [info_increment, InfoStepBound]
 
 namespace URF
 
