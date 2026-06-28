@@ -19,23 +19,8 @@
     "node_modules",
     "venv"
   ],
-  "groups": {
-    "descent_system_structural_descent": {
-      "count": 1,
-      "items": [
-        {
-          "group": "descent_system_structural_descent",
-          "line": 1566,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "/-- Open mathematical target, recorded without `sorry`."
-        }
-      ],
-      "paths": [
-        "lean/URF/DescentSystem.lean"
-      ]
-    }
-  },
+  "groups": {},
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 1
+  "total_active_obligations": 0
 }

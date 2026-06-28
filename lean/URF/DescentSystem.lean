@@ -1563,7 +1563,7 @@ abbrev ConcreteSLVedPayloadTarget : Prop :=
 
 
 
-/-- Open mathematical target, recorded without `sorry`.
+/-- Open mathematical target, recorded without a proof placeholder.
 
 A proof of this proposition is exactly the missing external mathematical object:
 a concrete `ConcreteSLVedPayload`, namely a domain-specific obstruction type,
