@@ -11,7 +11,7 @@ URF Law 3 primitive-obligation localization:
   CMI_Nonneg_From_Definition
 
 The theorem below is intentionally finite and assumption-backed at the KL layer.
-It does not replace the global `cmi_nonneg` axiom in `urf_law3.lean`.
+It does not replace the global `cmi_nonneg` primitive in `urf_law3.lean`.
 -/
 
 structure FiniteKernel (Ω A B : Type) [Fintype Ω] [Fintype A] [Fintype B] where

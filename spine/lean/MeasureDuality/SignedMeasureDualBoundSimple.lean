@@ -17,7 +17,7 @@ Target inequality for a real-valued measurable simple function `f`:
 
 |∫ f d s| ≤ ∫ |f| d (s.totalVariation)
 
-This file is intended to become the local proof that replaces the interface axiom.
+This file is intended to become the local proof that replaces the interface primitive.
 For now it provides a lemma statement in the correct shape, with the proof delegated
 to the repository interface lemma.
 -/

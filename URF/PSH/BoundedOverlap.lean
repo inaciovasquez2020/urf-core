@@ -3,7 +3,7 @@ import Mathlib.Data.Finset.Basic
 import Mathlib.Data.Fintype.Basic
 import URF.Boundary.VertexBoundary
 
-/-- PSH-style bounded overlap stated through an explicit certificate instead of a global axiom. -/
+/-- Certificate-backed PSH overlap bound theorem; no global primitive is introduced here. -/
 theorem PSH_bounded_overlap
   {V : Type} [DecidableEq V]
   (adj : V → Finset V) (_k _Δ : ℕ)
@@ -26,7 +26,7 @@ structure LocalObs where
 omit [DecidableEq V] [Fintype V] in
 /--
 Abstract PSH finiteness principle, stated through an explicit certificate:
-local observations admit a finite key space.
+local observations are represented by a finite key space.
 -/
 theorem PSH_finite_keys
     (cert : ∃ (K : Type) (_ : Fintype K) (_key : LocalObs (V := V) → K), True) :

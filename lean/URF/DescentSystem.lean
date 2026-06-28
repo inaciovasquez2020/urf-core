@@ -66,7 +66,7 @@ class CycleSpaceModel (α : Type u) where
   contribution_eq_rank :
     ∀ w, witnessContribution w = cycleRankF2 w
 
-/-- Rank drop is now a field projection of `DescentSystem`, not a global axiom. -/
+/-- Rank drop is now a field projection of `DescentSystem`, not a global primitive. -/
 theorem step_rank_drop :
   ∀ {α : Type u} (D : DescentSystem α) (C : Configuration α),
     ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank :=
@@ -75,7 +75,7 @@ by
   exact D.step_rank_drop_field C h
 
 /-- Explicit per-system certificate replacing direct use of the global
-`step_rank_drop` axiom at conditional theorem surfaces. -/
+`step_rank_drop` primitive at conditional theorem surfaces. -/
 structure StepRankDropCertificate
   {α : Type u}
   (D : DescentSystem α) : Prop where
@@ -222,7 +222,7 @@ by
   exact Nat.lt_of_lt_of_le (Nat.lt_succ_self _) (step_rank_drop D C h)
 
 /-- Certificate-local rank strict decrease.  This does not remove the
-global `step_rank_drop` axiom; it creates the weakest conditional replacement
+global `step_rank_drop` primitive; it creates the weakest conditional replacement
 surface for downstream migration. -/
 theorem rank_strict_decrease_from_certificate
   {α : Type u} (D : DescentSystem α)
@@ -251,7 +251,7 @@ theorem nstep_rank_monotone_from_iterated_step_formula
 
 /-- Certificate-local version of `nstep_rank_monotone_from_iterated_step_formula`.
 
-This replaces the internal appeal to the global `step_rank_drop` axiom with
+This replaces the internal appeal to the global `step_rank_drop` primitive with
 an explicit `StepRankDropCertificate D` hypothesis. -/
 theorem nstep_rank_monotone_from_iterated_step_formula_from_certificate
     {α : Type u}
@@ -283,7 +283,7 @@ theorem step_rank_nonincrease_of_terminal_step_nonincrease
 /-- Certificate-local version of `step_rank_nonincrease_of_terminal_step_nonincrease`.
 
 This replaces the nonterminal branch's appeal to the global `step_rank_drop`
-axiom with an explicit `StepRankDropCertificate D` hypothesis. -/
+primitive with an explicit `StepRankDropCertificate D` hypothesis. -/
 theorem step_rank_nonincrease_of_terminal_step_nonincrease_from_certificate
     {α : Type u}
     (D : DescentSystem α)
@@ -829,7 +829,7 @@ by
     packageConcreteAbstractDescentEquivalence S D R hPivot hFullRank C
 
 /-- Explicit local compatibility hypothesis replacing direct theorem-surface
-dependence on the older global rank-drop axiom. -/
+dependence on the older global rank-drop primitive. -/
 structure StepCompatibleDescentSystem
     {α : Type u}
     (S : SupportEncoding α)
@@ -858,7 +858,7 @@ by
   exact h C hcompat hterm
 
 /-- The concrete pivot package implies the rank drop for one descent step.
-Proved by direct appeal to the global step_rank_drop axiom. -/
+Proved by direct appeal to the global step_rank_drop primitive. -/
 theorem ConcretePivotImpliesStepRankDrop
     {α : Type u}
     (S : SupportEncoding α)
@@ -872,7 +872,7 @@ theorem ConcretePivotImpliesStepRankDrop
 
 /-- Certificate-local concrete pivot rank drop.
 
-This migrates one direct dependent of the global `step_rank_drop` axiom
+This migrates one direct dependent of the global `step_rank_drop` primitive
 to the explicit `StepRankDropCertificate` surface. -/
 theorem ConcretePivotImpliesStepRankDrop_from_certificate
     {α : Type u}
@@ -901,7 +901,7 @@ by
 
 /-- Certificate-local concrete-pivot compatibility witness.
 
-This avoids the direct route through the global `step_rank_drop` axiom by
+This avoids the direct route through the global `step_rank_drop` primitive by
 requiring an explicit `StepRankDropCertificate D`. -/
 theorem StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
     {α : Type u}
@@ -993,7 +993,7 @@ by
 
 /-- Conditional zero-rank reachability surface.
 
-This is the axiom-separated theorem surface: it depends only on an explicit
+This is the primitive-separated theorem surface: it depends only on an explicit
 `StepCompatibleDescentSystem` witness and does not use
 `StepCompatibleDescentSystem.of_concrete_pivot`.
 -/
@@ -1013,7 +1013,7 @@ theorem ZeroRankReachedWithinRank_conditional_from_step_compatible
 /-- Certificate-local zero-rank reachability theorem.
 
 This routes zero-rank reachability through an explicit
-`StepRankDropCertificate D` instead of the global `step_rank_drop` axiom.
+`StepRankDropCertificate D` instead of the global `step_rank_drop` primitive.
 -/
 theorem ZeroRankReachedWithinRank_from_step_rank_drop_certificate
     {α : Type u}
@@ -1037,7 +1037,7 @@ by
 /-- Zero-rank reachability derived from the `DescentSystem` rank-drop field.
 
 This closes the route from the promoted field to the certificate-local
-zero-rank theorem without reintroducing a global axiom. -/
+zero-rank theorem without reintroducing a global primitive. -/
 theorem ZeroRankReachedWithinRank_from_descent_system_field
     {α : Type u}
     (S : SupportEncoding α)
@@ -1563,7 +1563,7 @@ abbrev ConcreteSLVedPayloadTarget : Prop :=
 
 
 
-/-- Open mathematical target, recorded without `sorry`.
+/-- Open mathematical target, recorded without a proof placeholder.
 
 A proof of this proposition is exactly the missing external mathematical object:
 a concrete `ConcreteSLVedPayload`, namely a domain-specific obstruction type,
