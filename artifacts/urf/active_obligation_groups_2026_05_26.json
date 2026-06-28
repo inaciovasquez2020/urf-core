@@ -21,14 +21,8 @@
   ],
   "groups": {
     "descent_system_structural_descent": {
-      "count": 4,
+      "count": 3,
       "items": [
-        {
-          "group": "descent_system_structural_descent",
-          "line": 996,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "This is the axiom-separated theorem surface: it depends only on an explicit"
-        },
         {
           "group": "descent_system_structural_descent",
           "line": 1016,
@@ -55,5 +49,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 4
+  "total_active_obligations": 3
 }
