@@ -251,7 +251,7 @@ theorem nstep_rank_monotone_from_iterated_step_formula
 
 /-- Certificate-local version of `nstep_rank_monotone_from_iterated_step_formula`.
 
-This replaces the internal appeal to the global `step_rank_drop` axiom with
+This replaces the internal appeal to the global `step_rank_drop` primitive with
 an explicit `StepRankDropCertificate D` hypothesis. -/
 theorem nstep_rank_monotone_from_iterated_step_formula_from_certificate
     {α : Type u}
