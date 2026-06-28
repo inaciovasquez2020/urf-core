@@ -133,23 +133,9 @@
         "finite_cmi_to_local_cmi_nonneg_interface.lean",
         "spine/lean/MeasureDuality/SignedMeasureDualBoundSimple.lean"
       ]
-    },
-    "psh_bounded_overlap_model": {
-      "count": 1,
-      "items": [
-        {
-          "group": "psh_bounded_overlap_model",
-          "line": 29,
-          "path": "URF/PSH/BoundedOverlap.lean",
-          "text": "local observations admit a finite key space."
-        }
-      ],
-      "paths": [
-        "URF/PSH/BoundedOverlap.lean"
-      ]
     }
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 17
+  "total_active_obligations": 16
 }
