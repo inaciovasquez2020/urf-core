@@ -21,14 +21,8 @@
   ],
   "groups": {
     "descent_system_structural_descent": {
-      "count": 2,
+      "count": 1,
       "items": [
-        {
-          "group": "descent_system_structural_descent",
-          "line": 1040,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "zero-rank theorem without reintroducing a global axiom. -/"
-        },
         {
           "group": "descent_system_structural_descent",
           "line": 1566,
@@ -43,5 +37,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 2
+  "total_active_obligations": 1
 }
