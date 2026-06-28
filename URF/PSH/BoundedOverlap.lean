@@ -26,7 +26,7 @@ structure LocalObs where
 omit [DecidableEq V] [Fintype V] in
 /--
 Abstract PSH finiteness principle, stated through an explicit certificate:
-local observations admit a finite key space.
+local observations are represented by a finite key space.
 -/
 theorem PSH_finite_keys
     (cert : ∃ (K : Type) (_ : Fintype K) (_key : LocalObs (V := V) → K), True) :
