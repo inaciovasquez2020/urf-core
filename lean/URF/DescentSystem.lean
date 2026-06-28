@@ -66,7 +66,7 @@ class CycleSpaceModel (α : Type u) where
   contribution_eq_rank :
     ∀ w, witnessContribution w = cycleRankF2 w
 
-/-- Rank drop is now a field projection of `DescentSystem`, not a global axiom. -/
+/-- Rank drop is now a field projection of `DescentSystem`, not a global primitive. -/
 theorem step_rank_drop :
   ∀ {α : Type u} (D : DescentSystem α) (C : Configuration α),
     ¬ D.terminal C → (D.step C).rank + 1 ≤ C.rank :=
