@@ -544,15 +544,28 @@ def ConcretePhiDefinitionUsingExtractRMatrix
   Matrix (Fin (Finset.card (D.extractR R C))) S.E (ZMod 2)
 := extractRMatrix S D R C
 
-axiom pivot_family :
-  ∀ {α : Type u}
-    (S : SupportEncoding α)
-    (D : DescentSystem α)
-    (R : Nat)
-    (C : Configuration α),
+def PivotFamilyInvariant
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat) : Prop :=
+  ∀ C : Configuration α,
     ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
       ∀ i j,
         extractRMatrix S D R C i (p j) = if i = j then 1 else 0
+
+theorem pivot_family
+  {α : Type u}
+  (S : SupportEncoding α)
+  (D : DescentSystem α)
+  (R : Nat)
+  (hPivot : PivotFamilyInvariant S D R)
+  (C : Configuration α) :
+  ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
+    ∀ i j,
+      extractRMatrix S D R C i (p j) = if i = j then 1 else 0 :=
+by
+  exact hPivot C
 
 
 
@@ -563,10 +576,11 @@ theorem pivot_family_obstruction_from_nonempty_extractR
   (S : SupportEncoding α)
   (D : DescentSystem α)
   (R : Nat)
+  (hPivot : PivotFamilyInvariant S D R)
   (C : Configuration α)
   (hn : (D.extractR R C).Nonempty) :
   False := by
-  rcases pivot_family S D R C with ⟨p, hp⟩
+  rcases pivot_family S D R hPivot C with ⟨p, hp⟩
   have hpos : 0 < Finset.card (D.extractR R C) := Finset.card_pos.mpr hn
   let i : Fin (Finset.card (D.extractR R C)) := ⟨0, hpos⟩
   have hdiag := hp i i
@@ -577,13 +591,15 @@ theorem AbstractStepRealizesCanonicalF2Pivot
   (S : SupportEncoding α)
   (D : DescentSystem α)
   (R : Nat)
+  (hPivot : PivotFamilyInvariant S D R)
   (C : Configuration α) :
   ∃ p : Fin (Finset.card (D.extractR R C)) ↪ S.E,
     ∀ i j,
       ConcretePhiDefinitionUsingExtractRMatrix S D R C i (p j) =
         if i = j then 1 else 0 :=
 by
-  simpa [ConcretePhiDefinitionUsingExtractRMatrix] using pivot_family S D R C
+  simpa [ConcretePhiDefinitionUsingExtractRMatrix] using
+    pivot_family S D R hPivot C
 
 def ExtractRMatrixFullRankInvariant
   {α : Type u}
@@ -778,13 +794,14 @@ theorem packageConcreteAbstractDescentEquivalence
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ConcreteAbstractDescentEquivalence S D R C :=
 by
   exact
     ⟨ConcreteRankAgreement S D R hFullRank C,
-     AbstractStepRealizesCanonicalF2Pivot S D R C⟩
+     AbstractStepRealizesCanonicalF2Pivot S D R hPivot C⟩
 
 
 theorem packageConcreteAbstractDescentEquivalence_from_full_rank_invariant
@@ -792,12 +809,13 @@ theorem packageConcreteAbstractDescentEquivalence_from_full_rank_invariant
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ConcreteAbstractDescentEquivalence S D R C :=
 by
   exact
-    packageConcreteAbstractDescentEquivalence S D R hFullRank C
+    packageConcreteAbstractDescentEquivalence S D R hPivot hFullRank C
 
 /-- Explicit local compatibility hypothesis replacing direct theorem-surface
 dependence on the older global rank-drop axiom. -/
@@ -992,6 +1010,7 @@ theorem ZeroRankReachedWithinRank_from_step_rank_drop_certificate
     (D : DescentSystem α)
     (R : Nat)
     (cert : StepRankDropCertificate D)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
@@ -1001,7 +1020,7 @@ by
       S D R
       (StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
         S D R cert)
-      (fun C => packageConcreteAbstractDescentEquivalence S D R hFullRank C)
+      (fun C => packageConcreteAbstractDescentEquivalence S D R hPivot hFullRank C)
       C
 
 /-- Zero-rank reachability derived from the `DescentSystem` rank-drop field.
@@ -1013,6 +1032,7 @@ theorem ZeroRankReachedWithinRank_from_descent_system_field
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
@@ -1021,6 +1041,7 @@ by
     ZeroRankReachedWithinRank_from_step_rank_drop_certificate
       S D R
       (StepRankDropCertificate_from_descent_system_field D)
+      hPivot
       hFullRank
       C
 
@@ -1029,6 +1050,7 @@ theorem ZeroRankReachedWithinRank_from_concrete_pivot
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R)
     (C : Configuration α) :
     ∃ n ≤ C.rank, (D.nstep n C).rank = 0 :=
@@ -1037,7 +1059,7 @@ by
     ZeroRankReachedWithinRank_from_step_compatible
       S D R
       (StepCompatibleDescentSystem.of_concrete_pivot S D R)
-      (fun C => packageConcreteAbstractDescentEquivalence S D R hFullRank C)
+      (fun C => packageConcreteAbstractDescentEquivalence S D R hPivot hFullRank C)
       C
 
 /-- Certificate-local packaged concrete-pivot descent theorem surface. -/
@@ -1060,13 +1082,14 @@ theorem ConcretePivotDescentPackage_from_step_rank_drop_certificate
     (D : DescentSystem α)
     (R : Nat)
     (cert : StepRankDropCertificate D)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R) :
     ConcretePivotDescentPackageFromCertificate S D R cert :=
 by
   refine ⟨?_, ?_⟩
   · intro C
     exact ZeroRankReachedWithinRank_from_step_rank_drop_certificate
-      S D R cert hFullRank C
+      S D R cert hPivot hFullRank C
   · exact StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
       S D R cert
 
@@ -1087,12 +1110,13 @@ theorem packageConcretePivotDescent
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R) :
     ConcretePivotDescentPackage S D R :=
 by
   refine ⟨?_, ?_⟩
   · intro C
-    exact packageConcreteAbstractDescentEquivalence S D R hFullRank C
+    exact packageConcreteAbstractDescentEquivalence S D R hPivot hFullRank C
   · exact StepCompatibleDescentSystem.of_concrete_pivot S D R
 
 
@@ -1101,10 +1125,11 @@ theorem ConcretePivotDescentPackage_from_full_rank_invariant
     (S : SupportEncoding α)
     (D : DescentSystem α)
     (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R)
     (hFullRank : ExtractRMatrixFullRankInvariant S D R) :
     ConcretePivotDescentPackage S D R :=
 by
-  exact packageConcretePivotDescent S D R hFullRank
+  exact packageConcretePivotDescent S D R hPivot hFullRank
 
 theorem ConcretePivotDescentPackage.rank_drop
     {α : Type u}
@@ -1159,11 +1184,12 @@ Boundary: conditional/interface constructor only; no concrete pivot-elimination
 operation is supplied here.
 -/
 def canonical_F2_pivot_step_constructor {α : Type u}
-    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) :
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R) :
     CanonicalF2PivotStepConstructor S D R := by
   refine ⟨D.step, rfl, ?_⟩
   intro C _hC
-  exact AbstractStepRealizesCanonicalF2Pivot S D R C
+  exact AbstractStepRealizesCanonicalF2Pivot S D R hPivot C
 
 
 /-- Target object for a genuine concrete F₂ pivot-elimination operation on
@@ -1213,22 +1239,24 @@ Boundary: this uses the existing abstract pivot-realization surface and the
 domain-specific scientific step beyond `D.step`.
 -/
 def concrete_F2_pivot_elimination_operation_from_descent_field {α : Type u}
-    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) :
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R) :
     ConcreteF2PivotEliminationOperationOnConfiguration S D R := by
   refine ⟨D.step, ?_, ?_⟩
   · intro C _hC
-    exact AbstractStepRealizesCanonicalF2Pivot S D R C
+    exact AbstractStepRealizesCanonicalF2Pivot S D R hPivot C
   · intro C hC
     exact D.step_rank_drop_field C hC
 
 /-- The repository-native concrete F₂ pivot-elimination operation induces the
 canonical F₂ pivot step constructor. -/
 def canonical_F2_pivot_step_constructor_from_descent_field {α : Type u}
-    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat) :
+    (S : SupportEncoding α) (D : DescentSystem α) (R : Nat)
+    (hPivot : PivotFamilyInvariant S D R) :
     CanonicalF2PivotStepConstructor S D R :=
   canonical_F2_pivot_step_constructor_from_concrete_operation
     S D R
-    (concrete_F2_pivot_elimination_operation_from_descent_field S D R)
+    (concrete_F2_pivot_elimination_operation_from_descent_field S D R hPivot)
     rfl
 
 
@@ -1315,9 +1343,10 @@ Boundary: this does not manufacture the scientific system; it records the exact
 non-toy numerical payload needed to test one scientific descent step.
 -/
 def concrete_F2_pivot_elimination_operation_from_scientific_actual_number_test
-    {α : Type u} (T : ScientificActualNumberDescentTest α) :
+    {α : Type u} (T : ScientificActualNumberDescentTest α)
+    (hPivot : PivotFamilyInvariant T.S T.D T.R) :
     ConcreteF2PivotEliminationOperationOnConfiguration T.S T.D T.R :=
-  concrete_F2_pivot_elimination_operation_from_descent_field T.S T.D T.R
+  concrete_F2_pivot_elimination_operation_from_descent_field T.S T.D T.R hPivot
 
 
 /-- Target surface for the intended scientific `DescentSystem` instance.
