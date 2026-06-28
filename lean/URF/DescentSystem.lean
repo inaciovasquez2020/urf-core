@@ -399,9 +399,12 @@ abbrev DependencyRich
   (_C : Configuration α) : Prop :=
   True
 
-axiom dependencyRich_nonempty_extractR :
-  ∀ {α : Type u} (D : DescentSystem α) (R : Nat) (C : Configuration α),
-    DependencyRich D R C → (D.extractR R C).Nonempty
+theorem dependencyRich_nonempty_extractR
+  {α : Type u} (D : DescentSystem α)
+  (hExtractRNonempty : ∀ R C, (D.extractR R C).Nonempty) :
+  ∀ R C, DependencyRich D R C → (D.extractR R C).Nonempty := by
+  intro R C _hdep
+  exact hExtractRNonempty R C
 
 
 /-- Since `DependencyRich` is currently definitionally `True`, it cannot imply
