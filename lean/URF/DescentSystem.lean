@@ -1037,7 +1037,7 @@ by
 /-- Zero-rank reachability derived from the `DescentSystem` rank-drop field.
 
 This closes the route from the promoted field to the certificate-local
-zero-rank theorem without reintroducing a global axiom. -/
+zero-rank theorem without reintroducing a global primitive. -/
 theorem ZeroRankReachedWithinRank_from_descent_system_field
     {α : Type u}
     (S : SupportEncoding α)
