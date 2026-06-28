@@ -901,7 +901,7 @@ by
 
 /-- Certificate-local concrete-pivot compatibility witness.
 
-This avoids the direct route through the global `step_rank_drop` axiom by
+This avoids the direct route through the global `step_rank_drop` primitive by
 requiring an explicit `StepRankDropCertificate D`. -/
 theorem StepCompatibleDescentSystem.of_concrete_pivot_from_certificate
     {α : Type u}
