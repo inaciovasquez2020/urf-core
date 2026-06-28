@@ -21,17 +21,11 @@
   ],
   "groups": {
     "admissible_normalization": {
-      "count": 2,
+      "count": 1,
       "items": [
         {
           "group": "admissible_normalization",
-          "line": 65,
-          "path": "admissible/lean/URFAdmissible.lean",
-          "text": "axiom TM_normalization_assumption :"
-        },
-        {
-          "group": "admissible_normalization",
-          "line": 78,
+          "line": 80,
           "path": "admissible/lean/URFAdmissible.lean",
           "text": "axiom RAM_normalization_assumption :"
         }
@@ -209,5 +203,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 24
+  "total_active_obligations": 23
 }
