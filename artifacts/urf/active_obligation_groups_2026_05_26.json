@@ -21,14 +21,8 @@
   ],
   "groups": {
     "descent_system_structural_descent": {
-      "count": 12,
+      "count": 11,
       "items": [
-        {
-          "group": "descent_system_structural_descent",
-          "line": 78,
-          "path": "lean/URF/DescentSystem.lean",
-          "text": "`step_rank_drop` axiom at conditional theorem surfaces. -/"
-        },
         {
           "group": "descent_system_structural_descent",
           "line": 225,
@@ -103,5 +97,5 @@
   },
   "scope": "urf-core active repository files only",
   "status": "ACTIVE_OBLIGATION_GROUPS_ONLY_NO_THEOREM_CLOSURE",
-  "total_active_obligations": 12
+  "total_active_obligations": 11
 }
