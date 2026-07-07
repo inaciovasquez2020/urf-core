@@ -85,6 +85,45 @@ Forbidden promotions:
 - MotionBandShadow proves a universal physical minimum nonzero speed.
 - \(v_{\min}\) is promoted from explicit input to theorem.
 
+
+## Relative Time Scale Boundary
+
+For a system \(S\), an elapsed time input \(\mathrm{elapsed\_time}(S,t)\),
+and an explicit natural-cycle-time input \(\mathrm{natural\_cycle\_time}(S)\),
+define the bounded relative time scale:
+
+\[
+\mathrm{RelativeTimeScale}(S,t) :=
+\frac{\mathrm{elapsed\_time}(S,t)}
+{\mathrm{natural\_cycle\_time}(S)}.
+\]
+
+Here \(\mathrm{natural\_cycle\_time}(S)\) is an explicit input, not a theorem.
+It may represent a lifecycle, recurrence period, development interval, or other
+declared finite cycle for the chosen system \(S\).
+
+RelativeTimeScale links to
+
+\[
+\mathrm{MotionBandShadow}(V,c,v) := V < v \wedge v < c
+\]
+
+only as a bounded analogy: RelativeTimeScale records cycle-relative traversal,
+while MotionBandShadow records speed-band-relative motion. Neither object derives physical time dilation.
+
+Boundary:
+
+\[
+\mathrm{BOUNDARY} := \neg\ \mathrm{RelativeTimeScale\_proves\_physical\_time\_dilation}.
+\]
+
+Forbidden promotions:
+
+- RelativeTimeScale proves physical time dilation.
+- natural_cycle_time(S) is promoted from explicit input to theorem.
+- MotionBandShadow derives relativistic time dilation from ShadowOfInfinity.
+- ShadowOfInfinity implies physical time dilation.
+
 ## Status
 
 Canonical. Minimal. Toolkit-compatible.
