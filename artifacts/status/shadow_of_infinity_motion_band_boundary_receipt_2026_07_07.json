@@ -1,0 +1,19 @@
+{
+  "receipt": "shadow_of_infinity_motion_band_boundary_receipt_2026_07_07",
+  "repo": "urf-core",
+  "canonical_file": "docs/foundations/SHADOW_OF_INFINITY.md",
+  "object": "MotionBandShadow",
+  "definition": "MotionBandShadow(V,c,v) := V < v ∧ v < c",
+  "input_boundaries": {
+    "V": "explicit lower speed input",
+    "c": "explicit upper light-speed ceiling",
+    "v": "moving speed input",
+    "v_min": "explicit input only, not a theorem"
+  },
+  "forbidden_promotions": [
+    "ShadowOfInfinity implies physical time dilation",
+    "MotionBandShadow proves a universal physical minimum nonzero speed",
+    "v_min is promoted from explicit input to theorem"
+  ],
+  "boundary": "BOUNDARY := ¬ universal_physical_minimum_nonzero_speed_proved"
+}
