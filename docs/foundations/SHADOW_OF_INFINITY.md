@@ -55,6 +55,36 @@ T(\Sigma_\infty)=\infty,\qquad
 \Rightarrow \texttt{Irrelevant}.
 \]
 
+
+## Motion Band Shadow Boundary
+
+For an explicit input lower speed bound \(V\), an explicit upper light-speed
+ceiling \(c\), and a moving speed \(v\), define the bounded motion-band shadow
+predicate:
+
+\[
+\mathrm{MotionBandShadow}(V,c,v) := V < v \wedge v < c.
+\]
+
+Here \(V\) is an input boundary, not a theorem. In particular, any symbol such
+as \(v_{\min}\) used in a slowest-speed surface remains an explicit assumption
+or input witness unless separately derived in a formal physical theory.
+
+This object is a finite bounded-scale compatibility object against the
+canonical Shadow of Infinity definition. It does not assert or imply physical time dilation.
+
+Boundary:
+
+\[
+\mathrm{BOUNDARY} := \neg\ \mathrm{universal\_physical\_minimum\_nonzero\_speed\_proved}.
+\]
+
+Forbidden promotions:
+
+- Shadow of Infinity implies physical time dilation.
+- MotionBandShadow proves a universal physical minimum nonzero speed.
+- \(v_{\min}\) is promoted from explicit input to theorem.
+
 ## Status
 
 Canonical. Minimal. Toolkit-compatible.
