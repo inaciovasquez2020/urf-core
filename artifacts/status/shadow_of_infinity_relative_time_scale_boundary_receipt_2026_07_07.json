@@ -1,0 +1,25 @@
+{
+  "receipt": "shadow_of_infinity_relative_time_scale_boundary_receipt_2026_07_07",
+  "repo": "urf-core",
+  "canonical_file": "docs/foundations/SHADOW_OF_INFINITY.md",
+  "object": "RelativeTimeScale",
+  "definition": "RelativeTimeScale(S,t) := elapsed_time(S,t) / natural_cycle_time(S)",
+  "input_boundaries": {
+    "S": "system input",
+    "t": "time parameter input",
+    "elapsed_time(S,t)": "explicit elapsed-time input",
+    "natural_cycle_time(S)": "explicit natural-cycle-time input, not a theorem"
+  },
+  "bounded_analogy_link": {
+    "target": "MotionBandShadow(V,c,v) := V < v ∧ v < c",
+    "status": "bounded analogy only",
+    "restriction": "does not derive physical time dilation"
+  },
+  "forbidden_promotions": [
+    "RelativeTimeScale proves physical time dilation",
+    "natural_cycle_time(S) is promoted from explicit input to theorem",
+    "MotionBandShadow derives relativistic time dilation from ShadowOfInfinity",
+    "ShadowOfInfinity implies physical time dilation"
+  ],
+  "boundary": "BOUNDARY := ¬ RelativeTimeScale_proves_physical_time_dilation"
+}
