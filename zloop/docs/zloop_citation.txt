@@ -10,15 +10,18 @@ Artifact
 zloop/certs/frozen/hs_cert_interval_P200.json
 
 Meaning
-Verified Hilbert–Schmidt contraction
-S_HS(P) + T_HS(P) < 1 at P = 200
-Interval arithmetic with analytic tail bound
+Proposed Hilbert–Schmidt contraction certificate interface.
 
-Implication
-Zloop holds at cutoff P
-Equivalent to HZ*
-Implies ACL
-Yields conditional RH
+Current recomputation at P = 200 gives:
+S_HS(P) + T_HS(P) =
+2135.3005836807597297868553069295160824887369273881760091423483523634981735912575
+
+Therefore:
+accept == false
+
+BOUNDARY := not (S_HS(200) + T_HS(200) < 1)
+
+No implication to Zloop, HZ*, ACL, or conditional RH is established by this artifact.
 
 Reproduction
 git checkout zloop-hs-cert-P200
