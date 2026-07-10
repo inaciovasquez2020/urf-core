@@ -12,9 +12,13 @@ def power_graph(G, R):
                 H.add_edge(u, v)
     return H
 
-def greedy_chromatic_number(G):
+def greedy_color_count(G):
+    """Return the number of colors used by largest-first greedy coloring.
+
+    This is an upper bound on the chromatic number, not an exact computation.
+    """
     coloring = nx.coloring.greedy_color(G, strategy="largest_first")
-    return max(coloring.values()) + 1
+    return max(coloring.values(), default=-1) + 1
 
 sizes = [100, 200, 400]
 for n in sizes:
@@ -22,5 +26,8 @@ for n in sizes:
     diam = nx.diameter(G)
     R = math.ceil(diam / 2)
     H = power_graph(G, R)
-    chi = greedy_chromatic_number(H)
-    print(f"n={n}, diameter={diam}, R={R}, chi={chi}")
+    greedy_colors = greedy_color_count(H)
+    print(
+        f"n={n}, diameter={diam}, R={R}, "
+        f"greedy_color_count={greedy_colors}"
+    )
