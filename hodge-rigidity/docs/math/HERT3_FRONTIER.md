@@ -10,8 +10,9 @@ Prove the oscillation lower bound for flat non-horizontal Hodge tensors.
 
 ## Canonical role
 
-HERT-3 is the single remaining lemma in the Horizontal Extension Rigidity program.
-Once HERT-3 is verified, Horizontal Extension Rigidity is established.
+HERT-3 is the designated remaining lemma in the current Horizontal Extension Rigidity dependency surface.
+Conditional on that dependency surface being exhaustive, verification of HERT-3 establishes Horizontal Extension Rigidity.
+The repository does not currently prove that the dependency surface is exhaustive.
 
 ## Truth policy
 
