@@ -26,9 +26,27 @@ for forbidden in (
             f"TORI_FLIP_UNSUPPORTED_CLAIM_PRESENT := {forbidden}"
         )
 
-if r"\begin{lemma}[Flip preserves horizontality]" not in horizontal:
-    raise SystemExit(
-        "TORI_FLIP_HORIZONTAL_LEMMA_MISSING"
-    )
+required_horizontal = (
+    r"\begin{conjecture}[Flip preserves horizontality]",
+    r"\mathsf{Flip}(T)",
+    r"BOUNDARY: $\mathbb{Q}$-linearity of the Gauss--Manin connection does not by",
+    "preservation theorem for that envelope is required.",
+)
+
+for fragment in required_horizontal:
+    if fragment not in horizontal:
+        raise SystemExit(
+            f"TORI_FLIP_HORIZONTAL_BOUNDARY_MISSING := {fragment}"
+        )
+
+for forbidden in (
+    r"\begin{lemma}[Flip preserves horizontality]",
+    r"\begin{proof}",
+    r"Since $\nabla$ is $\mathbb{Q}$-linear",
+):
+    if forbidden in horizontal:
+        raise SystemExit(
+            f"TORI_FLIP_UNSUPPORTED_HORIZONTAL_CLAIM_PRESENT := {forbidden}"
+        )
 
 print("TORI_FLIP_BOUNDARY_OK")
