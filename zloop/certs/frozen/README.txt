@@ -1,12 +1,15 @@
-This certificate is frozen and treated as authoritative.
+This directory records the intended frozen-certificate interface.
 
 Contents
 hs_cert_interval_P200.json
 
-Meaning
-Interval arithmetic HS certificate
-Condition verified: S_HS(P) + T_HS(P) < 1
-Implied invariant: Zloop holds at cutoff P = 200
+Current status
+No authoritative accepting P200 certificate is established.
+The current recomputation gives accept == false.
+
+BOUNDARY := not (S_HS(200) + T_HS(200) < 1)
+
+No Zloop invariant is established at cutoff P = 200.
 
 Reproduction
 Run python zloop/scripts/run_certificate_interval.py 200
