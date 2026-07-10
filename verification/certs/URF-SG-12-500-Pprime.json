@@ -2,6 +2,7 @@
   "standard": "URF-SG",
   "version": "v1.0",
   "cert_id": "URF-SG-12-500-Pprime",
+  "admissible_class": "finite_numeric",
   "statement": {
     "type": "spectral_gap",
     "quantity": "lambda_1(P' | ker(P')^⊥)",
