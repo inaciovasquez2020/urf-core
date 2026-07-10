@@ -55,15 +55,19 @@ axioms.  A separate monodromy-invariant sub-VMHS theorem is required.
 
 \section{Fixed Part Theorem}
 
-\begin{theorem}[Fixed part for admissible VMHS]\label{thm:hodge-fixed-part}
+\begin{conjecture}[Fixed part for admissible VMHS]\label{thm:hodge-fixed-part}
 Flat sections $H^0(S, \mathbbV_\Q)$ form a rational mixed Hodge substructure.
-\end{theorem}
+\end{conjecture}
 
-\begin{proof}
-Admissibility ensures well-behaved filtrations.  
-Functoriality under Gauss--Manin connection ensures rationality.  
-\textbf{Lean stub reference:} \texttt{URF\_Core.lean → Hodge.fixed\_part}
-\end{proof}
+\noindent
+BOUNDARY: admissibility and functoriality of the Gauss--Manin connection do not
+by themselves prove that global flat sections inherit compatible weight and
+Hodge filtrations, are rational, and satisfy the mixed Hodge substructure
+axioms.  A separate fixed-part theorem for admissible VMHS is required.
+
+\noindent
+\textbf{Lean target reference:}
+\texttt{URF\_Core.lean → Hodge.fixed\_part}
 
 \section{Rationality of Horizontal Subtori}
 
