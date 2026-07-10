@@ -35,7 +35,7 @@
 \begin{itemize}
 \item Density-coercivity: \textbf{Proven on dense Paley--Wiener domain}; extends by closure.
 \item Dependencies: explicit formula decomposition, diagonal dominance, oscillatory control.
-\item Lean references: \texttt{URF\_Core.lean → AKR.*}
+
 \end{itemize}
 \end{center}
 
@@ -59,7 +59,7 @@ On the Paley--Wiener core $D\subseteq H$, there exists $c_0>0$ such that for all
 \begin{proof}
 The explicit formula decomposition gives a diagonal prime-sum term.  
 Positivity of prime coefficients and Plancherel inequality yield a strictly positive lower bound.  
-\textbf{Lean stub reference:} \texttt{URF\_Core.lean → AKR.diagonal\_dominance}
+
 \end{proof}
 
 \section{Oscillatory control lemma}
@@ -75,7 +75,7 @@ For $f\in D$, the oscillatory term satisfies
 \begin{proof}
 Oscillatory contributions arise from zero-interaction terms in the explicit formula.  
 Applying Plancherel and standard explicit-formula bounds gives $\varepsilon(R)\to 0$.  
-\textbf{Lean stub reference:} \texttt{URF\_Core.lean → AKR.oscillatory\_control}
+
 \end{proof}
 
 \section{Density-coercivity theorem}
@@ -97,7 +97,7 @@ Combine Lemmas \ref{lem:akr-diagonal} and \ref{lem:akr-oscillatory}:
 \ge \frac{c_0}{2} \|f\|_2^2
 \]
 for sufficiently large $R$.  
-\textbf{Lean stub reference:} \texttt{URF\_Core.lean → AKR.density\_coercivity}
+
 \end{proof}
 
 \begin{remark}[Scope]
