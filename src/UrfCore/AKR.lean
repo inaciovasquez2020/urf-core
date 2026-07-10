@@ -3,7 +3,9 @@ import UrfCore.Prelude
 namespace UrfCore
 namespace AKR
 
-structure Kernel (V : Type) where
+universe u
+
+structure Kernel (V : Type u) where
   carrier : V → Prop
 
 def archimedeanBound : ℕ := 0
