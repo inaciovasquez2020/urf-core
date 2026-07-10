@@ -1,0 +1,32 @@
+{
+  "surface": "archimedean_kernel_rigidity_density_coercivity",
+  "status": "CONDITIONAL_ARGUMENT_ONLY",
+  "source": "archimedean-kernel-rigidity/akr_density_coercivity.tex",
+  "frozen_source": true,
+  "first_unsupported_edge": {
+    "claim": "The diagonal prime-sum term admits a uniform constant c_0 > 0 on the stated Paley-Wiener core.",
+    "missing_object": "A precise operator, domain, normalization, and proof of a uniform positive lower bound independent of f."
+  },
+  "downstream_unsupported_edges": [
+    {
+      "claim": "The oscillatory contribution satisfies epsilon(R) -> 0 uniformly on the stated domain.",
+      "missing_object": "A defined parameter R, a quantified support class, and a uniform explicit-formula estimate."
+    },
+    {
+      "claim": "The operator decomposition yields density-coercivity by choosing R sufficiently large.",
+      "missing_object": "A theorem connecting the same R to the operator, domain, diagonal constant, and oscillatory estimate."
+    },
+    {
+      "claim": "Coercivity extends by closure.",
+      "missing_object": "A closability or closed-form theorem preserving the lower bound on the claimed closure domain."
+    }
+  ],
+  "nonclaims": [
+    "This receipt does not prove diagonal dominance.",
+    "This receipt does not prove oscillatory control.",
+    "This receipt does not prove density-coercivity.",
+    "This receipt does not modify the frozen module.",
+    "This receipt does not establish Archimedean Kernel Rigidity."
+  ],
+  "boundary": "not proven_unconditional_archimedean_kernel_density_coercivity"
+}
