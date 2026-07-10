@@ -1,10 +1,9 @@
-% Proof complete. No remaining gaps.
-% Status: Proven (ZFC, explicit constants)
-% Standalone. No conjectural inputs.
-% Dependencies:
-% - Finite FO^k local type bound
-% - Combinatorial fan forcing
-% - FO^k bounded-radius expressibility
+% Status: Conditional.
+% Missing lemma: for fixed k, Delta, and R, sufficiently large local
+% cycle rank forces two vertices with distinct FO^k radius-R pointed types.
+% Boundary: finiteness of the local-type space does not imply type
+% diversity, and FO^k expressibility of an (m,R)-fan is not established
+% when m exceeds the available variable bound.
 \section*{Cycle--Orbit Splitting (CLR)}
 
 \begin{lemma}[Finite FO$^k$ local type bound]
@@ -39,28 +38,18 @@ FO$^k$ formulas of quantifier rank $\le R$ can distinguish at most finitely many
 Hence the number of FO$^k$ radius-$R$ pointed types is finite.
 \end{proof}
 
-\begin{theorem}[CLR splitting]
-If $\dim_{\mathbb F_2} Z_1(B_{2R}(v))$ exceeds the FO$^k$ type bound, then there exists $w$ with
+\begin{lemma}[Missing cycle-rank-to-type-splitting implication]
+For fixed $k,\Delta,R$, sufficiently large
+$\dim_{\mathbb F_2} Z_1(B_{2R}(v))$ forces the existence of a vertex
+$w$ such that
 \[
 \tp^{\FO^k}_R(G,v) \neq \tp^{\FO^k}_R(G,w).
 \]
-\end{theorem}
+\end{lemma}
 
-\begin{proof}
-Assume for contradiction that all vertices $w$ satisfy
-$\tp^{\FO^k}_R(G,w)=\tp^{\FO^k}_R(G,v)$.
-
-By the cycle-rank hypothesis and Lemma (Cycle rank forces fan),
-there exists an $(m,R)$-cycle fan at $v$ with $m$ exceeding the
-maximum multiplicity realizable uniformly within a single FO$^k$
-radius-$R$ type.
-
-By Lemma (FO$^k$ fan expressibility), the existence of such an
-$(m,R)$-fan is an FO$^k$ property of $(B_R(v),v)$.
-Hence it must hold at every $w$ with the same FO$^k$ radius-$R$ type.
-
-This contradicts the finiteness bound on FO$^k$ local types.
-Therefore there exists $w$ with
-$\tp^{\FO^k}_R(G,w)\neq\tp^{\FO^k}_R(G,v)$.
-\end{proof}
+\noindent
+This implication is not proved here. Finiteness of the set of
+FO$^k$ radius-$R$ pointed types does not imply that distinct types
+occur, and no FO$^k$ formula expressing an $(m,R)$-fan is supplied
+when $m$ exceeds the available variable bound.
 
