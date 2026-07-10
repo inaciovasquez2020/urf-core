@@ -9,3 +9,6 @@ require mathlib from git
 
 lean_lib URF where
   srcDir := "lean"
+
+lean_lib UrfCore where
+  srcDir := "src"
