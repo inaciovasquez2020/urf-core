@@ -11,7 +11,7 @@ Prefab Composition Admissibility requires that every composite is typecheckable 
 CLR
 Cycle-Local Rigidity prohibits asserting perpetual local homogeneity under rich cycle overlap without a local witness.
 
-AKR
+
 Archimedean Kernel Rigidity prohibits persistent global effects without local support under decay.
 
 Checker statement
