@@ -39,15 +39,19 @@
 
 \section{Monodromy Invariants}
 
-\begin{lemma}[Monodromy invariants]\label{lem:hodge-monodromy}
+\begin{conjecture}[Monodromy invariants]\label{lem:hodge-monodromy}
 For an admissible $\mathbbV$, flat sections invariant under the Gauss--Manin connection form a sub-VMHS over $\Q$.
-\end{lemma}
+\end{conjecture}
 
-\begin{proof}
-Deligne canonical extension provides compatible weight/Hodge filtrations.  
-Flat sections respect these filtrations and are invariant under connection.  
-\textbf{Lean stub reference:} \texttt{URF\_Core.lean → Hodge.monodromy\_invariants}
-\end{proof}
+\noindent
+BOUNDARY: the existence of a Deligne canonical extension with compatible
+weight and Hodge filtrations does not by itself prove that invariant flat
+sections are closed under those filtrations or satisfy the full sub-VMHS
+axioms.  A separate monodromy-invariant sub-VMHS theorem is required.
+
+\noindent
+\textbf{Lean target reference:}
+\texttt{URF\_Core.lean → Hodge.monodromy\_invariants}
 
 \section{Fixed Part Theorem}
 
