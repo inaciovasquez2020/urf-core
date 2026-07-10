@@ -52,7 +52,6 @@ Sorry count: 0
 - `URF/Info/InfoAxioms.lean:8` — `axiom info_increment_le :`
 - `URF/PSH/BoundedOverlap.lean:7` — `axiom PSH_bounded_overlap`
 - `URF/PSH/BoundedOverlap.lean:25` — `axiom PSH_finite_keys :`
-- `src/UrfCore/AKR.lean:9` — `axiom archimedeanBound : ℕ`
 
 ## Admit locations
 
