@@ -20,7 +20,7 @@ noncomputable def radiusBall (G : Graph V) (R : ℕ) (v : V) : Finset V :=
 lemma mem_radiusBall_self (G : Graph V) (R : ℕ) (v : V) :
   v ∈ radiusBall G R v :=
 by
-  simpa [radiusBall, pathLength]
+  simp [radiusBall, pathLength]
 
 end CLR
 end UrfCore
