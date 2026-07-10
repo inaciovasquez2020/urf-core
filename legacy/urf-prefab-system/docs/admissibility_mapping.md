@@ -15,5 +15,5 @@ Cycle-Local Rigidity prohibits asserting perpetual local homogeneity under rich 
 Archimedean Kernel Rigidity prohibits persistent global effects without local support under decay.
 
 Checker statement
-All ACCEPT decisions are intended to be interpretable as: the input text does not assert a forbidden global claim under CLR or AKR and does not violate prefab composition constraints as represented in the current ruleset.
+All ACCEPT decisions are intended to be interpretable as: the input text does not assert a forbidden global claim under CLR and does not violate prefab composition constraints as represented in the current ruleset.
 
