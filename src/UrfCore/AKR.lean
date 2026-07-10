@@ -8,7 +8,6 @@ structure Kernel (V : Type) where
 
 def archimedeanBound : ℕ := 0
 
-def dummy : Nat := 0
 
 end AKR
 end UrfCore
