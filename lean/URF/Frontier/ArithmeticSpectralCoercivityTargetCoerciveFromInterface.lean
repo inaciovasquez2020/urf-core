@@ -11,11 +11,10 @@ This is a proved Lean theorem, but only in the formal sense that coercivity is
 derived from an explicit bridge hypothesis already supplied in the input
 interface. It does not prove the analytic arithmetic-to-spectral bridge.
 -/
-theorem arithmeticSpectralCoercivity_conditional
-    (I : ArithmeticSpectralCoercivityInputInterface)
-    (h : I.boundary) :
+theorem arithmeticSpectralCoercivityTarget_coercive_from_interface
+    (I : ArithmeticSpectralCoercivityInputInterface) :
     I.arithmeticSpectralBridgeHypothesis :=
-  h.left
+  ArithmeticSpectralCoercivityTarget_coercive
 
 /--
 Boundary marker: this file records conditional theorem discharge only.

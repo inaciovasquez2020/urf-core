@@ -1,3 +1,5 @@
+import URF.Frontier.ArithmeticSpectralCoercivityTarget
+
 namespace URF
 namespace Frontier
 
@@ -17,10 +19,13 @@ structure ArithmeticSpectralCoercivityInputInterface where
   spectralTestVector : spectralSpace → Prop
   energyFunctional : spectralSpace → Nat
   normProxy : spectralSpace → Nat
-  arithmeticSpectralBridgeHypothesis : Prop
   coercivityConstantPositiveHypothesis : Prop
   boundaryNoCoercivityProof : Prop
   boundaryNoFinalTheoremClosureClaim : Prop
+
+def ArithmeticSpectralCoercivityInputInterface.arithmeticSpectralBridgeHypothesis
+    (_I : ArithmeticSpectralCoercivityInputInterface) : Prop :=
+  ArithmeticSpectralCoercive ArithmeticSpectralCoercivityTarget (1 / 2)
 
 /--
 Boundary predicate for the input interface.

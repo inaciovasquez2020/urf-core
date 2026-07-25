@@ -2,11 +2,11 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-lean_path = ROOT / "lean" / "URF" / "Frontier" / "ArithmeticSpectralCoercivityConditionalTheorem.lean"
+lean_path = ROOT / "lean" / "URF" / "Frontier" / "ArithmeticSpectralCoercivityTargetCoerciveFromInterface.lean"
 urf_path = ROOT / "lean" / "URF.lean"
 
 if not lean_path.exists():
-    raise SystemExit("MISSING_OBJECT := lean/URF/Frontier/ArithmeticSpectralCoercivityConditionalTheorem.lean")
+    raise SystemExit("MISSING_OBJECT := lean/URF/Frontier/ArithmeticSpectralCoercivityTargetCoerciveFromInterface.lean")
 if not urf_path.exists():
     raise SystemExit("MISSING_OBJECT := lean/URF.lean")
 
@@ -15,11 +15,10 @@ urf_text = urf_path.read_text()
 
 required_fragments = [
     "import URF.Frontier.ArithmeticSpectralCoercivityInputInterface",
-    "theorem arithmeticSpectralCoercivity_conditional",
+    "theorem arithmeticSpectralCoercivityTarget_coercive_from_interface",
     "(I : ArithmeticSpectralCoercivityInputInterface)",
-    "(h : I.boundary)",
     "I.arithmeticSpectralBridgeHypothesis",
-    "h.left",
+    "ArithmeticSpectralCoercivityTarget_coercive",
     "def ARITHMETIC_SPECTRAL_COERCIVITY_CONDITIONAL_THEOREM_RECORDED : Bool := true",
     "def ARITHMETIC_SPECTRAL_COERCIVITY_ANALYTIC_BRIDGE_PROVED : Bool := false",
     "def ARITHMETIC_SPECTRAL_COERCIVITY_FINAL_CLOSURE_CLAIMED : Bool := false",
@@ -43,8 +42,8 @@ if "ARITHMETIC_SPECTRAL_COERCIVITY_ANALYTIC_BRIDGE_PROVED : Bool := true" in tex
 if "ARITHMETIC_SPECTRAL_COERCIVITY_FINAL_CLOSURE_CLAIMED : Bool := true" in text:
     raise SystemExit("BOUNDARY := final closure claimed")
 
-import_line = "import URF.Frontier.ArithmeticSpectralCoercivityConditionalTheorem"
+import_line = "import URF.Frontier.ArithmeticSpectralCoercivityTargetCoerciveFromInterface"
 if import_line not in urf_text.splitlines():
-    raise SystemExit("MISSING_OBJECT := import URF.Frontier.ArithmeticSpectralCoercivityConditionalTheorem")
+    raise SystemExit("MISSING_OBJECT := import URF.Frontier.ArithmeticSpectralCoercivityTargetCoerciveFromInterface")
 
 print("ARITHMETIC_SPECTRAL_COERCIVITY_CONDITIONAL_THEOREM_OK")
