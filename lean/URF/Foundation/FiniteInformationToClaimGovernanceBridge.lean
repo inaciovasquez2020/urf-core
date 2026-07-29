@@ -20,7 +20,9 @@ theorem finite_local_nonnegative_component_bound_bridge_source
       (ι := Fin T)
       (M := ℝ)
       (i := t)
-      (h := h_mem)
+      (h := by
+      intro h_not_mem
+      exact (h_not_mem h_mem).elim)
       (s := (Finset.univ : Finset (Fin T)))
       (f := localCMI)]
     simp
