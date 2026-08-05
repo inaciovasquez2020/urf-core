@@ -180,5 +180,55 @@ theorem ArithmeticSpectralCoercivityTarget_coercive :
   · intro q v _ _
     exact reducedPrimitiveForm_energy_lower_bound q v
 
+/--
+The uniform coercivity constant `1 / 2` is sharp for the concrete finite
+arithmetic family.
+
+The existing lower-bound theorem proves coercivity at `1 / 2`. For the
+discriminant `-3` form, the vector `(1, -1)` has norm square `2` and energy
+`1`, so every uniform coercivity constant is at most `1 / 2`.
+-/
+theorem ArithmeticSpectralCoercivityTarget_half_is_sharp :
+    ArithmeticSpectralCoercive
+        ArithmeticSpectralCoercivityTarget (1 / 2) ∧
+      ∀ c : ℝ,
+        ArithmeticSpectralCoercive ArithmeticSpectralCoercivityTarget c →
+          c ≤ 1 / 2 := by
+  constructor
+  · exact ArithmeticSpectralCoercivityTarget_coercive
+  · intro c hc
+    rcases hc with ⟨_, hbound⟩
+    have hwitness :=
+      hbound
+        ReducedPrimitiveBinaryQuadraticForm.discriminantNegThree
+        ((1 : ℝ), (-1 : ℝ))
+        (by
+          simp [
+            ArithmeticSpectralCoercivityTarget,
+            reducedPrimitiveBinaryQuadraticFamily
+          ])
+        (by
+          change ((1 : ℝ), (-1 : ℝ)) ≠ ((0 : ℝ), (0 : ℝ))
+          norm_num)
+    change
+      c * reducedPrimitiveFormNormSq
+        ReducedPrimitiveBinaryQuadraticForm.discriminantNegThree
+        ((1 : ℝ), (-1 : ℝ)) ≤
+        reducedPrimitiveFormInner
+          ReducedPrimitiveBinaryQuadraticForm.discriminantNegThree
+          (reducedPrimitiveFormOperator
+            ReducedPrimitiveBinaryQuadraticForm.discriminantNegThree
+            ((1 : ℝ), (-1 : ℝ)))
+          ((1 : ℝ), (-1 : ℝ)) at hwitness
+    norm_num [
+      reducedPrimitiveFormNormSq,
+      reducedPrimitiveFormInner,
+      reducedPrimitiveFormOperator,
+      reducedPrimitiveFormA,
+      reducedPrimitiveFormB,
+      reducedPrimitiveFormC
+    ] at hwitness
+    linarith
+
 end Frontier
 end URF
