@@ -8,7 +8,7 @@ on:
       - Dockerfile
       - requirements-sg-verifier.txt
       - verification/verify.py
-      - standards/URF-SG.json
+      - standards/URF-SG/schema.json
       - .github/workflows/urf-sg-verifier-container.yml
   workflow_dispatch:
 
@@ -65,6 +65,58 @@ jobs:
             -t urf-sg-verifier:smoke .
 
           (docker run --rm urf-sg-verifier:smoke 2>&1 || true) | grep -F "Usage: python verification/verify.py"
+
+          docker run --rm \
+            urf-sg-verifier:smoke \
+            /app/verification/certs/URF-SG-BASE-2.json
+
+          cat > "$RUNNER_TEMP/urf-sg-schema-bypass-sentinel.json" <<'JSON'
+          {
+            "cert_id": "CONTAINER-SCHEMA-BYPASS-SENTINEL",
+            "statement": {
+              "lower_bound": 1.0
+            },
+            "checks": {
+              "method": "numeric"
+            },
+            "P": [
+              [0.0, 0.0],
+              [0.0, 1.0]
+            ],
+            "n": 2
+          }
+          JSON
+
+          if docker run --rm \
+            -v "$RUNNER_TEMP/urf-sg-schema-bypass-sentinel.json:/work/cert.json:ro" \
+            urf-sg-verifier:smoke \
+            /work/cert.json
+          then
+            printf '%s\n' \
+              "FIRST_FAILED_IDENTITY := schema-invalid logic-valid sentinel rejected"
+            exit 1
+          fi
+
+          mkdir -p "$RUNNER_TEMP/empty-urf-sg-schema"
+
+          set +e
+          missing_schema_log="$(
+            docker run --rm \
+              -v "$RUNNER_TEMP/empty-urf-sg-schema:/app/standards/URF-SG:ro" \
+              urf-sg-verifier:smoke \
+              /app/verification/certs/URF-SG-BASE-2.json 2>&1
+          )"
+          missing_schema_rc=$?
+          set -e
+
+          [ "$missing_schema_rc" -ne 0 ] || {
+            printf '%s\n' \
+              "FIRST_FAILED_IDENTITY := missing schema must fail closed"
+            exit 1
+          }
+
+          printf '%s\n' "$missing_schema_log" |
+            grep -F "Required verifier schema not found"
 
       - name: Build and publish image
         id: build

@@ -10,11 +10,15 @@ from jsonschema import validate
 
 # -------- Paths --------
 
-SCHEMA_PATH = Path("standards/URF-SG/schema.json")
+SCHEMA_PATH = Path(__file__).resolve().parents[1] / "standards" / "URF-SG" / "schema.json"
 
 # -------- Utilities --------
 
 def load_schema():
+    if not SCHEMA_PATH.is_file():
+        raise FileNotFoundError(
+            f"Required verifier schema not found: {SCHEMA_PATH}"
+        )
     with open(SCHEMA_PATH, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -109,10 +113,10 @@ def verify_cert(path: str) -> None:
     with open(path, "r", encoding="utf-8") as f:
         cert = json.load(f)
 
-    # schema validation (if present)
-    if SCHEMA_PATH.exists():
-        schema = load_schema()
-        validate(instance=cert, schema=schema)
+    # Schema validation is part of the verifier contract.
+    # Missing schema state is a verification failure, never a bypass.
+    schema = load_schema()
+    validate(instance=cert, schema=schema)
 
     method = cert["checks"]["method"]
 

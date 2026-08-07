@@ -22,13 +22,13 @@ WORKDIR /app
 
 RUN addgroup --system urf \
  && adduser --system --ingroup urf --home /app urf \
- && mkdir -p /app/verification /app/standards
+ && mkdir -p /app/verification /app/standards/URF-SG
 
 COPY requirements-sg-verifier.txt /app/requirements-sg-verifier.txt
 RUN pip install --no-cache-dir -r /app/requirements-sg-verifier.txt
 
 COPY --chown=urf:urf verification/verify.py /app/verification/verify.py
-COPY --chown=urf:urf standards/URF-SG.json /app/standards/URF-SG.json
+COPY --chown=urf:urf standards/URF-SG/schema.json /app/standards/URF-SG/schema.json
 COPY --chown=urf:urf verification/certs/URF-SG-BASE-2.json /app/verification/certs/URF-SG-BASE-2.json
 
 USER urf
