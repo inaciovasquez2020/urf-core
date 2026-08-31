@@ -274,6 +274,38 @@ theorem finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of
     finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_terminal_decoder
       M C hC h0 decode hdecode hcap
 
+/--
+If each next transcript snapshot has conditional entropy at most `C` given its
+predecessor, then finite CMI is automatically bounded by the same `C`.  Combined
+with a constant initial snapshot and an explicit terminal decoder, this yields
+the target-entropy horizon lower bound directly from transcript capacity.
+-/
+theorem finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_constant_initial_terminal_decoder_and_transcript_capacity
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (C : ℝ) (hC : 0 < C)
+    (s₀ : history.Snapshot)
+    (hinitial : ∀ ω : history.Sample, M.S 0 ω = s₀)
+    (decode : history.Snapshot → XValue)
+    (hdecode : ∀ ω : history.Sample, decode (M.S history.horizon ω) = M.X ω)
+    (htranscriptCapacity : ∀ t : Nat, t < history.horizon →
+      URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+        M.sampleLaw (M.S (t + 1)) (M.S t) ≤ C) :
+    URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+        M.sampleLaw M.X / C ≤
+      (history.horizon : ℝ) := by
+  apply
+    finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_constant_initial_and_terminal_decoder
+      M C hC s₀ hinitial decode hdecode
+  intro t ht
+  exact
+    finite_accumulating_transcript_local_cmi_le_of_next_conditional_entropy_le
+      M C t (htranscriptCapacity t ht)
+
 def InitialStateNeutralAccumulatingTranscriptBridge.status : String :=
   "INITIAL_STATE_NEUTRAL_ACCUMULATING_TRANSCRIPT_BRIDGE_INTERFACE_ONLY"
 
