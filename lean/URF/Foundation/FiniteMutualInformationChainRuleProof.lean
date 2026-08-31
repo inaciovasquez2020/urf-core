@@ -135,6 +135,30 @@ theorem finite_accumulating_transcript_paired_step_mutual_information_eq_next
     simpa [g, FiniteAccumulatingTranscriptProbabilityModel.S_recovers_previous M t ht] using h
   simp only [finiteMutualInformation_eq_entropies, hSnapshot, hJoint]
 
+/--
+For an accumulating transcript, each one-step mutual-information increment is
+exactly the conditional mutual information revealed by the next snapshot.
+-/
+theorem finite_accumulating_transcript_step_chain_rule
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (t : Nat) (ht : t < history.horizon) :
+    finiteMutualInformation M.sampleLaw M.X (M.S (t + 1)) =
+      finiteMutualInformation M.sampleLaw M.X (M.S t) +
+        finiteConditionalMutualInformation M.sampleLaw M.X (M.S (t + 1)) (M.S t) := by
+  calc
+    finiteMutualInformation M.sampleLaw M.X (M.S (t + 1)) =
+        finiteMutualInformation M.sampleLaw M.X
+          (fun ω => (M.S (t + 1) ω, M.S t ω)) :=
+      (finite_accumulating_transcript_paired_step_mutual_information_eq_next M t ht).symm
+    _ = finiteMutualInformation M.sampleLaw M.X (M.S t) +
+        finiteConditionalMutualInformation M.sampleLaw M.X (M.S (t + 1)) (M.S t) :=
+      finite_accumulating_transcript_paired_step_chain_rule M t
+
 def FiniteMutualInformationChainRuleProof.status : String :=
   "FINITE_PROBABILITY_DERIVED_INFORMATION_CHAIN_RULE_PROVED_ALONGSIDE_LEGACY_INTERFACE"
 
