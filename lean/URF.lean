@@ -25,6 +25,7 @@ import URF.Foundation.FiniteDiscreteShannonEntropy
 import URF.Foundation.FiniteJointDistributionEntropy
 import URF.Foundation.FiniteMutualInformationDefinition
 import URF.Foundation.FiniteConditionalEntropyDefinition
+import URF.Foundation.FiniteConditionalMutualInformationDefinition
 import URF.Foundation.FiniteMutualInformationChainRuleProof
 import URF.Foundation.InitialStateNeutralAccumulatingTranscriptBridge
 import URF.Foundation.ChannelCapacityBoundDerivation
