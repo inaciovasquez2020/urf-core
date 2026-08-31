@@ -3,6 +3,9 @@ import URF.Foundation.FiniteMutualInformationChainRuleProof
 
 namespace URF
 
+open URF.Foundation.FiniteMutualInformationDefinition
+open URF.Foundation.FiniteConditionalMutualInformationDefinition
+
 /--
 Connects an accumulating transcript history to the existing finite-information
 chain-rule interface while making initial-state information neutrality explicit.
@@ -40,6 +43,28 @@ theorem InitialStateNeutralAccumulatingTranscriptBridge.terminal_information_eq_
       K.chainRule.finiteLocalSum K.history.horizon K.chainRule.localCMIValue := by
   rw [← K.horizon_compatible]
   exact K.terminal_information_eq_finite_local_sum
+
+/--
+For the concrete finite probability model, initial-state information neutrality
+turns the accumulating-transcript telescope into an exact terminal-information
+sum, without using the legacy chain-rule interface.
+-/
+theorem finite_accumulating_transcript_terminal_information_eq_local_cmi_sum_of_initial_neutral
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (h0 : finiteMutualInformation M.sampleLaw M.X (M.S 0) = 0) :
+    finiteMutualInformation M.sampleLaw M.X (M.S history.horizon) =
+      ∑ t in Finset.range history.horizon,
+        finiteConditionalMutualInformation
+          M.sampleLaw M.X (M.S (t + 1)) (M.S t) := by
+  have h :=
+    finite_accumulating_transcript_information_telescope
+      M history.horizon (Nat.le_refl history.horizon)
+  simpa [h0] using h
 
 def InitialStateNeutralAccumulatingTranscriptBridge.status : String :=
   "INITIAL_STATE_NEUTRAL_ACCUMULATING_TRANSCRIPT_BRIDGE_INTERFACE_ONLY"
