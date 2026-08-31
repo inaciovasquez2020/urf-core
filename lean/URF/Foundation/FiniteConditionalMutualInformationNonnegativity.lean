@@ -27,6 +27,31 @@ theorem finiteConditionalMutualInformation_nonnegative
     finiteConditionalMutualInformation_nonnegative_of_entropy_submodularity
       μ X Y Z (finiteEntropySubmodularity_from_conditionalGibbs μ X Y Z)
 
+/--
+Concrete finite conditional entropy is nonnegative.  This is derived from the
+proved CMI nonnegativity theorem by applying it to `I(X;X | Y)`: conditioning
+additionally on `X` leaves zero residual entropy because `X` is recovered by
+the first projection from `(X,Y)`.
+-/
+theorem finiteConditionalEntropy_nonnegative
+    {α β γ : Type u}
+    [DecidableEq α] [Fintype α]
+    [DecidableEq β] [Fintype β]
+    [DecidableEq γ] [Fintype γ]
+    (μ : FinDistribution α) (X : α → β) (Y : α → γ) :
+    0 ≤ URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy μ X Y := by
+  have hself := finiteConditionalMutualInformation_nonnegative μ X X Y
+  have hrecover :
+      URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+        μ X (fun a => (X a, Y a)) = 0 := by
+    exact
+      URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy_eq_zero_of_recoverable
+        μ X (fun a => (X a, Y a)) (fun xy : β × γ => xy.1) (by
+          intro a
+          rfl)
+  rw [finiteConditionalMutualInformation_eq_conditional_entropies, hrecover] at hself
+  simpa using hself
+
 def status : String :=
   "FINITE_CONDITIONAL_MUTUAL_INFORMATION_NONNEGATIVITY_PROVED"
 
