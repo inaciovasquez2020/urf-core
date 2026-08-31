@@ -20,6 +20,7 @@ import URF.Foundation.UnconditionalStableTraceNoGo
 import URF.Foundation.CMINonnegativityProof
 import URF.Foundation.AccumulatingTranscriptHistory
 import URF.Foundation.FiniteMutualInformationChainRuleProof
+import URF.Foundation.InitialStateNeutralAccumulatingTranscriptBridge
 import URF.Foundation.ChannelCapacityBoundDerivation
 import URF.Foundation.GlobalValidKernelTheorem
 import URF.Foundation.FiniteInformationToClaimGovernanceBridge
