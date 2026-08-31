@@ -31,6 +31,7 @@ import URF.Foundation.FiniteDistributionMathlibMeasureBridge
 import URF.Foundation.FiniteShannonEntropyMathlibBridge
 import URF.Foundation.FiniteConditionalProductGibbsMeasures
 import URF.Foundation.FiniteXYZAbsoluteContinuity
+import URF.Foundation.FiniteConditionalGibbsLikelihoodRatio
 import URF.Foundation.FiniteMutualInformationChainRuleProof
 import URF.Foundation.InitialStateNeutralAccumulatingTranscriptBridge
 import URF.Foundation.ChannelCapacityBoundDerivation
