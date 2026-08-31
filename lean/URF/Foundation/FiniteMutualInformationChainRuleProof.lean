@@ -1,6 +1,7 @@
 import Mathlib.Data.Real.Basic
 import URF.Foundation.FiniteMutualInformationDefinition
 import URF.Foundation.FiniteConditionalMutualInformationNonnegativityReduction
+import URF.Foundation.FiniteConditionalMutualInformationNonnegativity
 import URF.Foundation.FiniteAccumulatingTranscriptProbabilityModel
 
 namespace URF
@@ -181,6 +182,28 @@ theorem finite_accumulating_transcript_conditional_entropy_drop_eq_local_cmi
   simp only [finiteMutualInformation_eq_entropies, finiteConditionalEntropy_eq_entropies]
     at hstep ⊢
   linarith
+
+/--
+A one-step conditional-entropy capacity bound on the next transcript snapshot
+implies the local conditional-mutual-information capacity bound required by the
+accumulating-transcript horizon estimates.
+-/
+theorem finite_accumulating_transcript_local_cmi_le_of_next_conditional_entropy_le
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (C : ℝ) (t : Nat)
+    (hcapacity :
+      finiteConditionalEntropy M.sampleLaw (M.S (t + 1)) (M.S t) ≤ C) :
+    finiteConditionalMutualInformation M.sampleLaw M.X (M.S (t + 1)) (M.S t) ≤ C := by
+  exact le_trans
+    (URF.Foundation.FiniteConditionalMutualInformationNonnegativity.
+      finiteConditionalMutualInformation_le_conditionalEntropy_second
+        M.sampleLaw M.X (M.S (t + 1)) (M.S t))
+    hcapacity
 
 /--
 Finite telescoping of the accumulating-transcript information increments.
