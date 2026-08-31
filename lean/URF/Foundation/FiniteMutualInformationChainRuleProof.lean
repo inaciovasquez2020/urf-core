@@ -81,6 +81,60 @@ theorem finite_accumulating_transcript_paired_step_chain_rule
   exact finite_probability_derived_information_chain_rule
     M.sampleLaw M.X (M.S (t + 1)) (M.S t)
 
+/--
+Because an accumulating snapshot deterministically recovers its predecessor,
+adding the previous snapshot to the next snapshot does not change its mutual
+information with `X`.
+-/
+theorem finite_accumulating_transcript_paired_step_mutual_information_eq_next
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (t : Nat) (ht : t < history.horizon) :
+    finiteMutualInformation M.sampleLaw M.X
+        (fun ω => (M.S (t + 1) ω, M.S t ω)) =
+      finiteMutualInformation M.sampleLaw M.X (M.S (t + 1)) := by
+  have hSnapshot :
+      URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+          M.sampleLaw (fun ω => (M.S (t + 1) ω, M.S t ω)) =
+        URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+          M.sampleLaw (M.S (t + 1)) := by
+    let f : history.Snapshot → history.Snapshot × history.Snapshot :=
+      fun s => (s, history.recoverPrevious t s)
+    have hf : Function.Injective f := by
+      intro a b hab
+      exact congrArg (fun z => z.1) hab
+    have h :=
+      URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy_comp_injective
+        M.sampleLaw (M.S (t + 1)) f hf
+    simpa [f, FiniteAccumulatingTranscriptProbabilityModel.S_recovers_previous M t ht] using h
+  have hJoint :
+      URF.Foundation.FiniteJointDistributionEntropy.finiteJointEntropy
+          M.sampleLaw M.X (fun ω => (M.S (t + 1) ω, M.S t ω)) =
+        URF.Foundation.FiniteJointDistributionEntropy.finiteJointEntropy
+          M.sampleLaw M.X (M.S (t + 1)) := by
+    let g : XValue × history.Snapshot →
+        XValue × (history.Snapshot × history.Snapshot) :=
+      fun z => (z.1, (z.2, history.recoverPrevious t z.2))
+    have hg : Function.Injective g := by
+      intro a b hab
+      apply Prod.ext
+      · exact congrArg (fun z => z.1) hab
+      · exact congrArg (fun z => z.2.1) hab
+    change
+      URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+          M.sampleLaw (fun ω => (M.X ω, (M.S (t + 1) ω, M.S t ω))) =
+        URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+          M.sampleLaw (fun ω => (M.X ω, M.S (t + 1) ω))
+    have h :=
+      URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy_comp_injective
+        M.sampleLaw (fun ω => (M.X ω, M.S (t + 1) ω)) g hg
+    simpa [g, FiniteAccumulatingTranscriptProbabilityModel.S_recovers_previous M t ht] using h
+  simp only [finiteMutualInformation_eq_entropies, hSnapshot, hJoint]
+
 def FiniteMutualInformationChainRuleProof.status : String :=
   "FINITE_PROBABILITY_DERIVED_INFORMATION_CHAIN_RULE_PROVED_ALONGSIDE_LEGACY_INTERFACE"
 
