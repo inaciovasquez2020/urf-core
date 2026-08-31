@@ -160,6 +160,29 @@ theorem finite_accumulating_transcript_step_chain_rule
       finite_accumulating_transcript_paired_step_chain_rule M t
 
 /--
+For an accumulating transcript, the one-step drop in residual uncertainty about
+`X` is exactly the local conditional mutual information revealed by the next
+snapshot.  This is the exact conditional-entropy replacement for the prose
+CE-Bridge; it does not assert a corresponding identity for an arbitrary evolving
+configuration variable.
+-/
+theorem finite_accumulating_transcript_conditional_entropy_drop_eq_local_cmi
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (t : Nat) (ht : t < history.horizon) :
+    finiteConditionalEntropy M.sampleLaw M.X (M.S t) -
+        finiteConditionalEntropy M.sampleLaw M.X (M.S (t + 1)) =
+      finiteConditionalMutualInformation M.sampleLaw M.X (M.S (t + 1)) (M.S t) := by
+  have hstep := finite_accumulating_transcript_step_chain_rule M t ht
+  simp only [finiteMutualInformation_eq_entropies, finiteConditionalEntropy_eq_entropies]
+    at hstep ⊢
+  linarith
+
+/--
 Finite telescoping of the accumulating-transcript information increments.
 At every time `n` within the history horizon, the information in the current
 snapshot is the initial information plus the sum of the local conditional
