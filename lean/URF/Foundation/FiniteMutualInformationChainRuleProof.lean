@@ -159,6 +159,36 @@ theorem finite_accumulating_transcript_step_chain_rule
         finiteConditionalMutualInformation M.sampleLaw M.X (M.S (t + 1)) (M.S t) :=
       finite_accumulating_transcript_paired_step_chain_rule M t
 
+/--
+Finite telescoping of the accumulating-transcript information increments.
+At every time `n` within the history horizon, the information in the current
+snapshot is the initial information plus the sum of the local conditional
+mutual-information increments revealed at steps `0, ..., n-1`.
+-/
+theorem finite_accumulating_transcript_information_telescope
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (n : Nat) (hn : n ≤ history.horizon) :
+    finiteMutualInformation M.sampleLaw M.X (M.S n) =
+      finiteMutualInformation M.sampleLaw M.X (M.S 0) +
+        ∑ t in Finset.range n,
+          finiteConditionalMutualInformation
+            M.sampleLaw M.X (M.S (t + 1)) (M.S t) := by
+  induction n with
+  | zero =>
+      simp
+  | succ n ih =>
+      have hnlt : n < history.horizon := Nat.lt_of_succ_le hn
+      have hnle : n ≤ history.horizon := Nat.le_trans (Nat.le_succ n) hn
+      rw [finite_accumulating_transcript_step_chain_rule M n hnlt]
+      rw [ih hnle]
+      rw [Finset.sum_range_succ]
+      ring
+
 def FiniteMutualInformationChainRuleProof.status : String :=
   "FINITE_PROBABILITY_DERIVED_INFORMATION_CHAIN_RULE_PROVED_ALONGSIDE_LEGACY_INTERFACE"
 
