@@ -242,6 +242,38 @@ theorem finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of
     finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_initial_neutral_terminal_zero
       M C hC h0 hterminal hcap
 
+/--
+If the initial transcript snapshot is pointwise constant and the target is
+explicitly recoverable from the terminal snapshot, then both endpoint
+information conditions are structural.  Under a positive uniform local
+information capacity, the transcript horizon is at least target entropy divided
+by that capacity.
+-/
+theorem finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_constant_initial_and_terminal_decoder
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (C : ℝ) (hC : 0 < C)
+    (s₀ : history.Snapshot)
+    (hinitial : ∀ ω : history.Sample, M.S 0 ω = s₀)
+    (decode : history.Snapshot → XValue)
+    (hdecode : ∀ ω : history.Sample, decode (M.S history.horizon ω) = M.X ω)
+    (hcap : ∀ t : Nat, t < history.horizon →
+      finiteConditionalMutualInformation
+        M.sampleLaw M.X (M.S (t + 1)) (M.S t) ≤ C) :
+    URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+        M.sampleLaw M.X / C ≤
+      (history.horizon : ℝ) := by
+  have h0 : finiteMutualInformation M.sampleLaw M.X (M.S 0) = 0 :=
+    finiteMutualInformation_eq_zero_of_constant_second
+      M.sampleLaw M.X (M.S 0) s₀ hinitial
+  exact
+    finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_terminal_decoder
+      M C hC h0 decode hdecode hcap
+
 def InitialStateNeutralAccumulatingTranscriptBridge.status : String :=
   "INITIAL_STATE_NEUTRAL_ACCUMULATING_TRANSCRIPT_BRIDGE_INTERFACE_ONLY"
 
