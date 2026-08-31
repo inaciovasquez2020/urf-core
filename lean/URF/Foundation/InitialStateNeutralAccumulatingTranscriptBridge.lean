@@ -211,6 +211,37 @@ theorem finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of
   rw [hterminalInformation] at hle
   exact (div_le_iff₀ hC).2 hle
 
+/--
+If the target is explicitly recoverable from the terminal snapshot, then the
+terminal conditional entropy vanishes by the general recoverability lemma.
+Consequently an initially neutral accumulating transcript with positive uniform
+local information capacity has horizon at least target entropy divided by that
+capacity.  The decoder equation is the only terminal-correctness hypothesis.
+-/
+theorem finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_terminal_decoder
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (C : ℝ) (hC : 0 < C)
+    (h0 : finiteMutualInformation M.sampleLaw M.X (M.S 0) = 0)
+    (decode : history.Snapshot → XValue)
+    (hdecode : ∀ ω : history.Sample, decode (M.S history.horizon ω) = M.X ω)
+    (hcap : ∀ t : Nat, t < history.horizon →
+      finiteConditionalMutualInformation
+        M.sampleLaw M.X (M.S (t + 1)) (M.S t) ≤ C) :
+    URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+        M.sampleLaw M.X / C ≤
+      (history.horizon : ℝ) := by
+  have hterminal :=
+    URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy_eq_zero_of_recoverable
+      M.sampleLaw M.X (M.S history.horizon) decode hdecode
+  exact
+    finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_initial_neutral_terminal_zero
+      M C hC h0 hterminal hcap
+
 def InitialStateNeutralAccumulatingTranscriptBridge.status : String :=
   "INITIAL_STATE_NEUTRAL_ACCUMULATING_TRANSCRIPT_BRIDGE_INTERFACE_ONLY"
 
