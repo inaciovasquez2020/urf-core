@@ -34,6 +34,7 @@ import URF.Foundation.FiniteXYZAbsoluteContinuity
 import URF.Foundation.FiniteConditionalGibbsLikelihoodRatio
 import URF.Foundation.FiniteConditionalGibbsInequality
 import URF.Foundation.FiniteConditionalKLSumEntropyGap
+import URF.Foundation.FiniteConditionalMutualInformationNonnegativity
 import URF.Foundation.FiniteMutualInformationChainRuleProof
 import URF.Foundation.InitialStateNeutralAccumulatingTranscriptBridge
 import URF.Foundation.ChannelCapacityBoundDerivation
