@@ -43,6 +43,28 @@ theorem finiteRandomVariablePushProb_eq_preimage_sum
   by_cases h : X a = b <;>
     simp [deterministicRandomVariableKernel, h]
 
+/-- Injective recoding preserves pushforward mass at every image point. -/
+theorem finiteRandomVariablePushProb_comp_injective
+    {α β γ : Type u}
+    [DecidableEq α] [Fintype α]
+    [DecidableEq β] [Fintype β]
+    [DecidableEq γ] [Fintype γ]
+    (μ : FinDistribution α) (X : α → β) (f : β → γ)
+    (hf : Function.Injective f) (b : β) :
+    finiteRandomVariablePushProb μ (fun a => f (X a)) (f b) =
+      finiteRandomVariablePushProb μ X b := by
+  rw [finiteRandomVariablePushProb_eq_preimage_sum,
+    finiteRandomVariablePushProb_eq_preimage_sum]
+  apply Finset.sum_congr rfl
+  intro a _
+  by_cases h : X a = b
+  · subst b
+    simp
+  · have h' : f (X a) ≠ f b := by
+      intro hfb
+      exact h (hf hfb)
+    simp [h, h']
+
 theorem finiteRandomVariablePushProb_nonnegative
     {α β : Type u}
     [DecidableEq α] [Fintype α]
