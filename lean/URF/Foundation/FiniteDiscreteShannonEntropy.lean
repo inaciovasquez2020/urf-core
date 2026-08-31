@@ -46,6 +46,45 @@ def finiteRandomVariableEntropy
     (μ : FinDistribution α) (X : α → β) : ℝ :=
   finiteShannonEntropy (finiteRandomVariablePushDistribution μ X)
 
+/-- Injective recoding of a finite random variable preserves its Shannon entropy. -/
+theorem finiteRandomVariableEntropy_comp_injective
+    {α β γ : Type u}
+    [DecidableEq α] [Fintype α]
+    [DecidableEq β] [Fintype β]
+    [DecidableEq γ] [Fintype γ]
+    (μ : FinDistribution α) (X : α → β) (f : β → γ)
+    (hf : Function.Injective f) :
+    finiteRandomVariableEntropy μ (fun a => f (X a)) =
+      finiteRandomVariableEntropy μ X := by
+  classical
+  unfold finiteRandomVariableEntropy finiteShannonEntropy
+  simp only [finiteRandomVariablePushDistribution_prob]
+  calc
+    Finset.univ.sum
+        (fun c => shannonTerm
+          (finiteRandomVariablePushProb μ (fun a => f (X a)) c)) =
+      (Finset.univ.image f).sum
+        (fun c => shannonTerm
+          (finiteRandomVariablePushProb μ (fun a => f (X a)) c)) := by
+        symm
+        apply Finset.sum_subset
+        · simp
+        · intro c _ hc
+          have hcrange : c ∉ Set.range f := by
+            intro hmem
+            rcases hmem with ⟨b, rfl⟩
+            exact hc (by simp)
+          rw [finiteRandomVariablePushProb_comp_of_not_mem_range μ X f c hcrange]
+          exact shannonTerm_zero
+    _ = Finset.univ.sum
+        (fun b => shannonTerm (finiteRandomVariablePushProb μ X b)) := by
+      rw [Finset.sum_image]
+      · apply Finset.sum_congr rfl
+        intro b _
+        rw [finiteRandomVariablePushProb_comp_injective μ X f hf b]
+      · intro b₁ _ b₂ _ h
+        exact hf h
+
 def status : String :=
   "FINITE_DISCRETE_SHANNON_ENTROPY_DEFINITION_ZERO_SAFE"
 
