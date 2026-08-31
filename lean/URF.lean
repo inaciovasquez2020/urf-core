@@ -22,6 +22,7 @@ import URF.Foundation.AccumulatingTranscriptHistory
 import URF.Foundation.FiniteAccumulatingTranscriptProbabilityModel
 import URF.Foundation.FiniteRandomVariablePushforward
 import URF.Foundation.FiniteDiscreteShannonEntropy
+import URF.Foundation.FiniteJointDistributionEntropy
 import URF.Foundation.FiniteMutualInformationChainRuleProof
 import URF.Foundation.InitialStateNeutralAccumulatingTranscriptBridge
 import URF.Foundation.ChannelCapacityBoundDerivation
