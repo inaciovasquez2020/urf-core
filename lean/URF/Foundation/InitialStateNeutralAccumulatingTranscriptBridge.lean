@@ -171,6 +171,46 @@ theorem finite_accumulating_transcript_residual_uncertainty_depth_div_capacity_l
   exact finite_accumulating_transcript_residual_uncertainty_depth_le_horizon_mul_capacity
     M C hcap
 
+/--
+If an initially neutral accumulating transcript leaves zero residual uncertainty
+about the target at the terminal snapshot, then a positive uniform local
+information capacity forces the transcript horizon to be at least target
+entropy divided by that capacity.  Terminal zero conditional entropy is kept as
+an explicit hypothesis; no operational correctness theorem is assumed here.
+-/
+theorem finite_accumulating_transcript_target_entropy_div_capacity_le_horizon_of_initial_neutral_terminal_zero
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (C : ℝ) (hC : 0 < C)
+    (h0 : finiteMutualInformation M.sampleLaw M.X (M.S 0) = 0)
+    (hterminal :
+      URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+        M.sampleLaw M.X (M.S history.horizon) = 0)
+    (hcap : ∀ t : Nat, t < history.horizon →
+      finiteConditionalMutualInformation
+        M.sampleLaw M.X (M.S (t + 1)) (M.S t) ≤ C) :
+    URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+        M.sampleLaw M.X / C ≤
+      (history.horizon : ℝ) := by
+  have hterminalInformation :
+      finiteMutualInformation M.sampleLaw M.X (M.S history.horizon) =
+        URF.Foundation.FiniteDiscreteShannonEntropy.finiteRandomVariableEntropy
+          M.sampleLaw M.X := by
+    simp only [
+      finiteMutualInformation_eq_entropies,
+      URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy_eq_entropies]
+      at hterminal ⊢
+    linarith
+  have hle :=
+    finite_accumulating_transcript_terminal_information_le_horizon_mul_capacity_of_initial_neutral
+      M C h0 hcap
+  rw [hterminalInformation] at hle
+  exact (div_le_iff₀ hC).2 hle
+
 def InitialStateNeutralAccumulatingTranscriptBridge.status : String :=
   "INITIAL_STATE_NEUTRAL_ACCUMULATING_TRANSCRIPT_BRIDGE_INTERFACE_ONLY"
 
