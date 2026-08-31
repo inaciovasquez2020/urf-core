@@ -1,6 +1,7 @@
 import Mathlib.Data.Real.Basic
 import URF.Foundation.FiniteMutualInformationDefinition
 import URF.Foundation.FiniteConditionalMutualInformationNonnegativityReduction
+import URF.Foundation.FiniteAccumulatingTranscriptProbabilityModel
 
 namespace URF
 
@@ -60,6 +61,25 @@ theorem finite_probability_derived_information_chain_rule
     finiteConditionalEntropy_eq_entropies,
     pair_entropy_eq_joint_entropy]
   linarith
+
+/--
+The concrete one-step chain rule specialized to successive snapshots of the
+repository-native finite accumulating transcript probability model.
+-/
+theorem finite_accumulating_transcript_paired_step_chain_rule
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (t : Nat) :
+    finiteMutualInformation M.sampleLaw M.X
+        (fun ω => (M.S (t + 1) ω, M.S t ω)) =
+      finiteMutualInformation M.sampleLaw M.X (M.S t) +
+        finiteConditionalMutualInformation M.sampleLaw M.X (M.S (t + 1)) (M.S t) := by
+  exact finite_probability_derived_information_chain_rule
+    M.sampleLaw M.X (M.S (t + 1)) (M.S t)
 
 def FiniteMutualInformationChainRuleProof.status : String :=
   "FINITE_PROBABILITY_DERIVED_INFORMATION_CHAIN_RULE_PROVED_ALONGSIDE_LEGACY_INTERFACE"
