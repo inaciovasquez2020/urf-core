@@ -65,6 +65,23 @@ theorem finiteRandomVariablePushProb_comp_injective
       exact h (hf hfb)
     simp [h, h']
 
+/-- A recoded random variable has zero pushforward mass away from the recoding image. -/
+theorem finiteRandomVariablePushProb_comp_of_not_mem_range
+    {α β γ : Type u}
+    [DecidableEq α] [Fintype α]
+    [DecidableEq β] [Fintype β]
+    [DecidableEq γ] [Fintype γ]
+    (μ : FinDistribution α) (X : α → β) (f : β → γ)
+    (c : γ) (hc : c ∉ Set.range f) :
+    finiteRandomVariablePushProb μ (fun a => f (X a)) c = 0 := by
+  rw [finiteRandomVariablePushProb_eq_preimage_sum]
+  apply Finset.sum_eq_zero
+  intro a _
+  have h : f (X a) ≠ c := by
+    intro hEq
+    exact hc ⟨X a, hEq⟩
+  simp [h]
+
 theorem finiteRandomVariablePushProb_nonnegative
     {α β : Type u}
     [DecidableEq α] [Fintype α]
