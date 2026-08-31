@@ -98,6 +98,52 @@ theorem finite_accumulating_transcript_terminal_information_le_horizon_mul_capac
     _ = (history.horizon : ℝ) * C := by
       simp
 
+/--
+The finite residual-uncertainty depth of an accumulating transcript is bounded
+by horizon times a uniform local information capacity.  Here the depth summand
+is the exact conditional-entropy drop about the fixed target `X`; by the
+probability-derived one-step identity, each such drop equals the local CMI.
+This is the formal finite replacement for the simulation inequality on this
+residual-uncertainty surface, not a theorem about an arbitrary evolving
+configuration entropy.
+-/
+theorem finite_accumulating_transcript_residual_uncertainty_depth_le_horizon_mul_capacity
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (C : ℝ)
+    (hcap : ∀ t : Nat, t < history.horizon →
+      finiteConditionalMutualInformation
+        M.sampleLaw M.X (M.S (t + 1)) (M.S t) ≤ C) :
+    ∑ t in Finset.range history.horizon,
+        (URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+            M.sampleLaw M.X (M.S t) -
+          URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+            M.sampleLaw M.X (M.S (t + 1))) ≤
+      (history.horizon : ℝ) * C := by
+  calc
+    ∑ t in Finset.range history.horizon,
+        (URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+            M.sampleLaw M.X (M.S t) -
+          URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+            M.sampleLaw M.X (M.S (t + 1))) =
+      ∑ t in Finset.range history.horizon,
+        finiteConditionalMutualInformation
+          M.sampleLaw M.X (M.S (t + 1)) (M.S t) := by
+        apply Finset.sum_congr rfl
+        intro t ht
+        exact finite_accumulating_transcript_conditional_entropy_drop_eq_local_cmi
+          M t (Finset.mem_range.mp ht)
+    _ ≤ ∑ _t in Finset.range history.horizon, C := by
+      apply Finset.sum_le_sum
+      intro t ht
+      exact hcap t (Finset.mem_range.mp ht)
+    _ = (history.horizon : ℝ) * C := by
+      simp
+
 def InitialStateNeutralAccumulatingTranscriptBridge.status : String :=
   "INITIAL_STATE_NEUTRAL_ACCUMULATING_TRANSCRIPT_BRIDGE_INTERFACE_ONLY"
 
