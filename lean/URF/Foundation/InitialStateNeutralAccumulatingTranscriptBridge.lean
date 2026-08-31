@@ -144,6 +144,33 @@ theorem finite_accumulating_transcript_residual_uncertainty_depth_le_horizon_mul
     _ = (history.horizon : ℝ) * C := by
       simp
 
+/--
+When the uniform local information capacity is strictly positive, the finite
+residual-uncertainty depth yields a lower bound on the transcript horizon.
+This is the direct quotient form of the preceding capacity bound and remains
+restricted to conditional-entropy loss about the fixed target `X`.
+-/
+theorem finite_accumulating_transcript_residual_uncertainty_depth_div_capacity_le_horizon
+    {history : AccumulatingTranscriptHistory}
+    {XValue : Type u}
+    [DecidableEq history.Sample] [Fintype history.Sample]
+    [DecidableEq XValue] [Fintype XValue]
+    [DecidableEq history.Snapshot] [Fintype history.Snapshot]
+    (M : FiniteAccumulatingTranscriptProbabilityModel history XValue)
+    (C : ℝ) (hC : 0 < C)
+    (hcap : ∀ t : Nat, t < history.horizon →
+      finiteConditionalMutualInformation
+        M.sampleLaw M.X (M.S (t + 1)) (M.S t) ≤ C) :
+    (∑ t in Finset.range history.horizon,
+        (URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+            M.sampleLaw M.X (M.S t) -
+          URF.Foundation.FiniteConditionalEntropyDefinition.finiteConditionalEntropy
+            M.sampleLaw M.X (M.S (t + 1)))) / C ≤
+      (history.horizon : ℝ) := by
+  apply (div_le_iff₀ hC).2
+  exact finite_accumulating_transcript_residual_uncertainty_depth_le_horizon_mul_capacity
+    M C hcap
+
 def InitialStateNeutralAccumulatingTranscriptBridge.status : String :=
   "INITIAL_STATE_NEUTRAL_ACCUMULATING_TRANSCRIPT_BRIDGE_INTERFACE_ONLY"
 
