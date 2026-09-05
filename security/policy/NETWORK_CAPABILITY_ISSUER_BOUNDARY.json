@@ -1,6 +1,6 @@
 {
   "schema": "urf.network-capability-issuer-boundary.v1",
-  "status": "RUNTIME_VERIFY_ONLY_EXTERNAL_ISSUER_NOT_YET_DEPLOYED",
+  "status": "RUNTIME_VERIFY_ONLY_EXTERNAL_ISSUER_BLOCKED_BY_SIGNATURE_FORMAT_MISMATCH",
   "runtime_surface": "scripts/network_capability",
   "allowed_runtime_files": [
     "aiv_pub.key",
@@ -8,6 +8,7 @@
     "guarded_tsa_post.py",
     "signed_network_capability.py"
   ],
+  "runtime_signature_format": "minisign-detached-v1",
   "trusted_public_key": "scripts/network_capability/aiv_pub.key",
   "runtime_signing_permitted": false,
   "runtime_private_key_input_permitted": false,
@@ -16,10 +17,30 @@
   "external_identity_candidate": {
     "mechanism": "github-actions-keyless-oidc",
     "workflow": ".github/workflows/urf-sg-verifier-container.yml",
+    "signature_format": "sigstore-bundle-v1",
+    "format_compatible_with_runtime": false,
+    "capability_artifact_emitted": false,
+    "required_identity_constraints_for_future_sigstore_verifier": [
+      "oidc_issuer",
+      "workflow_identity",
+      "workflow_repository",
+      "workflow_sha"
+    ],
     "required_evidence": [
       "id-token: write",
       "actions/attest-build-provenance@v2"
     ]
   },
-  "certified_property": "checked TSA runtime surface is verify-only: no local signing command or private-key input is permitted, and only the pinned public verification key is present"
+  "promotion_gate": {
+    "blocked": true,
+    "reasons": [
+      "runtime verifier accepts Minisign detached signatures while candidate emits Sigstore attestations",
+      "candidate workflow does not emit a signed network-capability token"
+    ],
+    "acceptable_resolution": [
+      "add and verify a Sigstore capability verifier with pinned GitHub OIDC workflow identity constraints",
+      "or deploy an external issuer that produces Minisign detached signatures from a key outside runtime authority"
+    ]
+  },
+  "certified_property": "checked TSA runtime surface remains verify-only and the existing GitHub OIDC/Sigstore workflow is mechanically blocked from issuer promotion until its signature format and capability artifact are compatible with the runtime verifier"
 }
