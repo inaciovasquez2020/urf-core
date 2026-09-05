@@ -1,6 +1,6 @@
 {
   "schema": "urf.network-capability-verifier-pin.v1",
-  "status": "PIN_ONLY_NO_EXECUTION_COUPLING",
+  "status": "PINNED_LOCAL_COPY_NO_EXECUTION_COUPLING",
   "upstream_repository": "https://github.com/inaciovasquez2020/urf-verifier",
   "upstream_commit": "53b8bfaf1c83b5245bd507b306b07645e3038b2b",
   "verified_ci_run": 33932582655,
@@ -14,6 +14,10 @@
     "tests/test_guarded_network_execution.py": {
       "blob_sha": "78ec972ae488f459a5c1aa997953be56b48cb751"
     }
+  },
+  "local_materialization": {
+    "src/signed_network_capability.py": "scripts/network_capability/signed_network_capability.py",
+    "src/guarded_network_execution.py": "scripts/network_capability/guarded_network_execution.py"
   },
   "certified_property": "denied signed capability implies guarded_http_post does not invoke its network opener",
   "runtime_fetch_permitted": false,
