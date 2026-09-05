@@ -5,7 +5,6 @@ tag="${1:?usage: $0 <tag>}"
 tsa_url="${TSA_URL:-http://timestamp.digicert.com}"
 capability_token="${NETWORK_CAPABILITY_TOKEN:?set NETWORK_CAPABILITY_TOKEN to the signed capability token path}"
 capability_signature="${NETWORK_CAPABILITY_SIGNATURE:?set NETWORK_CAPABILITY_SIGNATURE to the detached signature path}"
-capability_public_key="${NETWORK_CAPABILITY_PUBLIC_KEY:?set NETWORK_CAPABILITY_PUBLIC_KEY to the verifier public key path}"
 
 mkdir -p tsa/"$tag"
 
@@ -20,8 +19,7 @@ stamp_one () {
     --query /tmp/tsq.bin \
     --response "$out" \
     --token "$capability_token" \
-    --signature "$capability_signature" \
-    --public-key "$capability_public_key"
+    --signature "$capability_signature"
   # basic parse check
   openssl ts -reply -in "$out" -text >/dev/null
 }

@@ -1,6 +1,6 @@
 {
   "schema": "urf.network-capability-verifier-pin.v1",
-  "status": "PINNED_LOCAL_COPY_REDIRECT_SAFE_TSA_ROUTED",
+  "status": "PINNED_LOCAL_COPY_REDIRECT_SAFE_TSA_ROUTED_FIXED_KEY",
   "upstream_repository": "https://github.com/inaciovasquez2020/urf-verifier",
   "upstream_commit": "aec9bc1dc9ea4ef7026054804b92fac171f1152e",
   "verified_ci_run": 33939328723,
@@ -13,13 +13,19 @@
     },
     "tests/test_guarded_network_execution.py": {
       "blob_sha": "681b997a2e88b5a74c449c68648f664b229aef42"
+    },
+    "keys/aiv_pub.key": {
+      "blob_sha": "86f92d3453b65dcfc0b333e81bb25cd12dfe7063"
     }
   },
   "local_materialization": {
     "src/signed_network_capability.py": "scripts/network_capability/signed_network_capability.py",
-    "src/guarded_network_execution.py": "scripts/network_capability/guarded_network_execution.py"
+    "src/guarded_network_execution.py": "scripts/network_capability/guarded_network_execution.py",
+    "keys/aiv_pub.key": "scripts/network_capability/aiv_pub.key"
   },
   "certified_property": "denied signed capability prevents opener construction; redirects are denied before a second network hop",
   "runtime_fetch_permitted": false,
-  "tsa_stamp_routed_through_guard": true
+  "tsa_stamp_routed_through_guard": true,
+  "tsa_runtime_public_key_path": "scripts/network_capability/aiv_pub.key",
+  "tsa_runtime_public_key_caller_selectable": false
 }

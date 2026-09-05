@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 import sys
 from pathlib import Path
 
@@ -29,12 +30,17 @@ def test_guarded_tsa_post_preserves_target_and_rfc3161_body(monkeypatch, tmp_pat
         response_path=response,
         token_path=tmp_path / "capability.json",
         signature_path=tmp_path / "capability.json.minisig",
-        public_key_path=tmp_path / "capability.pub",
         timeout=7.0,
     )
 
     assert captured["target"] == "http://timestamp.digicert.com"
     assert captured["body"] == b"rfc3161-query"
     assert captured["content_type"] == "application/timestamp-query"
+    assert captured["public_key_path"] == gtp.TRUSTED_PUBLIC_KEY
     assert captured["timeout"] == 7.0
     assert response.read_bytes() == b"rfc3161-response"
+
+
+def test_guarded_tsa_post_public_key_is_not_caller_selectable() -> None:
+    assert "public_key_path" not in inspect.signature(gtp.post_timestamp_query).parameters
+    assert gtp.TRUSTED_PUBLIC_KEY.name == "aiv_pub.key"

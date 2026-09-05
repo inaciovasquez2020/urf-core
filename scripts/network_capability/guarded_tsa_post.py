@@ -6,6 +6,9 @@ from pathlib import Path
 from guarded_network_execution import guarded_http_post
 
 
+TRUSTED_PUBLIC_KEY = Path(__file__).with_name("aiv_pub.key")
+
+
 def post_timestamp_query(
     *,
     target: str,
@@ -13,7 +16,6 @@ def post_timestamp_query(
     response_path: str | Path,
     token_path: str | Path,
     signature_path: str | Path,
-    public_key_path: str | Path,
     timeout: float = 5.0,
 ) -> None:
     """POST one RFC3161 query through the signed network-capability guard."""
@@ -23,7 +25,7 @@ def post_timestamp_query(
         body=query,
         token_path=token_path,
         signature_path=signature_path,
-        public_key_path=public_key_path,
+        public_key_path=TRUSTED_PUBLIC_KEY,
         content_type="application/timestamp-query",
         timeout=timeout,
     )
@@ -42,7 +44,6 @@ def main() -> int:
     parser.add_argument("--response", required=True)
     parser.add_argument("--token", required=True)
     parser.add_argument("--signature", required=True)
-    parser.add_argument("--public-key", required=True)
     parser.add_argument("--timeout", type=float, default=5.0)
     args = parser.parse_args()
 
@@ -52,7 +53,6 @@ def main() -> int:
         response_path=args.response,
         token_path=args.token,
         signature_path=args.signature,
-        public_key_path=args.public_key,
         timeout=args.timeout,
     )
     return 0
