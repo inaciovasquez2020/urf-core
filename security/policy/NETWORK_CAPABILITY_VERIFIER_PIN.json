@@ -1,6 +1,6 @@
 {
   "schema": "urf.network-capability-verifier-pin.v1",
-  "status": "PINNED_LOCAL_COPY_REDIRECT_SAFE_NO_TSA_ROUTING",
+  "status": "PINNED_LOCAL_COPY_REDIRECT_SAFE_TSA_ROUTED",
   "upstream_repository": "https://github.com/inaciovasquez2020/urf-verifier",
   "upstream_commit": "aec9bc1dc9ea4ef7026054804b92fac171f1152e",
   "verified_ci_run": 33939328723,
@@ -21,5 +21,5 @@
   },
   "certified_property": "denied signed capability prevents opener construction; redirects are denied before a second network hop",
   "runtime_fetch_permitted": false,
-  "tsa_stamp_routed_through_guard": false
+  "tsa_stamp_routed_through_guard": true
 }

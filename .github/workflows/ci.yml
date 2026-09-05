@@ -26,7 +26,7 @@ jobs:
           )
           assert pin == {
               "schema": "urf.network-capability-verifier-pin.v1",
-              "status": "PINNED_LOCAL_COPY_REDIRECT_SAFE_NO_TSA_ROUTING",
+              "status": "PINNED_LOCAL_COPY_REDIRECT_SAFE_TSA_ROUTED",
               "upstream_repository": "https://github.com/inaciovasquez2020/urf-verifier",
               "upstream_commit": "aec9bc1dc9ea4ef7026054804b92fac171f1152e",
               "verified_ci_run": 33939328723,
@@ -54,7 +54,7 @@ jobs:
                   "denied before a second network hop"
               ),
               "runtime_fetch_permitted": False,
-              "tsa_stamp_routed_through_guard": False,
+              "tsa_stamp_routed_through_guard": True,
           }
 
           def git_blob_sha(path: Path) -> str:
@@ -65,10 +65,19 @@ jobs:
           for upstream_path, local_path in pin["local_materialization"].items():
               expected = pin["required_files"][upstream_path]["blob_sha"]
               assert git_blob_sha(Path(local_path)) == expected
+
+          tsa_script = Path("scripts/tsa-stamp.sh").read_text()
+          assert "curl " not in tsa_script
+          assert "scripts/network_capability/guarded_tsa_post.py" in tsa_script
+          assert "NETWORK_CAPABILITY_TOKEN" in tsa_script
+          assert "NETWORK_CAPABILITY_SIGNATURE" in tsa_script
+          assert "NETWORK_CAPABILITY_PUBLIC_KEY" in tsa_script
+          assert 'TSA_URL:-http://timestamp.digicert.com' in tsa_script
           PY
 
       - name: Python tests
         run: |
+          bash -n scripts/tsa-stamp.sh
           python3 -m pip install . pytest
           pip install . pytest
           pytest -q \
