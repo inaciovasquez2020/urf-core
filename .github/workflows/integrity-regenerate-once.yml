@@ -1,7 +1,7 @@
 name: integrity-regenerate-once
 
 permissions:
-  contents: write
+  contents: read
 
 on:
   push:
@@ -10,14 +10,13 @@ on:
 
 jobs:
   regenerate:
-    if: github.event.head_commit.message == 'integrity: make manifest regeneration acyclic'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
         with:
           ref: audit/pin-network-capability-verifier-20260904
-          persist-credentials: true
-      - name: Regenerate acyclic integrity state and remove this one-shot workflow
+          persist-credentials: false
+      - name: Regenerate final-tree integrity state locally
         run: |
           git rm .github/workflows/integrity-regenerate-once.yml
           bash scripts/build-merkle.sh
@@ -26,8 +25,14 @@ jobs:
           unexpected="$(git status --porcelain | grep -vE '^(D  \.github/workflows/integrity-regenerate-once\.yml| M CHECKSUMS\.txt| M transparency/files\.sha256| M transparency/merkle\.root)$' || true)"
           test -z "$unexpected" || { echo "$unexpected"; exit 1; }
 
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add CHECKSUMS.txt transparency/files.sha256 transparency/merkle.root
-          git commit -m 'integrity: regenerate guarded TSA state'
-          git push origin HEAD:audit/pin-network-capability-verifier-20260904
+          sha256sum CHECKSUMS.txt transparency/files.sha256 transparency/merkle.root
+      - name: Upload regenerated integrity state
+        uses: actions/upload-artifact@v4
+        with:
+          name: guarded-tsa-integrity-state
+          path: |
+            CHECKSUMS.txt
+            transparency/files.sha256
+            transparency/merkle.root
+          if-no-files-found: error
+          retention-days: 1
