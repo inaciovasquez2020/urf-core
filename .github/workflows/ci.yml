@@ -75,6 +75,22 @@ jobs:
           assert 'TSA_URL:-http://timestamp.digicert.com' in tsa_script
           PY
 
+      - name: Verify deterministic integrity state
+        run: |
+          bash scripts/build-merkle.sh
+          bash scripts/build-checksums.sh
+          first_manifest="$(sha256sum transparency/files.sha256 | awk '{print $1}')"
+          first_root="$(cat transparency/merkle.root)"
+          first_checksums="$(sha256sum CHECKSUMS.txt | awk '{print $1}')"
+
+          bash scripts/build-merkle.sh
+          bash scripts/build-checksums.sh
+          test "$first_manifest" = "$(sha256sum transparency/files.sha256 | awk '{print $1}')"
+          test "$first_root" = "$(cat transparency/merkle.root)"
+          test "$first_checksums" = "$(sha256sum CHECKSUMS.txt | awk '{print $1}')"
+
+          git diff --exit-code -- CHECKSUMS.txt transparency/files.sha256 transparency/merkle.root
+
       - name: Python tests
         run: |
           bash -n scripts/tsa-stamp.sh
