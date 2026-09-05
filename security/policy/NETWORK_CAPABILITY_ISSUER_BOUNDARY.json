@@ -1,0 +1,25 @@
+{
+  "schema": "urf.network-capability-issuer-boundary.v1",
+  "status": "RUNTIME_VERIFY_ONLY_EXTERNAL_ISSUER_NOT_YET_DEPLOYED",
+  "runtime_surface": "scripts/network_capability",
+  "allowed_runtime_files": [
+    "aiv_pub.key",
+    "guarded_network_execution.py",
+    "guarded_tsa_post.py",
+    "signed_network_capability.py"
+  ],
+  "trusted_public_key": "scripts/network_capability/aiv_pub.key",
+  "runtime_signing_permitted": false,
+  "runtime_private_key_input_permitted": false,
+  "caller_selectable_trust_root_permitted": false,
+  "external_issuer_deployed": false,
+  "external_identity_candidate": {
+    "mechanism": "github-actions-keyless-oidc",
+    "workflow": ".github/workflows/urf-sg-verifier-container.yml",
+    "required_evidence": [
+      "id-token: write",
+      "actions/attest-build-provenance@v2"
+    ]
+  },
+  "certified_property": "checked TSA runtime surface is verify-only: no local signing command or private-key input is permitted, and only the pinned public verification key is present"
+}

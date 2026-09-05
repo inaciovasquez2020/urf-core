@@ -124,4 +124,5 @@ jobs:
             tests/test_eclipse_equivalence.py \
             tests/test_eclipse_closure_snapshot.py \
             tests/test_network_capability_guard_zero_io.py \
-            tests/test_guarded_tsa_post.py
+            tests/test_guarded_tsa_post.py \
+            tests/test_network_capability_issuer_boundary.py
