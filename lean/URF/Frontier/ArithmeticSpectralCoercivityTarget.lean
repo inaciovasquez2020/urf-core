@@ -230,5 +230,27 @@ theorem ArithmeticSpectralCoercivityTarget_half_is_sharp :
     ] at hwitness
     linarith
 
+
+theorem ArithmeticSpectralCoercivityTarget_coercive_iff :
+    ∀ c : ℝ,
+      ArithmeticSpectralCoercive ArithmeticSpectralCoercivityTarget c ↔
+        0 < c ∧ c ≤ 1 / 2 := by
+  intro c
+  constructor
+  · intro hc
+    exact ⟨hc.1, ArithmeticSpectralCoercivityTarget_half_is_sharp.2 c hc⟩
+  · rintro ⟨hc_pos, hc_le⟩
+    constructor
+    · exact hc_pos
+    · intro q v hdomain hadmissible
+      have hhalf :=
+        ArithmeticSpectralCoercivityTarget_coercive.2
+          q v hdomain hadmissible
+      have hnorm :
+          0 ≤ reducedPrimitiveFormNormSq q v := by
+        simp [reducedPrimitiveFormNormSq]
+        positivity
+      nlinarith
+
 end Frontier
 end URF
