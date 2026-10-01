@@ -31,5 +31,15 @@ def SpectralCoercive
       target.admissible v →
       c * target.normSq v ≤ target.inner (target.operator v) v
 
+/--
+Certificate object for a spectral coercivity bound. This records a proved
+spectral-side coercivity witness without identifying it with the arithmetic
+family or asserting the missing arithmetic-to-spectral transfer.
+-/
+structure SpectralGapCertificate where
+  target : SpectralCoercivityTarget
+  gap : ℝ
+  coercivity : SpectralCoercive target gap
+
 end Frontier
 end URF
