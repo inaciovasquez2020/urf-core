@@ -17,5 +17,19 @@ structure SpectralCoercivityTarget where
   domain : space → Prop
   admissible : space → Prop
 
+/--
+Spectral coercivity obligation for an independently defined spectral target.
+This records the inequality that an arithmetic-to-spectral transfer must
+eventually establish; it does not assert that the obligation is proved.
+-/
+def SpectralCoercive
+    (target : SpectralCoercivityTarget)
+    (c : ℝ) : Prop :=
+  0 < c ∧
+    ∀ (v : target.space),
+      target.domain v →
+      target.admissible v →
+      c * target.normSq v ≤ target.inner (target.operator v) v
+
 end Frontier
 end URF
