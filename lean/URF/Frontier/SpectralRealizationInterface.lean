@@ -14,6 +14,7 @@ structure SpectralRealizationInterface where
   realization : Type*
   toRealization : target.space → realization
   realizedOperator : realization → realization
+  realizedInner : realization → realization → ℝ
   fromRealization : realization → target.space
   distinguished : target.space → Prop
   realizedDistinguished : realization → Prop
@@ -24,6 +25,10 @@ structure SpectralRealizationInterface where
   distinguished_alignment :
     ∀ v : target.space,
       distinguished v ↔ realizedDistinguished (toRealization v)
+  inner_preservation :
+    ∀ v w : target.space,
+      target.inner v w =
+        realizedInner (toRealization v) (toRealization w)
   left_inverse :
     ∀ v : target.space,
       fromRealization (toRealization v) = v
