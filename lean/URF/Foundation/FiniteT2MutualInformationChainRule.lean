@@ -38,6 +38,7 @@ theorem finiteT2_mutual_information_chain_rule_of_positive
     {α β γ : Type u}
     [DecidableEq α] [DecidableEq β] [DecidableEq γ]
     [Fintype α] [Fintype β] [Fintype γ]
+    [Nonempty α] [Nonempty β] [Nonempty γ]
     (P : JointFiniteDistributionData α β γ)
     (hpos : ∀ p, 0 < P.joint p) :
     finiteMutualInformation (jointMarginalPair P) =
