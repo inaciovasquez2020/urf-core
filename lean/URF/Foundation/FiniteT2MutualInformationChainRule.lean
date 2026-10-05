@@ -34,13 +34,11 @@ theorem marginalXZ_sum_one
     ∑ p, (marginalXZ P).joint p = 1 :=
   (marginalXZ P).sum_one
 
-theorem finiteT2_mutual_information_chain_rule_of_positive
+theorem finiteT2_mutual_information_chain_rule
     {α β γ : Type u}
     [DecidableEq α] [DecidableEq β] [DecidableEq γ]
     [Fintype α] [Fintype β] [Fintype γ]
-    [Nonempty α] [Nonempty β] [Nonempty γ]
-    (P : JointFiniteDistributionData α β γ)
-    (hpos : ∀ p, 0 < P.joint p) :
+    (P : JointFiniteDistributionData α β γ) :
     finiteMutualInformation (jointMarginalPair P) =
       finiteMutualInformation (marginalXZ P) + jointConditionalMI P := by
   classical
@@ -49,43 +47,32 @@ theorem finiteT2_mutual_information_chain_rule_of_positive
   let pyz : β × γ → ℝ := fun yz => ∑ x, P.joint (x, yz.1, yz.2)
   let pxz : α × γ → ℝ := fun xz => ∑ y, P.joint (xz.1, y, xz.2)
   let pz : γ → ℝ := fun z => ∑ xy, P.joint (xy.1, xy.2, z)
-  have hp : ∀ x y z, 0 < p (x,y,z) := by
-    intro x y z
-    exact hpos (x,y,z)
-  have hpx : ∀ x, 0 < px x := by
-    intro x
-    exact Finset.sum_pos' (fun yz _ => le_of_lt (hp x yz.1 yz.2))
-      ⟨(Classical.choice (Fintype.exists_true γ)), Finset.mem_univ _,
-        lt_of_lt_of_le (hp x (Classical.choice (Fintype.exists_true β))
-          (Classical.choice (Fintype.exists_true γ))) (Finset.single_le_sum
-          (fun yz _ => le_of_lt (hp x yz.1 yz.2)) (Finset.mem_univ _))⟩
-  have hpyz : ∀ yz, 0 < pyz yz := by
-    intro yz
-    exact Finset.sum_pos' (fun x _ => le_of_lt (hp x yz.1 yz.2))
-      ⟨Classical.choice (Fintype.exists_true α), Finset.mem_univ _,
-        hp (Classical.choice (Fintype.exists_true α)) yz.1 yz.2⟩
-  have hpxz : ∀ xz, 0 < pxz xz := by
-    intro xz
-    exact Finset.sum_pos' (fun y _ => le_of_lt (hp xz.1 y xz.2))
-      ⟨Classical.choice (Fintype.exists_true β), Finset.mem_univ _,
-        hp xz.1 (Classical.choice (Fintype.exists_true β)) xz.2⟩
-  have hpz : ∀ z, 0 < pz z := by
-    intro z
-    exact Finset.sum_pos' (fun xy _ => le_of_lt (hp xy.1 xy.2 z))
-      ⟨(Classical.choice (Fintype.exists_true α),
-          Classical.choice (Fintype.exists_true β)), Finset.mem_univ _,
-        hp (Classical.choice (Fintype.exists_true α))
-          (Classical.choice (Fintype.exists_true β)) z⟩
   have hterm :
       ∀ x y z,
-        p (x,y,z) *
-            Real.log (p (x,y,z) / (px x * pyz (y,z))) =
-          p (x,y,z) *
-              Real.log (pxz (x,z) / (px x * pz z)) +
-            p (x,y,z) *
-              Real.log ((p (x,y,z) * pz z) /
-                (pxz (x,z) * pyz (y,z))) := by
+        p (x,y,z) * Real.log (p (x,y,z) / (px x * pyz (y,z))) =
+          p (x,y,z) * Real.log (pxz (x,z) / (px x * pz z)) +
+            p (x,y,z) * Real.log ((p (x,y,z) * pz z) /
+              (pxz (x,z) * pyz (y,z))) := by
     intro x y z
+    by_cases hp : p (x,y,z) = 0
+    · simp [hp]
+    have hp' : 0 < p (x,y,z) := lt_of_le_of_ne (P.nonneg (x,y,z)) (Ne.symm hp)
+    have hpx' : 0 < px x := by
+      exact lt_of_lt_of_le hp'
+        (Finset.single_le_sum
+          (fun yz _ => P.nonneg (x, yz.1, yz.2)) (Finset.mem_univ (y,z)))
+    have hpyz' : 0 < pyz (y,z) := by
+      exact lt_of_lt_of_le hp'
+        (Finset.single_le_sum
+          (fun x' _ => P.nonneg (x', y, z)) (Finset.mem_univ x))
+    have hpxz' : 0 < pxz (x,z) := by
+      exact lt_of_lt_of_le hp'
+        (Finset.single_le_sum
+          (fun y' _ => P.nonneg (x, y', z)) (Finset.mem_univ y))
+    have hpz' : 0 < pz z := by
+      exact lt_of_lt_of_le hp'
+        (Finset.single_le_sum
+          (fun xy _ => P.nonneg (xy.1, xy.2, z)) (Finset.mem_univ (x,y)))
     rw [Real.log_div, Real.log_div, Real.log_div]
     · rw [Real.log_mul, Real.log_mul, Real.log_mul]
       · ring
@@ -102,13 +89,36 @@ theorem finiteT2_mutual_information_chain_rule_of_positive
     rw [Finset.sum_product]
     apply Finset.sum_congr rfl
     intro z hz
-    rw [dif_neg]
-    · simp [Finset.sum_mul]
+    by_cases hpz : pz z = 0
+    · have hzero : ∀ xy, p (xy.1,xy.2,z) = 0 := by
+        intro xy
+        have hle : p (xy.1,xy.2,z) ≤ pz z := by
+          exact Finset.single_le_sum
+            (fun xy' _ => P.nonneg (xy'.1,xy'.2,z)) (Finset.mem_univ xy)
+        exact le_antisymm (hle.trans_eq hpz) (P.nonneg _)
+      simp [hpz, hzero]
+    · have hpz' : 0 < pz z := lt_of_le_of_ne
+        (Finset.sum_nonneg (fun xy _ => P.nonneg (xy.1,xy.2,z)))
+        (Ne.symm hpz)
+      rw [dif_neg (ne_of_gt hpz')]
+      simp [Finset.sum_mul]
       congr 1
       ext xy
-      field_simp
+      by_cases hp : p (xy.1,xy.2,z) = 0
+      · simp [hp]
+      have hp' : 0 < p (xy.1,xy.2,z) :=
+        lt_of_le_of_ne (P.nonneg _) (Ne.symm hp)
+      have hpxz' : 0 < pxz (xy.1,z) := by
+        exact lt_of_lt_of_le hp'
+          (Finset.single_le_sum
+            (fun y' _ => P.nonneg (xy.1,y',z)) (Finset.mem_univ xy.2))
+      have hpyz' : 0 < pyz (xy.2,z) := by
+        exact lt_of_lt_of_le hp'
+          (Finset.single_le_sum
+            (fun x' _ => P.nonneg (x',xy.2,z)) (Finset.mem_univ xy.1))
+      field_simp [ne_of_gt hp', ne_of_gt hpz', ne_of_gt hpxz',
+        ne_of_gt hpyz']
       ring
-    · exact ne_of_gt (hpz z)
   rw [hcmipoint]
   unfold finiteMutualInformation jointMarginalPair marginalXZ
   simp only [p, px, pyz, pxz, pz]
