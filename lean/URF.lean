@@ -19,6 +19,7 @@ import URF.Foundation.StableTraceCertificateEquivalence
 import URF.Foundation.UnconditionalStableTraceNoGo
 import URF.Foundation.CMINonnegativityProof
 import URF.Foundation.FiniteMutualInformationChainRuleProof
+import URF.Foundation.FiniteKernelTranscriptSemantics
 import URF.Foundation.ChannelCapacityBoundDerivation
 import URF.Foundation.GlobalValidKernelTheorem
 import URF.Foundation.FiniteInformationToClaimGovernanceBridge
