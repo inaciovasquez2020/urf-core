@@ -22,6 +22,9 @@ structure ValidURFFiniteKernel where
   measurableTransitionSystem : Prop
   perStepCapacityBound :
     ∀ t : Nat, t < chain.T → chain.localCMIValue t ≤ channelCapacity
+  localSum_eq_sum :
+    ∀ T : Nat, ∀ f : Nat → ℝ,
+      chain.finiteLocalSum T f = ∑ t in Finset.range T, f t
 
 /--
 The admissibility interface exposes the exact local information bound needed

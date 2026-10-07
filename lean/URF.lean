@@ -21,6 +21,7 @@ import URF.Foundation.CMINonnegativityProof
 import URF.Foundation.FiniteMutualInformationChainRuleProof
 import URF.Foundation.FiniteKernelTranscriptSemantics
 import URF.Foundation.ValidURFKernelPredicate
+import URF.Foundation.ValidURFKernelCapacityBound
 import URF.Foundation.ChannelCapacityBoundDerivation
 import URF.Foundation.GlobalValidKernelTheorem
 import URF.Foundation.FiniteInformationToClaimGovernanceBridge
