@@ -1,17 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="${1:-.}"
-cd "$ROOT"
-
-test -f CHECKSUMS.txt
-
-set +e
-grep -vE '^(README.md|CITATION.cff|CHECKSUMS.txt)$' CHECKSUMS.txt \
-  | sha256sum --ignore-missing -c - \
-  | tee /tmp/checksum.log
-rc=${PIPESTATUS[1]}
-set -e
-
-grep -q 'FAILED' /tmp/checksum.log && exit 1
-exit 0
+exec python3 "$SCRIPT_DIR/verify_checksums.py" "$ROOT"
