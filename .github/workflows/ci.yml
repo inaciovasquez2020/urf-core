@@ -37,3 +37,6 @@ jobs:
             tests/test_eclipse_equivalence.py \
             tests/test_eclipse_closure_snapshot.py \
             tests/test_verify_checksums.py
+
+      - name: Verify repository checksum manifest
+        run: bash scripts/verify_checksums.sh
