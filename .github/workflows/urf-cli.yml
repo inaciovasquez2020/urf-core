@@ -1,0 +1,50 @@
+name: urf-cli package checks
+
+on:
+  pull_request:
+    paths:
+      - "urf-cli/**"
+      - ".github/workflows/urf-cli.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "urf-cli/**"
+      - ".github/workflows/urf-cli.yml"
+  workflow_dispatch:
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package and build tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ./urf-cli build
+
+      - name: Run CLI regression tests
+        working-directory: urf-cli
+        run: python -m unittest discover -s tests -v
+
+      - name: Remove stale distribution artifacts
+        working-directory: urf-cli
+        run: python -c "import shutil; shutil.rmtree('dist', ignore_errors=True)"
+
+      - name: Build source distribution and wheel
+        working-directory: urf-cli
+        run: python -m build
+
+      - name: Confirm distribution artifacts exist
+        working-directory: urf-cli
+        run: |
+          python -c "from pathlib import Path; p=Path('dist'); wheels=list(p.glob('*.whl')); sdists=list(p.glob('*.tar.gz')); print('\n'.join(str(x) for x in wheels+sdists)); assert len(wheels) == 1, f'expected exactly one wheel, got {len(wheels)}'; assert len(sdists) == 1, f'expected exactly one sdist, got {len(sdists)}'; assert '0.1.2' in wheels[0].name; assert '0.1.2' in sdists[0].name"
