@@ -4,15 +4,33 @@ build-backend = "hatchling.build"
 
 [project]
 name = "urf-cli"
-version = "0.1.1"
-
+version = "0.1.2"
+description = "Command-line structural validation for URF-SG certificates"
+readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "Inacio F. Vasquez" }]
 dependencies = ["jsonschema>=4.21"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Homepage = "https://github.com/inaciovasquez2020/urf-core"
+Repository = "https://github.com/inaciovasquez2020/urf-core"
+Issues = "https://github.com/inaciovasquez2020/urf-core/issues"
 
 [project.scripts]
 urf = "urf_cli.__main__:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/urf_cli"]
-
