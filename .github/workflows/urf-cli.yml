@@ -36,6 +36,10 @@ jobs:
         working-directory: urf-cli
         run: python -m unittest discover -s tests -v
 
+      - name: Remove stale distribution artifacts
+        working-directory: urf-cli
+        run: python -c "import shutil; shutil.rmtree('dist', ignore_errors=True)"
+
       - name: Build source distribution and wheel
         working-directory: urf-cli
         run: python -m build
@@ -43,4 +47,4 @@ jobs:
       - name: Confirm distribution artifacts exist
         working-directory: urf-cli
         run: |
-          python -c "from pathlib import Path; p=Path('dist'); files=list(p.glob('*.whl'))+list(p.glob('*.tar.gz')); print('\n'.join(str(x) for x in files)); assert len(list(p.glob('*.whl'))) == 1; assert len(list(p.glob('*.tar.gz'))) == 1"
+          python -c "from pathlib import Path; p=Path('dist'); wheels=list(p.glob('*.whl')); sdists=list(p.glob('*.tar.gz')); print('\n'.join(str(x) for x in wheels+sdists)); assert len(wheels) == 1, f'expected exactly one wheel, got {len(wheels)}'; assert len(sdists) == 1, f'expected exactly one sdist, got {len(sdists)}'; assert '0.1.2' in wheels[0].name; assert '0.1.2' in sdists[0].name"
