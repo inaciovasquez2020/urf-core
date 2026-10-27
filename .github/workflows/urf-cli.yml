@@ -47,4 +47,16 @@ jobs:
       - name: Confirm distribution artifacts exist
         working-directory: urf-cli
         run: |
-          python -c "from pathlib import Path; p=Path('dist'); wheels=list(p.glob('*.whl')); sdists=list(p.glob('*.tar.gz')); print('\n'.join(str(x) for x in wheels+sdists)); assert len(wheels) == 1, f'expected exactly one wheel, got {len(wheels)}'; assert len(sdists) == 1, f'expected exactly one sdist, got {len(sdists)}'; assert '0.1.2' in wheels[0].name; assert '0.1.2' in sdists[0].name"
+          python -c "from pathlib import Path; p=Path('dist'); wheels=list(p.glob('*.whl')); sdists=list(p.glob('*.tar.gz')); print('\\n'.join(str(x) for x in wheels+sdists)); assert len(wheels) == 1, f'expected exactly one wheel, got {len(wheels)}'; assert len(sdists) == 1, f'expected exactly one sdist, got {len(sdists)}'; assert '0.1.2' in wheels[0].name; assert '0.1.2' in sdists[0].name"
+
+      - name: Record distribution SHA-256 hashes
+        working-directory: urf-cli
+        run: sha256sum dist/* > dist/SHA256SUMS
+
+      - name: Upload verified build outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: urf-cli-0.1.2-python-${{ matrix.python-version }}
+          path: urf-cli/dist/*
+          if-no-files-found: error
+          retention-days: 14
