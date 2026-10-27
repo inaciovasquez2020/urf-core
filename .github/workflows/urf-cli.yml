@@ -51,7 +51,7 @@ jobs:
 
       - name: Record distribution SHA-256 hashes
         working-directory: urf-cli
-        run: sha256sum dist/* > dist/SHA256SUMS
+        run: cd dist && sha256sum *.whl *.tar.gz > SHA256SUMS
 
       - name: Upload verified build outputs
         uses: actions/upload-artifact@v4
