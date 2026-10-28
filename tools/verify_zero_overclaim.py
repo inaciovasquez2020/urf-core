@@ -70,6 +70,8 @@ for claim in data.get("claims", []):
         errors.append(f"{cid}: PROVED claim lacks proof receipt")
     elif status == "PROVED" and not verification.get("receipt", "").strip():
         errors.append(f"{cid}: PROVED claim lacks proof receipt")
+    elif status == "PROVED" and verification.get("source_revision") != claim.get("source_revision"):
+        errors.append(f"{cid}: PROVED claim has stale source revision")
 
 if errors:
     print("ZERO_OVERCLAIM_VERIFIER_FAILED")
