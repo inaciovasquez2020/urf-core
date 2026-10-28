@@ -39,12 +39,16 @@ for claim in data.get("claims", []):
     boundary = claim.get("boundary", [])
     evidence = claim.get("evidence", [])
     forbidden = claim.get("forbidden_promotions", [])
+    unresolved_obligations = claim.get("unresolved_obligations", [])
 
     if status not in ALLOWED:
         errors.append(f"{cid}: invalid status {status}")
 
     if status != "PROVED" and not boundary:
         errors.append(f"{cid}: non-PROVED claim lacks boundary")
+
+    if status == "PROVED" and unresolved_obligations:
+        errors.append(f"{cid}: PROVED claim has unresolved obligations")
 
     lowered = text.lower()
 
