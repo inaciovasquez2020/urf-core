@@ -63,6 +63,14 @@ for claim in data.get("claims", []):
     if status == "PROVED" and not evidence:
         errors.append(f"{cid}: PROVED claim lacks evidence list")
 
+    verification = claim.get("verification")
+    if status == "PROVED" and not isinstance(verification, dict):
+        errors.append(f"{cid}: PROVED claim lacks proof receipt")
+    elif status == "PROVED" and not isinstance(verification.get("receipt"), str):
+        errors.append(f"{cid}: PROVED claim lacks proof receipt")
+    elif status == "PROVED" and not verification.get("receipt", "").strip():
+        errors.append(f"{cid}: PROVED claim lacks proof receipt")
+
 if errors:
     print("ZERO_OVERCLAIM_VERIFIER_FAILED")
     for e in errors:
