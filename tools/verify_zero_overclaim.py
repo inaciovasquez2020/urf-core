@@ -39,12 +39,16 @@ for claim in data.get("claims", []):
     boundary = claim.get("boundary", [])
     evidence = claim.get("evidence", [])
     forbidden = claim.get("forbidden_promotions", [])
+    unresolved_obligations = claim.get("unresolved_obligations", [])
 
     if status not in ALLOWED:
         errors.append(f"{cid}: invalid status {status}")
 
     if status != "PROVED" and not boundary:
         errors.append(f"{cid}: non-PROVED claim lacks boundary")
+
+    if status == "PROVED" and unresolved_obligations:
+        errors.append(f"{cid}: PROVED claim has unresolved obligations")
 
     lowered = text.lower()
 
@@ -58,6 +62,16 @@ for claim in data.get("claims", []):
 
     if status == "PROVED" and not evidence:
         errors.append(f"{cid}: PROVED claim lacks evidence list")
+
+    verification = claim.get("verification")
+    if status == "PROVED" and not isinstance(verification, dict):
+        errors.append(f"{cid}: PROVED claim lacks proof receipt")
+    elif status == "PROVED" and not isinstance(verification.get("receipt"), str):
+        errors.append(f"{cid}: PROVED claim lacks proof receipt")
+    elif status == "PROVED" and not verification.get("receipt", "").strip():
+        errors.append(f"{cid}: PROVED claim lacks proof receipt")
+    elif status == "PROVED" and verification.get("source_revision") != claim.get("source_revision"):
+        errors.append(f"{cid}: PROVED claim has stale source revision")
 
 if errors:
     print("ZERO_OVERCLAIM_VERIFIER_FAILED")
