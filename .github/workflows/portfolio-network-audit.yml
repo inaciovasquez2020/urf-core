@@ -70,46 +70,55 @@ jobs:
               if matches:
                   print(suffix, len(matches), *matches, sep="\n  ")
           PY
-      - name: Inspect cancer supplementary material link and table files
+      - name: Retrieve cancer supplementary package through PMC OA metadata
         continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
           python - <<'PY' | tee audit-output/cancer_supplement_inventory.txt
-          import re, urllib.request, urllib.parse, zipfile, io
-          article = "https://www.mdpi.com/2072-6694/13/13/3342"
-          req = urllib.request.Request(article, headers={"User-Agent": "Mozilla/5.0 research-audit"})
-          with urllib.request.urlopen(req, timeout=60) as r:
-              html = r.read()
-              print("article_http_status=", r.status, "html_bytes=", len(html))
-          text = html.decode("utf-8", "replace")
-          links = []
-          for raw in re.findall(r'''href=["']([^"']+\.zip[^"']*)["']''', text, re.I):
-              url = urllib.parse.urljoin(article, raw.replace("&amp;", "&"))
-              if "cancers-13-03342-s001" in url or "supplement" in url.lower() or "s1" in url.lower():
-                  links.append(url)
-          links = list(dict.fromkeys(links))
-          print("supplement_zip_candidates=", len(links))
-          for url in links:
-              print("candidate=", url)
-              try:
-                  req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 research-audit"})
-                  with urllib.request.urlopen(req, timeout=90) as r:
-                      blob = r.read()
-                      print("download_status=", r.status, "bytes=", len(blob), "content_type=", r.headers.get("Content-Type"))
-                  if zipfile.is_zipfile(io.BytesIO(blob)):
-                      z = zipfile.ZipFile(io.BytesIO(blob))
-                      print("zip_members:")
-                      for item in z.infolist():
-                          print(item.filename, item.file_size)
-                      for item in z.infolist():
-                          if item.filename.lower().endswith((".xlsx", ".xls", ".csv", ".tsv")):
-                              data = z.read(item)
-                              print("TABLE_FILE", item.filename, "bytes", len(data))
-                              if item.filename.lower().endswith((".csv", ".tsv")):
-                                  print(data[:1200].decode("utf-8", "replace"))
-              except Exception as e:
-                  print("candidate_error=", type(e).__name__, str(e))
+          import hashlib, io, tarfile, urllib.request, xml.etree.ElementTree as ET, zipfile
+          from pathlib import Path
+          api = "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC8268167"
+          req = urllib.request.Request(api, headers={"User-Agent": "URF-research-audit/1.0"})
+          try:
+              with urllib.request.urlopen(req, timeout=60) as r:
+                  xml = r.read()
+                  print("oa_api_http_status=", r.status, "xml_bytes=", len(xml))
+              print(xml.decode("utf-8", "replace")[:3000])
+              root = ET.fromstring(xml)
+              links = [x.attrib.get("href") for x in root.iter("link") if x.attrib.get("href")]
+              if not links:
+                  raise RuntimeError("PMC OA API returned no package link")
+              print("package_links=", links)
+              url = next((x for x in links if x.endswith((".tar.gz", ".tgz"))), links[0])
+              if url.startswith("ftp://ftp.ncbi.nlm.nih.gov/"):
+                  url = url.replace("ftp://ftp.ncbi.nlm.nih.gov/", "https://ftp.ncbi.nlm.nih.gov/", 1)
+              print("selected_package_url=", url)
+              req = urllib.request.Request(url, headers={"User-Agent": "URF-research-audit/1.0"})
+              with urllib.request.urlopen(req, timeout=120) as r:
+                  blob = r.read()
+                  print("package_http_status=", r.status, "package_bytes=", len(blob))
+              print("package_sha256=", hashlib.sha256(blob).hexdigest())
+              Path("audit-output/PMC8268167_oa_package.tar.gz").write_bytes(blob)
+              with tarfile.open(fileobj=io.BytesIO(blob), mode="r:*") as t:
+                  members = t.getmembers()
+                  print("package_member_count=", len(members))
+                  for m in members:
+                      print("MEMBER", m.name, "bytes", m.size)
+                  for m in members:
+                      if m.isfile() and m.name.lower().endswith((".zip", ".xlsx", ".xls", ".csv", ".tsv", ".pdf")):
+                          data = t.extractfile(m).read()
+                          print("SUPPLEMENT_CANDIDATE", m.name, "bytes", len(data), "sha256", hashlib.sha256(data).hexdigest())
+                          if m.name.lower().endswith(".zip"):
+                              try:
+                                  with zipfile.ZipFile(io.BytesIO(data)) as z:
+                                      print("NESTED_ZIP_MEMBERS")
+                                      for item in z.infolist():
+                                          print(item.filename, item.file_size)
+                              except Exception as e:
+                                  print("nested_zip_error=", type(e).__name__, str(e))
+          except Exception as e:
+              print("SUPPLEMENT_RETRIEVAL_FAILED=", type(e).__name__, str(e))
           PY
       - name: Audit pinned Chronos source for numerical solver and lockfiles
         shell: bash
