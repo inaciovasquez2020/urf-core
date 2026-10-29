@@ -1,0 +1,142 @@
+name: Portfolio external artifact audit
+on:
+  push:
+    branches:
+      - work/portfolio-network-audit-20261029
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  external-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout URF audit host
+        uses: actions/checkout@v4
+      - name: Checkout pinned Chronos source
+        uses: actions/checkout@v4
+        with:
+          repository: inaciovasquez2020/chronos-urf-rr
+          ref: fb08ec739446572b0a439f563bd350917a60fa2e
+          path: chronos-source
+      - name: Download and hash pinned DESI data
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-output
+          base='https://raw.githubusercontent.com/CobayaSampler/bao_data/bb0c1c9009dc76d1391300e169e8df38fd1096db/desi_bao_dr2'
+          curl --fail --location --retry 3 "$base/desi_gaussian_bao_ALL_GCcomb_mean.txt" -o audit-output/desi_mean.txt
+          curl --fail --location --retry 3 "$base/desi_gaussian_bao_ALL_GCcomb_cov.txt" -o audit-output/desi_cov.txt
+          sha256sum audit-output/desi_mean.txt audit-output/desi_cov.txt | tee audit-output/desi_sha256.txt
+          wc -c -l audit-output/desi_mean.txt audit-output/desi_cov.txt | tee audit-output/desi_sizes.txt
+          python - <<'PY' | tee audit-output/desi_dimensions.txt
+          import numpy as np
+          mean = np.loadtxt("audit-output/desi_mean.txt", comments="#")
+          cov = np.loadtxt("audit-output/desi_cov.txt", comments="#")
+          print("mean_shape=", mean.shape)
+          print("covariance_shape=", cov.shape)
+          assert mean.shape == (13,), mean.shape
+          assert cov.shape == (13, 13), cov.shape
+          PY
+      - name: Download and inventory KiDS archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://kids.strw.leidenuniv.nl/sci_data/KiDS_Legacy_cosmic_shear_data_release.tar.gz'
+          curl --fail --location --retry 3 "$url" -o audit-output/kids-legacy-cosmic-shear.tar.gz
+          sha256sum audit-output/kids-legacy-cosmic-shear.tar.gz | tee audit-output/kids_sha256.txt
+          stat --printf='archive_bytes=%s\n' audit-output/kids-legacy-cosmic-shear.tar.gz | tee audit-output/kids_size.txt
+          tar -tzf audit-output/kids-legacy-cosmic-shear.tar.gz | tee audit-output/kids_inventory.txt
+          tar -tvzf audit-output/kids-legacy-cosmic-shear.tar.gz > audit-output/kids_inventory_detailed.txt
+          python - <<'PY' | tee audit-output/kids_inventory_summary.txt
+          from pathlib import Path
+          names = Path("audit-output/kids_inventory.txt").read_text().splitlines()
+          print("member_count=", len(names))
+          for suffix in (".fits", ".fits.gz", ".txt", ".dat", ".cov", ".ini", ".yaml", ".yml", ".npy", ".npz"):
+              matches = [x for x in names if x.lower().endswith(suffix)]
+              if matches:
+                  print(suffix, len(matches), *matches, sep="\n  ")
+          PY
+      - name: Inspect cancer supplementary material link and table files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' | tee audit-output/cancer_supplement_inventory.txt
+          import re, urllib.request, urllib.parse, zipfile, io
+          article = "https://www.mdpi.com/2072-6694/13/13/3342"
+          req = urllib.request.Request(article, headers={"User-Agent": "Mozilla/5.0 research-audit"})
+          with urllib.request.urlopen(req, timeout=60) as r:
+              html = r.read()
+              print("article_http_status=", r.status, "html_bytes=", len(html))
+          text = html.decode("utf-8", "replace")
+          links = []
+          for raw in re.findall(r'''href=["']([^"']+\.zip[^"']*)["']''', text, re.I):
+              url = urllib.parse.urljoin(article, raw.replace("&amp;", "&"))
+              if "cancers-13-03342-s001" in url or "supplement" in url.lower() or "s1" in url.lower():
+                  links.append(url)
+          links = list(dict.fromkeys(links))
+          print("supplement_zip_candidates=", len(links))
+          for url in links:
+              print("candidate=", url)
+              try:
+                  req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 research-audit"})
+                  with urllib.request.urlopen(req, timeout=90) as r:
+                      blob = r.read()
+                      print("download_status=", r.status, "bytes=", len(blob), "content_type=", r.headers.get("Content-Type"))
+                  if zipfile.is_zipfile(io.BytesIO(blob)):
+                      z = zipfile.ZipFile(io.BytesIO(blob))
+                      print("zip_members:")
+                      for item in z.infolist():
+                          print(item.filename, item.file_size)
+                      for item in z.infolist():
+                          if item.filename.lower().endswith((".xlsx", ".xls", ".csv", ".tsv")):
+                              data = z.read(item)
+                              print("TABLE_FILE", item.filename, "bytes", len(data))
+                              if item.filename.lower().endswith((".csv", ".tsv")):
+                                  print(data[:1200].decode("utf-8", "replace"))
+              except Exception as e:
+                  print("candidate_error=", type(e).__name__, str(e))
+          PY
+      - name: Audit pinned Chronos source for numerical solver and lockfiles
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "chronos_commit=$(git -C chronos-source rev-parse HEAD)"
+            echo "solver_or_benchmark_matches:"
+            git -C chronos-source grep -n -I -E 'Regge.?Wheeler|Leaver|quasinormal|QNM|continued fraction|omega.*0\.747343' HEAD -- ':!*.svg' || true
+            echo "dependency_lockfiles:"
+            find chronos-source -type f \( -name 'uv.lock' -o -name 'poetry.lock' -o -name 'requirements*.txt' -o -name 'environment.yml' -o -name 'lake-manifest.json' -o -name 'Cargo.lock' \) -print | sort
+          } | tee audit-output/chronos_solver_inventory.txt
+      - name: Check PyPI 0.1.2 release JSON and download published artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          status=$(curl --silent --show-error --location --output audit-output/pypi-0.1.2.json --write-out '%{http_code}' 'https://pypi.org/pypi/urf-cli/0.1.2/json' || true)
+          echo "pypi_json_http_status=$status" | tee audit-output/pypi_status.txt
+          if [ "$status" = "200" ]; then
+            python - <<'PY' | tee audit-output/pypi_artifacts.txt
+          import json, urllib.request, hashlib
+          data = json.load(open("audit-output/pypi-0.1.2.json"))
+          print("version=", data["info"]["version"])
+          for item in data.get("urls", []):
+              url = item["url"]
+              name = item["filename"]
+              print("file=", name, "expected_sha256=", item["digests"]["sha256"], "size=", item["size"], "url=", url)
+              req = urllib.request.Request(url, headers={"User-Agent": "portfolio-audit/1.0"})
+              with urllib.request.urlopen(req, timeout=90) as r:
+                  blob = r.read()
+              actual = hashlib.sha256(blob).hexdigest()
+              print("downloaded_bytes=", len(blob), "actual_sha256=", actual, "MATCH=", actual == item["digests"]["sha256"])
+              assert actual == item["digests"]["sha256"], name
+          PY
+          else
+            echo "PyPI release JSON not available; no artifact hashes can be independently checked." | tee -a audit-output/pypi_status.txt
+          fi
+      - name: Upload audit receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-network-audit
+          path: audit-output/
+          if-no-files-found: warn
+          retention-days: 30
