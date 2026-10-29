@@ -79,7 +79,7 @@ def validate_proof_receipt(claim, errors):
     if verification.get("source_revision") != source_revision:
         errors.append(f"{cid}: PROVED claim has stale source revision")
     evidence_class = verification.get("evidence_class")
-    if evidence_class not in EVIDENCE_CLASSES:
+    if not isinstance(evidence_class, str) or evidence_class not in EVIDENCE_CLASSES:
         errors.append(f"{cid}: proof receipt has invalid evidence_class: {evidence_class}")
     elif evidence_class != "formal_proof":
         errors.append(f"{cid}: PROVED claim requires formal_proof evidence_class")
@@ -146,7 +146,7 @@ for claim in data.get("claims", []):
     forbidden = claim.get("forbidden_promotions", [])
     unresolved_obligations = claim.get("unresolved_obligations", [])
 
-    if status not in ALLOWED:
+    if not isinstance(status, str) or status not in ALLOWED:
         errors.append(f"{cid}: invalid status {status}")
 
     if status != "PROVED" and not boundary:
@@ -155,14 +155,20 @@ for claim in data.get("claims", []):
     if status == "PROVED" and unresolved_obligations:
         errors.append(f"{cid}: PROVED claim has unresolved obligations")
 
+    if not isinstance(text, str):
+        errors.append(f"{cid}: public_claim must be a string")
+        text = ""
     lowered = text.lower()
 
     for word in CLOSURE_WORDS:
         if word.lower() in lowered and status != "PROVED":
             errors.append(f"{cid}: closure wording used without PROVED status: {word}")
 
+    if not isinstance(forbidden, list):
+        errors.append(f"{cid}: forbidden_promotions must be a list")
+        forbidden = []
     for word in forbidden:
-        if word.lower() in lowered:
+        if isinstance(word, str) and word.lower() in lowered:
             errors.append(f"{cid}: forbidden promotion appears in public claim: {word}")
 
     if status == "PROVED" and not evidence:
