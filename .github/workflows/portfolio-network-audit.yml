@@ -29,13 +29,21 @@ jobs:
           sha256sum audit-output/desi_mean.txt audit-output/desi_cov.txt | tee audit-output/desi_sha256.txt
           wc -c -l audit-output/desi_mean.txt audit-output/desi_cov.txt | tee audit-output/desi_sizes.txt
           python - <<'PY' | tee audit-output/desi_dimensions.txt
-          import numpy as np
-          mean = np.loadtxt("audit-output/desi_mean.txt", comments="#")
-          cov = np.loadtxt("audit-output/desi_cov.txt", comments="#")
-          print("mean_shape=", mean.shape)
-          print("covariance_shape=", cov.shape)
-          assert mean.shape == (13,), mean.shape
-          assert cov.shape == (13, 13), cov.shape
+          from pathlib import Path
+          def numeric_rows(path):
+              rows = []
+              for line in Path(path).read_text().splitlines():
+                  line = line.strip()
+                  if not line or line.startswith("#"):
+                      continue
+                  rows.append([float(x) for x in line.split()])
+              return rows
+          mean = numeric_rows("audit-output/desi_mean.txt")
+          cov = numeric_rows("audit-output/desi_cov.txt")
+          print("mean_rows=", len(mean), "columns_per_row=", sorted({len(row) for row in mean}))
+          print("covariance_rows=", len(cov), "columns_per_row=", sorted({len(row) for row in cov}))
+          assert len(mean) == 13 and all(len(row) == 1 for row in mean), "unexpected mean vector dimensions"
+          assert len(cov) == 13 and all(len(row) == 13 for row in cov), "unexpected covariance dimensions"
           PY
       - name: Download and inventory KiDS archive
         shell: bash
