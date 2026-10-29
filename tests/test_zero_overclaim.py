@@ -136,3 +136,15 @@ def test_valid_immutable_formal_proof_receipt_passes(tmp_path):
     result = run_verifier(project)
     assert result.returncode == 0, result.stdout + result.stderr
     assert "ZERO_OVERCLAIM_VERIFIER_OK" in result.stdout
+
+
+def test_malformed_evidence_class_is_rejected_without_crashing(tmp_path):
+    project = make_project(tmp_path, evidence_class="formal_proof")
+    registry_path = project / "artifacts" / "status" / "claim_registry.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registry["claims"][0]["verification"]["evidence_class"] = ["formal_proof"]
+    registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+    result = run_verifier(project)
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "proof receipt has invalid evidence_class" in result.stdout
