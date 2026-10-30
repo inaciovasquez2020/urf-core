@@ -62,3 +62,4 @@ import URF.Frontier.MetricLikeCandidateConstructionObligation
 import URF.Frontier.MetricCandidateCompatibilityWithScalingLimitObligation
 
 import URF.Analysis.SumSpaceGradientBridge
+import URF.Analysis.ScalePathLowerBound
