@@ -44,5 +44,34 @@ theorem norm_sub_le_sum_succ_sub_norm
     _ ≤ ∑ r ∈ Finset.range L,
         ‖m (j + r + 1) - m (j + r)‖ := norm_sum_le _ _
 
+/--
+Sliding-block overlap estimate. Every nonnegative increment can be
+charged to at most L starting positions. The proof uses a bounded
+double-sum majorant with a fixed outer range.
+-/
+theorem sliding_block_sum_le
+    (a : ℕ → ℝ) (N L : ℕ)
+    (ha : ∀ i, 0 ≤ a i) :
+    (∑ j ∈ Finset.range N,
+      ∑ r ∈ Finset.range L, a (j + r)) ≤
+      (L : ℝ) * ∑ i ∈ Finset.range (N + L), a i := by
+  rw [Finset.sum_comm]
+  calc
+    (∑ r ∈ Finset.range L, ∑ j ∈ Finset.range N, a (j + r))
+      ≤ ∑ r ∈ Finset.range L,
+          ∑ i ∈ Finset.range (N + L), a i := by
+            apply Finset.sum_le_sum
+            intro r hr
+            have hrL : r < L := Finset.mem_range.mp hr
+            rw [← Finset.sum_Ico_eq_sum_range]
+            apply Finset.sum_le_sum_of_subset_of_nonneg
+            · intro i hi
+              have hri := Finset.mem_Ico.mp hi
+              exact Finset.mem_range.mpr (by omega)
+            · intro i hi _
+              exact ha i
+    _ = (L : ℝ) * ∑ i ∈ Finset.range (N + L), a i := by
+          simp
+
 end Analysis
 end URF
