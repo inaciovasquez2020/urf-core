@@ -1,0 +1,94 @@
+{
+  "schema": "urf-pr-workflow-run-reconciliation-receipt-v1",
+  "receipt_date": "2026-10-29",
+  "repository": "inaciovasquez2020/urf-core",
+  "target_head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+  "event_filter": "pull_request",
+  "expected_run_count": 8,
+  "observed_run_count": 8,
+  "runs": [
+    {
+      "id": 40932671846,
+      "name": "build",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932671846"
+    },
+    {
+      "id": 40932671863,
+      "name": "No Duplicate Namespace Check",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932671863"
+    },
+    {
+      "id": 40932671879,
+      "name": "verify-surface",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932671879"
+    },
+    {
+      "id": 40932671916,
+      "name": "lean-proof-portfolio-classification",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932671916"
+    },
+    {
+      "id": 40932672021,
+      "name": "CI",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932672021"
+    },
+    {
+      "id": 40932671838,
+      "name": "zero-overclaim",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932671838"
+    },
+    {
+      "id": 40932671882,
+      "name": "Lean Action CI",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932671882"
+    },
+    {
+      "id": 40932671900,
+      "name": "external-status-lock",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "94f160c0da6669a1880f88b4e5a210e74122c405",
+      "url": "https://github.com/inaciovasquez2020/urf-core/actions/runs/40932671900"
+    }
+  ],
+  "checks": {
+    "all_runs_share_target_head_sha": true,
+    "all_runs_are_pull_request_triggered": true,
+    "all_runs_completed_successfully": true
+  },
+  "interpretation_boundary": {
+    "workflow_status_is_not_mathematical_proof": true,
+    "theorem_level_validity_established_by_this_receipt": false,
+    "push_triggered_runs_included": false
+  },
+  "evidence_source": "GitHub Actions run metadata queried individually on 2026-10-29"
+}
