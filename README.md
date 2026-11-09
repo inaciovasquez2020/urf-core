@@ -1,5 +1,60 @@
 # URF Core — Formal Verification Infrastructure
 
+## What is the Unified Rigidity Framework (URF)?
+
+The **Unified Rigidity Framework (URF)** is a verification-oriented mathematical
+research program studying when local observations, finite information capacity,
+and admissible transformations constrain global structure or prevent its exact
+reconstruction. Its applications are investigated in discrete mathematics,
+formal logic, computation, topology, and mathematical physics. Connections
+between these subjects are research targets, not assumed equivalences.
+
+### Reconstruction model (a specification schema, not a universal theorem)
+
+A particular reconstruction problem specifies:
+
+- `X`: a class of admissible configurations;
+- `O : X → Y`: all information accessible to the stated observer or process;
+- `I : X → Z`: the global invariant or property being reconstructed;
+- `B`: locality, depth, time, communication, or other resource bounds that
+  determine the actual observation map `O`;
+- `C`: proofs, counterexamples, or reproducible verification certificates.
+
+The basic **indistinguishability obstruction** is the elementary implication
+
+```text
+O(x) = O(y) and I(x) != I(y)
+    => no exact decoder D : Y -> Z satisfies I = D o O on all of X.
+```
+
+For finite images, `|I(X)| > |O(X)|` is another sufficient condition: a
+single observation value must then represent configurations with different
+invariant values. A bound on information *per step* does not, by itself,
+bound total accessible information over arbitrarily many steps. Rigidity or
+impossibility results require the concrete observation model, capacity
+hypotheses, and a proved obstruction; locality alone is insufficient.
+
+### Research domains and proof boundaries
+
+- **Finite structures and logic:** bounded-radius neighborhoods, logical
+  types, cycle-overlap invariants, and distinguishability limits.
+- **Topology:** local combinatorial moves and their possible global
+  consequences; the independent Poincaré derivation remains open.
+- **Transport and holonomy:** finite gauge examples of locally restricted
+  observations with globally distinguishable invariants; draft computations
+  are not Lean theorems or evidence of a necessary extra physical dimension.
+- **Computation and verification:** explicit witnesses, deterministic tests,
+  Lean theorem statements, and audited dependencies.
+- **Physics:** candidate applications of geometric and information
+  constraints; no unified physical theory or fifth-dimensional necessity
+  is established.
+
+An **unconditional URF theorem** must specify its domain and assumptions,
+prove its conclusion without unresolved project axioms or proof holes, and
+pass the relevant dependency/axiom audit. Finite experiments are evidence
+only for their tested domain. Consult the status sections below before
+citing any claimed closure.
+
 ## Scope and Status
 
 URF Core is a Lean formalization and certificate-boundary repository.
