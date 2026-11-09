@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Exact local-gauge indistinguishability witness on cycle graphs; stdlib only."""
 
+# Python optimization strips assertions; never certify a stripped execution.
+if not __debug__:
+    raise SystemExit("OPTIMIZED_EXECUTION_REJECTED: assertions are disabled")
+
 def ball(n,root,r):
     return {v for v in range(n) if min((v-root)%n,(root-v)%n)<=r}
 
