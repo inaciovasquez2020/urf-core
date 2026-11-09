@@ -16,10 +16,10 @@ R2 \prec R6 \prec R5 \prec R8.
 - R6: invariant splitting required
 - R5: entropy-depth gap invariant required
 - R8: transcript factorization required
+- R4: DraG0n Completeness OPEN; missing-variable existence theorem unproved
 
 ## Resolved
 
-- R4 (DraG0n Completeness)
 - R3 (Spectral bound)
 - R1 (Coercivity)
 
