@@ -30,9 +30,13 @@ O(x) = O(y) and I(x) != I(y)
 For finite images, `|I(X)| > |O(X)|` is another sufficient condition: a
 single observation value must then represent configurations with different
 invariant values. A bound on information *per step* does not, by itself,
-bound total accessible information over arbitrarily many steps. Rigidity or
-impossibility results require the concrete observation model, capacity
-hypotheses, and a proved obstruction; locality alone is insufficient.
+bound total accessible information over arbitrarily many steps. The
+indistinguishability obstruction above needs no finite-capacity premise:
+for example, `O(n, b) = n` and `I(n, b) = b` cannot be exactly decoded
+from `O`. Capacity assumptions are required only for arguments using
+capacity bounds. Every rigidity or impossibility claim still requires
+a specified observation model and a proved obstruction; locality alone
+is insufficient.
 
 ### Research domains and proof boundaries
 
