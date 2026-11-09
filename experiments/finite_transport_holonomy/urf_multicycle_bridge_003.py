@@ -44,6 +44,13 @@ obs=tuple((x+y)/2 for x,y in zip(pa,pb))
 assert max(abs(obs[i]-pa[i]) for i in range(3))==F(1,4)
 assert max(abs(obs[i]-pb[i]) for i in range(3))==F(1,4)
 assert syndrome(pa)==(0,0,0) and syndrome(pb)==(1,0,1)
+# Verify the actual observed loop signature is equally close to the two
+# admissible codewords, not merely that the path observations overlap.
+obs_signature = tuple(sum(C[i][j]*obs[j] for j in range(3)) % N
+                      for i in range(3))
+assert d_inf(obs_signature, syndrome(pa)) == F(1,2)
+assert d_inf(obs_signature, syndrome(pb)) == F(1,2)
+assert not any(d_inf(obs_signature, s) < F(1,2) for s in classes)
 
 # Exact finite error sweep: for each codeword test all e in {-1/5,0,1/5}^3
 # on the measured loop signatures; nearest L-infinity codeword is unique.
