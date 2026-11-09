@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Exact local-gauge indistinguishability witness on cycle graphs; stdlib only."""
-from itertools import product
 
 def ball(n,root,r):
     return {v for v in range(n) if min((v-root)%n,(root-v)%n)<=r}
@@ -53,5 +52,5 @@ def test():
     print(f'LOCAL_GAUGE_EQUIVALENCE := PASS; CASES := {checks}')
     print(f'GLOBAL_HOLONOMY_DIFFERENCE := PASS; CASES := {full}')
     print(f'FULL_BALL_NEGATIVE_CONTROLS := PASS; CASES := {controls}')
-    print('THEOREM_STATUS := MATHEMATICAL_PROOF; LEAN := NOT_RUN')
+    print('COMPUTATION_STATUS := COMPUTATION_PASS; LEAN := NOT_RUN')
 if __name__=='__main__': test()
