@@ -3,6 +3,10 @@
 from fractions import Fraction as F
 from itertools import product
 
+# Python optimization strips assertions; never certify a stripped execution.
+if not __debug__:
+    raise SystemExit("OPTIMIZED_EXECUTION_REJECTED: assertions are disabled")
+
 N=12
 # Theta graph: three paths between two common vertices.
 # Oriented loop rows are path1-path2, path2-path3, path1-path3.
