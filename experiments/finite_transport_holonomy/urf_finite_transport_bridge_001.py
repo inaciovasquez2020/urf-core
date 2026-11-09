@@ -5,6 +5,10 @@ NOT a Lean proof or a physical fifth-dimensional model.
 from itertools import product
 from collections import Counter
 
+# Python optimization strips assertions; never certify a stripped execution.
+if not __debug__:
+    raise SystemExit("OPTIMIZED_EXECUTION_REJECTED: assertions are disabled")
+
 N = 12
 
 def hol(edges):
