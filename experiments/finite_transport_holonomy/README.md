@@ -5,9 +5,9 @@ Status: **experimental, exact finite computation**. No Lean compilation, physica
 ## Source artifacts and scope
 
 1. `urf_finite_transport_bridge_001.py`: Z/12 triangular-cycle gauge invariance; filled-face flatness; six-triangle annulus flat on faces but with nonzero loop holonomy; parity collision.
-2. `urf_holonomy_noise_bridge_002.py`: three-edge cycle nearest-class decoding with exact rational errors, including a sharp midpoint counterexample. Under the stated *real lifted edge measurements* and integrally quantized total holonomy assumption, the sufficient threshold is `epsilon < 1/(2m)`. This is not a theorem for arbitrary real-valued holonomy or independently rounded edges.
-3. `urf_multicycle_bridge_003.py`: three-path theta graph, 144 Z/12 holonomy signatures, linear relation `h13 = h12+h23 (mod 12)`; noise-grid decoder check; one-coordinate corruption ambiguity. Sufficient *path-measurement* error threshold `epsilon < 1/4`; distinct from the direct signature-coordinate error bound.
-4. `urf_local_global_bridge_004.py`: C_n local-gauge indistinguishability with globally distinct holonomy; radius-r balls are proper forests for `n > 2r+1`. This assumes observers see gauge classes of *restricted* connections, not raw global-gauge edge labels or globally coordinated gauge choices.
+2. `urf_holonomy_noise_bridge_002.py`: three-edge cycle nearest-class decoding with exact rational errors, including a sharp midpoint counterexample and an explicit six-face annulus with an adversarial edge perturbation. Under the stated *real lifted edge measurements* and integrally quantized total holonomy assumption, the sufficient threshold is `epsilon < 1/(2m)`. This is not a theorem for arbitrary real-valued holonomy or independently rounded edges.
+3. `urf_multicycle_bridge_003.py`: three-path theta graph, 144 Z/12 holonomy signatures, linear relation `h13 = h12+h23 (mod 12)`; noise-grid decoder check; one-coordinate corruption ambiguity with an asserted equal-distance observed signature. Sufficient *path-measurement* error threshold `epsilon < 1/4`; distinct from the direct signature-coordinate error bound.
+4. `urf_local_global_bridge_004.py`: C_n local-gauge indistinguishability with globally distinct holonomy; radius-r balls are proper forests for `n > 2r+1`. This assumes observations consist solely of **independently gauge-quotiented induced radius-r restrictions**. Gauge identifications are not coordinated on overlaps; shared edge labels, compatible transition gauges, or a common global gauge can recover global holonomy and invalidate this indistinguishability claim.
 
 ## General algebraic facts (not novel theorems)
 
@@ -32,11 +32,11 @@ Expected summary (current source):
 
 ## Research boundaries
 
-- `COMPUTATION_PASS`: current scripts executed in an isolated Python environment on 2026-11-09.
+- `COMPUTATION_PASS`: prior exact source revision passed in the isolated Python environment on 2026-11-09; this corrected revision requires new CI and pinned-replay validation.
 - `LEAN_VERIFIED`: NOT_RUN.
 - `CHRONOS_R1_R2_R3`: OPEN and unaffected.
 - `POINCARE_GLOBAL_JIID`: OPEN and unaffected.
 - `FIFTH_DIMENSION_NECESSITY`: OPEN; a 4D gauge connection can encode nontrivial holonomy.
 - `NOVELTY`: NOT_ESTABLISHED.
 
-These are candidate interfaces for URF finite-local/global certificates. Do not import them into canonical theorem claims without declaration-level review and a matching proof audit.
+These are candidate interfaces for URF finite-local/global certificates. Do not import them into canonical theorem claims without declaration-level review and a matching proof audit. Each Python PASS denotes bounded computation only, regardless of an accompanying separate paper proof.
