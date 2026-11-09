@@ -3,6 +3,10 @@
 from fractions import Fraction as Q
 from itertools import product
 
+# Python optimization strips assertions; never certify a stripped execution.
+if not __debug__:
+    raise SystemExit("OPTIMIZED_EXECUTION_REJECTED: assertions are disabled")
+
 MOD = 12
 M = 3
 
@@ -33,7 +37,16 @@ def exhaustive(delta):
     return tests, unique_correct, ambiguous, wrong, first
 
 for delta in (Q(1, 7), Q(1, 6), Q(1, 5)):
-    print('delta=', delta, 'counts=', exhaustive(delta))
+    result = exhaustive(delta)
+    tests, correct, ambiguous, wrong, first = result
+    assert tests == MOD * 3**M
+    if delta == Q(1, 7):
+        assert (correct, ambiguous, wrong) == (324, 0, 0)
+    elif delta == Q(1, 6):
+        assert (correct, ambiguous, wrong) == (300, 24, 0)
+    else:
+        assert (correct, ambiguous, wrong) == (300, 0, 24)
+    print('delta=', delta, 'counts=', result)
 
 # Explicit annulus: outer vertices 0,1,2; inner 3,4,5.
 # Each triangle's curvature is computed from oriented edge values,
