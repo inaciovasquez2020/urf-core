@@ -35,18 +35,32 @@ def exhaustive(delta):
 for delta in (Q(1, 7), Q(1, 6), Q(1, 5)):
     print('delta=', delta, 'counts=', exhaustive(delta))
 
-# Flat six-face annulus: outer O_i, inner I_i; radials zero.
-# Outer/inner cycle edges and the diagonal O_i -> I_(i+1) carry q_i.
-q = (0, 0, 1)
-faces = []
-for i in range(3):
-    # face O_i -> O_(i+1) -> I_(i+1) -> O_i
-    faces.append((q[i]+0-q[i]) % MOD)
-    # face O_i -> I_(i+1) -> I_i -> O_i
-    faces.append((q[i]-q[i]+0) % MOD)
-assert all(f == 0 for f in faces)
-assert sum(q) % MOD == 1
-print('annulus_faces=', faces, 'outer_holonomy=',sum(q)%MOD, 'inner_holonomy=',sum(q)%MOD)
+# Explicit annulus: outer vertices 0,1,2; inner 3,4,5.
+# Each triangle's curvature is computed from oriented edge values,
+# not from a symbolic expression which cancels by construction.
+faces = ((0,1,4),(0,4,3),(1,2,5),(1,5,4),(2,0,3),(2,3,5))
+arcs = {(0,1):0,(1,2):0,(2,0):1,(3,4):0,(4,5):0,(5,3):1,
+        (0,3):0,(1,4):0,(2,5):0,(0,4):0,(1,5):0,(2,3):1}
+def transport(u,v):
+    if (u,v) in arcs:
+        return arcs[(u,v)]
+    if (v,u) in arcs:
+        return -arcs[(v,u)]
+    raise ValueError((u,v))
+def cycle_holonomy(vertices):
+    return sum(transport(vertices[i], vertices[(i+1)%len(vertices)])
+               for i in range(len(vertices))) % MOD
+face_curvatures = [cycle_holonomy(f) for f in faces]
+outer_holonomy = cycle_holonomy((0,1,2))
+inner_holonomy = cycle_holonomy((3,4,5))
+assert face_curvatures == [0]*6
+assert outer_holonomy == inner_holonomy == 1
+# Adversarial defect: flipping an outer boundary edge destroys flatness.
+arcs[(0,1)] += 1
+assert any(cycle_holonomy(f) != 0 for f in faces)
+arcs[(0,1)] -= 1
+print('annulus_faces=',face_curvatures,'outer_holonomy=',outer_holonomy,
+      'inner_holonomy=',inner_holonomy,'PERTURBATION_REJECTED := PASS')
 
 # Exact adversarial indistinguishability at equality delta = 1/(2m).
 mid = tuple(Q(1,2*M) for _ in range(M))
