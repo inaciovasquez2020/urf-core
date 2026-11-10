@@ -6,12 +6,15 @@ if not __debug__:
     raise SystemExit("OPTIMIZED_EXECUTION_REJECTED: assertions are disabled")
 
 def ball(n,root,r):
+    """Return graph-distance radius-r vertices on C_n."""
     return {v for v in range(n) if min((v-root)%n,(root-v)%n)<=r}
 
 def edges(n,verts):
+    """List directed edges whose endpoints lie in the induced subgraph."""
     return [(i,(i+1)%n) for i in range(n) if i in verts and (i+1)%n in verts]
 
 def local_gauge(n,q,conn,verts):
+    """Determine if the restriction is a vertex coboundary."""
     # Test whether edge field conn restricted to an induced graph is a vertex coboundary.
     adj={v:[] for v in verts}
     for i,j in edges(n,verts):
@@ -31,6 +34,7 @@ def local_gauge(n,q,conn,verts):
     return True
 
 def test():
+    """Run bounded positive and negative local-global checks."""
     checks=0; local=0; full=0
     for q in (2,3,5,12):
         for n in range(3,21):
