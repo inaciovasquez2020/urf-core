@@ -1,0 +1,65 @@
+{
+  "schema": "urf.transfer001.source-manifest.v1",
+  "date": "2026-11-09",
+  "source_base_commit": "f03a5ad38ccd307d3f2e79996e1884b0eaa7a92d",
+  "files": [
+    {
+      "path": "proofs/cohomology_locality_transfer.md",
+      "sha256": "2989fd51c558b0d2cab5a9e6ed593e2cd6071722d661ce3621276b30b46eebf1",
+      "git_blob_sha1": "5ad58def86355c149e78a75c21f761c0467db917"
+    },
+    {
+      "path": "proofs/cycle_span_addendum.md",
+      "sha256": "4c3492d33897ff258310cefb66f429270cbb8f2fceb5cea955b2abfea170f7e1",
+      "git_blob_sha1": "c76290009348570771f393aeaac4af8770098d8b"
+    },
+    {
+      "path": "proofs/constructive_hidden_holonomy.md",
+      "sha256": "1017a2d5abf10e4ad5dd9e0968524fda8d00fcebe631aa26c3522d86b05fbcab",
+      "git_blob_sha1": "feaf6d1361b879a929492d92c394f1a19ea66de1"
+    },
+    {
+      "path": "lean/URF_ObservationFactorization_Candidate.lean",
+      "sha256": "9108a0ed85bb72a2a74c8f10386dcade637c7822b22eff73cdd2f40862d99742",
+      "git_blob_sha1": "ce19207f098f07181d752a448e033838395ccf72"
+    },
+    {
+      "path": "verification/urf_cross_domain_transfer_20261109.py",
+      "sha256": "817844ce913ea2cf415f04ebaec7ce56c6027cc1a8ec7d5754e02c7859052f1d",
+      "git_blob_sha1": "f498fab566a87d3a05b668cafa4ee98eeebde628"
+    },
+    {
+      "path": "verification/urf_cycle_span_transfer_20261109.py",
+      "sha256": "27745d5293beb5ed78002c7677b22ab699fa2a5463699b67c9b3965e81a598b2",
+      "git_blob_sha1": "99b612562caab813e989977e9f5315603ff805dd"
+    },
+    {
+      "path": "verification/urf_hidden_holonomy_witness_20261109.py",
+      "sha256": "84e84fe304a01b16909200328ef38190a339f314f03daf624e3b1c2614e38be5",
+      "git_blob_sha1": "cac460c6fd376213c21b5acc1cdfa06a3db19dc1"
+    },
+    {
+      "path": "receipts/original_transfer.json",
+      "sha256": "6c2f4f9d53a6c61596b5922ec87d53f73c93e8ea8912e995708686b9a4165d45",
+      "git_blob_sha1": "ab817939a8beef1bf2f1f118fa25567e51423128"
+    },
+    {
+      "path": "receipts/cycle_span_transfer.json",
+      "sha256": "90b2a601d7460b0b0cdf9253fc99fc0fbfadf99c4ea85602c5a9386bfe296bcd",
+      "git_blob_sha1": "56cff07ffb050c23f76eb15f973c912d9fad5335"
+    },
+    {
+      "path": "receipts/constructive_witness.json",
+      "sha256": "47aa22f187c6a19267b80f36a6c856eb743ab98fde8d3a6a17962da13dacb99b",
+      "git_blob_sha1": "9f3fa3eb485cb44f627e5092d120d50967877b0b"
+    }
+  ],
+  "provenance": {
+    "code": "exact-original-source",
+    "finite_receipts": "preexisting isolated execution, content pinned by SHA-256",
+    "abstract_lean": "Mac user-reported compilation PASS and four allowed-axiom audits; source is standalone",
+    "full_graph_lean": "OPEN",
+    "actual_urf_ai_toolkit": "NOT_RUN",
+    "novelty": "NOT_ESTABLISHED"
+  }
+}
