@@ -11,15 +11,18 @@ MOD = 12
 M = 3
 
 def circle_dist(x, k):
+    """Compute circular distance between a real lift and integer class."""
     d = (x - k) % MOD
     return min(d, MOD-d)
 
 def candidates(observed):
+    """Return all closest integer holonomy classes to measured edges."""
     dist = [circle_dist(sum(observed), k) for k in range(MOD)]
     best = min(dist)
     return [k for k, d in enumerate(dist) if d == best]
 
 def exhaustive(delta):
+    """Count outcomes over a finite grid of exact rational edge errors."""
     tests = 0
     unique_correct = 0
     ambiguous = 0
@@ -55,12 +58,14 @@ faces = ((0,1,4),(0,4,3),(1,2,5),(1,5,4),(2,0,3),(2,3,5))
 arcs = {(0,1):0,(1,2):0,(2,0):1,(3,4):0,(4,5):0,(5,3):1,
         (0,3):0,(1,4):0,(2,5):0,(0,4):0,(1,5):0,(2,3):1}
 def transport(u,v):
+    """Read an oriented annulus edge value, reversing signs as needed."""
     if (u,v) in arcs:
         return arcs[(u,v)]
     if (v,u) in arcs:
         return -arcs[(v,u)]
     raise ValueError((u,v))
 def cycle_holonomy(vertices):
+    """Compute directed cycle holonomy from explicit edge values."""
     return sum(transport(vertices[i], vertices[(i+1)%len(vertices)])
                for i in range(len(vertices))) % MOD
 face_curvatures = [cycle_holonomy(f) for f in faces]
