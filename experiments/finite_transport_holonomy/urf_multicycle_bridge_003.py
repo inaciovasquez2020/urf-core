@@ -13,10 +13,12 @@ N=12
 C=((1,-1,0),(0,1,-1),(1,0,-1))
 
 def moddist(x,y):
+    """Shortest circular distance modulo N."""
     z=(x-y)%N
     return min(z,N-z)
 
 def syndrome(a):
+    """Compute theta-loop signatures from oriented path values."""
     return tuple(sum(row[j]*a[j] for j in range(3))%N for row in C)
 
 classes=sorted(set(syndrome(a) for a in product(range(N),repeat=3)))
@@ -24,8 +26,12 @@ assert len(classes)==N*N
 # possible classes are (u,v,u+v) and three loop readings are redundant
 assert all((s[0]+s[1])%N==s[2] for s in classes)
 
-def d_inf(x,y): return max(moddist(a,b) for a,b in zip(x,y))
-def d_l1(x,y): return sum(moddist(a,b) for a,b in zip(x,y))
+def d_inf(x,y):
+    """Maximum componentwise circular metric."""
+    return max(moddist(a,b) for a,b in zip(x,y))
+def d_l1(x,y):
+    """Sum of componentwise circular metrics."""
+    return sum(moddist(a,b) for a,b in zip(x,y))
 min_inf=min(d_inf(x,y) for i,x in enumerate(classes) for y in classes[i+1:])
 min_l1=min(d_l1(x,y) for i,x in enumerate(classes) for y in classes[i+1:])
 assert (min_inf,min_l1)==(1,2)
