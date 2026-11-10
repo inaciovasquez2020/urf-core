@@ -12,9 +12,11 @@ if not __debug__:
 N = 12
 
 def hol(edges):
+    """Return the oriented cycle holonomy modulo 12."""
     return sum(edges) % N
 
 def triangle_gauge(edges, vertices):
+    """Apply the coboundary of vertex potentials to three edge values."""
     """Edges 0->1,1->2,2->0; a_uv -> a_uv + g_v - g_u."""
     a,b,c = edges
     x,y,z = vertices
@@ -43,10 +45,12 @@ faces=[(0,1,4),(0,4,3),(1,2,5),(1,5,4),(2,0,3),(2,3,5)]
 arcs={(0,1):0,(1,2):0,(2,0):1,(3,4):0,(4,5):0,(5,3):1,
       (0,3):0,(1,4):0,(2,5):0,(0,4):0,(1,5):0,(2,3):1}
 def edge(u,v):
+    """Read a directed annulus edge with reversal sign."""
     if (u,v) in arcs: return arcs[(u,v)]
     if (v,u) in arcs: return -arcs[(v,u)]
     raise ValueError((u,v))
 def face_curvature(f):
+    """Sum directed edge values around one triangular face."""
     u,v,w=f
     return (edge(u,v)+edge(v,w)+edge(w,u))%N
 assert all(face_curvature(f)==0 for f in faces)
