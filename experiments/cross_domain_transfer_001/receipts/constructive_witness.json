@@ -1,0 +1,107 @@
+{
+  "assumptions": [
+    "finite simple graphs",
+    "Fp, prime p",
+    "induced radius balls",
+    "independent local gauge choices, no cross-ball synchronization"
+  ],
+  "counts": {
+    "adversarial_cases": 84,
+    "all_simple_graph_cases": 716,
+    "cycle_radius_cases": 336,
+    "negative_controls": 163,
+    "nontrivial_hidden_classes": 321
+  },
+  "lean_graph_pairing": "OPEN",
+  "legacy_toolkit": "NOT_RUN",
+  "novelty": "NOT_ESTABLISHED",
+  "proof_status": "FINITE_CERTIFICATE_ONLY",
+  "resource_limits": {
+    "max_graph_vertices": 18,
+    "primes": [
+      2,
+      3,
+      5
+    ],
+    "seconds": 35
+  },
+  "result": "COMPUTATION_PASS",
+  "source": "explicit global cochain + per-ball local gauge certificates",
+  "witnesses": [
+    {
+      "cochains": [
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "global_cycle_dimensions": 2,
+      "hidden_dimensions": 1,
+      "local_vertex_potentials": [
+        [
+          {
+            "0": 0,
+            "1": 1,
+            "2": 1,
+            "4": 0
+          },
+          {
+            "0": 0,
+            "1": 1,
+            "2": 1
+          },
+          {
+            "0": 0,
+            "1": 1,
+            "2": 1,
+            "3": 1
+          },
+          {
+            "2": 0,
+            "3": 0,
+            "4": 0
+          },
+          {
+            "0": 0,
+            "3": 0,
+            "4": 0
+          }
+        ]
+      ],
+      "name": "chorded_five",
+      "p": 2,
+      "r": 1,
+      "visible_dimensions": 1
+    }
+  ]
+}
