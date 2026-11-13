@@ -1,0 +1,78 @@
+{
+  "boundaries": [
+    "finite simple undirected graphs",
+    "F_p for p prime",
+    "independent gauge quotient per local induced ball",
+    "no global overlap synchronization",
+    "finite check only; not Lean verification"
+  ],
+  "counts": {
+    "adversarial_observations": 84,
+    "all_graph_observations": 1074,
+    "all_graphs": 74,
+    "cycle_cases": 540
+  },
+  "lean": "NOT_RUN",
+  "method": "independent fundamental-cycle span versus quotient restriction rank",
+  "novelty": "NOT_ESTABLISHED",
+  "partial_observation_examples": [
+    {
+      "b1": 2,
+      "hidden": 1,
+      "local_basis_vectors": 3,
+      "name": "chorded_cycle",
+      "p": 2,
+      "r": 1,
+      "visible": 1
+    },
+    {
+      "b1": 2,
+      "hidden": 1,
+      "local_basis_vectors": 3,
+      "name": "chorded_cycle",
+      "p": 3,
+      "r": 1,
+      "visible": 1
+    },
+    {
+      "b1": 2,
+      "hidden": 1,
+      "local_basis_vectors": 3,
+      "name": "chorded_cycle",
+      "p": 5,
+      "r": 1,
+      "visible": 1
+    },
+    {
+      "b1": 2,
+      "hidden": 1,
+      "local_basis_vectors": 5,
+      "name": "theta",
+      "p": 2,
+      "r": 2,
+      "visible": 1
+    },
+    {
+      "b1": 2,
+      "hidden": 1,
+      "local_basis_vectors": 5,
+      "name": "theta",
+      "p": 3,
+      "r": 2,
+      "visible": 1
+    },
+    {
+      "b1": 2,
+      "hidden": 1,
+      "local_basis_vectors": 5,
+      "name": "theta",
+      "p": 5,
+      "r": 2,
+      "visible": 1
+    }
+  ],
+  "result": "COMPUTATION_PASS",
+  "seconds_guard": 35,
+  "theorem": "rank of local quotient observations equals dimension of span of embedded local cycle spaces",
+  "toolkit": "NOT_RUN"
+}
