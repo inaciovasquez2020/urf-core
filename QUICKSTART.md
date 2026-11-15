@@ -45,11 +45,9 @@ python3 -m pytest -q
 [ -x ./scripts/verify.sh ] && ./scripts/verify.sh
 ```
 
-## 5. Reproduce checksums
+## 5. Check artifact integrity
 
-```bash
-sha256sum artifacts/* 2>/dev/null || true
-```
+Compare the SHA-256 digest of the artifact you obtained with the expected digest in the manifest for that exact release. For example, run `shasum -a 256 path/to/artifact` and compare the complete 64-character digest. The repository’s prefab manifest includes generated outputs and applies to its documented build snapshot.
 
 ## 6. Next steps
 
