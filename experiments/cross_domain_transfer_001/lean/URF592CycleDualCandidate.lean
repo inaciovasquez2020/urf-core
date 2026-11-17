@@ -254,8 +254,9 @@ theorem gauge_finrank_plus_annihilator
 
 
 /-- The fixed standard edge-coordinate basis identifies cochains and duals. -/
-noncomputable def edgeCoordinateDualEquiv : (E → K) ≃ₗ[K] Module.Dual K (E → K) :=
-  (Pi.basisFun K E).toDualEquiv
+noncomputable def edgeCoordinateDualEquiv : (E → K) ≃ₗ[K] Module.Dual K (E → K) := by
+  classical
+  exact (Pi.basisFun K E).toDualEquiv
 
 /-- This coordinate-duality map evaluates using the actual edge pairing. -/
 theorem edgeCoordinateDualEquiv_apply (z a : E → K) :
@@ -266,7 +267,7 @@ theorem edgeCoordinateDualEquiv_apply (z a : E → K) :
     apply (Pi.basisFun K E).ext
     intro e
     simp [edgeCoordinateDualEquiv, cycleEvaluation, edgePair,
-      Basis.toDual_apply_left, Pi.basisFun_apply]
+      Module.Basis.toDual_apply_left, Pi.basisFun_apply]
   exact congrArg (fun φ : Module.Dual K (E → K) => φ a) h
 
 #print axioms edgeCoordinateDualEquiv_apply
