@@ -234,18 +234,18 @@ def dualCycleSubspace (G : OrientedEdges V E) :
     Submodule K (Module.Dual K (E → K)) :=
   (gaugeSpan (K := K) G).dualAnnihilator
 
-/-- Canonical finite-dimensional gauge-quotient / dual-annihilator equivalence.
-    Coordinate identification with (ker incidenceBoundary)^* remains OPEN. -/
+/-- Noncanonical finite-dimensional gauge-quotient / dual-annihilator equivalence
+    using a chosen basis. The natural graph cycle pairing remains OPEN. -/
 noncomputable def gaugeQuotientEquivDualCycle
     [FiniteDimensional K (E → K)] (G : OrientedEdges V E) :
-    ((E → K) ⧸ gaugeSpan (K := K) G) ≃ₗ[K] dualCycleSubspace G :=
+    ((E → K) ⧸ gaugeSpan (K := K) G) ≃ₗ[K] dualCycleSubspace (K := K) G :=
   (gaugeSpan (K := K) G).quotEquivAnnihilator
 
 /-- Exact dimension identity for the graph gauge submodule and its dual annihilator. -/
 theorem gaugeSpan_finrank_add_dualCycle_finrank
     [FiniteDimensional K (E → K)] (G : OrientedEdges V E) :
     Module.finrank K (gaugeSpan (K := K) G) +
-      Module.finrank K (dualCycleSubspace G) =
+      Module.finrank K (dualCycleSubspace (K := K) G) =
         Module.finrank K (E → K) := by
   exact Subspace.finrank_add_finrank_dualAnnihilator_eq (gaugeSpan (K := K) G)
 
