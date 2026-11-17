@@ -377,6 +377,20 @@ noncomputable def graphGaugeQuotientEquivCycleDual
     ((graphPairingLinear (K := K) G).quotKerEquivOfSurjective
       (graphPairingLinear_surjective G))
 
+
+/-- The perfect graph pairing on a gauge class is the finite edge dot product
+    of any representative with a concrete cycle. -/
+theorem graphGaugeQuotientEquivCycleDual_mk
+    (G : OrientedEdges V E) (a : E → K)
+    (z : cycleSubspace (K := K) G) :
+    graphGaugeQuotientEquivCycleDual G
+      ((gaugeSpan (K := K) G).mkQ a) z =
+        edgePair a (z : E → K) := by
+  change graphPairingLinear G a z = edgePair a (z : E → K)
+  exact graphPairingLinear_apply G a z
+
+#print axioms graphGaugeQuotientEquivCycleDual_mk
+
 #print axioms graphGaugeQuotientEquivCycleDual
 
 #print axioms graphPairingLinear_ker_eq_gaugeSpan
