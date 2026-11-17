@@ -61,3 +61,51 @@ end URF.Transfer.CycleDual
 #print axioms URF.Transfer.CycleDual.restriction_dual_apply
 #print axioms URF.Transfer.CycleDual.hidden_iff_annihilates_local_cycles
 #print axioms URF.Transfer.CycleDual.observed_add_hidden_eq_global_dual
+
+/-!
+First graph-specific layer. Here a finite oriented graph is represented by
+its edge endpoint maps. Cycle predicate is stated as annihilation of all
+vertex coboundaries; equivalence with the incidence-boundary kernel and the
+perfect quotient pairing remains OPEN. None of the abstract proofs above
+are altered.
+-/
+
+namespace URF.Transfer.GraphCochains
+
+universe u₁ u₂ u₃
+
+variable {K : Type u₁} [Field K]
+variable {V : Type u₂} {E : Type u₃} [Fintype E]
+
+/-- A choice of source and target for every oriented edge. -/
+structure OrientedEdges (V : Type u₂) (E : Type u₃) where
+  source : E → V
+  target : E → V
+
+/-- Vertex gauge coboundary on actual oriented edges. -/
+def coboundary (G : OrientedEdges V E) (g : V → K) (e : E) : K :=
+  g (G.target e) - g (G.source e)
+
+/-- Standard finite edge-cochain pairing. -/
+def edgePair (a z : E → K) : K :=
+  ∑ e : E, a e * z e
+
+/-- The annihilator description of the cycle space.
+    Kernel-of-incidence equivalence is not yet formalized. -/
+def IsCycle (G : OrientedEdges V E) (z : E → K) : Prop :=
+  ∀ g : V → K, edgePair (coboundary G g) z = 0
+
+/-- A local gauge transformation does not change a cycle measurement. -/
+theorem cycle_pair_gauge_invariant
+    (G : OrientedEdges V E) (a z : E → K)
+    (hz : IsCycle G z) (g : V → K) :
+    edgePair (fun e => a e + coboundary G g e) z = edgePair a z := by
+  calc
+    edgePair (fun e => a e + coboundary G g e) z =
+        edgePair a z + edgePair (coboundary G g) z := by
+          simp [edgePair, add_mul, Finset.sum_add_distrib]
+    _ = edgePair a z := by rw [hz g, add_zero]
+
+#print axioms cycle_pair_gauge_invariant
+
+end URF.Transfer.GraphCochains
