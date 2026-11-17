@@ -297,6 +297,39 @@ theorem mem_cycleSubspace_iff_incidence_zero
     z ∈ cycleSubspace G ↔ ∀ v : V, incidenceBoundary G z v = 0 := by
   rw [mem_cycleSubspace_iff, isCycle_iff_incidenceBoundary_zero]
 
+
+/-- Evaluation of an edge assignment on the concrete cycle submodule. -/
+noncomputable def graphPairingLinear (G : OrientedEdges V E) :
+    (E → K) →ₗ[K] Module.Dual K (cycleSubspace (K := K) G) :=
+  (cycleSubspace (K := K) G).dualRestrict.comp
+    (edgeCoordinateDualEquiv (K := K) (E := E)).toLinearMap
+
+/-- Graph pairing is exactly the finite edge dot product. -/
+theorem graphPairingLinear_apply (G : OrientedEdges V E)
+    (a : E → K) (z : cycleSubspace (K := K) G) :
+    graphPairingLinear G a z = edgePair a (z : E → K) := by
+  calc
+    graphPairingLinear G a z = edgePair (z : E → K) a := by
+      exact edgeCoordinateDualEquiv_apply (K := K) (E := E) a (z : E → K)
+    _ = edgePair a (z : E → K) := by
+      simp [edgePair, mul_comm]
+
+/-- Every functional on the graph cycle submodule arises from an edge cochain. -/
+theorem graphPairingLinear_surjective (G : OrientedEdges V E) :
+    Function.Surjective (graphPairingLinear (K := K) G) := by
+  intro φ
+  obtain ⟨ψ, hψ⟩ := (cycleSubspace (K := K) G).dualRestrict_surjective φ
+  obtain ⟨a, ha⟩ :=
+    (edgeCoordinateDualEquiv (K := K) (E := E)).surjective ψ
+  refine ⟨a, ?_⟩
+  change (cycleSubspace (K := K) G).dualRestrict
+    (edgeCoordinateDualEquiv (K := K) (E := E) a) = φ
+  rw [ha]
+  exact hψ
+
+#print axioms graphPairingLinear_apply
+#print axioms graphPairingLinear_surjective
+
 #print axioms mem_cycleSubspace_iff
 #print axioms mem_cycleSubspace_iff_incidence_zero
 
