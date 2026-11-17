@@ -168,67 +168,6 @@ theorem isCycle_iff_incidenceBoundary_zero
     rw [coboundary_edgePair_eq_vertexPair]
     simp [hz]
 
-
-/-- The concrete oriented-edge gauge coboundary as a linear map. -/
-def coboundaryLinear (G : OrientedEdges V E) :
-    (V → K) →ₗ[K] (E → K) where
-  toFun := coboundary G
-  map_add' := by
-    intro g h
-    funext e
-    simp [coboundary, sub_eq_add_neg, add_comm, add_left_comm, add_assoc]
-  map_smul' := by
-    intro c g
-    funext e
-    simp only [coboundary, Pi.smul_apply, smul_eq_mul]
-    ring
-
-/-- Measurement of a fixed edge-cycle is linear in its edge cochain. -/
-def cycleEvalLinear (z : E → K) : (E → K) →ₗ[K] K where
-  toFun := fun a => edgePair a z
-  map_add' := by
-    intro a b
-    simp [edgePair, add_mul, Finset.sum_add_distrib]
-  map_smul' := by
-    intro c a
-    simp [edgePair, Finset.mul_sum, mul_assoc]
-
-/-- Vertex gauge changes form an explicitly typed submodule of edge assignments. -/
-def gaugeRange (G : OrientedEdges V E) : Submodule K (E → K) :=
-  LinearMap.range (coboundaryLinear G)
-
-/-- Annihilating coboundaries makes cycle measurement descend to gauge classes. -/
-theorem gaugeRange_le_cycleEval_ker
-    (G : OrientedEdges V E) (z : E → K) (hz : IsCycle G z) :
-    gaugeRange G ≤
-      LinearMap.ker (cycleEvalLinear z) := by
-  intro a ha
-  obtain ⟨g, rfl⟩ := LinearMap.mem_range.mp ha
-  exact hz g
-
-/-- An actual gauge-quotient measurement, defined by the universal property
-    of quotient modules. This does not yet assert perfect pairing. -/
-def cycleEvalOnGaugeQuotient
-    (G : OrientedEdges V E) (z : E → K) (hz : IsCycle G z) :
-    ((E → K) ⧸ gaugeRange G) →ₗ[K] K :=
-  (gaugeRange G).liftQ
-    (cycleEvalLinear z) (gaugeRange_le_cycleEval_ker G z hz)
-
-/-- Evaluation of a gauge class agrees with its representative's pairing. -/
-theorem cycleEvalOnGaugeQuotient_mk
-    (G : OrientedEdges V E) (z : E → K) (hz : IsCycle G z)
-    (a : E → K) :
-    cycleEvalOnGaugeQuotient G z hz
-      ((gaugeRange G).mkQ a) =
-      edgePair a z := by
-  rfl
-
-#print axioms coboundaryLinear
-#print axioms cycleEvalLinear
-#print axioms gaugeRange_le_cycleEval_ker
-#print axioms cycleEvalOnGaugeQuotient
-#print axioms cycleEvalOnGaugeQuotient_mk
-
 #print axioms coboundary_edgePair_eq_vertexPair
 #print axioms isCycle_iff_incidenceBoundary_zero
 
