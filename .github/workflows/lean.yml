@@ -24,3 +24,54 @@ jobs:
           source $HOME/.elan/env
           lake update
           lake build
+
+      - name: Compile PR592 isolated abstract cycle-dual candidate and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          source "$HOME/.elan/env"
+          file="experiments/cross_domain_transfer_001/lean/URF592CycleDualCandidate.lean"
+          test -f "$file"
+          log="$(mktemp)"
+          trap 'rm -f "$log"' EXIT
+          if ! lake env lean "$file" >"$log" 2>&1; then
+            cat "$log"
+            echo "PR592_ABSTRACT_COMPILE := FAIL"
+            exit 1
+          fi
+          cat "$log"
+          python3 - "$log" <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+          output = Path(sys.argv[1]).read_text()
+          names = (
+              "restriction_dual_apply",
+              "hidden_iff_annihilates_local_cycles",
+              "observed_add_hidden_eq_global_dual",
+          )
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for name in names:
+              declaration = "URF.Transfer.CycleDual." + name
+              found = [
+                  line for line in output.splitlines()
+                  if ("'" + declaration + "'") in line and (
+                      "depends on axioms:" in line or
+                      "does not depend on any axioms" in line
+                  )
+              ]
+              if len(found) != 1:
+                  raise SystemExit("AXIOM_AUDIT := FAIL (missing/duplicate output: " + declaration + ")")
+              line = found[0]
+              if "depends on axioms:" in line:
+                  m = re.search(r"depends on axioms:\s*\[([^\]]*)\]", line)
+                  if m is None:
+                      raise SystemExit("AXIOM_AUDIT := FAIL (unparseable: " + declaration + ")")
+                  axioms = {x.strip() for x in m.group(1).split(",") if x.strip()}
+                  if not axioms <= allowed:
+                      raise SystemExit("AXIOM_AUDIT := FAIL (forbidden axioms: " +
+                                       declaration + " " + repr(sorted(axioms - allowed)) + ")")
+              print("AXIOMS_ALLOWED := " + declaration)
+          print("PR592_ABSTRACT_COMPILE := PASS")
+          print("GRAPH_SPECIFIC_GAUGE_QUOTIENT := OPEN")
+          PY
