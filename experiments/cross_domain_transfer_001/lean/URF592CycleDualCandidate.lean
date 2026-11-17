@@ -318,7 +318,9 @@ theorem graphPairingLinear_apply (G : OrientedEdges V E)
 theorem graphPairingLinear_surjective (G : OrientedEdges V E) :
     Function.Surjective (graphPairingLinear (K := K) G) := by
   intro φ
-  obtain ⟨ψ, hψ⟩ := (cycleSubspace (K := K) G).dualRestrict_surjective φ
+  have hsurj : Function.Surjective ((cycleSubspace (K := K) G).dualRestrict) :=
+    Subspace.dualRestrict_surjective
+  obtain ⟨ψ, hψ⟩ := hsurj φ
   obtain ⟨a, ha⟩ :=
     (edgeCoordinateDualEquiv (K := K) (E := E)).surjective ψ
   refine ⟨a, ?_⟩
