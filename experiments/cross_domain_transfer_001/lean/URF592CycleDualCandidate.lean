@@ -252,28 +252,6 @@ theorem gauge_finrank_plus_annihilator
         Module.finrank K (E → K) := by
   exact Subspace.finrank_add_finrank_dualAnnihilator_eq (gaugeSpan (K := K) G)
 
-
-/-- Standard basis identifies each finite edge cochain with its dual. -/
-noncomputable def edgeCoordinateDualEquiv : (E → K) ≃ₗ[K] Module.Dual K (E → K) := by
-  classical
-  exact (Pi.basisFun K E).toDualEquiv
-
-/-- The standard coordinate duality is the graph's dot-product pairing. -/
-theorem edgeCoordinateDualEquiv_apply (z a : E → K) :
-    edgeCoordinateDualEquiv (K := K) (E := E) z a = edgePair a z := by
-  classical
-  have h : (edgeCoordinateDualEquiv (K := K) (E := E) z) =
-      cycleEvaluation z := by
-    apply (Pi.basisFun K E).ext
-    intro e
-    change ((Pi.basisFun K E).toDual z) ((Pi.basisFun K E) e) =
-      edgePair ((Pi.basisFun K E) e) z
-    rw [Module.Basis.toDual_apply_left]
-    simp [edgePair, Pi.basisFun_apply]
-  exact congrArg (fun φ : Module.Dual K (E → K) => φ a) h
-
-#print axioms edgeCoordinateDualEquiv_apply
-
 #print axioms gaugeQuotientAnnihilatorEquiv
 #print axioms gauge_finrank_plus_annihilator
 
