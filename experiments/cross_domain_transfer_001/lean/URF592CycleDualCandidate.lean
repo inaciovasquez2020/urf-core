@@ -273,6 +273,35 @@ theorem edgeCoordinateDualEquiv_apply (z a : E → K) :
     simp [edgePair, Pi.basisFun_apply, Pi.single_apply]
   exact congrArg (fun φ : Module.Dual K (E → K) => φ a) h
 
+
+/-- Concrete graph cycles are the inverse image of the gauge annihilator
+    under the standard coordinate duality. -/
+noncomputable def cycleSubspace (G : OrientedEdges V E) : Submodule K (E → K) :=
+  (gaugeSpan (K := K) G).dualAnnihilator.comap
+    (edgeCoordinateDualEquiv (K := K) (E := E)).toLinearMap
+
+/-- Cycle-submodule membership equals the existing graph cycle predicate. -/
+theorem mem_cycleSubspace_iff (G : OrientedEdges V E) (z : E → K) :
+    z ∈ cycleSubspace G ↔ IsCycle G z := by
+  rw [isCycle_iff_annihilates_gaugeSpan]
+  simp only [cycleSubspace, Submodule.mem_comap, Submodule.mem_dualAnnihilator]
+  constructor
+  · intro hz a ha
+    have h := hz a ha
+    rwa [edgeCoordinateDualEquiv_apply] at h
+  · intro hz a ha
+    rw [edgeCoordinateDualEquiv_apply]
+    exact hz a ha
+
+/-- The graph cycle submodule is precisely the incidence-boundary kernel. -/
+theorem mem_cycleSubspace_iff_incidence_zero
+    [Fintype V] [DecidableEq V] (G : OrientedEdges V E) (z : E → K) :
+    z ∈ cycleSubspace G ↔ ∀ v : V, incidenceBoundary G z v = 0 := by
+  rw [mem_cycleSubspace_iff, isCycle_iff_incidenceBoundary_zero]
+
+#print axioms mem_cycleSubspace_iff
+#print axioms mem_cycleSubspace_iff_incidence_zero
+
 #print axioms edgeCoordinateDualEquiv_apply
 
 #print axioms gaugeQuotientAnnihilatorEquiv
