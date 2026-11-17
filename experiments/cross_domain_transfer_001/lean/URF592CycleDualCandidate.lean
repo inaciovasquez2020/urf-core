@@ -228,6 +228,33 @@ theorem isCycle_iff_annihilates_gaugeSpan
       Submodule.span K (Set.range (coboundary G : (V → K) → (E → K)))
     exact Submodule.subset_span (Set.mem_range_self g)
 
+
+/-! This is a noncanonical finite-dimensional quotient equivalence supplied
+by mathlib. It is NOT the natural graph pairing or the graph restriction theorem. -/
+
+/-- Annihilator subspace of the concrete gauge submodule in the cochain dual. -/
+def gaugeDualAnnihilator (G : OrientedEdges V E) :
+    Submodule K (Module.Dual K (E → K)) :=
+  (gaugeSpan (K := K) G).dualAnnihilator
+
+/-- A basis-dependent linear equivalence, not the desired canonical pairing. -/
+noncomputable def gaugeQuotientAnnihilatorEquiv
+    [FiniteDimensional K (E → K)] (G : OrientedEdges V E) :
+    ((E → K) ⧸ gaugeSpan (K := K) G) ≃ₗ[K]
+      gaugeDualAnnihilator (K := K) G :=
+  Subspace.quotEquivAnnihilator (gaugeSpan (K := K) G)
+
+/-- The finite-dimensional complement formula for actual vertex gauge spans. -/
+theorem gauge_finrank_plus_annihilator
+    [FiniteDimensional K (E → K)] (G : OrientedEdges V E) :
+    Module.finrank K (gaugeSpan (K := K) G) +
+      Module.finrank K (gaugeDualAnnihilator (K := K) G) =
+        Module.finrank K (E → K) := by
+  exact Subspace.finrank_add_finrank_dualAnnihilator_eq (gaugeSpan (K := K) G)
+
+#print axioms gaugeQuotientAnnihilatorEquiv
+#print axioms gauge_finrank_plus_annihilator
+
 #print axioms isCycle_iff_annihilates_gaugeSpan
 
 #print axioms gaugeSpan_le_cycleEvaluation_ker
