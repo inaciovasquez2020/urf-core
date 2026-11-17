@@ -449,28 +449,7 @@ theorem localCycleObservation_surjective
   rw [hq]
   exact hψ
 
-/-- Exact graph-local hidden dimension derived from surjectivity and rank-nullity. -/
-theorem localCycleObservation_hidden_finrank
-    (G : OrientedEdges V E) (S : Set E) :
-    Module.finrank K (supportedLocalCycles (K := K) G S) +
-      Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) =
-        Module.finrank K (cycleSubspace (K := K) G) := by
-  have h := LinearMap.finrank_range_add_finrank_ker
-    (localCycleObservation (K := K) G S)
-  rw [LinearMap.range_eq_top.mpr (localCycleObservation_surjective G S)] at h
-  have h' :
-      Module.finrank K (supportedLocalCycles (K := K) G S) +
-        Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) =
-          Module.finrank K ((E → K) ⧸ gaugeSpan (K := K) G) := by
-    simpa only [Module.finrank_top, Subspace.dual_finrank_eq] using h
-  calc
-    _ = Module.finrank K ((E → K) ⧸ gaugeSpan (K := K) G) := h'
-    _ = Module.finrank K (Module.Dual K (cycleSubspace (K := K) G)) :=
-      (graphGaugeQuotientEquivCycleDual (K := K) G).finrank_eq
-    _ = Module.finrank K (cycleSubspace (K := K) G) := Subspace.dual_finrank_eq
-
 #print axioms localCycleObservation_surjective
-#print axioms localCycleObservation_hidden_finrank
 
 #print axioms localCycleObservation_eq_dual_inclusion
 #print axioms localCycleObservation_mk
