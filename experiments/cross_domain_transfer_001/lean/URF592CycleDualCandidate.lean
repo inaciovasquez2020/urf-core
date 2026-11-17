@@ -287,11 +287,9 @@ theorem mem_cycleSubspace_iff (G : OrientedEdges V E) (z : E → K) :
   simp only [cycleSubspace, Submodule.mem_comap, Submodule.mem_dualAnnihilator]
   constructor
   · intro hz a ha
-    have h := hz a ha
-    rwa [edgeCoordinateDualEquiv_apply] at h
+    exact (edgeCoordinateDualEquiv_apply (K := K) (E := E) z a).symm.trans (hz a ha)
   · intro hz a ha
-    rw [edgeCoordinateDualEquiv_apply]
-    exact hz a ha
+    exact (edgeCoordinateDualEquiv_apply (K := K) (E := E) z a).trans (hz a ha)
 
 /-- The graph cycle submodule is precisely the incidence-boundary kernel. -/
 theorem mem_cycleSubspace_iff_incidence_zero
