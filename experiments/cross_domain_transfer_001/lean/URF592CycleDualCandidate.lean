@@ -383,7 +383,7 @@ noncomputable def graphGaugeQuotientEquivCycleDual
 theorem graphGaugeQuotientEquivCycleDual_mk
     (G : OrientedEdges V E) (a : E → K)
     (z : cycleSubspace (K := K) G) :
-    graphGaugeQuotientEquivCycleDual G
+    graphGaugeQuotientEquivCycleDual (K := K) G
       ((gaugeSpan (K := K) G).mkQ a) z =
         edgePair a (z : E → K) := by
   change graphPairingLinear G a z = edgePair a (z : E → K)
