@@ -431,6 +431,43 @@ theorem localCycleObservation_mk
       edgePair a (z : E → K)
   exact graphGaugeQuotientEquivCycleDual_mk G a z
 
+
+/-- Every local-cycle functional is observable from a global gauge class. -/
+theorem localCycleObservation_surjective
+    (G : OrientedEdges V E) (S : Set E) :
+    Function.Surjective (localCycleObservation (K := K) G S) := by
+  intro φ
+  have hlocal : Function.Surjective
+      ((supportedLocalCycles (K := K) G S).dualRestrict) :=
+    Subspace.dualRestrict_surjective
+  obtain ⟨ψ, hψ⟩ := hlocal φ
+  obtain ⟨q, hq⟩ :=
+    (graphGaugeQuotientEquivCycleDual (K := K) G).surjective ψ
+  refine ⟨q, ?_⟩
+  change (supportedLocalCycles (K := K) G S).dualRestrict
+    (graphGaugeQuotientEquivCycleDual (K := K) G q) = φ
+  rw [hq]
+  exact hψ
+
+/-- Exact hidden dimension for local graph cycle observations. -/
+theorem localCycleObservation_hidden_finrank
+    (G : OrientedEdges V E) (S : Set E) :
+    Module.finrank K (supportedLocalCycles (K := K) G S) +
+      Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) =
+        Module.finrank K (cycleSubspace (K := K) G) := by
+  have h := LinearMap.finrank_range_add_finrank_ker
+    (localCycleObservation (K := K) G S)
+  rw [LinearMap.range_eq_top.mpr (localCycleObservation_surjective G S)] at h
+  simp only [Submodule.finrank_top, Subspace.dual_finrank_eq] at h
+  calc
+    _ = Module.finrank K ((E → K) ⧸ gaugeSpan (K := K) G) := h
+    _ = Module.finrank K (Module.Dual K (cycleSubspace (K := K) G)) :=
+      (graphGaugeQuotientEquivCycleDual (K := K) G).finrank_eq
+    _ = Module.finrank K (cycleSubspace (K := K) G) := Subspace.dual_finrank_eq
+
+#print axioms localCycleObservation_surjective
+#print axioms localCycleObservation_hidden_finrank
+
 #print axioms localCycleObservation_eq_dual_inclusion
 #print axioms localCycleObservation_mk
 
