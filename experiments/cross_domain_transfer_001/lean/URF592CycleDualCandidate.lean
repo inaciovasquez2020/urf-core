@@ -424,7 +424,7 @@ theorem localCycleObservation_eq_dual_inclusion
 theorem localCycleObservation_mk
     (G : OrientedEdges V E) (S : Set E)
     (a : E → K) (z : supportedLocalCycles (K := K) G S) :
-    localCycleObservation G S ((gaugeSpan (K := K) G).mkQ a) z =
+    localCycleObservation (K := K) G S ((gaugeSpan (K := K) G).mkQ a) z =
       edgePair a (z : E → K) := by
   change graphGaugeQuotientEquivCycleDual (K := K) G
     ((gaugeSpan (K := K) G).mkQ a) (z : cycleSubspace (K := K) G) =
