@@ -329,6 +329,42 @@ theorem graphPairingLinear_surjective (G : OrientedEdges V E) :
   rw [ha]
   exact hψ
 
+
+/-- Vanishing on every graph cycle is equivalent to being a vertex gauge cochain. -/
+theorem graphPairingLinear_ker_eq_gaugeSpan (G : OrientedEdges V E) :
+    LinearMap.ker (graphPairingLinear (K := K) G) = gaugeSpan (K := K) G := by
+  ext a
+  constructor
+  · intro ha
+    apply (Subspace.forall_mem_dualAnnihilator_apply_eq_zero_iff
+      (gaugeSpan (K := K) G) a).mp
+    intro φ hφ
+    let z : E → K := (edgeCoordinateDualEquiv (K := K) (E := E)).symm φ
+    have hz : z ∈ cycleSubspace (K := K) G := by
+      change edgeCoordinateDualEquiv (K := K) (E := E) z ∈
+        (gaugeSpan (K := K) G).dualAnnihilator
+      simpa [z] using hφ
+    have hzero : graphPairingLinear (K := K) G a ⟨z, hz⟩ = 0 := by
+      have h := LinearMap.mem_ker.mp ha
+      simpa using congrArg (fun ψ : Module.Dual K (cycleSubspace (K := K) G) =>
+        ψ ⟨z, hz⟩) h
+    have hpair : edgePair a z = 0 := by
+      rw [graphPairingLinear_apply] at hzero
+      exact hzero
+    calc
+      φ a = edgeCoordinateDualEquiv (K := K) (E := E) z a := by simp [z]
+      _ = edgePair a z := edgeCoordinateDualEquiv_apply z a
+      _ = 0 := hpair
+  · intro ha
+    apply LinearMap.mem_ker.mpr
+    ext z
+    have hz : IsCycle G (z : E → K) :=
+      (mem_cycleSubspace_iff G (z : E → K)).mp z.property
+    have hpair := (isCycle_iff_annihilates_gaugeSpan G (z : E → K)).mp hz a ha
+    simpa only [graphPairingLinear_apply, LinearMap.zero_apply] using hpair
+
+#print axioms graphPairingLinear_ker_eq_gaugeSpan
+
 #print axioms graphPairingLinear_apply
 #print axioms graphPairingLinear_surjective
 
