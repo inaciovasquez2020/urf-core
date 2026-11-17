@@ -389,6 +389,51 @@ theorem graphGaugeQuotientEquivCycleDual_mk
   change graphPairingLinear G a z = edgePair a (z : E → K)
   exact graphPairingLinear_apply G a z
 
+
+/-- Cycles supported entirely inside a selected set of graph edges. -/
+noncomputable def supportedLocalCycles
+    (G : OrientedEdges V E) (S : Set E) :
+    Submodule K (cycleSubspace (K := K) G) where
+  carrier := {z | ∀ e : E, e ∉ S → (z : E → K) e = 0}
+  zero_mem' := by
+    intro e he
+    rfl
+  add_mem' := by
+    intro a b ha hb e he
+    simp [ha e he, hb e he]
+  smul_mem' := by
+    intro c a ha e he
+    simp [ha e he]
+
+/-- Local gauge-class observations are dual restriction to supported cycles. -/
+noncomputable def localCycleObservation
+    (G : OrientedEdges V E) (S : Set E) :
+    ((E → K) ⧸ gaugeSpan (K := K) G) →ₗ[K]
+      Module.Dual K (supportedLocalCycles (K := K) G S) :=
+  (supportedLocalCycles (K := K) G S).dualRestrict.comp
+    (graphGaugeQuotientEquivCycleDual (K := K) G).toLinearMap
+
+/-- Graph restriction is precisely the dual of local-cycle inclusion. -/
+theorem localCycleObservation_eq_dual_inclusion
+    (G : OrientedEdges V E) (S : Set E) :
+    localCycleObservation (K := K) G S =
+      (supportedLocalCycles (K := K) G S).subtype.dualMap.comp
+        (graphGaugeQuotientEquivCycleDual (K := K) G).toLinearMap := rfl
+
+/-- A local cycle measures an edge cochain by its original edge pairing. -/
+theorem localCycleObservation_mk
+    (G : OrientedEdges V E) (S : Set E)
+    (a : E → K) (z : supportedLocalCycles (K := K) G S) :
+    localCycleObservation G S ((gaugeSpan (K := K) G).mkQ a) z =
+      edgePair a (z : E → K) := by
+  change graphGaugeQuotientEquivCycleDual (K := K) G
+    ((gaugeSpan (K := K) G).mkQ a) (z : cycleSubspace (K := K) G) =
+      edgePair a (z : E → K)
+  exact graphGaugeQuotientEquivCycleDual_mk G a z
+
+#print axioms localCycleObservation_eq_dual_inclusion
+#print axioms localCycleObservation_mk
+
 #print axioms graphGaugeQuotientEquivCycleDual_mk
 
 #print axioms graphGaugeQuotientEquivCycleDual
