@@ -180,7 +180,8 @@ def coboundaryLinear (G : OrientedEdges V E) :
   map_smul' := by
     intro c g
     funext e
-    simp [coboundary, smul_sub]
+    simp only [coboundary, Pi.smul_apply, smul_eq_mul]
+    ring
 
 /-- Measurement of a fixed edge-cycle is linear in its edge cochain. -/
 def cycleEvalLinear (z : E → K) : (E → K) →ₗ[K] K where
@@ -192,10 +193,14 @@ def cycleEvalLinear (z : E → K) : (E → K) →ₗ[K] K where
     intro c a
     simp [edgePair, Finset.mul_sum, mul_assoc]
 
+/-- Vertex gauge changes form an explicitly typed submodule of edge assignments. -/
+def gaugeRange (G : OrientedEdges V E) : Submodule K (E → K) :=
+  LinearMap.range (coboundaryLinear G)
+
 /-- Annihilating coboundaries makes cycle measurement descend to gauge classes. -/
 theorem gaugeRange_le_cycleEval_ker
     (G : OrientedEdges V E) (z : E → K) (hz : IsCycle G z) :
-    LinearMap.range (coboundaryLinear G) ≤
+    gaugeRange G ≤
       LinearMap.ker (cycleEvalLinear z) := by
   intro a ha
   obtain ⟨g, rfl⟩ := LinearMap.mem_range.mp ha
@@ -205,8 +210,8 @@ theorem gaugeRange_le_cycleEval_ker
     of quotient modules. This does not yet assert perfect pairing. -/
 def cycleEvalOnGaugeQuotient
     (G : OrientedEdges V E) (z : E → K) (hz : IsCycle G z) :
-    ((E → K) ⧸ LinearMap.range (coboundaryLinear G)) →ₗ[K] K :=
-  (LinearMap.range (coboundaryLinear G)).liftQ
+    ((E → K) ⧸ gaugeRange G) →ₗ[K] K :=
+  (gaugeRange G).liftQ
     (cycleEvalLinear z) (gaugeRange_le_cycleEval_ker G z hz)
 
 /-- Evaluation of a gauge class agrees with its representative's pairing. -/
@@ -214,7 +219,7 @@ theorem cycleEvalOnGaugeQuotient_mk
     (G : OrientedEdges V E) (z : E → K) (hz : IsCycle G z)
     (a : E → K) :
     cycleEvalOnGaugeQuotient G z hz
-      ((LinearMap.range (coboundaryLinear G)).mkQ a) =
+      ((gaugeRange G).mkQ a) =
       edgePair a z := by
   rfl
 
