@@ -363,6 +363,22 @@ theorem graphPairingLinear_ker_eq_gaugeSpan (G : OrientedEdges V E) :
     have hpair := (isCycle_iff_annihilates_gaugeSpan G (z : E → K)).mp hz a ha
     simpa only [graphPairingLinear_apply, LinearMap.zero_apply] using hpair
 
+
+/-- The natural perfect graph pairing: edge cochains modulo vertex gauges
+    are linearly equivalent to functionals on the concrete graph cycle space. -/
+noncomputable def graphGaugeQuotientEquivCycleDual
+    (G : OrientedEdges V E) :
+    ((E → K) ⧸ gaugeSpan (K := K) G) ≃ₗ[K]
+      Module.Dual K (cycleSubspace (K := K) G) :=
+  (Submodule.quotEquivOfEq
+    (gaugeSpan (K := K) G)
+    (LinearMap.ker (graphPairingLinear (K := K) G))
+    (graphPairingLinear_ker_eq_gaugeSpan G).symm).trans
+    ((graphPairingLinear (K := K) G).quotKerEquivOfSurjective
+      (graphPairingLinear_surjective G))
+
+#print axioms graphGaugeQuotientEquivCycleDual
+
 #print axioms graphPairingLinear_ker_eq_gaugeSpan
 
 #print axioms graphPairingLinear_apply
