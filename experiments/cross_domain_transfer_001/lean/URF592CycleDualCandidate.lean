@@ -106,6 +106,71 @@ theorem cycle_pair_gauge_invariant
           simp [edgePair, add_mul, Finset.sum_add_distrib]
     _ = edgePair a z := by rw [hz g, add_zero]
 
+
+/-- The oriented edge-incidence boundary, with incoming minus outgoing flow. -/
+def incidenceBoundary [Fintype V] [DecidableEq V]
+    (G : OrientedEdges V E) (z : E → K) (v : V) : K :=
+  (∑ e : E, if G.target e = v then z e else 0) -
+  (∑ e : E, if G.source e = v then z e else 0)
+
+/-- The cochain/cycle pairing is the vertex pairing with the incidence boundary. -/
+theorem coboundary_edgePair_eq_vertexPair
+    [Fintype V] [DecidableEq V]
+    (G : OrientedEdges V E) (g : V → K) (z : E → K) :
+    edgePair (coboundary G g) z =
+      ∑ v : V, g v * incidenceBoundary G z v := by
+  have htarget :
+      (∑ e : E, g (G.target e) * z e) =
+        ∑ v : V, g v * (∑ e : E, if G.target e = v then z e else 0) := by
+    calc
+      _ = ∑ e : E, ∑ v : V, g v * (if G.target e = v then z e else 0) := by
+        apply Finset.sum_congr rfl
+        intro e he
+        simp
+      _ = ∑ v : V, ∑ e : E, g v * (if G.target e = v then z e else 0) := by
+        rw [Finset.sum_comm]
+      _ = ∑ v : V, g v * (∑ e : E, if G.target e = v then z e else 0) := by
+        simp_rw [Finset.mul_sum]
+  have hsource :
+      (∑ e : E, g (G.source e) * z e) =
+        ∑ v : V, g v * (∑ e : E, if G.source e = v then z e else 0) := by
+    calc
+      _ = ∑ e : E, ∑ v : V, g v * (if G.source e = v then z e else 0) := by
+        apply Finset.sum_congr rfl
+        intro e he
+        simp
+      _ = ∑ v : V, ∑ e : E, g v * (if G.source e = v then z e else 0) := by
+        rw [Finset.sum_comm]
+      _ = ∑ v : V, g v * (∑ e : E, if G.source e = v then z e else 0) := by
+        simp_rw [Finset.mul_sum]
+  calc
+    edgePair (coboundary G g) z =
+        (∑ e : E, g (G.target e) * z e) -
+        (∑ e : E, g (G.source e) * z e) := by
+          simp [edgePair, coboundary, sub_mul, Finset.sum_sub_distrib]
+    _ = (∑ v : V, g v * (∑ e : E, if G.target e = v then z e else 0)) -
+        (∑ v : V, g v * (∑ e : E, if G.source e = v then z e else 0)) := by
+          rw [htarget, hsource]
+    _ = ∑ v : V, g v * incidenceBoundary G z v := by
+          simp [incidenceBoundary, mul_sub, Finset.sum_sub_distrib]
+
+/-- The annihilator cycle definition is exactly the incidence boundary kernel. -/
+theorem isCycle_iff_incidenceBoundary_zero
+    [Fintype V] [DecidableEq V]
+    (G : OrientedEdges V E) (z : E → K) :
+    IsCycle G z ↔ ∀ v : V, incidenceBoundary G z v = 0 := by
+  constructor
+  · intro hz v
+    have h := hz (fun w : V => if w = v then (1 : K) else 0)
+    rw [coboundary_edgePair_eq_vertexPair] at h
+    simpa using h
+  · intro hz g
+    rw [coboundary_edgePair_eq_vertexPair]
+    simp [hz]
+
+#print axioms coboundary_edgePair_eq_vertexPair
+#print axioms isCycle_iff_incidenceBoundary_zero
+
 #print axioms cycle_pair_gauge_invariant
 
 end URF.Transfer.GraphCochains
