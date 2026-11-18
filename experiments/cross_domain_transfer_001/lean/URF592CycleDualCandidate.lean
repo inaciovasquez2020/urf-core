@@ -648,6 +648,33 @@ theorem uniformFiberShannonEntropy_eq_ker_finrank
   rw [uniformFiberShannonEntropy_eq_log_card,
     uniform_fiber_log_card_eq_ker_finrank]
 
+/-- Aggregate conditional Shannon entropy for a uniformly sampled input X:
+    average of the conditional fiber entropies using p(X = x) = 1 / |Q|.
+    This equals H(X | f(X)) by the finite conditional-entropy identity. -/
+noncomputable def uniformConditionalShannonEntropy
+    [Fintype Q] (f : Q →ₗ[K] Y) : ℝ := by
+  classical
+  exact ∑ x : Q, ((1 : ℝ) / (Fintype.card Q : ℝ)) *
+    uniformFiberShannonEntropy f x
+
+/-- Aggregate conditional Shannon entropy for a uniformly sampled finite-field
+    vector is exactly the kernel dimension times log of the field size. -/
+theorem uniformConditionalShannonEntropy_eq_ker_finrank
+    [Fintype Q] (f : Q →ₗ[K] Y) :
+    uniformConditionalShannonEntropy f =
+      (Module.finrank K (LinearMap.ker f) : ℝ) *
+        Real.log (Nat.card K : ℝ) := by
+  classical
+  have hn : (Fintype.card Q : ℝ) ≠ 0 := by
+    haveI : Nonempty Q := ⟨0⟩
+    exact_mod_cast (Fintype.card_pos (α := Q)).ne'
+  unfold uniformConditionalShannonEntropy
+  simp_rw [uniformFiberShannonEntropy_eq_ker_finrank]
+  simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  field_simp
+
+#print axioms uniformConditionalShannonEntropy_eq_ker_finrank
+
 #print axioms uniformFiberShannonEntropy_eq_log_card
 #print axioms uniformFiberShannonEntropy_eq_ker_finrank
 
