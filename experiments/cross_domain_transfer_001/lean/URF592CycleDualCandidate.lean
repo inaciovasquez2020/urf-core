@@ -485,6 +485,28 @@ theorem localCycleObservation_surjective
   rw [hq]
   exact hψ
 
+/-- Concrete graph-local rank/nullity, instantiated from the verified abstract
+    result without unfolding the local-cycle observation definitions. -/
+set_option maxHeartbeats 800000 in
+theorem localCycleObservation_hidden_finrank
+    (G : OrientedEdges V E) (S : Set E) :
+    Module.finrank K (supportedLocalCycles (K := K) G S) +
+      Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) =
+        Module.finrank K (cycleSubspace (K := K) G) := by
+  let f : ((E → K) ⧸ gaugeSpan (K := K) G) →ₗ[K]
+      Module.Dual K (supportedLocalCycles (K := K) G S) :=
+    localCycleObservation (K := K) G S
+  let e : ((E → K) ⧸ gaugeSpan (K := K) G) ≃ₗ[K]
+      Module.Dual K (cycleSubspace (K := K) G) :=
+    graphGaugeQuotientEquivCycleDual (K := K) G
+  have hf : Function.Surjective f :=
+    localCycleObservation_surjective (K := K) G S
+  have h := URF.Transfer.CycleDual.surjective_dual_observation_hidden_finrank
+    (K := K) (f := f) hf e
+  exact h
+
+#print axioms localCycleObservation_hidden_finrank
+
 #print axioms localCycleObservation_surjective
 
 #print axioms localCycleObservation_eq_dual_inclusion
