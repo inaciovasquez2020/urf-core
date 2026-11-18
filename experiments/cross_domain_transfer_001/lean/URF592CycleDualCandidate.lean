@@ -673,10 +673,10 @@ noncomputable def graphUniformFiberShannonEntropy
   exact URF.Transfer.UniformObservationEntropy.uniformFiberShannonEntropy
     (localCycleObservation (K := K) G S) q
 
-/-- Exact graph information budget for uniform gauge classes over finite fields.
-The Shannon entropy is the explicit discrete sum over a nonempty fiber. -/
 set_option maxHeartbeats 800000
 
+/-- Exact graph information budget for uniform gauge classes over finite fields.
+The Shannon entropy is the explicit discrete sum over a nonempty fiber. -/
 theorem graphUniformFiberShannonEntropy_add_observed
     (G : OrientedEdges V E) (S : Set E)
     (q : ((E → K) ⧸ gaugeSpan (K := K) G)) :
