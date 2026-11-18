@@ -1,0 +1,18 @@
+info: [root]: lakefile.lean and lakefile.toml are both present; using lakefile.lean
+/Users/inaciof.vasquez/Downloads/URFCoreConcreteGraphStage.lean:262:4: warning: 'change f (z.1 + x₀) = y' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/Users/inaciof.vasquez/Downloads/URFCoreConcreteGraphStage.lean:391:0: warning: automatically included section variable(s) unused in theorem `URF.EntropyBridge.observation_surjective`:
+  [FiniteDimensional K V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional K V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+/Users/inaciof.vasquez/Downloads/URFCoreConcreteGraphStage.lean:396:0: warning: automatically included section variable(s) unused in theorem `URF.EntropyBridge.observation_kernel`:
+  [FiniteDimensional K V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional K V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+'URF.EntropyBridge.orderedEdge_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.concreteGraph_hidden_finrank' depends on axioms: [propext, Classical.choice, Quot.sound]
