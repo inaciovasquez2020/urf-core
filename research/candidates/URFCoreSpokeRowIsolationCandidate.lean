@@ -740,3 +740,94 @@ theorem simpleGraphBoundary_spoke_zero_candidate
 #print axioms URF.EntropyBridge.simpleGraphBoundary_spoke_zero_candidate
 
 end URF.EntropyBridge
+
+/-! Cone elimination stage. NOT_RUN at creation. The hypotheses on the
+rim lifts are explicit; their concrete triangle construction is a separate
+obligation. No existence of a triangle is assumed without a hypothesis. -/
+namespace URF.EntropyBridge
+
+/-- A circulation is determined by its nonspoke coefficients. -/
+theorem circulation_eq_of_rim_eq_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (v : V) (z w : OrderedEdge G → K)
+    (hz : simpleGraphBoundary (K := K) G z = 0)
+    (hw : simpleGraphBoundary (K := K) G w = 0)
+    (hrim : ∀ e : OrderedEdge G,
+      e.val.1 ≠ v → e.val.2 ≠ v → z e = w e) :
+    z = w := by
+  have hdiff : simpleGraphBoundary (K := K) G (z - w) = 0 := by
+    rw [map_sub, hz, hw, sub_zero]
+  have hs : ∀ e : OrderedEdge G, (z - w) e ≠ 0 →
+      e.val.1 = v ∨ e.val.2 = v := by
+    intro e he
+    by_contra hn
+    push_neg at hn
+    apply he
+    change z e - w e = 0
+    rw [hrim e hn.1 hn.2, sub_self]
+  exact sub_eq_zero.mp
+    (simpleGraphBoundary_spoke_zero_candidate G v (z - w) hs hdiff)
+
+/-- Constructive rim elimination. Each lift t e is a circulation whose
+coefficients on nonspoke edges are the Kronecker delta at e.
+Only active nonspoke edges of z require a lift. -/
+theorem circulation_rim_decomposition_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (v : V) (z : OrderedEdge G → K)
+    (hz : simpleGraphBoundary (K := K) G z = 0)
+    (t : OrderedEdge G → (OrderedEdge G → K))
+    (ht : ∀ e : OrderedEdge G, e.val.1 ≠ v → e.val.2 ≠ v →
+      z e ≠ 0 →
+      simpleGraphBoundary (K := K) G (t e) = 0)
+    (hdelta : ∀ e : OrderedEdge G, e.val.1 ≠ v → e.val.2 ≠ v →
+      z e ≠ 0 → ∀ d : OrderedEdge G, d.val.1 ≠ v → d.val.2 ≠ v →
+      t e d = (by classical exact if d = e then 1 else 0)) :
+    z = (by
+      classical
+      exact ∑ e ∈ (Finset.univ.filter (fun e : OrderedEdge G =>
+        e.val.1 ≠ v ∧ e.val.2 ≠ v ∧ z e ≠ 0)), z e • t e) := by
+  classical
+  let S : Finset (OrderedEdge G) := Finset.univ.filter (fun e =>
+    e.val.1 ≠ v ∧ e.val.2 ≠ v ∧ z e ≠ 0)
+  let w : OrderedEdge G → K := ∑ e ∈ S, z e • t e
+  change z = w
+  have hmem (e : OrderedEdge G) (he : e ∈ S) :
+      e.val.1 ≠ v ∧ e.val.2 ≠ v ∧ z e ≠ 0 := by
+    simpa [S] using he
+  have hw : simpleGraphBoundary (K := K) G w = 0 := by
+    dsimp [w]
+    rw [map_sum]
+    apply Finset.sum_eq_zero
+    intro e he
+    obtain ⟨h1, h2, h3⟩ := hmem e he
+    rw [map_smul, ht e h1 h2 h3, smul_zero]
+  apply circulation_eq_of_rim_eq_candidate G v z w hz hw
+  intro d hd1 hd2
+  have hwval : w d = ∑ e ∈ S, z e * t e d := by
+    simp [w, Finset.sum_apply, Pi.smul_apply, smul_eq_mul]
+  rw [hwval]
+  by_cases hzd : z d = 0
+  · rw [hzd]
+    symm
+    apply Finset.sum_eq_zero
+    intro e he
+    obtain ⟨h1, h2, h3⟩ := hmem e he
+    have hne : d ≠ e := by
+      intro h
+      exact h3 (by simpa only [← h] using hzd)
+    rw [hdelta e h1 h2 h3 d hd1 hd2, if_neg hne, mul_zero]
+  · have hdS : d ∈ S := by
+      simp [S, hd1, hd2, hzd]
+    have hsum : (∑ e ∈ S, z e * t e d) = z d * t d d := by
+      apply Finset.sum_eq_single d
+      · intro e he hne
+        obtain ⟨h1, h2, h3⟩ := hmem e he
+        rw [hdelta e h1 h2 h3 d hd1 hd2, if_neg (Ne.symm hne), mul_zero]
+      · intro h
+        exact False.elim (h hdS)
+    rw [hsum, hdelta d hd1 hd2 hzd d hd1 hd2, if_pos rfl, mul_one]
+
+#print axioms URF.EntropyBridge.circulation_eq_of_rim_eq_candidate
+#print axioms URF.EntropyBridge.circulation_rim_decomposition_candidate
+
+end URF.EntropyBridge
