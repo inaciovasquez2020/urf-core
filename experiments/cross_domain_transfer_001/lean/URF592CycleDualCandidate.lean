@@ -72,6 +72,7 @@ theorem surjective_dual_observation_hidden_finrank
     (e : Q ≃ₗ[K] Module.Dual K GlobalCycles) :
     Module.finrank K LocalCycles + Module.finrank K (LinearMap.ker f) =
       Module.finrank K GlobalCycles := by
+  classical
   have h := LinearMap.finrank_range_add_finrank_ker f
   rw [LinearMap.range_eq_top.mpr hf, finrank_top] at h
   have hlocal :
