@@ -669,6 +669,10 @@ noncomputable def graphUniformFiberShannonEntropy
     (G : OrientedEdges V E) (S : Set E)
     (q : ((E → K) ⧸ gaugeSpan (K := K) G)) : ℝ := by
   classical
+  haveI : Finite (E → K) := inferInstance
+  haveI : Finite ((E → K) ⧸ gaugeSpan (K := K) G) :=
+    Finite.of_surjective (gaugeSpan (K := K) G).mkQ
+      (Submodule.mkQ_surjective _)
   letI : Fintype ((E → K) ⧸ gaugeSpan (K := K) G) := Fintype.ofFinite _
   exact URF.Transfer.UniformObservationEntropy.uniformFiberShannonEntropy
     (localCycleObservation (K := K) G S) q
@@ -686,6 +690,10 @@ theorem graphUniformFiberShannonEntropy_add_observed
       (Module.finrank K (cycleSubspace (K := K) G) : ℝ) *
         Real.log (Nat.card K : ℝ) := by
   classical
+  haveI : Finite (E → K) := inferInstance
+  haveI : Finite ((E → K) ⧸ gaugeSpan (K := K) G) :=
+    Finite.of_surjective (gaugeSpan (K := K) G).mkQ
+      (Submodule.mkQ_surjective _)
   letI : Fintype ((E → K) ⧸ gaugeSpan (K := K) G) := Fintype.ofFinite _
   have hentropy :
       graphUniformFiberShannonEntropy (K := K) G S q =
