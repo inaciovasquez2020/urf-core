@@ -56,6 +56,41 @@ theorem observed_add_hidden_eq_global_dual
   rw [LinearMap.finrank_range_dualMap_eq_finrank_range] at h
   exact h
 
+/-- Generic rank-nullity for a surjective measurement into the dual of a
+    local space, when the global measurement domain is the dual of a global
+    space. This lemma deliberately contains no graph-specific definitions. -/
+theorem surjective_dual_observation_hidden_finrank
+    {Q GlobalCycles LocalCycles : Type v}
+    [AddCommGroup Q] [Module K Q]
+    [AddCommGroup GlobalCycles] [Module K GlobalCycles]
+    [AddCommGroup LocalCycles] [Module K LocalCycles]
+    [FiniteDimensional K Q]
+    [FiniteDimensional K GlobalCycles]
+    [FiniteDimensional K LocalCycles]
+    (f : Q →ₗ[K] Module.Dual K LocalCycles)
+    (hf : Function.Surjective f)
+    (e : Q ≃ₗ[K] Module.Dual K GlobalCycles) :
+    Module.finrank K LocalCycles + Module.finrank K (LinearMap.ker f) =
+      Module.finrank K GlobalCycles := by
+  have h := LinearMap.finrank_range_add_finrank_ker f
+  rw [LinearMap.range_eq_top.mpr hf, finrank_top] at h
+  have hlocal :
+      Module.finrank K (Module.Dual K LocalCycles) =
+        Module.finrank K LocalCycles :=
+    (Basis.ofVectorSpace K LocalCycles).toDualEquiv.symm.finrank_eq
+  have hglobal :
+      Module.finrank K (Module.Dual K GlobalCycles) =
+        Module.finrank K GlobalCycles :=
+    (Basis.ofVectorSpace K GlobalCycles).toDualEquiv.symm.finrank_eq
+  calc
+    _ = Module.finrank K (Module.Dual K LocalCycles) +
+        Module.finrank K (LinearMap.ker f) := by rw [hlocal]
+    _ = Module.finrank K Q := h
+    _ = Module.finrank K (Module.Dual K GlobalCycles) := e.finrank_eq
+    _ = Module.finrank K GlobalCycles := hglobal
+
+#print axioms surjective_dual_observation_hidden_finrank
+
 end URF.Transfer.CycleDual
 
 #print axioms URF.Transfer.CycleDual.restriction_dual_apply
