@@ -485,6 +485,19 @@ theorem localCycleObservation_surjective
   rw [hq]
   exact hψ
 
+/-- The exact local graph information deficit equals the kernel dimension. -/
+theorem localCycleObservation_hidden_finrank
+    (G : OrientedEdges V E) (S : Set E) :
+    Module.finrank K (supportedLocalCycles (K := K) G S) +
+      Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) =
+        Module.finrank K (cycleSubspace (K := K) G) := by
+  exact URF.Transfer.CycleDual.surjective_dual_observation_hidden_finrank
+    (localCycleObservation (K := K) G S)
+    (localCycleObservation_surjective (K := K) G S)
+    (graphGaugeQuotientEquivCycleDual (K := K) G)
+
+#print axioms localCycleObservation_hidden_finrank
+
 #print axioms localCycleObservation_surjective
 
 #print axioms localCycleObservation_eq_dual_inclusion
