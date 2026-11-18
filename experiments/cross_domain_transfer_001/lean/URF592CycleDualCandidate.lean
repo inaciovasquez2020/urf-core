@@ -492,6 +492,10 @@ theorem localCycleObservation_hidden_finrank
       Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) =
         Module.finrank K (cycleSubspace (K := K) G) := by
   exact URF.Transfer.CycleDual.surjective_dual_observation_hidden_finrank
+    (K := K)
+    (Q := ((E → K) ⧸ gaugeSpan (K := K) G))
+    (GlobalCycles := cycleSubspace (K := K) G)
+    (LocalCycles := supportedLocalCycles (K := K) G S)
     (localCycleObservation (K := K) G S)
     (localCycleObservation_surjective (K := K) G S)
     (graphGaugeQuotientEquivCycleDual (K := K) G)
