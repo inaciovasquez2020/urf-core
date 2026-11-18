@@ -682,7 +682,7 @@ theorem uniform_fiber_entropy_exact_candidate
   have hcard :
       Fintype.card F =
         Fintype.card (LinearMap.ker f) :=
-    linear_fiber_card_eq_ker f y x₀ hx₀
+    Fintype.card_congr (linearFiberEquivKer f y x₀ hx₀)
 
   have h_uniform :
       finiteEntropy
