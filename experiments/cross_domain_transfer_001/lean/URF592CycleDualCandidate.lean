@@ -652,3 +652,64 @@ theorem uniformFiberShannonEntropy_eq_ker_finrank
 #print axioms uniform_fiber_log_card_eq_ker_finrank
 
 end URF.Transfer.UniformObservationEntropy
+
+
+/-! Specialization of finite-field uniform Shannon entropy to actual graph
+gauge classes and locally supported cycle observations. -/
+namespace URF.Transfer.GraphCochains
+
+universe u₁ u₂ u₃
+variable {K : Type u₁} [Field K] [Finite K]
+variable {V : Type u₂} {E : Type u₃} [Fintype E]
+
+/-- Shannon entropy on the uniformly distributed fiber of the local graph
+observation through a chosen gauge class, with its finite type constructed
+from finite-field finite-dimensionality. -/
+noncomputable def graphUniformFiberShannonEntropy
+    (G : OrientedEdges V E) (S : Set E)
+    (q : ((E → K) ⧸ gaugeSpan (K := K) G)) : ℝ := by
+  classical
+  letI : Fintype ((E → K) ⧸ gaugeSpan (K := K) G) := Fintype.ofFinite _
+  exact URF.Transfer.UniformObservationEntropy.uniformFiberShannonEntropy
+    (localCycleObservation (K := K) G S) q
+
+/-- Exact graph information budget for uniform gauge classes over finite fields.
+The Shannon entropy is the explicit discrete sum over a nonempty fiber. -/
+set_option maxHeartbeats 800000
+
+theorem graphUniformFiberShannonEntropy_add_observed
+    (G : OrientedEdges V E) (S : Set E)
+    (q : ((E → K) ⧸ gaugeSpan (K := K) G)) :
+    graphUniformFiberShannonEntropy G S q +
+      (Module.finrank K (supportedLocalCycles (K := K) G S) : ℝ) *
+        Real.log (Nat.card K : ℝ) =
+      (Module.finrank K (cycleSubspace (K := K) G) : ℝ) *
+        Real.log (Nat.card K : ℝ) := by
+  classical
+  letI : Fintype ((E → K) ⧸ gaugeSpan (K := K) G) := Fintype.ofFinite _
+  have hentropy :
+      graphUniformFiberShannonEntropy (K := K) G S q =
+        (Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) : ℝ) *
+          Real.log (Nat.card K : ℝ) := by
+    unfold graphUniformFiberShannonEntropy
+    exact URF.Transfer.UniformObservationEntropy.uniformFiberShannonEntropy_eq_ker_finrank
+      (localCycleObservation (K := K) G S) q
+  have hdim :
+      (Module.finrank K (supportedLocalCycles (K := K) G S) : ℝ) +
+        (Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) : ℝ) =
+          (Module.finrank K (cycleSubspace (K := K) G) : ℝ) := by
+    exact_mod_cast (localCycleObservation_hidden_finrank (K := K) G S)
+  calc
+    _ = ((Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) : ℝ) *
+        Real.log (Nat.card K : ℝ)) +
+        ((Module.finrank K (supportedLocalCycles (K := K) G S) : ℝ) *
+        Real.log (Nat.card K : ℝ)) := by rw [hentropy]
+    _ = ((Module.finrank K (supportedLocalCycles (K := K) G S) : ℝ) +
+        (Module.finrank K (LinearMap.ker (localCycleObservation (K := K) G S)) : ℝ)) *
+        Real.log (Nat.card K : ℝ) := by ring
+    _ = (Module.finrank K (cycleSubspace (K := K) G) : ℝ) *
+        Real.log (Nat.card K : ℝ) := by rw [hdim]
+
+#print axioms graphUniformFiberShannonEntropy_add_observed
+
+end URF.Transfer.GraphCochains
