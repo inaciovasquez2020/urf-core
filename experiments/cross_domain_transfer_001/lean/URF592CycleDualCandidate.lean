@@ -602,6 +602,53 @@ theorem uniform_fiber_log_card_eq_ker_finrank
   rw [fiber_natCard_eq_pow_ker_finrank]
   rw [Nat.cast_pow, Real.log_pow]
 
+/-- Shannon's discrete entropy of the uniform conditional distribution on an
+    attained fiber. It is the sum of -p log p over exactly those states. -/
+noncomputable def uniformFiberShannonEntropy
+    [Fintype Q] (f : Q →ₗ[K] Y) (x : Q) : ℝ := by
+  classical
+  exact ∑ _z : {z : Q // f z = f x},
+    -((1 : ℝ) / (Nat.card {z : Q // f z = f x} : ℝ)) *
+      Real.log ((1 : ℝ) / (Nat.card {z : Q // f z = f x} : ℝ))
+
+/-- Exact Shannon entropy of a uniform nonempty observation fiber. -/
+theorem uniformFiberShannonEntropy_eq_log_card
+    [Fintype Q] (f : Q →ₗ[K] Y) (x : Q) :
+    uniformFiberShannonEntropy f x =
+      Real.log (Nat.card {z : Q // f z = f x} : ℝ) := by
+  classical
+  let F := {z : Q // f z = f x}
+  have hne : Nonempty F := ⟨⟨x, rfl⟩⟩
+  have hn : (Nat.card F : ℝ) ≠ 0 := by
+    exact_mod_cast (Nat.card_pos (α := F)).ne'
+  have hcard : (Fintype.card F : ℝ) = (Nat.card F : ℝ) := by
+    simp [Nat.card_eq_fintype_card]
+  have hlog :
+      Real.log ((1 : ℝ) / (Nat.card F : ℝ)) =
+        -Real.log (Nat.card F : ℝ) := by
+    simp [one_div, Real.log_inv]
+  unfold uniformFiberShannonEntropy
+  change (∑ _z : F, -((1 : ℝ) / (Nat.card F : ℝ)) *
+      Real.log ((1 : ℝ) / (Nat.card F : ℝ))) =
+        Real.log (Nat.card F : ℝ)
+  simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+  rw [hcard, hlog]
+  field_simp
+  ring
+
+/-- Uniform conditional Shannon entropy is exactly the lost linear dimension
+    times the natural logarithm of the finite-field cardinality. -/
+theorem uniformFiberShannonEntropy_eq_ker_finrank
+    [Fintype Q] (f : Q →ₗ[K] Y) (x : Q) :
+    uniformFiberShannonEntropy f x =
+      (Module.finrank K (LinearMap.ker f) : ℝ) *
+        Real.log (Nat.card K : ℝ) := by
+  rw [uniformFiberShannonEntropy_eq_log_card,
+    uniform_fiber_log_card_eq_ker_finrank]
+
+#print axioms uniformFiberShannonEntropy_eq_log_card
+#print axioms uniformFiberShannonEntropy_eq_ker_finrank
+
 #print axioms fiber_natCard_eq_pow_ker_finrank
 #print axioms uniform_fiber_log_card_eq_ker_finrank
 
