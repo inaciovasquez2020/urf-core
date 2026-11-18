@@ -657,3 +657,86 @@ def SpokeOnlyZeroTarget
 #print axioms URF.EntropyBridge.matrix_zero_of_isolating_rows_candidate
 
 end URF.EntropyBridge
+
+/-! Complete spoke-only candidate. Compiler verification pending. -/
+namespace URF.EntropyBridge
+
+theorem orderedEdge_unique_incident_pair_candidate
+    {V : Type*} [LinearOrder V] {G : SimpleGraph V}
+    (e d : OrderedEdge G) (v u : V) (hvu : v ≠ u)
+    (hev : e.val.1 = v ∨ e.val.2 = v)
+    (heu : e.val.1 = u ∨ e.val.2 = u)
+    (hdv : d.val.1 = v ∨ d.val.2 = v)
+    (hdu : d.val.1 = u ∨ d.val.2 = u) :
+    d = e := by
+  have he : e.val.1 < e.val.2 := e.property.1
+  have hd : d.val.1 < d.val.2 := d.property.1
+  apply Subtype.ext
+  apply Prod.ext <;> grind
+
+theorem spoke_isolation_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (v : V) :
+    SpokeIsolationTarget (K := K) G v := by
+  classical
+  intro z hs e he
+  have hlt : e.val.1 < e.val.2 := e.property.1
+  have hendpoint : ∃ u : V, v ≠ u ∧
+      (e.val.1 = u ∨ e.val.2 = u) := by
+    rcases hs e he with h | h
+    · refine ⟨e.val.2, ?_, Or.inr rfl⟩
+      rw [← h]
+      exact ne_of_lt hlt
+    · refine ⟨e.val.1, ?_, Or.inl rfl⟩
+      rw [← h]
+      exact (ne_of_lt hlt).symm
+  obtain ⟨u, hvu, heu⟩ := hendpoint
+  refine ⟨u, ?_, ?_⟩
+  · unfold simpleGraphIncidence
+    rcases heu with h | h
+    · rw [if_pos h.symm]
+      exact neg_ne_zero.mpr one_ne_zero
+    · rw [if_neg (by
+        intro hh
+        exact (ne_of_lt hlt) (hh.symm.trans h.symm)), if_pos h.symm]
+      exact one_ne_zero
+  · intro d hde
+    by_cases hzd : z d = 0
+    · simp [hzd]
+    · have hdu : ¬ (d.val.1 = u ∨ d.val.2 = u) := by
+        intro hdu
+        exact hde (orderedEdge_unique_incident_pair_candidate e d v u hvu
+          (hs e he) heu (hs d hzd) hdu)
+      have h1 : u ≠ d.val.1 := fun h => hdu (Or.inl h.symm)
+      have h2 : u ≠ d.val.2 := fun h => hdu (Or.inr h.symm)
+      simp [simpleGraphIncidence, h1, h2]
+
+theorem spoke_only_zero_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (v : V) :
+    SpokeOnlyZeroTarget (K := K) G v := by
+  classical
+  intro z hs hz
+  exact matrix_zero_of_isolating_rows_candidate
+    (simpleGraphIncidence (K := K) G) z hz
+    (spoke_isolation_candidate (K := K) G v z hs)
+
+theorem simpleGraphBoundary_spoke_zero_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (v : V) (z : OrderedEdge G → K)
+    (hs : ∀ e, z e ≠ 0 → e.val.1 = v ∨ e.val.2 = v)
+    (hz : simpleGraphBoundary (K := K) G z = 0) :
+    z = 0 := by
+  apply spoke_only_zero_candidate (K := K) G v z hs
+  intro u
+  have h := congrFun hz u
+  change (∑ e : OrderedEdge G,
+    simpleGraphIncidence (K := K) G u e * z e) = 0 at h
+  exact h
+
+#print axioms URF.EntropyBridge.orderedEdge_unique_incident_pair_candidate
+#print axioms URF.EntropyBridge.spoke_isolation_candidate
+#print axioms URF.EntropyBridge.spoke_only_zero_candidate
+#print axioms URF.EntropyBridge.simpleGraphBoundary_spoke_zero_candidate
+
+end URF.EntropyBridge
