@@ -458,7 +458,12 @@ theorem localCycleObservation_hidden_finrank
   have h := LinearMap.finrank_range_add_finrank_ker
     (localCycleObservation (K := K) G S)
   rw [LinearMap.range_eq_top.mpr (localCycleObservation_surjective G S)] at h
-  rw [finrank_top, Subspace.dual_finrank_eq] at h
+  rw [finrank_top] at h
+  have hdual :
+      Module.finrank K (Module.Dual K (supportedLocalCycles (K := K) G S)) =
+        Module.finrank K (supportedLocalCycles (K := K) G S) :=
+    Subspace.dual_finrank_eq
+  rw [hdual] at h
   calc
     _ = Module.finrank K ((E → K) ⧸ gaugeSpan (K := K) G) := h
     _ = Module.finrank K (Module.Dual K (cycleSubspace (K := K) G)) :=
