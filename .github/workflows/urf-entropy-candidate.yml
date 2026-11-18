@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/urf-entropy-candidate.yml'
       - 'research/candidates/URFCoreUniformConditionalExplicitKernelCandidate.lean'
+      - 'research/candidates/URFCoreSpokeRowIsolationCandidate.lean'
   workflow_dispatch:
 permissions:
   contents: read
@@ -61,6 +62,35 @@ jobs:
                   raise SystemExit("Disallowed axioms: " + str(found - allowed))
               print(full, ":= AXIOM_PASS")
           print("AXIOM_AUDIT := PASS")
+          PY
+      - name: Compile concrete spoke-only theorem and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_file=research/candidates/URFCoreSpokeRowIsolationCandidate.lean
+          sha256sum "$source_file" > "$RUNNER_TEMP/urf-receipt/spoke.sha256"
+          lake env lean "$source_file" 2>&1 | tee "$RUNNER_TEMP/urf-receipt/spoke.log"
+          python3 - "$RUNNER_TEMP/urf-receipt/spoke.log" <<'PY'
+          import sys, re
+          s = open(sys.argv[1]).read()
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for name in ("matrix_zero_of_isolating_rows_candidate",
+                       "orderedEdge_unique_incident_pair_candidate",
+                       "spoke_isolation_candidate",
+                       "spoke_only_zero_candidate",
+                       "simpleGraphBoundary_spoke_zero_candidate"):
+              full = "URF.EntropyBridge." + name
+              m = re.search(r"'" + re.escape(full) + r"' depends on axioms: \[([^\]]*)\]", s)
+              if m is None:
+                  if ("'" + full + "' does not depend on any axioms") in s:
+                      print(full, ":= AXIOM_PASS")
+                      continue
+                  raise SystemExit("Missing axiom receipt: " + full)
+              found = {a.strip() for a in m.group(1).split(",") if a.strip()}
+              if not found <= allowed:
+                  raise SystemExit("Disallowed axioms: " + str(found - allowed))
+              print(full, ":= AXIOM_PASS")
+          print("SPOKE_AXIOM_AUDIT := PASS")
           PY
       - name: Preserve compiler receipt
         if: always()
