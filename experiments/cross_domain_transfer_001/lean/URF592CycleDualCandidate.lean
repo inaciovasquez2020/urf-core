@@ -546,3 +546,63 @@ theorem localCycleObservation_hidden_finrank
 #print axioms cycle_pair_gauge_invariant
 
 end URF.Transfer.GraphCochains
+
+
+/-!
+Uniform finite-field observation: any populated fiber is an affine translate
+of the linear kernel. The cardinality and logarithmic results below require
+finite-field structure and finite-dimensional domain. Arbitrary probability
+distributions are not covered by these results.
+-/
+namespace URF.Transfer.UniformObservationEntropy
+
+universe u v w
+
+variable {K : Type u} [Field K] [Finite K]
+variable {Q : Type v} {Y : Type w}
+variable [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q]
+variable [AddCommGroup Y] [Module K Y]
+
+/-- The fiber above an attained value is an affine copy of the kernel. -/
+noncomputable def fiberEquivKernel (f : Q →ₗ[K] Y) (x : Q) :
+    {z : Q // f z = f x} ≃ LinearMap.ker f where
+  toFun := fun z => ⟨z.val - x, by
+    change f (z.val - x) = 0
+    rw [map_sub, z.property, sub_self]⟩
+  invFun := fun z => ⟨z.val + x, by
+    change f (z.val + x) = f x
+    rw [map_add, (LinearMap.mem_ker.mp z.property), zero_add]⟩
+  left_inv := by
+    intro z
+    apply Subtype.ext
+    simp
+  right_inv := by
+    intro z
+    apply Subtype.ext
+    simp
+
+/-- Exact finite-field cardinality of any populated observation fiber. -/
+theorem fiber_natCard_eq_pow_ker_finrank
+    (f : Q →ₗ[K] Y) (x : Q) :
+    Nat.card {z : Q // f z = f x} =
+      (Nat.card K) ^ Module.finrank K (LinearMap.ker f) := by
+  calc
+    Nat.card {z : Q // f z = f x} = Nat.card (LinearMap.ker f) :=
+      Nat.card_congr (fiberEquivKernel f x)
+    _ = (Nat.card K) ^ Module.finrank K (LinearMap.ker f) :=
+      Module.natCard_eq_pow_finrank
+
+/-- Pointwise entropy of the uniform conditional fiber, expressed as a log
+    cardinality; the probability distribution is required to be uniform. -/
+theorem uniform_fiber_log_card_eq_ker_finrank
+    (f : Q →ₗ[K] Y) (x : Q) :
+    Real.log (Nat.card {z : Q // f z = f x} : ℝ) =
+      (Module.finrank K (LinearMap.ker f) : ℝ) *
+        Real.log (Nat.card K : ℝ) := by
+  rw [fiber_natCard_eq_pow_ker_finrank]
+  rw [Nat.cast_pow, Real.log_pow]
+
+#print axioms fiber_natCard_eq_pow_ker_finrank
+#print axioms uniform_fiber_log_card_eq_ker_finrank
+
+end URF.Transfer.UniformObservationEntropy
