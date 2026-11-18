@@ -634,7 +634,6 @@ theorem uniformFiberShannonEntropy_eq_log_card
   simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
   rw [hcard, hlog]
   field_simp
-  ring
 
 /-- Uniform conditional Shannon entropy is exactly the lost linear dimension
     times the natural logarithm of the finite-field cardinality. -/
