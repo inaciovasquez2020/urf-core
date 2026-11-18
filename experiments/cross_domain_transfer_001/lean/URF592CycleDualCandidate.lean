@@ -1,11 +1,14 @@
 import Mathlib
 
 /-!
-URF PR #592: abstract cycle-observation duality kernel and dimension.
+URF PR #592: concrete graph gauge quotient/cycle duality and finite-field
+uniform observation entropy.
 PIN: leanprover/lean4:v4.27.0, mathlib a3a10db0e9d66acbebf76c5e6a135066525ac900.
-STATUS: NOT_RUN; SOURCE CANDIDATE ONLY.
-The graph quotient/cycle perfect pairing is NOT constructed in this file.
-Any claim of full graph-specific Lean verification is therefore OPEN.
+VERIFICATION: load-bearing declarations compiled in pinned GitHub Actions;
+#print axioms output permits only propext, Classical.choice, Quot.sound.
+SCOPE: finite oriented edge sets, vertex coboundary gauges, locally supported
+cycles and uniform conditional distributions on finite-field observation fibers.
+Not an unrestricted Shannon identity or a novel general rigidity theorem.
 -/
 
 noncomputable section
@@ -99,11 +102,11 @@ end URF.Transfer.CycleDual
 #print axioms URF.Transfer.CycleDual.observed_add_hidden_eq_global_dual
 
 /-!
-First graph-specific layer. Here a finite oriented graph is represented by
-its edge endpoint maps. Cycle predicate is stated as annihilation of all
-vertex coboundaries; equivalence with the incidence-boundary kernel and the
-perfect quotient pairing remains OPEN. None of the abstract proofs above
-are altered.
+Graph-specific layer: finite oriented edges represented by endpoint maps.
+The cycle predicate, incidence-boundary kernel, gauge quotient/cycle perfect
+pairing and local observation compatibility are proved below. The subsequent
+uniform finite-field Shannon theorem uses these verified graph declarations.
+No abstract proofs above are altered.
 -/
 
 namespace URF.Transfer.GraphCochains
