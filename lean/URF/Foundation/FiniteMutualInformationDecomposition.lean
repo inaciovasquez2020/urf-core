@@ -25,7 +25,7 @@ theorem finiteMutualInformation_eq_marginalEntropy_sub_conditionalEntropy
     intro y
     exact Finset.sum_nonneg (fun x _ => P.nonneg (x, y))
   have hpx_sum : ∑ x, px x = 1 := by
-    simpa [px, Finset.sum_product] using P.sum_one
+    simpa [px, Fintype.sum_prod_type] using P.sum_one
   have hpy_sum : ∑ y, py y = 1 := by
     simpa [py, Finset.sum_product] using P.sum_one
   have hpy_zero : ∀ y, py y = 0 → ∀ x, P.joint (x,y) = 0 := by
