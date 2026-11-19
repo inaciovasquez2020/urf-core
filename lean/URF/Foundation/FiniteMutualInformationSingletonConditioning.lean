@@ -13,7 +13,7 @@ noncomputable def singletonConditioningJoint
     intro p
     exact P.nonneg (p.1, p.2.1)
   sum_one := by
-    simpa [Finset.sum_product] using P.sum_one
+    simpa [Fintype.sum_prod_type] using P.sum_one
 
 theorem jointConditionalMI_singletonConditioning
     {α β : Type u}
