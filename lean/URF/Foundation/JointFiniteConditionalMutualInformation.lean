@@ -67,7 +67,7 @@ theorem jointConditional_sum_one_of_pos
     (hz : 0 < jointWeight P z) :
     ∑ p : α × β, jointConditional P z p = 1 := by
   unfold jointConditional
-  rw [Finset.sum_div]
+  rw [← Finset.sum_div]
   rw [show (∑ p : α × β, P.joint (p.1, p.2, z)) = jointWeight P z by rfl]
   exact div_self (ne_of_gt hz)
 
