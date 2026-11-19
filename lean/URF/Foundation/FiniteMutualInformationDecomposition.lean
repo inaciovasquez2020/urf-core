@@ -48,22 +48,16 @@ theorem finiteMutualInformation_eq_marginalEntropy_sub_conditionalEntropy
       ∀ x y,
         P.joint (x,y) * Real.log (P.joint (x,y) / (px x * py y))
         =
-        (- px x * Real.log (px x)) +
-          py y * (- (P.joint (x,y) / py y) * Real.log (P.joint (x,y) / py y)) := by
+        - P.joint (x,y) * Real.log (px x) +
+          P.joint (x,y) * Real.log (P.joint (x,y) / py y) := by
     intro x y
     by_cases hp : P.joint (x,y) = 0
     · simp [hp]
-    by_cases hy : py y = 0
-    · simp [hp, hy, hpy_zero y hy x]
-    by_cases hx : px x = 0
-    · simp [hp, hx, hpx_zero x hx y]
-    have hp' : 0 < P.joint (x,y) := lt_of_le_of_ne (P.nonneg (x,y)) (Ne.symm hp)
-    have hx' : 0 < px x := lt_of_le_of_ne (hpx x) (Ne.symm hx)
-    have hy' : 0 < py y := lt_of_le_of_ne (hpy y) (Ne.symm hy)
-    rw [Real.log_div, Real.log_div]
-    rw [Real.log_mul (ne_of_gt hx') (ne_of_gt hy')]
-    field_simp [ne_of_gt hx', ne_of_gt hy', ne_of_gt hp']
-    ring
+    · have hx : px x ≠ 0 := fun hx => hp (hpx_zero x hx y)
+      have hy : py y ≠ 0 := fun hy => hp (hpy_zero y hy x)
+      rw [Real.log_div hp (mul_ne_zero hx hy), Real.log_mul hx hy,
+        Real.log_div hp hy]
+      ring
   unfold finiteMutualInformation finiteShannonEntropy finiteConditionalEntropyXGivenY
   simp only [px, py] at hpoint
   simp_rw [hpoint]
