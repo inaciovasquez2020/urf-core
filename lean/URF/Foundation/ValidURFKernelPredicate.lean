@@ -24,7 +24,7 @@ structure ValidURFFiniteKernel where
     ∀ t : Nat, t < chain.T → chain.localCMIValue t ≤ channelCapacity
   localSum_eq_sum :
     ∀ T : Nat, ∀ f : Nat → ℝ,
-      chain.finiteLocalSum T f = ∑ t in Finset.range T, f t
+      chain.finiteLocalSum T f = Finset.sum (Finset.range T) f
 
 /--
 The admissibility interface exposes the exact local information bound needed
