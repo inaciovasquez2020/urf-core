@@ -77,11 +77,16 @@ theorem finiteT2_mutual_information_chain_rule
       exact lt_of_lt_of_le hp'
         (Finset.single_le_sum
           (fun xy _ => P.nonneg (xy.1, xy.2, z)) (Finset.mem_univ (x,y)))
-    rw [Real.log_div, Real.log_div, Real.log_div]
-    · rw [Real.log_mul, Real.log_mul, Real.log_mul]
-      · ring
-      all_goals positivity
-    all_goals positivity
+    have hx := ne_of_gt hpx'
+    have hyz := ne_of_gt hpyz'
+    have hxz := ne_of_gt hpxz'
+    have hz := ne_of_gt hpz'
+    rw [Real.log_div hp (mul_ne_zero hx hyz),
+      Real.log_div hxz (mul_ne_zero hx hz),
+      Real.log_div (mul_ne_zero hp hz) (mul_ne_zero hxz hyz),
+      Real.log_mul hx hyz, Real.log_mul hx hz,
+      Real.log_mul hp hz, Real.log_mul hxz hyz]
+    ring
   have hcmipoint :
       jointConditionalMI P =
         ∑ z, ∑ xy, p (xy.1,xy.2,z) *
