@@ -25,7 +25,8 @@ noncomputable def finiteKernelTranscriptDistribution
           intro p
           exact input.nonneg p.1
         sum_one := by
-          simpa using input.sum_one }
+          rw [Fintype.sum_prod_type]
+          simpa [Fintype.card_fun] using input.sum_one }
   | T + 1 =>
       { joint := fun p =>
           let q := (transcriptPrefixLastEquiv β T) p.2
