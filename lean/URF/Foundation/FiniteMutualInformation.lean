@@ -35,7 +35,7 @@ private lemma finite_sum_mul_log_div_leq
     fun i hi => div_nonneg (hb i hi) B_pos.le
   have A'' : ∀ i ∈ s, 0 ≤ a i / b i :=
     fun i hi => div_nonneg (ha i hi) (hb i hi)
-  convert! ConcaveOn.le_map_sum Real.concaveOn_negMulLog A' A
+  convert ConcaveOn.le_map_sum Real.concaveOn_negMulLog A' A
       (p := fun i => a i / b i) A'' using 1
   · simp only [Real.negMulLog, neg_mul, smul_eq_mul, mul_neg, Finset.sum_neg_distrib]
     rw [neg_div, Finset.sum_div]
