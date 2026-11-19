@@ -31,8 +31,11 @@ noncomputable def transcriptOneStepJoint
         (fun p => P.joint p)
         (fun p => P.joint (p.1, (transcriptPrefixLastEquiv β T).symm p.2))
         (by
-          intro p
-          rfl)
+          rintro ⟨a, t⟩
+          change P.joint (a, t) =
+            P.joint (a, (transcriptPrefixLastEquiv β T).symm
+              ((transcriptPrefixLastEquiv β T) t))
+          rw [Equiv.symm_apply_apply])
     simpa [e] using h.symm.trans P.sum_one
 
 theorem transcriptOneStepJoint_nonneg
