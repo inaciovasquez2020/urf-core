@@ -42,7 +42,8 @@ noncomputable def finiteKernelTranscriptDistribution
           let e :
               α × (Fin (T + 1) → β) ≃
                 (α × (Fin T → β)) × β :=
-            (Equiv.refl α).prodCongr (transcriptPrefixLastEquiv β T)
+            ((Equiv.refl α).prodCongr (transcriptPrefixLastEquiv β T)).trans
+              (Equiv.prodAssoc α (Fin T → β) β).symm
           rw [Fintype.sum_equiv e]
           simp only [Finset.sum_product]
           calc
