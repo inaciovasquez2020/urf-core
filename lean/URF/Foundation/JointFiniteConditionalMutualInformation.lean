@@ -34,7 +34,13 @@ theorem jointWeight_sum_one
     (P : JointFiniteDistributionData α β γ) :
     ∑ z, jointWeight P z = 1 := by
   unfold jointWeight
-  simpa [Finset.sum_product] using P.sum_one
+  have h := P.sum_one
+  simp_rw [Fintype.sum_prod_type] at h ⊢
+  rw [Finset.sum_comm (s := (Finset.univ : Finset γ))
+    (t := (Finset.univ : Finset α))]
+  simp_rw [Finset.sum_comm (s := (Finset.univ : Finset γ))
+    (t := (Finset.univ : Finset β))]
+  exact h
 
 noncomputable def jointConditional
     {α β γ : Type u}
