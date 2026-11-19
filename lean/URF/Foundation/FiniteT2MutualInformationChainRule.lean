@@ -98,7 +98,7 @@ theorem finiteT2_mutual_information_chain_rule
     apply Finset.sum_congr rfl
     intro z hz
     by_cases hpz : pz z = 0
-    · have hzero : ∀ xy, p (xy.1,xy.2,z) = 0 := by
+    · have hzero : ∀ xy : α × β, p (xy.1,xy.2,z) = 0 := by
         intro xy
         have hle : p (xy.1,xy.2,z) ≤ pz z := by
           exact Finset.single_le_sum
