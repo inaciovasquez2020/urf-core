@@ -89,7 +89,7 @@ theorem finiteT2_mutual_information_chain_rule
     ring
   have hcmipoint :
       jointConditionalMI P =
-        ∑ z, ∑ xy, p (xy.1,xy.2,z) *
+        ∑ z : γ, ∑ xy : α × β, p (xy.1,xy.2,z) *
           Real.log ((p (xy.1,xy.2,z) * pz z) /
             (pxz (xy.1,z) * pyz (xy.2,z))) := by
     unfold jointConditionalMI
