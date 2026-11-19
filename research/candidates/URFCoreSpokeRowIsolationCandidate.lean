@@ -1114,3 +1114,70 @@ theorem triangleBoundary_le_cycleKernel_candidate
 #print axioms URF.EntropyBridge.triangleBoundary_le_cycleKernel_candidate
 
 end URF.EntropyBridge
+
+/-! Clique H1 quotient dimension stage. NOT_RUN at creation.
+The boundary subspace is defined independently of radius locality. -/
+namespace URF.EntropyBridge
+
+noncomputable def radiusOneGraphChainCandidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) : GraphChainPresentation K V (OrderedEdge G) where
+  boundary := simpleGraphBoundary (K := K) G
+  localCycles := (radiusOneAmbientCandidate (K := K) G).comap
+    (LinearMap.ker (simpleGraphBoundary (K := K) G)).subtype
+
+noncomputable def cliqueBoundaryCyclesCandidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) :
+    Submodule K (LinearMap.ker (simpleGraphBoundary (K := K) G)) :=
+  (triangleBoundaryAmbientCandidate (K := K) G).comap
+    (LinearMap.ker (simpleGraphBoundary (K := K) G)).subtype
+
+/-- First homology in degree one, using the span of oriented triangle
+boundaries in the actual cycle space as the boundary subspace. -/
+abbrev cliqueH1Candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) :=
+  (LinearMap.ker (simpleGraphBoundary (K := K) G)) ⧸
+    cliqueBoundaryCyclesCandidate (K := K) G
+
+theorem radiusOne_localCycles_eq_cliqueBoundary_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) :
+    (radiusOneGraphChainCandidate (K := K) G).localCycles =
+      cliqueBoundaryCyclesCandidate (K := K) G := by
+  change (radiusOneAmbientCandidate (K := K) G).comap _ =
+    (triangleBoundaryAmbientCandidate (K := K) G).comap _
+  rw [radiusOne_eq_triangleBoundary_candidate G]
+
+theorem cliqueH1_finrank_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) :
+    Module.finrank K (cliqueH1Candidate (K := K) G) =
+      Module.finrank K (LinearMap.ker (simpleGraphBoundary (K := K) G)) -
+        Module.finrank K (cliqueBoundaryCyclesCandidate (K := K) G) := by
+  have h := Submodule.finrank_quotient_add_finrank
+    (cliqueBoundaryCyclesCandidate (K := K) G)
+  change Module.finrank K (cliqueH1Candidate (K := K) G) +
+    Module.finrank K (cliqueBoundaryCyclesCandidate (K := K) G) =
+    Module.finrank K (LinearMap.ker (simpleGraphBoundary (K := K) G)) at h
+  omega
+
+theorem radiusOne_hidden_finrank_eq_cliqueH1_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) :
+    Module.finrank K
+      (LinearMap.ker (graphObservation (radiusOneGraphChainCandidate (K := K) G))) =
+    Module.finrank K (cliqueH1Candidate (K := K) G) := by
+  rw [graphObservation_hidden_finrank, cliqueH1_finrank_candidate]
+  change Module.finrank K (LinearMap.ker (simpleGraphBoundary (K := K) G)) -
+    Module.finrank K (radiusOneGraphChainCandidate (K := K) G).localCycles =
+    Module.finrank K (LinearMap.ker (simpleGraphBoundary (K := K) G)) -
+    Module.finrank K (cliqueBoundaryCyclesCandidate (K := K) G)
+  rw [radiusOne_localCycles_eq_cliqueBoundary_candidate]
+
+#print axioms URF.EntropyBridge.radiusOne_localCycles_eq_cliqueBoundary_candidate
+#print axioms URF.EntropyBridge.cliqueH1_finrank_candidate
+#print axioms URF.EntropyBridge.radiusOne_hidden_finrank_eq_cliqueH1_candidate
+
+end URF.EntropyBridge
