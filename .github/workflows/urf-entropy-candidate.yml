@@ -7,6 +7,7 @@ on:
       - '.github/workflows/urf-entropy-candidate.yml'
       - 'research/candidates/URFCoreUniformConditionalExplicitKernelCandidate.lean'
       - 'research/candidates/URFCoreSpokeRowIsolationCandidate.lean'
+      - 'research/candidates/URFCoreSharpCliqueEntropyCandidate.lean'
   workflow_dispatch:
 permissions:
   contents: read
@@ -106,6 +107,34 @@ jobs:
                   raise SystemExit("Disallowed axioms: " + str(found - allowed))
               print(full, ":= AXIOM_PASS")
           print("SPOKE_AXIOM_AUDIT := PASS")
+          PY
+      - name: Compile sharp clique entropy assembly and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_file=research/candidates/URFCoreSharpCliqueEntropyCandidate.lean
+          sha256sum "$source_file" > "$RUNNER_TEMP/urf-receipt/sharp.sha256"
+          lake env lean "$source_file" 2>&1 | tee "$RUNNER_TEMP/urf-receipt/sharp.log"
+          python3 - "$RUNNER_TEMP/urf-receipt/sharp.log" <<'PY'
+          import sys, re
+          s = open(sys.argv[1]).read()
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for name in ("radiusOne_kernel_card_eq_pow_cliqueH1_candidate",
+                       "radiusOne_log_kernel_eq_cliqueH1_candidate",
+                       "radiusOne_entropy_le_cliqueH1_candidate",
+                       "radiusOne_uniform_entropy_eq_cliqueH1_candidate"):
+              full = "URF.EntropyBridge." + name
+              m = re.search(r"'" + re.escape(full) + r"' depends on axioms: \[([^\]]*)\]", s)
+              if m is None:
+                  if ("'" + full + "' does not depend on any axioms") in s:
+                      print(full, ":= AXIOM_PASS")
+                      continue
+                  raise SystemExit("Missing axiom receipt: " + full)
+              found = {a.strip() for a in m.group(1).split(",") if a.strip()}
+              if not found <= allowed:
+                  raise SystemExit("Disallowed axioms: " + str(found - allowed))
+              print(full, ":= AXIOM_PASS")
+          print("SHARP_ENTROPY_AXIOM_AUDIT := PASS")
           PY
       - name: Preserve compiler receipt
         if: always()
