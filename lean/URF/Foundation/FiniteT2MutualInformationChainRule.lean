@@ -47,7 +47,7 @@ theorem finiteT2_mutual_information_chain_rule
       finiteMutualInformation (marginalXZ P) + jointConditionalMI P := by
   classical
   let p : α × β × γ → ℝ := P.joint
-  let px : α → ℝ := fun x => ∑ yz, P.joint (x, yz.1, yz.2)
+  let px : α → ℝ := fun x => ∑ yz : β × γ, P.joint (x, yz.1, yz.2)
   let pyz : β × γ → ℝ := fun yz => ∑ x, P.joint (x, yz.1, yz.2)
   let pxz : α × γ → ℝ := fun xz => ∑ y, P.joint (xz.1, y, xz.2)
   let pz : γ → ℝ := fun z => ∑ xy, P.joint (xy.1, xy.2, z)
