@@ -831,3 +831,162 @@ theorem circulation_rim_decomposition_candidate
 #print axioms URF.EntropyBridge.circulation_rim_decomposition_candidate
 
 end URF.EntropyBridge
+
+/-! Concrete signed triangle lifts; compiler audit pending. -/
+namespace URF.EntropyBridge
+
+noncomputable def directedEdgeChainCandidate
+    {V K : Type*} [LinearOrder V] [Field K]
+    {G : SimpleGraph V} (a b : V) : OrderedEdge G → K :=
+  fun d => if d.val.1 = a ∧ d.val.2 = b then 1
+    else if d.val.1 = b ∧ d.val.2 = a then -1 else 0
+
+/-- An oriented unit edge has the incidence column as its boundary. -/
+theorem boundary_unit_edge_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (e : OrderedEdge G) (c : K) (u : V) :
+    simpleGraphBoundary (K := K) G
+      (fun d => (by classical exact if d = e then c else 0)) u =
+      simpleGraphIncidence (K := K) G u e * c := by
+  classical
+  change (∑ d : OrderedEdge G, simpleGraphIncidence (K := K) G u d *
+    (if d = e then c else 0)) = _
+  rw [Finset.sum_eq_single e]
+  · simp
+  · intro d _ h
+    simp [h]
+  · simp
+
+theorem directed_edge_boundary_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (a b : V) (hab : G.Adj a b) (u : V) :
+    simpleGraphBoundary (K := K) G
+      (directedEdgeChainCandidate (G := G) a b) u =
+      (if u = b then 1 else 0) - (if u = a then 1 else 0) := by
+  classical
+  have hn : a ≠ b := hab.ne
+  rcases lt_or_gt_of_ne hn with hlt | hgt
+  · let e : OrderedEdge G := ⟨(a,b), hlt, hab⟩
+    have hc : directedEdgeChainCandidate (K := K) (G := G) a b =
+        (fun d => if d = e then 1 else 0) := by
+      funext d
+      have hd : d.val.1 < d.val.2 := d.property.1
+      have heq : (d.val.1 = a ∧ d.val.2 = b) ↔ d = e := by
+        constructor
+        · intro h
+          apply Subtype.ext
+          exact Prod.ext h.1 h.2
+        · intro h
+          subst d
+          exact ⟨rfl,rfl⟩
+      have hrev : ¬ (d.val.1 = b ∧ d.val.2 = a) := by
+        intro h
+        rw [h.1,h.2] at hd
+        exact (not_lt_of_ge hlt.le) hd
+      simp [directedEdgeChainCandidate, heq, hrev]
+    rw [hc, boundary_unit_edge_candidate]
+    change (if u = a then (-1 : K) else if u = b then 1 else 0) * 1 = _
+    by_cases ha : u = a <;> by_cases hb : u = b <;> simp_all
+  · let e : OrderedEdge G := ⟨(b,a), hgt, hab.symm⟩
+    have hc : directedEdgeChainCandidate (K := K) (G := G) a b =
+        (fun d => if d = e then -1 else 0) := by
+      funext d
+      have hd : d.val.1 < d.val.2 := d.property.1
+      have heq : (d.val.1 = b ∧ d.val.2 = a) ↔ d = e := by
+        constructor
+        · intro h
+          apply Subtype.ext
+          exact Prod.ext h.1 h.2
+        · intro h
+          subst d
+          exact ⟨rfl,rfl⟩
+      have hfwd : ¬ (d.val.1 = a ∧ d.val.2 = b) := by
+        intro h
+        rw [h.1,h.2] at hd
+        exact (not_lt_of_ge hgt.le) hd
+      simp [directedEdgeChainCandidate, heq, hfwd]
+    rw [hc, boundary_unit_edge_candidate]
+    change (if u = b then (-1 : K) else if u = a then 1 else 0) * (-1) = _
+    by_cases ha : u = a <;> by_cases hb : u = b <;> simp_all
+
+noncomputable def coneTriangleCandidate
+    {V K : Type*} [LinearOrder V] [Field K]
+    (G : SimpleGraph V) (v : V) (e : OrderedEdge G) :
+    OrderedEdge G → K :=
+  directedEdgeChainCandidate v e.val.1 +
+  directedEdgeChainCandidate e.val.1 e.val.2 +
+  directedEdgeChainCandidate e.val.2 v
+
+theorem cone_triangle_boundary_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (v : V) (e : OrderedEdge G)
+    (ha : G.Adj v e.val.1) (hb : G.Adj v e.val.2) :
+    simpleGraphBoundary (K := K) G
+      (coneTriangleCandidate (K := K) G v e) = 0 := by
+  classical
+  unfold coneTriangleCandidate
+  rw [map_add, map_add]
+  funext u
+  change simpleGraphBoundary (K := K) G (directedEdgeChainCandidate v e.val.1) u +
+    simpleGraphBoundary (K := K) G (directedEdgeChainCandidate e.val.1 e.val.2) u +
+    simpleGraphBoundary (K := K) G (directedEdgeChainCandidate e.val.2 v) u = 0
+  rw [directed_edge_boundary_candidate G _ _ ha,
+      directed_edge_boundary_candidate G _ _ e.property.2,
+      directed_edge_boundary_candidate G _ _ hb.symm]
+  ring
+
+theorem cone_triangle_rim_delta_candidate
+    {V K : Type*} [LinearOrder V] [Field K]
+    (G : SimpleGraph V) (v : V) (e d : OrderedEdge G)
+    (hd1 : d.val.1 ≠ v) (hd2 : d.val.2 ≠ v) :
+    coneTriangleCandidate (K := K) G v e d =
+      (by classical exact if d = e then 1 else 0) := by
+  classical
+  have he : e.val.1 < e.val.2 := e.property.1
+  have hd : d.val.1 < d.val.2 := d.property.1
+  have hrev : ¬ (d.val.1 = e.val.2 ∧ d.val.2 = e.val.1) := by
+    intro h
+    rw [h.1,h.2] at hd
+    exact (not_lt_of_ge he.le) hd
+  have hsame : (d.val.1 = e.val.1 ∧ d.val.2 = e.val.2) ↔ d = e := by
+    constructor
+    · intro h
+      exact Subtype.ext (Prod.ext h.1 h.2)
+    · intro h
+      subst d
+      exact ⟨rfl,rfl⟩
+  change directedEdgeChainCandidate (K := K) v e.val.1 d +
+    directedEdgeChainCandidate (K := K) e.val.1 e.val.2 d +
+    directedEdgeChainCandidate (K := K) e.val.2 v d = _
+  simp [directedEdgeChainCandidate, hd1, hd2, hrev, hsame]
+
+/-- Every circulation supported in a closed radius-one ball is a sum
+of actual triangle chains. The support hypothesis is stated on active
+rim edges: both endpoints must be adjacent to the center. -/
+theorem radius_one_triangle_generation_candidate
+    {V K : Type*} [LinearOrder V] [Fintype V] [Field K]
+    (G : SimpleGraph V) (v : V) (z : OrderedEdge G → K)
+    (hz : simpleGraphBoundary (K := K) G z = 0)
+    (hball : ∀ e : OrderedEdge G, e.val.1 ≠ v → e.val.2 ≠ v →
+      z e ≠ 0 → G.Adj v e.val.1 ∧ G.Adj v e.val.2) :
+    z = (by
+      classical
+      exact ∑ e ∈ (Finset.univ.filter (fun e : OrderedEdge G =>
+        e.val.1 ≠ v ∧ e.val.2 ≠ v ∧ z e ≠ 0)),
+        z e • coneTriangleCandidate (K := K) G v e) := by
+  classical
+  apply circulation_rim_decomposition_candidate G v z hz
+    (coneTriangleCandidate (K := K) G v)
+  · intro e h1 h2 h3
+    exact cone_triangle_boundary_candidate G v e
+      (hball e h1 h2 h3).1 (hball e h1 h2 h3).2
+  · intro e _ _ _ d hd1 hd2
+    exact cone_triangle_rim_delta_candidate G v e d hd1 hd2
+
+#print axioms URF.EntropyBridge.boundary_unit_edge_candidate
+#print axioms URF.EntropyBridge.directed_edge_boundary_candidate
+#print axioms URF.EntropyBridge.cone_triangle_boundary_candidate
+#print axioms URF.EntropyBridge.cone_triangle_rim_delta_candidate
+#print axioms URF.EntropyBridge.radius_one_triangle_generation_candidate
+
+end URF.EntropyBridge
