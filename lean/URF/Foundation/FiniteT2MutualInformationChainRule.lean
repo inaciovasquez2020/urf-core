@@ -50,7 +50,7 @@ theorem finiteT2_mutual_information_chain_rule
   let px : α → ℝ := fun x => ∑ yz : β × γ, P.joint (x, yz.1, yz.2)
   let pyz : β × γ → ℝ := fun yz => ∑ x, P.joint (x, yz.1, yz.2)
   let pxz : α × γ → ℝ := fun xz => ∑ y, P.joint (xz.1, y, xz.2)
-  let pz : γ → ℝ := fun z => ∑ xy, P.joint (xy.1, xy.2, z)
+  let pz : γ → ℝ := fun z => ∑ xy : α × β, P.joint (xy.1, xy.2, z)
   have hterm :
       ∀ x y z,
         p (x,y,z) * Real.log (p (x,y,z) / (px x * pyz (y,z))) =
