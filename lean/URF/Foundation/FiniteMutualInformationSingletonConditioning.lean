@@ -24,6 +24,6 @@ theorem jointConditionalMI_singletonConditioning
   unfold jointConditionalMI
   classical
   simp [singletonConditioningJoint, jointWeight, jointConditional,
-    finiteMutualInformation]
+    finiteMutualInformation, P.sum_one]
 
 end URF.Foundation
