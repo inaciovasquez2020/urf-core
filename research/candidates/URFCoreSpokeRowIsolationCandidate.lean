@@ -1175,6 +1175,7 @@ theorem radiusOne_hidden_finrank_eq_cliqueH1_candidate
     Module.finrank K (LinearMap.ker (simpleGraphBoundary (K := K) G)) -
     Module.finrank K (cliqueBoundaryCyclesCandidate (K := K) G)
   rw [radiusOne_localCycles_eq_cliqueBoundary_candidate]
+  rfl
 
 #print axioms URF.EntropyBridge.radiusOne_localCycles_eq_cliqueBoundary_candidate
 #print axioms URF.EntropyBridge.cliqueH1_finrank_candidate
