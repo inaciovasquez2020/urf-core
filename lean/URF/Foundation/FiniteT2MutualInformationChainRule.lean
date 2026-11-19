@@ -107,35 +107,82 @@ theorem finiteT2_mutual_information_chain_rule
       have hw : (∑ xy : α × β, P.joint (xy.1,xy.2,z)) = 0 := hpz
       have hj : ∀ xy : α × β, P.joint (xy.1,xy.2,z) = 0 := hzero
       simp [hw, hj]
-    · have hpz' : 0 < pz z := lt_of_le_of_ne
-        (Finset.sum_nonneg (fun xy _ => P.nonneg (xy.1,xy.2,z)))
-        (Ne.symm hpz)
-      rw [dif_neg (ne_of_gt hpz')]
-      simp [Finset.sum_mul]
-      congr 1
-      ext xy
+    · change (if pz z = 0 then 0 else pz z *
+          ∑ xy : α × β, (p (xy.1,xy.2,z) / pz z) *
+            Real.log ((p (xy.1,xy.2,z) / pz z) /
+              ((∑ y : β, p (xy.1,y,z) / pz z) *
+               (∑ x : α, p (x,xy.2,z) / pz z)))) =
+          ∑ xy : α × β, p (xy.1,xy.2,z) *
+            Real.log ((p (xy.1,xy.2,z) * pz z) /
+              (pxz (xy.1,z) * pyz (xy.2,z)))
+      rw [if_neg hpz, Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro xy _
+      rw [← Finset.sum_div, ← Finset.sum_div]
+      change pz z * ((p (xy.1,xy.2,z) / pz z) *
+        Real.log ((p (xy.1,xy.2,z) / pz z) /
+          ((pxz (xy.1,z) / pz z) * (pyz (xy.2,z) / pz z)))) =
+        p (xy.1,xy.2,z) * Real.log ((p (xy.1,xy.2,z) * pz z) /
+          (pxz (xy.1,z) * pyz (xy.2,z)))
       by_cases hp : p (xy.1,xy.2,z) = 0
       · simp [hp]
-      have hp' : 0 < p (xy.1,xy.2,z) :=
-        lt_of_le_of_ne (P.nonneg _) (Ne.symm hp)
-      have hpxz' : 0 < pxz (xy.1,z) := by
-        exact lt_of_lt_of_le hp'
-          (Finset.single_le_sum
+      · have hp' : 0 < p (xy.1,xy.2,z) :=
+          lt_of_le_of_ne (P.nonneg _) (Ne.symm hp)
+        have ha : 0 < pxz (xy.1,z) :=
+          lt_of_lt_of_le hp' (Finset.single_le_sum
             (fun y' _ => P.nonneg (xy.1,y',z)) (Finset.mem_univ xy.2))
-      have hpyz' : 0 < pyz (xy.2,z) := by
-        exact lt_of_lt_of_le hp'
-          (Finset.single_le_sum
+        have hb : 0 < pyz (xy.2,z) :=
+          lt_of_lt_of_le hp' (Finset.single_le_sum
             (fun x' _ => P.nonneg (x',xy.2,z)) (Finset.mem_univ xy.1))
-      field_simp [ne_of_gt hp', ne_of_gt hpz', ne_of_gt hpxz',
-        ne_of_gt hpyz']
-      ring
-  rw [hcmipoint]
-  unfold finiteMutualInformation jointMarginalPair marginalXZ
-  simp only [p, px, pyz, pxz, pz]
-  rw [Finset.sum_product]
-  rw [Finset.sum_product]
-  simp_rw [hterm]
-  simp only [Finset.sum_add_distrib]
-  ring
+        have hr : (p (xy.1,xy.2,z) / pz z) /
+            ((pxz (xy.1,z) / pz z) * (pyz (xy.2,z) / pz z)) =
+            (p (xy.1,xy.2,z) * pz z) / (pxz (xy.1,z) * pyz (xy.2,z)) := by
+          field_simp [hpz, ne_of_gt ha, ne_of_gt hb] <;> ring
+        rw [hr, ← mul_assoc]
+        have hm : pz z * (p (xy.1,xy.2,z) / pz z) = p (xy.1,xy.2,z) := by
+          field_simp [hpz]
+        rw [hm]
+  have hx (x : α) : (∑ z : γ, pxz (x,z)) = px x := by
+    change (∑ z : γ, ∑ y : β, p (x,y,z)) =
+      ∑ yz : β × γ, p (x,yz.1,yz.2)
+    rw [Fintype.sum_prod_type_right]
+  have hz (z : γ) : (∑ x : α, pxz (x,z)) = pz z := by
+    change (∑ x : α, ∑ y : β, p (x,y,z)) =
+      ∑ xy : α × β, p (xy.1,xy.2,z)
+    rw [Fintype.sum_prod_type]
+  have hleft : finiteMutualInformation (jointMarginalPair P) =
+      ∑ x : α, ∑ y : β, ∑ z : γ,
+        p (x,y,z) * Real.log (p (x,y,z) / (px x * pyz (y,z))) := by
+    change (∑ q : α × β × γ,
+      p q * Real.log (p q / (px q.1 * pyz q.2))) = _
+    simp_rw [Fintype.sum_prod_type]
+  have hright : finiteMutualInformation (marginalXZ P) =
+      ∑ x : α, ∑ y : β, ∑ z : γ,
+        p (x,y,z) * Real.log (pxz (x,z) / (px x * pz z)) := by
+    change (∑ q : α × γ, pxz q *
+      Real.log (pxz q / ((∑ z : γ, pxz (q.1,z)) *
+        (∑ x : α, pxz (x,q.2))))) = _
+    simp_rw [hx, hz, Fintype.sum_prod_type]
+    apply Finset.sum_congr rfl
+    intro x _
+    rw [Finset.sum_comm (s := (Finset.univ : Finset β))
+      (t := (Finset.univ : Finset γ))]
+    apply Finset.sum_congr rfl
+    intro z _
+    change pxz (x,z) * Real.log (pxz (x,z) / (px x * pz z)) =
+      ∑ y : β, p (x,y,z) * Real.log (pxz (x,z) / (px x * pz z))
+    exact Finset.sum_mul _ _ _
+  have hc : jointConditionalMI P =
+      ∑ x : α, ∑ y : β, ∑ z : γ,
+        p (x,y,z) * Real.log ((p (x,y,z) * pz z) /
+          (pxz (x,z) * pyz (y,z))) := by
+    rw [hcmipoint]
+    simp_rw [Fintype.sum_prod_type]
+    rw [Finset.sum_comm (s := (Finset.univ : Finset γ))
+      (t := (Finset.univ : Finset α))]
+    simp_rw [Finset.sum_comm (s := (Finset.univ : Finset γ))
+      (t := (Finset.univ : Finset β))]
+  rw [hleft, hright, hc]
+  simp_rw [hterm, Finset.sum_add_distrib]
 
 end URF.Foundation
