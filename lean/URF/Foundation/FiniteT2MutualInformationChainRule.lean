@@ -104,7 +104,9 @@ theorem finiteT2_mutual_information_chain_rule
           exact Finset.single_le_sum
             (fun xy' _ => P.nonneg (xy'.1,xy'.2,z)) (Finset.mem_univ xy)
         exact le_antisymm (hle.trans_eq hpz) (P.nonneg _)
-      simp [hpz, hzero]
+      have hw : (∑ xy : α × β, P.joint (xy.1,xy.2,z)) = 0 := hpz
+      have hj : ∀ xy : α × β, P.joint (xy.1,xy.2,z) = 0 := hzero
+      simp [hw, hj]
     · have hpz' : 0 < pz z := lt_of_le_of_ne
         (Finset.sum_nonneg (fun xy _ => P.nonneg (xy.1,xy.2,z)))
         (Ne.symm hpz)
