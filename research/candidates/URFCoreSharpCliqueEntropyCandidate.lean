@@ -1378,6 +1378,7 @@ respective green research checkpoints, with their identical base included
 only once. No theorem is assumed from another unchecked source. -/
 namespace URF.EntropyBridge
 
+set_option maxHeartbeats 2000000 in
 /-- Finite field cardinality expressed using the actual homology quotient.
 The dual-space Fintype instances are explicit, as in the verified
 conditional-entropy theorems. They exist for these finite-dimensional
