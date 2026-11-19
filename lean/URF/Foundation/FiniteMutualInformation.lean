@@ -105,10 +105,21 @@ theorem finiteMutualInformation_nonneg
   have hsum_a : ∑ p, a p = 1 := by
     simpa [a] using P.sum_one
   have hsum_b : ∑ p, b p = 1 := by
-    simp only [b, Finset.sum_product, ← Finset.sum_mul]
-    rw [show (∑ x : α, ∑ y : β, P.joint (x, y)) = 1 by
-      simpa [Finset.sum_product] using P.sum_one]
-    simp
+    have hx : (∑ x : α, ∑ y : β, P.joint (x, y)) = 1 :=
+      (Fintype.sum_prod_type P.joint).symm.trans P.sum_one
+    have hy : (∑ y : β, ∑ x : α, P.joint (x, y)) = 1 :=
+      (Fintype.sum_prod_type_right P.joint).symm.trans P.sum_one
+    calc
+      (∑ p, b p) =
+          ∑ x : α, ∑ y : β,
+            (∑ v : β, P.joint (x, v)) * (∑ u : α, P.joint (u, y)) :=
+        Fintype.sum_prod_type b
+      _ = (∑ x : α, ∑ v : β, P.joint (x, v)) *
+          (∑ y : β, ∑ u : α, P.joint (u, y)) :=
+        (Fintype.sum_mul_sum
+          (fun x : α => ∑ v : β, P.joint (x, v))
+          (fun y : β => ∑ u : α, P.joint (u, y))).symm
+      _ = 1 := by rw [hx, hy, one_mul]
   have hlog :=
     finite_sum_mul_log_div_leq
       (s := (Finset.univ : Finset (α × β))) ha hb habs
