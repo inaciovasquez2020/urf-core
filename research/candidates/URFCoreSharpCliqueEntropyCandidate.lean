@@ -1378,7 +1378,6 @@ respective green research checkpoints, with their identical base included
 only once. No theorem is assumed from another unchecked source. -/
 namespace URF.EntropyBridge
 
-set_option maxHeartbeats 2000000 in
 /-- Finite field cardinality expressed using the actual homology quotient.
 The dual-space Fintype instances are explicit, as in the verified
 conditional-entropy theorems. They exist for these finite-dimensional
@@ -1396,7 +1395,9 @@ theorem radiusOne_kernel_card_eq_pow_cliqueH1_candidate
         (graphObservation (radiusOneGraphChainCandidate (K := K) G))) =
       Fintype.card K ^ Module.finrank K (LinearMap.ker
         (graphObservation (radiusOneGraphChainCandidate (K := K) G))) :=
-      Module.card_eq_pow_finrank
+      Module.card_eq_pow_finrank (K := K)
+        (V := ↥(LinearMap.ker
+          (graphObservation (radiusOneGraphChainCandidate (K := K) G))))
     _ = Fintype.card K ^ Module.finrank K (cliqueH1Candidate (K := K) G) :=
       congrArg (fun n : ℕ => Fintype.card K ^ n)
         (radiusOne_hidden_finrank_eq_cliqueH1_candidate (K := K) G)
