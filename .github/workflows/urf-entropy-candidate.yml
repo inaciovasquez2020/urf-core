@@ -85,7 +85,12 @@ jobs:
                        "directed_edge_boundary_candidate",
                        "cone_triangle_boundary_candidate",
                        "cone_triangle_rim_delta_candidate",
-                       "radius_one_triangle_generation_candidate"):
+                       "radius_one_triangle_generation_candidate",
+                       "radiusOne_le_triangleBoundary_candidate",
+                       "cone_triangle_closedBall_support_candidate",
+                       "triangleBoundary_le_radiusOne_candidate",
+                       "radiusOne_eq_triangleBoundary_candidate",
+                       "triangleBoundary_le_cycleKernel_candidate"):
               full = "URF.EntropyBridge." + name
               m = re.search(r"'" + re.escape(full) + r"' depends on axioms: \[([^\]]*)\]", s)
               if m is None:
