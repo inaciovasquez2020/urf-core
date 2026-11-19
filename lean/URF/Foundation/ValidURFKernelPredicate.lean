@@ -1,4 +1,5 @@
 import URF.Foundation.FiniteMutualInformationChainRuleProof
+import Mathlib.Algebra.BigOperators.Group.Finset.Defs
 
 namespace URF.Foundation
 
@@ -24,7 +25,7 @@ structure ValidURFFiniteKernel where
     ∀ t : Nat, t < chain.T → chain.localCMIValue t ≤ channelCapacity
   localSum_eq_sum :
     ∀ T : Nat, ∀ f : Nat → ℝ,
-      chain.finiteLocalSum T f = Finset.sum (Finset.range T) f
+      chain.finiteLocalSum T f = ∑ t ∈ Finset.range T, f t
 
 /--
 The admissibility interface exposes the exact local information bound needed
