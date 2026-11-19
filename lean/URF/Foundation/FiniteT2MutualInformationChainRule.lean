@@ -16,7 +16,11 @@ noncomputable def marginalXZ
     intro p
     exact Finset.sum_nonneg (fun y _ => P.nonneg (p.1, y, p.2))
   sum_one := by
-    simpa [Finset.sum_product, Prod.assoc] using P.sum_one
+    have h := P.sum_one
+    simp_rw [Fintype.sum_prod_type] at h ⊢
+    simp_rw [Finset.sum_comm (s := (Finset.univ : Finset γ))
+      (t := (Finset.univ : Finset β))]
+    exact h
 
 theorem marginalXZ_nonneg
     {α β γ : Type u}
