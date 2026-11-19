@@ -1,4 +1,5 @@
 import Mathlib
+import URF.Foundation.ConcreteFiniteShannonEntropy
 
 namespace URF.Foundation
 
