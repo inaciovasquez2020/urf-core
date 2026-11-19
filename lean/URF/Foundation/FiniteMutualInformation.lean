@@ -90,22 +90,17 @@ theorem finiteMutualInformation_nonneg
     by_contra hpa
     have hpa_pos : 0 < a p := lt_of_le_of_ne (ha p hp) (Ne.symm hpa)
     have hx_pos : 0 < ∑ y, P.joint (p.1, y) := by
-      exact lt_of_le_of_lt
-        (ha p hp)
-        (by
-          have hterm : P.joint p ≤ ∑ y, P.joint (p.1, y) := by
-            exact Finset.single_le_sum
-              (s := (Finset.univ : Finset β))
-              (fun y _ => P.nonneg (p.1, y))
-              (Finset.mem_univ p.2)
-          exact hterm)
+      exact lt_of_lt_of_le hpa_pos
+        (Finset.single_le_sum
+          (s := (Finset.univ : Finset β))
+          (fun y _ => P.nonneg (p.1, y))
+          (Finset.mem_univ p.2))
     have hy_pos : 0 < ∑ x, P.joint (x, p.2) := by
-      have hterm : P.joint p ≤ ∑ x, P.joint (x, p.2) := by
-        exact Finset.single_le_sum
+      exact lt_of_lt_of_le hpa_pos
+        (Finset.single_le_sum
           (s := (Finset.univ : Finset α))
           (fun x _ => P.nonneg (x, p.2))
-          (Finset.mem_univ p.1)
-      exact lt_of_le_of_lt (ha p hp) (lt_of_le_of_ne hterm (Ne.symm hpa))
+          (Finset.mem_univ p.1))
     exact (ne_of_gt (mul_pos hx_pos hy_pos)) hbp
   have hsum_a : ∑ p, a p = 1 := by
     simpa [a] using P.sum_one
