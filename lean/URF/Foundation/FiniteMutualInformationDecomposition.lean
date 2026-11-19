@@ -64,8 +64,15 @@ theorem finiteMutualInformation_eq_marginalEntropy_sub_conditionalEntropy
     rw [Fintype.sum_prod_type]
     apply Finset.sum_congr rfl
     intro x _
-    rw [← Finset.sum_mul, Finset.sum_neg_distrib]
-    rfl
+    change (∑ y : β, -P.joint (x,y) * Real.log (px x)) =
+      -px x * Real.log (px x)
+    calc
+      (∑ y : β, -P.joint (x,y) * Real.log (px x)) =
+          (∑ y : β, -P.joint (x,y)) * Real.log (px x) :=
+        (Finset.sum_mul _ _ _).symm
+      _ = -px x * Real.log (px x) := by
+        rw [Finset.sum_neg_distrib]
+        rfl
   have hB :
       (∑ p : α × β, P.joint p * Real.log (P.joint p / py p.2)) =
         ∑ y, -(py y * ∑ x, -(P.joint (x,y) / py y) *
