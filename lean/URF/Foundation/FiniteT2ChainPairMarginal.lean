@@ -15,7 +15,7 @@ noncomputable def jointMarginalPair
     intro p
     exact P.nonneg (p.1, p.2.1, p.2.2)
   sum_one := by
-    simpa [Finset.sum_product, Prod.assoc] using P.sum_one
+    exact P.sum_one
 
 theorem jointMarginalPair_nonneg
     {α β γ : Type u}
