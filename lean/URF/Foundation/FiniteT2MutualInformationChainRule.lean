@@ -95,7 +95,6 @@ theorem finiteT2_mutual_information_chain_rule
     unfold jointConditionalMI
     simp [jointWeight, jointConditional, p, pxz, pyz, pz,
       finiteMutualInformation]
-    rw [Finset.sum_product]
     apply Finset.sum_congr rfl
     intro z hz
     by_cases hpz : pz z = 0
