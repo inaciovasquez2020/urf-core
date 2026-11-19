@@ -1,5 +1,6 @@
 import Mathlib
 import URF.Foundation.FiniteTranscriptDistribution
+import URF.Foundation.FiniteTranscriptOneStepJoint
 import URF.Foundation.FlagshipFiniteKernelTheoremSurface
 
 namespace URF.Foundation
