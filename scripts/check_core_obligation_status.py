@@ -3,6 +3,9 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
+import sys
+sys.path.insert(0, str(ROOT / "tools"))
+from lean_obligation_scan import strip_noncode
 STATUS_DOC = ROOT / "docs/status/OPEN_OBLIGATION_INVENTORY_2026_04_27.md"
 FORMAL_DOC = ROOT / "docs/status/FORMAL_STATUS_2026_04_27.md"
 README = ROOT / "README.md"
@@ -22,7 +25,7 @@ def lean_files():
 def counts() -> dict[str, int]:
     out = {k: 0 for k in PATTERNS}
     for p in lean_files():
-        for line in p.read_text(encoding="utf-8", errors="ignore").splitlines():
+        for line in strip_noncode(p.read_text(encoding="utf-8")).splitlines():
             for name, rx in PATTERNS.items():
                 if rx.search(line):
                     out[name] += 1

@@ -6,10 +6,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_stable_trace_certificate_equivalence_lean_surface():
     text = (ROOT / "lean/URF/Foundation/StableTraceCertificateEquivalence.lean").read_text()
-    assert "noncomputable theorem stableGenAdmissibleTrace_to_certificate" in text
+    assert "theorem stableGenAdmissibleTrace_to_certificate" in text
     assert "[Inhabited X.Trace]" in text
-    assert "noncomputable theorem stableGenAdmissibleTrace_iff_certificateExists" in text
-    assert "noncomputable theorem stableTraceCertificateExists_iff_stableGenAdmissibleTrace" in text
+    assert "theorem stableGenAdmissibleTrace_iff_certificateExists" in text
+    assert "theorem stableTraceCertificateExists_iff_stableGenAdmissibleTrace" in text
     assert "def emptyTraceCounterinterface" in text
     assert "theorem emptyTraceCountermodel_no_certificate" in text
 

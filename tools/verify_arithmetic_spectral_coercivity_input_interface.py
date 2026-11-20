@@ -17,7 +17,10 @@ required_fragments = [
     "arithmeticStructure : Type",
     "spectralSpace : Type",
     "spectralOperator : spectralSpace → spectralSpace",
-    "arithmeticSpectralBridgeHypothesis : Prop",
+    "def ArithmeticSpectralCoercivityInputInterface.arithmeticSpectralBridgeHypothesis",
+    "ArithmeticSpectralCoercive ArithmeticSpectralCoercivityTarget (1 / 2)",
+    "theorem ArithmeticSpectralCoercivityInputInterface.arithmeticSpectralBridgeHypothesis_proved",
+    "exact ArithmeticSpectralCoercivityTarget_coercive",
     "coercivityConstantPositiveHypothesis : Prop",
     "boundaryNoCoercivityProof : Prop",
     "boundaryNoFinalTheoremClosureClaim : Prop",
@@ -32,8 +35,18 @@ for fragment in required_fragments:
         raise SystemExit(f"MISSING_OBJECT := {fragment}")
 
 import re
+from lean_obligation_scan import strip_noncode
 
-for forbidden_decl in ["axiom", "opaque", "theorem"]:
+text = strip_noncode(text)
+
+theorems = re.findall(
+    r"(?m)^\s*theorem\s+([^\s]+)", text
+)
+assert theorems == [
+    "ArithmeticSpectralCoercivityInputInterface.arithmeticSpectralBridgeHypothesis_proved"
+]
+
+for forbidden_decl in ["axiom", "opaque"]:
     if re.search(rf"(?m)^\\s*{forbidden_decl}\\b", text):
         raise SystemExit(
             f"BOUNDARY := forbidden Lean proof/closure declaration present: {forbidden_decl}"

@@ -45,7 +45,7 @@ def main() -> None:
     assert "finite_capacity_bound" in artifact["conditional_inputs"]
 
     for token in [
-        "structure FiniteMutualInformationChainRuleProof",
+        "import URF.Foundation.FiniteMutualInformationChainRuleProof",
         "structure ChannelCapacityBoundDerivation",
         "finiteChain : FiniteMutualInformationChainRuleProof",
         "channelCapacity : ℝ",
@@ -60,6 +60,12 @@ def main() -> None:
     ]:
         assert token in lean, f"missing Lean token: {token}"
 
+    chain_source = (
+        ROOT / "lean/URF/Foundation/FiniteMutualInformationChainRuleProof.lean"
+    ).read_text()
+    assert "structure FiniteMutualInformationChainRuleProof" in chain_source
+    assert "finite_chain_rule :" in chain_source
+    assert "cmi_nonneg :" in chain_source
     assert "import URF.Foundation.ChannelCapacityBoundDerivation" in root_import
 
     for token in [
