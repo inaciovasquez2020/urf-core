@@ -59,3 +59,30 @@ jobs:
           name: stage1-lean-log
           path: stage1.log
           if-no-files-found: ignore
+      - name: Compile and audit stage 2a after stage 1 passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.GeneralRadiusStage1
+          lake env lean lean/URF/Foundation/GeneralRadiusStage2a.lean 2>&1 | tee stage2a.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          names = ["walkVertex_mem_radius","shortClosedWalk_vertex_mem_radius","shortClosedWalk_circulation_mem_radiusCycles","shortWalkCycles_le_radiusCycles"]
+          log=Path("stage2a.log").read_text()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          for name in names:
+              match=re.search(r"'URF\.EntropyBridge\.Multiscale\."+name+r"' depends on axioms: \[([^\]]*)\]", log)
+              if not match:
+                  assert f"'URF.EntropyBridge.Multiscale.{name}' does not depend on any axioms" in log, name
+              else:
+                  assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= allowed, (name,match.group(1))
+              print(name, "AXIOM_AUDIT_PASS")
+          print("STAGE2A_SHORT_WALK_LOCALITY_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2a-lean-log
+          path: stage2a.log
+          if-no-files-found: ignore
