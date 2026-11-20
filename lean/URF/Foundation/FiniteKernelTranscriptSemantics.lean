@@ -1,5 +1,6 @@
 import Mathlib
 import URF.Foundation.FiniteTranscriptDistribution
+import URF.Foundation.FiniteTranscriptOneStepJoint
 import URF.Foundation.FlagshipFiniteKernelTheoremSurface
 
 namespace URF.Foundation
@@ -24,7 +25,8 @@ noncomputable def finiteKernelTranscriptDistribution
           intro p
           exact input.nonneg p.1
         sum_one := by
-          simpa using input.sum_one }
+          rw [Fintype.sum_prod_type]
+          simpa [Fintype.card_fun] using input.sum_one }
   | T + 1 =>
       { joint := fun p =>
           let q := (transcriptPrefixLastEquiv β T) p.2
@@ -40,9 +42,13 @@ noncomputable def finiteKernelTranscriptDistribution
           let e :
               α × (Fin (T + 1) → β) ≃
                 (α × (Fin T → β)) × β :=
-            (Equiv.refl α).prodCongr (transcriptPrefixLastEquiv β T)
-          rw [Fintype.sum_equiv e]
-          simp only [Finset.sum_product]
+            ((Equiv.refl α).prodCongr (transcriptPrefixLastEquiv β T)).trans
+              (Equiv.prodAssoc α (Fin T → β) β).symm
+          rw [Fintype.sum_equiv e
+            _ (fun p : (α × (Fin T → β)) × β =>
+              (finiteKernelTranscriptDistribution input K T).joint p.1 *
+                (K.transition p.1.1).prob p.2) (by intro p; rfl)]
+          rw [Fintype.sum_prod_type]
           calc
             ∑ p : α × (Fin T → β), ∑ b : β,
                 (finiteKernelTranscriptDistribution input K T).joint p *

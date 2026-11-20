@@ -12,7 +12,7 @@ theorem finiteMutualInformation_le_marginalEntropy_left
         { prob := fun x => ∑ y, P.joint (x, y)
           nonneg := fun x => Finset.sum_nonneg (fun y _ => P.nonneg (x, y))
           sum_one := by
-            simpa [Finset.sum_product] using P.sum_one } := by
+            simpa [Fintype.sum_prod_type] using P.sum_one } := by
   rw [finiteMutualInformation_eq_marginalEntropy_sub_conditionalEntropy]
   linarith [finiteConditionalEntropyXGivenY_nonneg P]
 

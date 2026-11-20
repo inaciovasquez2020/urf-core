@@ -13,7 +13,7 @@ theorem finiteMutualInformation_eq_marginalEntropy_sub_conditionalEntropy
         { prob := fun x => ∑ y, P.joint (x, y)
           nonneg := fun x => Finset.sum_nonneg (fun y _ => P.nonneg (x, y))
           sum_one := by
-            simpa [Finset.sum_product] using P.sum_one } -
+            simpa [Fintype.sum_prod_type] using P.sum_one } -
       finiteConditionalEntropyXGivenY P := by
   classical
   let px : α → ℝ := fun x => ∑ y, P.joint (x, y)
@@ -25,9 +25,9 @@ theorem finiteMutualInformation_eq_marginalEntropy_sub_conditionalEntropy
     intro y
     exact Finset.sum_nonneg (fun x _ => P.nonneg (x, y))
   have hpx_sum : ∑ x, px x = 1 := by
-    simpa [px, Finset.sum_product] using P.sum_one
+    simpa [px, Fintype.sum_prod_type] using P.sum_one
   have hpy_sum : ∑ y, py y = 1 := by
-    simpa [py, Finset.sum_product] using P.sum_one
+    exact (Fintype.sum_prod_type_right P.joint).symm.trans P.sum_one
   have hpy_zero : ∀ y, py y = 0 → ∀ x, P.joint (x,y) = 0 := by
     intro y hy x
     have hle : P.joint (x,y) ≤ py y := by
@@ -48,27 +48,56 @@ theorem finiteMutualInformation_eq_marginalEntropy_sub_conditionalEntropy
       ∀ x y,
         P.joint (x,y) * Real.log (P.joint (x,y) / (px x * py y))
         =
-        (- px x * Real.log (px x)) +
-          py y * (- (P.joint (x,y) / py y) * Real.log (P.joint (x,y) / py y)) := by
+        - P.joint (x,y) * Real.log (px x) +
+          P.joint (x,y) * Real.log (P.joint (x,y) / py y) := by
     intro x y
     by_cases hp : P.joint (x,y) = 0
     · simp [hp]
-    by_cases hy : py y = 0
-    · simp [hp, hy, hpy_zero y hy x]
-    by_cases hx : px x = 0
-    · simp [hp, hx, hpx_zero x hx y]
-    have hp' : 0 < P.joint (x,y) := lt_of_le_of_ne (P.nonneg (x,y)) (Ne.symm hp)
-    have hx' : 0 < px x := lt_of_le_of_ne (hpx x) (Ne.symm hx)
-    have hy' : 0 < py y := lt_of_le_of_ne (hpy y) (Ne.symm hy)
-    rw [Real.log_div, Real.log_div]
-    rw [Real.log_mul (ne_of_gt hx') (ne_of_gt hy')]
-    field_simp [ne_of_gt hx', ne_of_gt hy', ne_of_gt hp']
-    ring
+    · have hx : px x ≠ 0 := fun hx => hp (hpx_zero x hx y)
+      have hy : py y ≠ 0 := fun hy => hp (hpy_zero y hy x)
+      rw [Real.log_div hp (mul_ne_zero hx hy), Real.log_mul hx hy,
+        Real.log_div hp hy]
+      ring
+  have hA :
+      (∑ p : α × β, -P.joint p * Real.log (px p.1)) =
+        ∑ x, -px x * Real.log (px x) := by
+    rw [Fintype.sum_prod_type]
+    apply Finset.sum_congr rfl
+    intro x _
+    change (∑ y : β, -P.joint (x,y) * Real.log (px x)) =
+      -px x * Real.log (px x)
+    calc
+      (∑ y : β, -P.joint (x,y) * Real.log (px x)) =
+          (∑ y : β, -P.joint (x,y)) * Real.log (px x) :=
+        (Finset.sum_mul _ _ _).symm
+      _ = -px x * Real.log (px x) := by
+        rw [Finset.sum_neg_distrib]
+  have hB :
+      (∑ p : α × β, P.joint p * Real.log (P.joint p / py p.2)) =
+        ∑ y, -(py y * ∑ x, -(P.joint (x,y) / py y) *
+          Real.log (P.joint (x,y) / py y)) := by
+    rw [Fintype.sum_prod_type_right]
+    apply Finset.sum_congr rfl
+    intro y _
+    calc
+      (∑ x, P.joint (x,y) * Real.log (P.joint (x,y) / py y)) =
+          ∑ x, -(py y * (-(P.joint (x,y) / py y) *
+            Real.log (P.joint (x,y) / py y))) := by
+        apply Finset.sum_congr rfl
+        intro x _
+        by_cases hy : py y = 0
+        · simp [hy, hpy_zero y hy x]
+        · field_simp [hy]
+          <;> ring
+      _ = _ := by rw [Finset.sum_neg_distrib, ← Finset.mul_sum]
   unfold finiteMutualInformation finiteShannonEntropy finiteConditionalEntropyXGivenY
-  simp only [px, py] at hpoint
-  simp_rw [hpoint]
   simp only [Real.negMulLog]
-  rw [← Finset.sum_sub_distrib]
-  ring
+  change (∑ p : α × β, P.joint p *
+    Real.log (P.joint p / (px p.1 * py p.2))) =
+    (∑ x, -px x * Real.log (px x)) -
+      ∑ y, py y * ∑ x, -(P.joint (x,y) / py y) *
+        Real.log (P.joint (x,y) / py y)
+  simp_rw [hpoint]
+  rw [Finset.sum_add_distrib, hA, hB, Finset.sum_neg_distrib, sub_eq_add_neg]
 
 end URF.Foundation

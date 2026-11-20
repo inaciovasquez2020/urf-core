@@ -10,7 +10,7 @@ structure FiniteShannonEntropyData (β : Type u) [DecidableEq β] [Fintype β] w
 noncomputable def finiteShannonEntropy
     {β : Type u} [DecidableEq β] [Fintype β]
     (P : FiniteShannonEntropyData β) : ℝ :=
-  ∑ b in Finset.univ, Real.negMulLog (P.prob b)
+  Finset.sum Finset.univ (fun b => Real.negMulLog (P.prob b))
 
 theorem finiteShannonEntropy_nonneg
     {β : Type u} [DecidableEq β] [Fintype β]

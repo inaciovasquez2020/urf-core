@@ -60,3 +60,4 @@ import URF.Frontier.GeometricObservableConvergenceObligation
 import URF.Frontier.MetricLikeCandidateConstructionObligation
 
 import URF.Frontier.MetricCandidateCompatibilityWithScalingLimitObligation
+import URF.Foundation.SharpCliqueEntropy

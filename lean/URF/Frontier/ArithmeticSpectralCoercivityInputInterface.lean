@@ -28,13 +28,6 @@ def ArithmeticSpectralCoercivityInputInterface.arithmeticSpectralBridgeHypothesi
   ArithmeticSpectralCoercive ArithmeticSpectralCoercivityTarget (1 / 2)
 
 /--
-Boundary predicate for the input interface.
-
-A future proof may replace these assumptions with concrete constructions.
-At this checkpoint they are explicitly hypotheses, not proved theorem content.
--/
-
-/--
 The concrete target theorem supplies the input bridge hypothesis without an additional assumption.
 -/
 theorem ArithmeticSpectralCoercivityInputInterface.arithmeticSpectralBridgeHypothesis_proved
@@ -43,6 +36,12 @@ theorem ArithmeticSpectralCoercivityInputInterface.arithmeticSpectralBridgeHypot
   exact ArithmeticSpectralCoercivityTarget_coercive
 
 
+/--
+Boundary predicate for the input interface.
+
+A future proof may replace these assumptions with concrete constructions.
+At this checkpoint they are explicitly hypotheses, not proved theorem content.
+-/
 def ArithmeticSpectralCoercivityInputInterface.boundary
     (I : ArithmeticSpectralCoercivityInputInterface) : Prop :=
   I.arithmeticSpectralBridgeHypothesis ∧
