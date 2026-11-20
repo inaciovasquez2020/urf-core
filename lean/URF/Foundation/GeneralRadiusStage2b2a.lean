@@ -11,7 +11,9 @@ theorem exists_cycle_of_two_neighbors
     ∃ v : V, ∃ p : H.Walk v v, p.IsCycle := by
   classical
   by_contra hno
-  have hac : H.IsAcyclic := fun p hp => hno ⟨_, p, hp⟩
+  have hac : H.IsAcyclic := by
+    intro v p hp
+    exact hno ⟨v, p, hp⟩
   obtain ⟨u, v, huv⟩ := hne
   let c := H.connectedComponentMk u
   have hcu : H.connectedComponentMk u = c := rfl
