@@ -113,3 +113,27 @@ jobs:
           name: stage2b1-lean-log
           path: stage2b1.log
           if-no-files-found: ignore
+      - name: Compile and audit stage 2b2a after support incidence passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.GeneralRadiusStage2b1
+          lake env lean lean/URF/Foundation/GeneralRadiusStage2b2a.lean 2>&1 | tee stage2b2a.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          log=Path("stage2b2a.log").read_text()
+          name="URF.EntropyBridge.Multiscale.exists_cycle_of_two_neighbors"
+          match=re.search(r"'"+re.escape(name)+r"' depends on axioms: \[([^\]]*)\]",log)
+          if match:
+              assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= {"propext","Classical.choice","Quot.sound"}
+          else:
+              assert f"'{name}' does not depend on any axioms" in log
+          print("STAGE2B2A_FINITE_BRANCHING_CYCLE_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2b2a-lean-log
+          path: stage2b2a.log
+          if-no-files-found: ignore
