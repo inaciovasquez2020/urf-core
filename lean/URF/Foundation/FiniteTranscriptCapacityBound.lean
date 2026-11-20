@@ -18,26 +18,22 @@ theorem jointConditionalMI_le_log_card_left
     [Fintype α] [Fintype β] [Fintype γ]
     (P : JointFiniteDistributionData α β γ) :
     jointConditionalMI P ≤ Real.log (Fintype.card α) := by
+  classical
   unfold jointConditionalMI
-  apply le_trans
-    (Finset.sum_le_sum (fun z hz => by
+  calc
+    _ ≤ ∑ z : γ,
+        jointWeight P z * Real.log (Fintype.card α) := by
+      apply Finset.sum_le_sum
+      intro z _
       by_cases hz0 : jointWeight P z = 0
       · simp [hz0]
-      ·
-        let Q : FiniteMutualInformationData α β :=
-          { joint := jointConditional P z
-            nonneg := jointConditional_nonneg P z
-            sum_one := jointConditional_sum_one_of_pos P z
-              (lt_of_le_of_ne (jointWeight_nonneg P z) (Ne.symm hz0)) }
-        have hmi :
-            finiteMutualInformation Q ≤ Real.log (Fintype.card α) :=
-          finiteMutualInformation_le_log_card_left Q
-        have hw : 0 ≤ jointWeight P z :=
-          jointWeight_nonneg P z
-        exact mul_le_mul_of_nonneg_left hmi hw))
-    (by
-      rw [← Finset.mul_sum, jointWeight_sum_one P]
-      ring)
+      · rw [dif_neg hz0]
+        apply mul_le_mul_of_nonneg_left
+        · exact finiteMutualInformation_le_log_card_left _
+        · exact jointWeight_nonneg P z
+    _ = Real.log (Fintype.card α) := by
+      rw [← Finset.sum_mul, jointWeight_sum_one P, one_mul]
+
 
 theorem transcript_step_cmi_le_log_card_left
     {α β : Type u} {T : ℕ}
@@ -45,7 +41,7 @@ theorem transcript_step_cmi_le_log_card_left
     [Fintype α] [Fintype β]
     (P : FiniteTranscriptDistributionData α β (T + 1)) :
     transcriptStepCMI P ≤ Real.log (Fintype.card α) := by
-  exact jointConditionalMI_le_log_card_left (transcriptOneStepJoint P)
+  exact jointConditionalMI_le_log_card_left (transcriptOneStepJointSwapped P)
 
 theorem transcript_mutual_information_le_time_log_card_left
     {α β : Type u} {T : ℕ}
@@ -54,25 +50,24 @@ theorem transcript_mutual_information_le_time_log_card_left
     (P : FiniteTranscriptDistributionData α β T) :
     transcriptMutualInformation P ≤
       T * Real.log (Fintype.card α) := by
+
   rw [transcript_mutual_information_eq_chain_cmi_sum P]
   induction T with
   | zero =>
-      simp [transcriptChainCMISum]
+      rw [transcriptChainCMISum_zero]
+      simp
   | succ T ih =>
-      rw [transcriptChainCMISum]
+      rw [transcriptChainCMISum_succ]
       have hprefix :
-          transcriptChainCMISum (transcriptPrefixDistribution P) ≤
+          transcriptChainCMISum
+            (transcriptPrefixDistribution P) ≤
             T * Real.log (Fintype.card α) :=
         ih (transcriptPrefixDistribution P)
       have hstep :
-          transcriptStepCMI P ≤ Real.log (Fintype.card α) :=
+          transcriptStepCMI P ≤
+            Real.log (Fintype.card α) :=
         transcript_step_cmi_le_log_card_left P
-      have hsum :
-          transcriptChainCMISum (transcriptPrefixDistribution P) +
-              transcriptStepCMI P ≤
-            T * Real.log (Fintype.card α) +
-              Real.log (Fintype.card α) :=
-        add_le_add hprefix hstep
+      have hsum := add_le_add hprefix hstep
       simpa [Nat.cast_succ, add_mul] using hsum
 
 end URF.Foundation

@@ -1,0 +1,17 @@
+import URF
+
+#print axioms URF.Foundation.transcriptPrefixDistribution
+#print axioms URF.Foundation.transcriptPrefixDistribution_mutualInformation_eq_prefixMarginal
+#print axioms URF.Foundation.transcriptStepCMI
+#print axioms URF.Foundation.transcriptChainCMISumAux
+#print axioms URF.Foundation.transcriptChainCMISum
+#print axioms URF.Foundation.transcriptChainCMISum_zero
+#print axioms URF.Foundation.transcriptChainCMISum_succ
+#print axioms URF.Foundation.transcriptMutualInformation_zero
+#print axioms URF.Foundation.transcript_mutual_information_eq_chain_cmi_sum
+#print axioms URF.Foundation.jointConditionalMI_le_log_card_left
+#print axioms URF.Foundation.transcript_step_cmi_le_log_card_left
+#print axioms URF.Foundation.transcript_mutual_information_le_time_log_card_left
+#print axioms URF.Foundation.transcript_one_step_mutual_information_decomposition
+#print axioms URF.EntropyBridge.radiusOne_entropy_le_cliqueH1_candidate
+#print axioms URF.EntropyBridge.radiusOne_uniform_entropy_eq_cliqueH1_candidate
