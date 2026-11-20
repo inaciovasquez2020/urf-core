@@ -1,0 +1,61 @@
+name: Multiscale radius stage 1 exact verification
+on:
+  push:
+    branches: ['verify/multiscale-radius-stage1-20261120']
+  pull_request:
+    branches: ['research/multiscale-recovery-complexity-20261120']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  stage1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: false
+          use-github-cache: false
+      - name: Verify pinned toolchain and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          test "$(cat lean-toolchain)" = "leanprover/lean4:v4.27.0"
+          lean --version
+          python3 -c 'import json; p=json.load(open("lake-manifest.json"))["packages"]; assert next(x["rev"] for x in p if x["name"]=="mathlib")=="a3a10db0e9d66acbebf76c5e6a135066525ac900"'
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a3a10db0e9d66acbebf76c5e6a135066525ac900
+          git diff --exit-code -- lean-toolchain lake-manifest.json lakefile.lean
+      - name: Compile existing dependency and stage one
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.SharpCliqueEntropy
+          lake env lean lean/URF/Foundation/GeneralRadiusStage1.lean 2>&1 | tee stage1.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          names = ["closedRadiusBall_step","closedRadiusBall_mono","closedRadiusBall_one_iff","radiusAmbient_le_kernel","radiusAmbient_mono","radiusAmbient_one","radiusCycles_mono","radiusCycles_one"]
+          log=Path("stage1.log").read_text()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          for name in names:
+              match=re.search(r"'URF\.EntropyBridge\.Multiscale\."+name+r"' depends on axioms: \[([^\]]*)\]", log)
+              if not match:
+                  assert f"'URF.EntropyBridge.Multiscale.{name}' does not depend on any axioms" in log, name
+              else:
+                  assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= allowed, (name,match.group(1))
+              print(name, "AXIOM_AUDIT_PASS")
+          print("STAGE1_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage1-lean-log
+          path: stage1.log
+          if-no-files-found: ignore
