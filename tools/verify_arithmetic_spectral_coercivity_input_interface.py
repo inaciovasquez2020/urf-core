@@ -47,13 +47,13 @@ assert theorems == [
 ]
 
 for forbidden_decl in ["axiom", "opaque"]:
-    if re.search(rf"(?m)^\\s*{forbidden_decl}\\b", text):
+    if re.search(rf"(?m)^\s*{forbidden_decl}\b", text):
         raise SystemExit(
             f"BOUNDARY := forbidden Lean proof/closure declaration present: {forbidden_decl}"
         )
 
 for forbidden_token in ["sorry", "admit"]:
-    if re.search(rf"\\b{forbidden_token}\\b", text):
+    if re.search(rf"\b{forbidden_token}\b", text):
         raise SystemExit(
             f"BOUNDARY := forbidden Lean proof placeholder present: {forbidden_token}"
         )

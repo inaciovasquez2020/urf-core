@@ -16,7 +16,7 @@ def test_comments_and_strings():
     )
     result = list(obligations(text))
     assert [n for n, _ in result] == [5, 6]
-    assert strip_noncode(text).count("\\n") == text.count("\\n")
+    assert strip_noncode(text).count("\n") == text.count("\n")
 
 def test_inline_comment():
     result = list(obligations("theorem t : True := by /- ignored -/ sorry"))
