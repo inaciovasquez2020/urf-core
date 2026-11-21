@@ -12,3 +12,6 @@ lean_lib URF where
 
 lean_lib UrfCore where
   srcDir := "src"
+
+lean_lib CactusEntropy where
+  srcDir := "lean"
