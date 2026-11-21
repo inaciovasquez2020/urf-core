@@ -1,0 +1,193 @@
+name: Multiscale radius stage 1 exact verification
+on:
+  push:
+    branches: ['verify/multiscale-radius-stage1-20261120']
+  pull_request:
+    branches: ['research/multiscale-recovery-complexity-20261120']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  stage1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: false
+          use-github-cache: false
+      - name: Verify pinned toolchain and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          test "$(cat lean-toolchain)" = "leanprover/lean4:v4.27.0"
+          lean --version
+          python3 -c 'import json; p=json.load(open("lake-manifest.json"))["packages"]; assert next(x["rev"] for x in p if x["name"]=="mathlib")=="a3a10db0e9d66acbebf76c5e6a135066525ac900"'
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = a3a10db0e9d66acbebf76c5e6a135066525ac900
+          git diff --exit-code -- lean-toolchain lake-manifest.json lakefile.lean
+      - name: Compile existing dependency and stage one
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.SharpCliqueEntropy
+          lake env lean lean/URF/Foundation/GeneralRadiusStage1.lean 2>&1 | tee stage1.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          names = ["closedRadiusBall_step","closedRadiusBall_mono","closedRadiusBall_one_iff","radiusAmbient_le_kernel","radiusAmbient_mono","radiusAmbient_one","radiusCycles_mono","radiusCycles_one"]
+          log=Path("stage1.log").read_text()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          for name in names:
+              match=re.search(r"'URF\.EntropyBridge\.Multiscale\."+name+r"' depends on axioms: \[([^\]]*)\]", log)
+              if not match:
+                  assert f"'URF.EntropyBridge.Multiscale.{name}' does not depend on any axioms" in log, name
+              else:
+                  assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= allowed, (name,match.group(1))
+              print(name, "AXIOM_AUDIT_PASS")
+          print("STAGE1_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage1-lean-log
+          path: stage1.log
+          if-no-files-found: ignore
+      - name: Compile and audit stage 2a after stage 1 passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.GeneralRadiusStage1
+          lake env lean lean/URF/Foundation/GeneralRadiusStage2a.lean 2>&1 | tee stage2a.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          names = ["walkVertex_mem_radius","shortClosedWalk_vertex_mem_radius","shortClosedWalk_circulation_mem_radiusCycles","shortWalkCycles_le_radiusCycles"]
+          log=Path("stage2a.log").read_text()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          for name in names:
+              match=re.search(r"'URF\.EntropyBridge\.Multiscale\."+name+r"' depends on axioms: \[([^\]]*)\]", log)
+              if not match:
+                  assert f"'URF.EntropyBridge.Multiscale.{name}' does not depend on any axioms" in log, name
+              else:
+                  assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= allowed, (name,match.group(1))
+              print(name, "AXIOM_AUDIT_PASS")
+          print("STAGE2A_SHORT_WALK_LOCALITY_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2a-lean-log
+          path: stage2a.log
+          if-no-files-found: ignore
+      - name: Compile and audit stage 2b1 after short-walk locality passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.GeneralRadiusStage2a
+          lake env lean lean/URF/Foundation/GeneralRadiusStage2b1.lean 2>&1 | tee stage2b1.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          names = ["incidence_ne_zero_of_endpoint","circulation_support_second_incident"]
+          log=Path("stage2b1.log").read_text()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          for name in names:
+              match=re.search(r"'URF\.EntropyBridge\.Multiscale\."+name+r"' depends on axioms: \[([^\]]*)\]", log)
+              if not match:
+                  assert f"'URF.EntropyBridge.Multiscale.{name}' does not depend on any axioms" in log, name
+              else:
+                  assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= allowed, (name,match.group(1))
+              print(name, "AXIOM_AUDIT_PASS")
+          print("STAGE2B1_SUPPORT_NO_LEAF_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2b1-lean-log
+          path: stage2b1.log
+          if-no-files-found: ignore
+      - name: Compile and audit stage 2b2a after support incidence passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.GeneralRadiusStage2b1
+          lake env lean lean/URF/Foundation/GeneralRadiusStage2b2a.lean 2>&1 | tee stage2b2a.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          log=Path("stage2b2a.log").read_text()
+          name="URF.EntropyBridge.Multiscale.exists_cycle_of_two_neighbors"
+          match=re.search(r"'"+re.escape(name)+r"' depends on axioms: \[([^\]]*)\]",log)
+          if match:
+              assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= {"propext","Classical.choice","Quot.sound"}
+          else:
+              assert f"'{name}' does not depend on any axioms" in log
+          print("STAGE2B2A_FINITE_BRANCHING_CYCLE_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2b2a-lean-log
+          path: stage2b2a.log
+          if-no-files-found: ignore
+      - name: Compile and audit stage 2b2b after finite cycle extraction passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.GeneralRadiusStage2b2a
+          lake env lean lean/URF/Foundation/GeneralRadiusStage2b2b.lean 2>&1 | tee stage2b2b.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          log=Path("stage2b2b.log").read_text()
+          names=["circulationSupportGraph_le","circulationSupportGraph_branch","nonzero_circulation_support_has_cycle"]
+          for n in names:
+              name="URF.EntropyBridge.Multiscale."+n
+              match=re.search(r"'"+re.escape(name)+r"' depends on axioms: \[([^\]]*)\]",log)
+              if match:
+                  assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= {"propext","Classical.choice","Quot.sound"}
+              else:
+                  assert f"'{name}' does not depend on any axioms" in log
+              print(n,"AXIOM_AUDIT_PASS")
+          print("STAGE2B2B_CONCRETE_SUPPORT_CYCLE_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2b2b-lean-log
+          path: stage2b2b.log
+          if-no-files-found: ignore
+      - name: Compile and audit stage 2b3a after concrete support cycle passes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build URF.Foundation.GeneralRadiusStage2b2b
+          lake env lean lean/URF/Foundation/GeneralRadiusStage2b3a.lean 2>&1 | tee stage2b3a.log
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          log=Path("stage2b3a.log").read_text()
+          names=["walkChain_boundary","closedWalkChain_boundary_zero","walkChain_nonzero_traversed"]
+          for n in names:
+              name="URF.EntropyBridge.Multiscale."+n
+              match=re.search(r"'"+re.escape(name)+r"' depends on axioms: \[([^\]]*)\]",log)
+              if match:
+                  assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= {"propext","Classical.choice","Quot.sound"}
+              else:
+                  assert f"'{name}' does not depend on any axioms" in log
+              print(n,"AXIOM_AUDIT_PASS")
+          print("STAGE2B3A_ORIENTED_WALK_CHAIN_LEAN_VERIFIED")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stage2b3a-lean-log
+          path: stage2b3a.log
+          if-no-files-found: ignore

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import re
+from lean_obligation_scan import strip_noncode
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -66,7 +67,7 @@ def main() -> None:
         rel = f.relative_to(ROOT).as_posix()
         if any(part in EXCLUDED_PARTS for part in Path(rel).parts):
             continue
-        for i, line in enumerate(f.read_text(errors="ignore").splitlines(), start=1):
+        for i, line in enumerate(strip_noncode(f.read_text(encoding="utf-8")).splitlines(), start=1):
             if PATTERN.search(line):
                 obligations.append({
                     "path": rel,
@@ -113,8 +114,9 @@ def main() -> None:
             assert ".lake" not in parts
             assert "legacy" not in parts
     assert data["total_active_obligations"] >= 0
-    if data["total_active_obligations"] > 0:
-        assert "descent_system_structural_descent" in data["groups"]
+    assert data["total_active_obligations"] == sum(
+        g["count"] for g in data["groups"].values()
+    )
     assert "provenance_codec" not in data["groups"]
     assert data["status"].endswith("NO_THEOREM_CLOSURE")
 

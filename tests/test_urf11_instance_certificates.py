@@ -58,7 +58,7 @@ def Promote(packet, witnesses, results):
 def test_current_instance_weak_interaction_certificate():
     text = WEAK_CERT.read_text()
     assert "## Status\nPROVED" in text
-    assert "deg^{+}(F_i)\ge 1" in text
+    assert r"deg^{+}(F_i)\ge 1" in text
     assert "Every field currently has at least one outgoing bridge packet." in text
 
     packets = parse_list(PACKET_PATH, "bridge_packets")

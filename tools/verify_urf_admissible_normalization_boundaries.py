@@ -13,19 +13,25 @@ lean = LEAN.read_text()
 doc = DOC.read_text()
 artifact = json.loads(ARTIFACT.read_text())
 
+from lean_obligation_scan import strip_noncode
+
+assert not re.search(
+    r"\b(?:axiom|sorry|admit)\b", strip_noncode(lean)
+)
+
 required = [
-    "axiom TM_normalization_assumption",
-    "theorem TM_normalization",
-    "exact TM_normalization_assumption M",
-    "axiom RAM_normalization_assumption",
-    "theorem RAM_normalization",
-    "exact RAM_normalization_assumption R",
+    "structure TMNormalizationInvariant : Prop where",
+    "theorem TM_normalization_from_invariant",
+    "exact h.normalization M",
+    "structure RAMNormalizationInvariant : Prop where",
+    "theorem RAM_normalization_from_invariant",
+    "exact h.normalization R",
 ]
 
 for phrase in required:
     assert phrase in lean, phrase
 
-for theorem in ("TM_normalization", "RAM_normalization"):
+for theorem in ("TM_normalization_from_invariant", "RAM_normalization_from_invariant"):
     m = re.search(rf"theorem\s+{theorem}\b(?P<body>.*?)(?=\n/--|\nend URF)", lean, flags=re.S)
     assert m, theorem
     assert "admit" not in m.group("body"), theorem
