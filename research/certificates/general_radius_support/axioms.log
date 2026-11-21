@@ -1,0 +1,79 @@
+info: [root]: lakefile.lean and lakefile.toml are both present; using lakefile.lean
+'URF.EntropyBridge.Multiscale.mem_chainSupport' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.directedEdgeChain_ne_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.walk_edge_at' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.walk_edge_at_of_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.cycle_walkChain_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.cycle_walkChain_coefficient_eq_sign' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.card_chainSupport_walkChain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.cancel_chain_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.shortSimpleCycleSpan_le_shortWalkCycles' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.circulation_mem_shortSimpleCycleSpan' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.circulation_mem_shortWalkCycles' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.boundedSupportCycleSpace_le_radiusCycles' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.chainSupport_add_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.chainSupport_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.card_chainSupport_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.directedEdgeChain_swap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.orderedEdgeChain_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballDepth_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballDepth_parent_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballParent_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballPathChain_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalChain_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.card_ballFundamentalChain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalChain_chord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalChain_tree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalChain_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalChain_supported' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalVector_independent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalVector_spans' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.ballFundamentalBasis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.card_ballFundamentalBasis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.radiusCycles_le_boundedSupportCycleSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.radiusCycles_eq_boundedSupportCycleSpace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.closedRadiusBall_step' does not depend on any axioms
+'URF.EntropyBridge.Multiscale.closedRadiusBall_mono' does not depend on any axioms
+'URF.EntropyBridge.Multiscale.closedRadiusBall_one_iff' does not depend on any axioms
+'URF.EntropyBridge.Multiscale.radiusAmbient_le_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.radiusAmbient_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.radiusAmbient_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.radiusCycles_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.radiusCycles_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.walkVertex_mem_radius' depends on axioms: [propext, Quot.sound]
+'URF.EntropyBridge.Multiscale.shortClosedWalk_vertex_mem_radius' depends on axioms: [propext, Quot.sound]
+'URF.EntropyBridge.Multiscale.shortClosedWalk_circulation_mem_radiusCycles' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.shortWalkCycles_le_radiusCycles' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.incidence_ne_zero_of_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.circulation_support_second_incident' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.exists_cycle_of_two_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.circulationSupportGraph_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.circulationSupportGraph_branch' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.nonzero_circulation_support_has_cycle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.Multiscale.walkChain_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.closedWalkChain_boundary_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.Multiscale.walkChain_nonzero_traversed' depends on axioms: [propext, Classical.choice, Quot.sound]
