@@ -1,0 +1,6 @@
+RAW_PAIR_GAME_EQUIV := PASS 1 winning_states 3 iterations 0
+RAW_PAIR_GAME_EQUIV := PASS 2 winning_states 31 iterations 0
+RAW_PAIR_GAME_SEPARATION := PASS 2 winning_states 0 iterations 2
+RAW_PAIR_GAME_EQUIV := PASS 3 winning_states 661 iterations 0
+RAW_PAIR_GAME_SEPARATION := PASS 3 winning_states 0 iterations 3
+DIRECT_CROSSCHECK := COMPUTATION_PASS
