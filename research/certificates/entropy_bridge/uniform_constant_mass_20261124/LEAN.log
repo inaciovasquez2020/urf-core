@@ -1,0 +1,38 @@
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-entropy-recovery-audit-86a_l8w7/Combined.lean:262:4: warning: 'change f (z.1 + x₀) = y' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-entropy-recovery-audit-86a_l8w7/Combined.lean:391:0: warning: automatically included section variable(s) unused in theorem `URF.EntropyBridge.observation_surjective`:
+  [FiniteDimensional K V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional K V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-entropy-recovery-audit-86a_l8w7/Combined.lean:396:0: warning: automatically included section variable(s) unused in theorem `URF.EntropyBridge.observation_kernel`:
+  [FiniteDimensional K V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional K V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+'URF.EntropyBridge.orderedEdge_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.concreteGraph_hidden_finrank' depends on axioms: [propext, Classical.choice, Quot.sound]
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-entropy-recovery-audit-86a_l8w7/Combined.lean:621:10: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-entropy-recovery-audit-86a_l8w7/Combined.lean:621:10: warning: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+'URF.EntropyBridge.linear_conditional_entropy_eq_log_kernel_of_constant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.uniform_linear_conditional_entropy_eq_log_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.uniform_linear_conditional_entropy_eq_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.graphObservation_uniform_entropy_eq_hidden_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.concreteGraph_uniform_entropy_eq_hidden_finrank' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

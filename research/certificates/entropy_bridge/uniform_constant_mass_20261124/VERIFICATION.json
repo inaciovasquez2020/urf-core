@@ -1,0 +1,57 @@
+{
+  "combined_sha256": "6827c1715ec6185205679cccd02e5ce748851a1026dd47841f4158e41993c2e4",
+  "compiler_exit": 0,
+  "compiler_log_sha256": "93fc431194abc61df60a48d3163e6418955d704898abac258ce94a2ac82181bc",
+  "existing_equivalent_graph_theorem": "uniform_graph_entropy_20261121/GraphEntropy.lean",
+  "global_urf": "OPEN",
+  "head": "b0e35f266b8051d1b0d0854094e37a4266caf6cb",
+  "lean": "4.27.0",
+  "mathlib": "a3a10db0e9d66acbebf76c5e6a135066525ac900",
+  "original_blob": "f2c19f332fdc95d6204c7725619d59cbd494a75d",
+  "original_sha256": "5bef144e6d0aadf220113435278b0ce286fc3e717e3e41ae27f84673016f4712",
+  "production_import": "NOT_PERFORMED",
+  "proof_sha256": "664895af012eda922c4127edaa59b417c3e634917ef17b87fb74387a2a71545e",
+  "status": "LEAN_VERIFIED_ISOLATED",
+  "verified_declarations": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "URF.EntropyBridge.linear_conditional_entropy_eq_log_kernel_of_constant"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "URF.EntropyBridge.uniform_linear_conditional_entropy_eq_log_kernel"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "URF.EntropyBridge.uniform_linear_conditional_entropy_eq_finrank"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "URF.EntropyBridge.graphObservation_uniform_entropy_eq_hidden_finrank"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "name": "URF.EntropyBridge.concreteGraph_uniform_entropy_eq_hidden_finrank"
+    }
+  ]
+}
