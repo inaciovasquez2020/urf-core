@@ -1,0 +1,9 @@
+# Prospective falsification protocol (proposal, not preregistered)
+
+Primary target: objectively scored factual belief revision on held-out participants/tasks. Secondary targets: meaning preservation, distress, connectedness and effective action conditional on controllability. Separate verifiable facts from moral values and metaphysical commitments; disagreement is not exclusion and perceived falsehood is not proven falsehood.
+
+Compare M0 (prior conviction, uncertainty, evidence quality), M1 (+ intellectual humility), M2 (+ identity threat and social belonging), MED (+ independently measured meaning/evidence coupling). Lock outcome definitions, measurement validity, split unit, missing-data strategy, multiplicity, effect-size threshold and model tuning before confirmatory analysis. Avoid participant/classroom leakage. Use held-out predictive loss and uncertainty intervals, with external replication. Test measurement invariance and plausible direct intervention effects; report weak instruments and failure of exclusion restrictions rather than claiming identification.
+
+Randomize evidential information and meaning-support interventions independently where ethically approved. Include controls for source credibility, demand effects and social acceptance. Separate acute and longitudinal responses. Human-subject research requires appropriate consent and ethics review. Reject incremental predictive claim if MED fails the prespecified improvement criterion; reject universal directional claims on credible counterexamples. No diagnostic or treatment claims.
+
+Coping: distinguish protection (distress down, effective action maintained/increased), compensation (distress down without action change), and possible avoidance (action decreases despite feasible beneficial opportunities). Assess actual controllability, not just outcomes.
