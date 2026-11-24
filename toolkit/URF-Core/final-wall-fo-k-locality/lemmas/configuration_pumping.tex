@@ -1,29 +1,35 @@
-\section*{Configuration Pumping Lemma (Conditional)}
+\section*{Configuration-Type Pigeonhole: corrected scope}
 
-\textbf{Status: CONDITIONAL.}
+\noindent\textbf{Status:} The elementary statement below is proved.
+A cycle-rank-to-configuration encoding and any consequent splitting of
+\emph{different} rooted vertex types remain \textbf{OPEN}.
 
-Fix $k,\Delta,R$.  
-Let $\mathcal T(k,\Delta,R)$ denote the finite set of FO$^k$ configuration
-types on radius-$R$ neighborhoods in bounded-degree graphs.
+Fix $k,\Delta,R$ and a finite collection $\mathcal T(k,\Delta,R)$ of
+well-defined local configuration types. Finiteness holds when these types
+are evaluated on rooted radius-$R$ balls of graphs with bounded degree
+and a fixed finite relational vocabulary. No claim about arbitrary
+unbounded-radius global FO$^k$ types is intended.
 
-\begin{lemma}[Configuration Pumping]
-Let $G$ satisfy $\Delta(G)\le\Delta$.
-If for some vertex $v$,
-\[
-\dim_{\mathbb F_2} Z_1(B_{2R}(v)) > |\mathcal T(k,\Delta,R)|,
-\]
-then there exist two distinct pebble configurations with identical
-FO$^k$ local type occurring within radius $R$.
-Consequently,
-\[
-\exists x\neq y:\ \mathrm{tp}^{\mathrm{FO}^k}_R(x)\neq
-\mathrm{tp}^{\mathrm{FO}^k}_R(y).
-\]
+\begin{lemma}[Finite-type pigeonhole]
+Let $\mathcal C$ be a finite set of \emph{distinct} configurations with
+a specified map $\tau:\mathcal C\to\mathcal T$. If
+$|\mathcal C|>|\mathcal T|$, then there exist distinct
+$c,c'\in\mathcal C$ with $\tau(c)=\tau(c')$.
 \end{lemma}
+\begin{proof}
+If $\tau$ were injective, the cardinality inequality would be reversed.
+\end{proof}
 
-\begin{remark}
-This lemma replaces the EF Cycle--Linkage Trap.
-It relies only on finite type counting and configuration repetition.
-No global linkage or holonomy is assumed.
-\end{remark}
+\noindent\textbf{Conditional cycle-basis application.}
+If $\dim_{\mathbb F_2}Z_1(B_{2R}(v))>|\mathcal T|$ \emph{and}
+there is a proved injection from a basis of that cycle space into
+$\mathcal C$ with a specified type map $\tau$, then the lemma gives two
+\emph{distinct configurations of equal type}. The injection cannot be
+inferred from the dimension inequality alone.
 
+\noindent\textbf{Invalid former inference:} Equal types for two
+configurations do not imply \emph{unequal} rooted vertex types at some
+pair of vertices. Vertex-transitive graphs, including the Petersen graph,
+can have nonzero local cycle rank with only one rooted vertex type.
+Therefore the previous ``Consequently'' clause asserting a vertex-type
+split is withdrawn; it cannot support a cycle--orbit splitting theorem.
