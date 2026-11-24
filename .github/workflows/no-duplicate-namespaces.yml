@@ -29,15 +29,14 @@ jobs:
             ~/.cache/lean
           key: ${{ runner.os }}-lean-${{ hashFiles('lean-toolchain') }}
 
-      - name: Detect duplicate namespaces (same file only)
+      - name: Report reopened namespaces (informational)
         run: |
           dup=$(grep -R '^[[:space:]]*namespace[[:space:]]\+' -n lean 2>/dev/null \
             | awk -F: '{print $1 ":" $3}' \
             | sort | uniq -c | awk '$1>1 {print $2}')
           if [ -n "$dup" ]; then
-            echo "Duplicate namespaces found within same file:"
+            echo "Reopened namespaces (legal Lean syntax; compiler remains authoritative):"
             echo "$dup"
-            exit 1
           fi
 
       - name: Lake update
