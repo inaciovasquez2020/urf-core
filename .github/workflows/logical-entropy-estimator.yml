@@ -1,0 +1,54 @@
+name: Logical entropy estimator isolated audit
+on:
+  push:
+    branches: [research/logical-entropy-20261124]
+  pull_request:
+    paths:
+      - 'research/candidates/LogicalEntropyEstimator.lean'
+      - '.github/workflows/logical-entropy-estimator.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Compile and audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(head -n 1 lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          mkdir -p "$RUNNER_TEMP/logical-entropy"
+          git rev-parse HEAD > "$RUNNER_TEMP/logical-entropy/head.txt"
+          sha256sum research/candidates/LogicalEntropyEstimator.lean > "$RUNNER_TEMP/logical-entropy/source.sha256"
+          lake env lean research/candidates/LogicalEntropyEstimator.lean 2>&1 | tee "$RUNNER_TEMP/logical-entropy/lean.log"
+          python3 - "$RUNNER_TEMP/logical-entropy/lean.log" <<'PY'
+          import sys, re
+          log = open(sys.argv[1]).read()
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for name in ("two_point_error", "invariant_estimator_lower_bound", "entropy_gap_lower_bound"):
+              full = "LogicalEntropy." + name
+              lines = [line for line in log.splitlines() if line.startswith("'" + full + "'")]
+              assert len(lines) == 1, full
+              line = lines[0]
+              if "does not depend on any axioms" in line:
+                  continue
+              match = re.search(r"\[([^\]]*)\]", line)
+              assert match, line
+              assert {a.strip() for a in match.group(1).split(",") if a.strip()} <= allowed, line
+          print("AXIOM_AUDIT := PASS")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: logical-entropy-estimator-receipt
+          path: ${{ runner.temp }}/logical-entropy/
