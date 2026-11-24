@@ -1,0 +1,46 @@
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-cactus-corrected-2vsqg8cz/src/CactusChain.lean:28:34: warning: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [simpleGraphIncidence, P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵h.ne]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-cactus-corrected-2vsqg8cz/src/CactusChain.lean:31:36: warning: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [simpleGraphIncidence, P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵xu]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-cactus-corrected-2vsqg8cz/src/CactusChain.lean:32:36: warning: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [simpleGraphIncidence, P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵xu, xv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-cactus-corrected-2vsqg8cz/src/CactusChain.lean:39:34: warning: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [simpleGraphIncidence, P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵h.ne.symm]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-cactus-corrected-2vsqg8cz/src/CactusChain.lean:42:36: warning: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [simpleGraphIncidence, P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵xv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-cactus-corrected-2vsqg8cz/src/CactusChain.lean:43:36: warning: This simp argument is unused:
+  Pi.single_apply
+
+Hint: Omit it from the simp argument list.
+  simp [simpleGraphIncidence, P̵i̵.̵s̵i̵n̵g̵l̵e̵_̵a̵p̵p̵l̵y̵,̵ ̵xu, xv]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+'URF.EntropyBridge.boundary_orientedStep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.boundary_walkChain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.boundary_cycleChain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.cycleVector' depends on axioms: [propext, Classical.choice, Quot.sound]

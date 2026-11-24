@@ -1,0 +1,4 @@
+/var/folders/g7/t7cdygm521zfn6t572ncddgw0000gn/T/urf-cactus-corrected-2vsqg8cz/src/CactusExactVisibility.lean:67:4: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'URF.EntropyBridge.UndirectedCycle.visible_iff_short' depends on axioms: [propext, Classical.choice, Quot.sound]

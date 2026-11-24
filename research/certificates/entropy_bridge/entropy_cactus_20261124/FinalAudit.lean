@@ -1,0 +1,6 @@
+import CactusEntropy
+
+#check URF.EntropyBridge.cactus_uniform_conditional_entropy_eq
+#print axioms URF.EntropyBridge.cactus_uniform_conditional_entropy_eq
+#check URF.EntropyBridge.graphObservation_uniform_entropy_eq_finrank_gap
+#print axioms URF.EntropyBridge.graphObservation_uniform_entropy_eq_finrank_gap

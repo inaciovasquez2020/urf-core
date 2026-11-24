@@ -1,0 +1,42 @@
+{
+  "repository": "urf-core",
+  "head": "2ab05a484f6365d8282b45ca89f739c03923edcf",
+  "branch": "research/entropy-graph-chain-20261117",
+  "lean": "4.27.0",
+  "mathlib": "a3a10db0e9d66acbebf76c5e6a135066525ac900",
+  "compiled_modules": [
+    "GraphEntropy",
+    "CactusIndex",
+    "CactusChain",
+    "CactusSupport",
+    "CactusCycleSupport",
+    "CactusLength",
+    "CactusIndependence",
+    "CactusCut",
+    "CactusSupportCycle",
+    "CactusSpanning",
+    "CactusBasis",
+    "CactusVisibility",
+    "CactusDetour",
+    "CactusExactVisibility",
+    "CactusArcCut",
+    "CactusNoShortcut",
+    "CactusAssembly",
+    "CactusDimension",
+    "CactusEntropy"
+  ],
+  "module_count": 19,
+  "reported_verification_elapsed_seconds": 200.17,
+  "final_theorems": [
+    "URF.EntropyBridge.cactus_uniform_conditional_entropy_eq",
+    "URF.EntropyBridge.graphObservation_uniform_entropy_eq_finrank_gap"
+  ],
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "verification": "LEAN_VERIFIED",
+  "full_project_build": "NOT_RUN",
+  "independent_review": "OPEN"
+}

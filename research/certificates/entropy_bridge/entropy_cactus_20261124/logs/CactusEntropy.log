@@ -1,0 +1,2 @@
+'URF.EntropyBridge.reachableRadiusUniformConditionalEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.cactus_uniform_conditional_entropy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]

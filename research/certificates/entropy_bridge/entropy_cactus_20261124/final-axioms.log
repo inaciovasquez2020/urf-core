@@ -1,0 +1,23 @@
+URF.EntropyBridge.cactus_uniform_conditional_entropy_eq.{u_1, u_2} {V : Type u_1} {K : Type u_2} [LinearOrder V]
+  [Fintype V] [Field K] {G : SimpleGraph V} [Fintype K] (hcat : URF.EntropyBridge.IsCactus G) (r : ℕ) :
+  URF.EntropyBridge.reachableRadiusUniformConditionalEntropy G r =
+    ↑(Fintype.card (URF.EntropyBridge.LongCycle G r)) * Real.log ↑(Fintype.card K)
+'URF.EntropyBridge.cactus_uniform_conditional_entropy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.graphObservation_uniform_entropy_eq_finrank_gap.{u_1, u_2, u_3} {K : Type u_1} {Vert : Type u_2}
+  {Edge : Type u_3} [Field K] [Fintype K] [Fintype Vert] [Fintype Edge]
+  (G : URF.EntropyBridge.GraphChainPresentation K Vert Edge)
+  [Fintype (Module.Dual K ↥(URF.EntropyBridge.graphCycles G))]
+  [Nonempty (Module.Dual K ↥(URF.EntropyBridge.graphCycles G))] [Fintype (Module.Dual K ↥G.localCycles)] :
+  ∑ y,
+      URF.EntropyBridge.observedMass
+          (URF.EntropyBridge.uniformFiniteProbability (Module.Dual K ↥(URF.EntropyBridge.graphCycles G))).mass
+          (⇑(URF.EntropyBridge.graphObservation G)) y *
+        URF.EntropyBridge.finiteEntropy
+          (URF.EntropyBridge.conditionalMass
+            (URF.EntropyBridge.uniformFiniteProbability (Module.Dual K ↥(URF.EntropyBridge.graphCycles G))).mass
+            (⇑(URF.EntropyBridge.graphObservation G)) y) =
+    ↑(Module.finrank K ↥(URF.EntropyBridge.graphCycles G) - Module.finrank K ↥G.localCycles) *
+      Real.log ↑(Fintype.card K)
+'URF.EntropyBridge.graphObservation_uniform_entropy_eq_finrank_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
