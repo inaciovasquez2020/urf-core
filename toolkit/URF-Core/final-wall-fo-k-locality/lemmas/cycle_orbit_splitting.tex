@@ -1,20 +1,53 @@
-\section*{Cycle--Orbit Splitting Lemma}
+\section*{Cycle--Orbit Splitting: corrected status}
 
-Let $\Delta(G)\le \Delta$ and define:
+\noindent\textbf{Status (November 2026):} The previously asserted
+cycle-rank-to-vertex-type-splitting implication is \emph{not proved}.
+Its nonvacuous interpretation fails already for degree three and radius one.
+The formal existential threshold statement is trivially true if its
+threshold exceeds the maximal possible rank; that vacuity is not a locality
+or type-splitting theorem.
 
+For a nonempty finite simple graph $G$ of maximum degree $\Delta$, let
+$B_{2R}(v)$ denote the induced radius-$2R$ ball and put
 \[
 \mathsf{CycComp}_R(G)
-=\max_v \dim_{\mathbb F_2} Z_1(B_{2R}(v)).
+ = \max_{v\in V(G)}\dim_{\mathbb F_2} Z_1(B_{2R}(v)).
 \]
-
-Then there exists $t^*(k,\Delta,R)$ such that:
-
+For $\Delta\ge 2$ put
 \[
-\mathsf{CycComp}_R(G)\ge t^*
-\;\Rightarrow\;
-\exists v,w:\;
-\mathrm{tp}^{\mathrm{FO}^k}_R(v)\neq \mathrm{tp}^{\mathrm{FO}^k}_R(w).
+M_{\Delta,R}=1+\Delta\sum_{j=0}^{2R-1}(\Delta-1)^j,
+\qquad U_{\Delta,R}=1+\left\lfloor
+ \frac{(\Delta-2)M_{\Delta,R}}{2}\right\rfloor .
 \]
+(The sum is empty when $R=0$.)
 
-Proof uses the Cycle Fan Predicate and EF Cycle-Linkage Trap.
+\noindent\textbf{Proposition (uniform ceiling).}
+For every nonempty graph of maximum degree $\Delta\ge2$,
+$\mathsf{CycComp}_R(G)\le U_{\Delta,R}$.
+For $\Delta\le1$, every ball is acyclic and the cycle rank is zero.
+\begin{proof}
+A radius-$2R$ ball is connected and contains at most $M_{\Delta,R}$
+vertices by breadth-first counting. With $n$ vertices, it has at most
+$\lfloor\Delta n/2\rfloor$ edges. Its cycle-space dimension is therefore
+$|E|-n+1\le 1+\lfloor(\Delta-2)n/2\rfloor \le U_{\Delta,R}$.
+For $\Delta\le1$ the graph is a disjoint union of vertices and edges.
+\end{proof}
 
+\noindent\textbf{Proposition (nonvacuous splitting obstruction).}
+Fix $\Delta=3$ and $R=1$. The Petersen graph, represented as the Kneser
+graph $KG(5,2)$, has ten vertices, fifteen edges, degree three and diameter
+two. Its radius-two ball at any vertex is the whole graph, with
+$\mathbb F_2$ cycle rank $15-10+1=6=U_{3,1}$.
+Permuting the five underlying symbols acts transitively on its ten
+vertices, so \emph{every} isomorphism-invariant rooted vertex type agrees
+at every vertex, including every ordinary $\mathrm{FO}^k$ type.
+Thus no $t^*(k,3,1)\le6$ forces two different vertex types, whereas
+$t^*(k,3,1)>6$ makes the antecedent impossible. This holds for every $k$.
+
+\noindent\textbf{OPEN:} A genuinely nonvacuous type-separation principle
+requires independently verified hypotheses that exclude homogeneous
+examples, a precise logical signature (ordinary $\mathrm{FO}^k$ versus
+counting logic), and an actual refinement operator tied to those semantics.
+The former Cycle Fan Predicate / EF Cycle--Linkage Trap reference does
+not discharge these obligations. In particular, no type-splitting result
+is derived from a pigeonhole repetition statement alone.
