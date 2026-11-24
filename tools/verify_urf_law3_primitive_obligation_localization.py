@@ -7,14 +7,17 @@ DOC = ROOT / "docs/status/URF_LAW3_PRIMITIVE_OBLIGATION_LOCALIZATION_2026_05_26.
 def main() -> None:
     law3 = LAW3.read_text()
     doc = DOC.read_text()
+    import re
+    from lean_obligation_scan import strip_noncode
+    assert not re.search(
+        r"\b(?:axiom|sorry|admit)\b", strip_noncode(law3)
+    )
 
     required_law3 = [
-        "constant CMI",
-        "axiom capacity",
-        "axiom chain_rule",
-        "axiom cmi_nonneg",
+        "(CMI : State",
+        "(per_step_capacity :",
         "theorem urf_law3",
-        "Finset.single_le_sum",
+        "exact per_step_capacity T t ht",
     ]
     required_doc = [
         "LOAD_BEARING_OBLIGATION_LOCALIZED",

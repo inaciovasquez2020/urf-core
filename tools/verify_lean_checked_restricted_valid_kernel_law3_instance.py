@@ -86,7 +86,14 @@ def main() -> None:
 
     assert "import URF.Foundation.GlobalValidKernelTheorem" in lean
     assert "import URF.Foundation.ChannelCapacityBoundDerivation" in lean
-    assert "import URF.Foundation.FiniteMutualInformationChainRuleProof" in lean
+    channel_source = Path(
+        "lean/URF/Foundation/ChannelCapacityBoundDerivation.lean"
+    ).read_text()
+    assert "import URF.Foundation.FiniteMutualInformationChainRuleProof" in channel_source
+    chain_source = Path(
+        "lean/URF/Foundation/FiniteMutualInformationChainRuleProof.lean"
+    ).read_text()
+    assert "structure FiniteMutualInformationChainRuleProof" in chain_source
 
     stripped = re.sub(r"/-.*?-/", "", lean, flags=re.DOTALL)
     stripped = re.sub(r"--.*", "", stripped)

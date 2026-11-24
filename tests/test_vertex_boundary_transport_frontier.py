@@ -12,7 +12,10 @@ def test_vertex_boundary_transport_has_no_admit():
 
 def test_vertex_boundary_transport_frontier_axiom_is_named():
     text = LEAN.read_text()
-    assert "axiom entropy_mul_card_bound" in text
+    assert "(entropy_mul_card_bound :" in text
+    assert "∀ C n : ℕ," in text
+    assert "entropy_of_set (C * n) ≤ entropy_of_set n" in text
+    assert "axiom entropy_mul_card_bound" not in text
     assert "entropy_mul_card_bound C S.card" in text
 
 

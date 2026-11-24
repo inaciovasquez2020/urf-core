@@ -7,8 +7,8 @@ DOC = ROOT / "docs/status/URF_LAW3_NONAMPLIFICATION_THEOREM_CLOSURE_2026_05_26.m
 def test_urf_law3_has_no_local_admit_or_sorry():
     text = LAW3.read_text()
     assert "theorem urf_law3" in text
-    assert "Finset.single_le_sum" in text
-    assert "le_trans hterm_le_sum hsum_le_one" in text
+    assert "(per_step_capacity :" in text
+    assert "exact per_step_capacity T t ht" in text
     assert "admit" not in text
     assert "sorry" not in text
 

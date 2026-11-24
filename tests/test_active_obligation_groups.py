@@ -19,7 +19,11 @@ def test_active_obligation_groups_boundary_and_exclusions():
             parts = set(Path(item["path"]).parts)
             assert ".lake" not in parts
             assert "legacy" not in parts
-    if data["total_active_obligations"] > 0:
-        assert "descent_system_structural_descent" in data["groups"]
+    assert data["total_active_obligations"] == sum(
+        g["count"] for g in data["groups"].values()
+    )
+    for group in data["groups"].values():
+        assert group["count"] == len(group["items"])
+        assert group["count"] > 0
     assert "provenance_codec" not in data["groups"]
     assert "any Clay problem" in data["does_not_prove"]
