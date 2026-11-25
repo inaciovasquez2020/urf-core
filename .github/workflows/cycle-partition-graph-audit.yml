@@ -26,13 +26,13 @@ jobs:
           test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.27.0'
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
           SRC=lean/URF/Foundation/CyclePartitionGraphCandidate.lean
-          test "$(git hash-object "$SRC")" = '696a0268f1b19cb655120d5d7c16e1d2047516a7'
+          test "$(git hash-object "$SRC")" = '9c71cb305a52641ff47999fe2b2d35492db82705'
           lake build URF.Foundation.CyclePartitionExtremizersCandidate
           lake env lean "$SRC" 2>&1 | tee "$RUNNER_TEMP/cycle-partition-graph.log"
           python3 - "$RUNNER_TEMP/cycle-partition-graph.log" <<'PY'
           import re,sys
           s=open(sys.argv[1],encoding='utf8').read()
-          for name in ('cyclePartition_adj_same_component','cyclePartition_vertices_finite','cyclePartition_vertices_card','cyclePartition_reachable_same_component','cyclePartition_consecutive_adj','cyclePartition_zero_reachable'):
+          for name in ('cyclePartition_adj_same_component','cyclePartition_vertices_finite','cyclePartition_vertices_card','cyclePartition_reachable_same_component','cyclePartition_consecutive_adj','cyclePartition_zero_reachable','cyclePartition_same_index_reachable'):
               f='URF.EntropyBridge.'+name
               pattern=r"(?m)^'"+re.escape(f)+r"' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])"
               m=re.findall(pattern,s)
