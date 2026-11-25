@@ -44,6 +44,59 @@ two-point lower bound and the deterministic midpoint attains it.
    worst-case error at least `(M-1)*log(q)/2` for any estimator.
    The constant midpoint `(M+1)*log(q)/2` attains that error.
 
+## Exact formal bridges (2026-11-25 audit)
+
+**Rooted ball:** For each component size `m >= L >= 2*r+2` and root
+`x ∈ Fin m`, the map `d ↦ (x+d) mod m` for integers `-r <= d <= r`
+is a root-preserving bijection from the path `[-r,r]` to the
+graph-distance-`r` ball of `x` in `C_m`. Moreover, two images are
+adjacent exactly when `|d-e|=1`: the potentially exceptional
+wraparound pair would need `m=2*r+1`, which is excluded. The
+resulting induced-ball isomorphism is independent of `m,x`, hence all
+rooted-ball multisets coincide. The cutoff is sharp for this claim:
+at `r=1,m=3`, the ball is a rooted triangle, rather than the rooted
+three-vertex path in `C_6`.
+
+**Cycle-space dimension, every field:** With `B : K^E → K^V` the
+oriented incidence boundary, its dual sends vertex potential `f` to
+the edge differences `f(head(e))-f(tail(e))`. A potential lies in
+`ker(Bᵀ)` exactly when it is constant along each graph edge, hence
+along each path; therefore `ker(Bᵀ) ≃ (π₀(G) → K)` and
+`rank(B)=|V|-|π₀(G)|`. Rank-nullity gives
+`dim(ker B)=|E|-|V|+|π₀(G)|`. For a disjoint union of cycles,
+`|E|=|V|`, yielding `dim Z₁(G;K)=|π₀(G)|`.
+This proof is characteristic-independent. Lean must additionally
+show that the chosen ordered-edge incidence linear map is the same
+boundary `B`; replacing it by a surrogate would not discharge the
+stated obligation. The mathematically correct natural-number
+subtraction is `|E|-(|V|-|π₀(G)|)` (not the potentially truncated
+`(|E|-|V|)+|π₀(G)|`).
+
+**Finite adversarial recheck (non-Mac, exact arithmetic):** Independently
+enumerated all nondecreasing integer partitions of `N` into parts
+`>=L`, for `3<=N<=36`. An explicit signed-displacement map was
+checked against every induced rooted adjacency pair across
+4,012 parameter triples `(N,L,r)` and 22,944 partition/observation
+instances, with zero failures. Independently constructed the GF(2)
+oriented incidence rows as integer bit vectors and applied XOR
+Gaussian elimination to 11,408 distinct graph partitions; in all
+cases the exact rank was `N-c`, so nullity was `c`. These checks
+are **COMPUTATION_PASS**, not a universal theorem and not Lean
+compilation. No Mac computations or downloads were performed.
+The graph proof above, rather than these finite checks, supplies
+the unrestricted mathematical justification.
+
+**Related formalization:** The repository
+`wwawrzy/paying-for-fractional-error-lean`, at commit
+`79218794d8ea0b8a4e01c3f9647e6b71cd05eb56`, contains
+`GraphTheory/SimpleGraph/CycleCutDimensions.lean` with a graph
+cycle-space dimension formula over `ZMod 2`. Another reference,
+`Shilun-Allan-Li/tcslib` at
+`0fbb65f2072e5cea340e1f69e0bdcd57cd56945b`, has an oriented
+real-field incidence rank formula. Neither was compiled or imported
+against this repository's pinned Mathlib, and neither is evidence
+that the *current* ordered-edge kernel bridge is Lean-verified.
+
 ## Verification boundary
 
 - Lean verified: exact scalar and observation minimax; extremal cycle
