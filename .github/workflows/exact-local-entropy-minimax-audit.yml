@@ -1,0 +1,47 @@
+name: Exact local entropy minimax Lean audit
+"on":
+  push:
+    branches: [research/exact-local-entropy-minimax-20261125]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Pinned compiler, source hash, proof and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          SRC='lean/URF/Foundation/ExactLocalEntropyMinimaxCandidate.lean'
+          test "$(git hash-object "$SRC")" = '1f663309400719cbf8d12af8eda289ffe86f3a5f'
+          lake env lean "$SRC" 2>&1 | tee "$RUNNER_TEMP/local-entropy-minimax.log"
+          python3 - "$RUNNER_TEMP/local-entropy-minimax.log" <<'PY'
+          import re,sys
+          log=open(sys.argv[1],encoding='utf8').read()
+          for name in ('scalar_midpoint_minimax','component_entropy_minimax','cycle_entropy_minimax_numeric'):
+              full='URF.EntropyBridge.'+name
+              pattern=r"(?m)^'"+re.escape(full)+r"' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])"
+              matches=re.findall(pattern,log)
+              if len(matches)!=1:
+                  raise SystemExit('AXIOM_REPORT_MISSING: '+full)
+              ax={x.strip() for x in matches[0].split(',') if x.strip()}
+              if not ax <= {'propext','Classical.choice','Quot.sound'}:
+                  raise SystemExit('FORBIDDEN_AXIOMS: '+full+' '+repr(ax))
+              print('LEAN_VERIFIED_ISOLATED',full,sorted(ax))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: exact-local-entropy-minimax-log
+          path: ${{ runner.temp }}/local-entropy-minimax.log
