@@ -38,9 +38,8 @@ theorem maximalCycleLengths_min (N L : ℕ) :
   simp only [maximalCycleLengths, List.mem_append, List.mem_replicate,
     List.mem_singleton] at ht
   rcases ht with ht | ht
-  · rcases ht with ⟨rfl, _⟩ | ⟨_, rfl⟩
-    · exact le_rfl
-    · exact le_rfl
+  · rcases ht with ⟨_, rfl⟩
+    exact le_rfl
   · subst t
     omega
 
