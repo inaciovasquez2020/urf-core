@@ -2,8 +2,8 @@
 
 Base: `d5916b12a6eb2df34fb150ce2e804236f077e7c7`.
 
-Historical statements are retained with visible scope corrections. These are mathematical paper audits, not new Lean certificates. PDFs have not been content-verified or regenerated. No unrelated theorem is reclassified.
+**Frozen historical artifact:** [clr_cycle_orbit_splitting.tex](final-wall-fo-k-locality/clr/clr_cycle_orbit_splitting.tex). Its bytes and existing checksums are preserved; this erratum supersedes its disputed argument. The [corrected mathematical statement](papers/fo-k-locality/cycle_orbit_splitting.tex) is the authoritative current scope.
 
-## final-wall-fo-k-locality/clr/clr_cycle_orbit_splitting.tex
+The Petersen graph is vertex-transitive, has maximum degree three and diameter two; each radius-two ball is the whole graph, with cycle rank six. Thus for degree three and radius one no threshold at most six forces two different rooted types; any larger threshold is vacuous by the uniform ball-size bound. Finite local-type count follows from finiteness of rooted bounded-size graphs, independently of quantifier rank. The historical misplaced proof does not prove the fan implication; fan construction remains open.
 
-The nonvacuous type-splitting assertion fails for the Petersen graph at degree three and radius one; its entire radius-two ball has rank six at every vertex. See the corrected source \texttt{papers/fo-k-locality/cycle\_orbit\_splitting.tex}. The finite-type proof follows instead from the finite number of rooted bounded-size graphs, independently of quantifier rank. The misplaced proof below does not prove the fan implication. Fan construction remains open.
+Paper audit only; no new Lean certificate, PDF regeneration or unrelated theorem reclassification.
