@@ -62,6 +62,25 @@ theorem cyclePartition_reachable_same_component (sizes : List ℕ)
   | @cons a b c hab w ih =>
     exact (cyclePartition_adj_same_component sizes a b hab).trans ih
 
+/-- Two consecutive positions in a listed cycle are joined by a graph edge. -/
+theorem cyclePartition_consecutive_adj (sizes : List ℕ)
+    (i : Fin sizes.length) (x y : Fin (sizes.get i))
+    (hxy : x.val + 1 = y.val) :
+    (cyclePartitionSimpleGraph sizes).Adj
+      (⟨i, x⟩ : CyclePartitionVertex sizes)
+      (⟨i, y⟩ : CyclePartitionVertex sizes) := by
+  change (⟨i, x⟩ : CyclePartitionVertex sizes) ≠ ⟨i, y⟩ ∧
+    (cyclePartitionSuccessorRel sizes ⟨i, x⟩ ⟨i, y⟩ ∨
+      cyclePartitionSuccessorRel sizes ⟨i, y⟩ ⟨i, x⟩)
+  constructor
+  · intro he
+    have hv : x.val = y.val :=
+      congrArg (fun z : CyclePartitionVertex sizes => z.2.val) he
+    omega
+  · exact Or.inl ⟨rfl, Or.inl hxy⟩
+
+#print axioms URF.EntropyBridge.cyclePartition_consecutive_adj
+
 #print axioms URF.EntropyBridge.cyclePartition_reachable_same_component
 
 #print axioms URF.EntropyBridge.cyclePartition_vertices_card
