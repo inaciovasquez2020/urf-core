@@ -1,0 +1,155 @@
+info: [root]: lakefile.lean and lakefile.toml are both present; using lakefile.lean
+URF.EntropyBridge.cyclePartition_successor_iff_next {sizes : List ℕ} (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i)
+  (u v : CyclePartitionVertex sizes) : cyclePartitionSuccessorRel sizes u v ↔ cyclePartitionNext sizes hp u = v
+'URF.EntropyBridge.cyclePartition_successor_iff_next' depends on axioms: [propext, Quot.sound]
+URF.EntropyBridge.cyclePartition_next_injective {sizes : List ℕ} (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) :
+  Function.Injective (cyclePartitionNext sizes hp)
+'URF.EntropyBridge.cyclePartition_next_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartitionNextPerm {sizes : List ℕ} (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) :
+  Equiv.Perm (CyclePartitionVertex sizes)
+'URF.EntropyBridge.cyclePartitionNextPerm' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_next_next_ne {sizes : List ℕ} (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i)
+  (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (v : CyclePartitionVertex sizes) :
+  cyclePartitionNext sizes hp (cyclePartitionNext sizes hp v) ≠ v
+'URF.EntropyBridge.cyclePartition_next_next_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_adj_iff_next {sizes : List ℕ} (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i)
+  (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (u v : CyclePartitionVertex sizes) :
+  (cyclePartitionSimpleGraph sizes).Adj u v ↔ cyclePartitionNext sizes hp u = v ∨ cyclePartitionNext sizes hp v = u
+'URF.EntropyBridge.cyclePartition_adj_iff_next' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartitionOrderedEdge {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i)
+  (u : CyclePartitionVertex sizes) : OrderedEdge (cyclePartitionSimpleGraph sizes)
+'URF.EntropyBridge.cyclePartitionOrderedEdge' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_orderedEdge_endpoints {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i)
+  (u : CyclePartitionVertex sizes) :
+  ↑(cyclePartitionOrderedEdge h3 hp u) = (u, cyclePartitionNext sizes hp u) ∨
+    ↑(cyclePartitionOrderedEdge h3 hp u) = (cyclePartitionNext sizes hp u, u)
+'URF.EntropyBridge.cyclePartition_orderedEdge_endpoints' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartitionEdgeEquiv {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) :
+  CyclePartitionVertex sizes ≃ OrderedEdge (cyclePartitionSimpleGraph sizes)
+'URF.EntropyBridge.cyclePartitionEdgeEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartitionEdgeSign.{u_1} {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (K : Type u_1)
+  [Field K] (u : CyclePartitionVertex sizes) : K
+'URF.EntropyBridge.cyclePartitionEdgeSign' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_edgeSign_sq.{u_1} {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (K : Type u_1)
+  [Field K] (u : CyclePartitionVertex sizes) : cyclePartitionEdgeSign h3 hp K u * cyclePartitionEdgeSign h3 hp K u = 1
+'URF.EntropyBridge.cyclePartition_edgeSign_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartitionSignedEdges.{u_1} {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (K : Type u_1)
+  [Field K] : (CyclePartitionVertex sizes → K) ≃ₗ[K] OrderedEdge (cyclePartitionSimpleGraph sizes) → K
+'URF.EntropyBridge.cyclePartitionSignedEdges' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_signed_incidence.{u_1} {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (K : Type u_1)
+  [Field K] (u v : CyclePartitionVertex sizes) :
+  simpleGraphIncidence (cyclePartitionSimpleGraph sizes) v ((cyclePartitionEdgeEquiv h3 hp) u) *
+      cyclePartitionEdgeSign h3 hp K u =
+    (if v = cyclePartitionNext sizes hp u then 1 else 0) - if v = u then 1 else 0
+'URF.EntropyBridge.cyclePartition_signed_incidence' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_boundary_intertwines.{u_1} {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (K : Type u_1)
+  [Field K] (z : CyclePartitionVertex sizes → K) (v : CyclePartitionVertex sizes) :
+  (simpleGraphBoundary (cyclePartitionSimpleGraph sizes)) ((cyclePartitionSignedEdges h3 hp K) z) v =
+    (cyclePartitionDirectedBoundary K sizes hp) z ((Equiv.symm (cyclePartitionNextPerm hp)) v)
+'URF.EntropyBridge.cyclePartition_boundary_intertwines' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartitionIncidenceKernelEquiv.{u_1} {sizes : List ℕ} [LinearOrder (CyclePartitionVertex sizes)]
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (K : Type u_1)
+  [Field K] :
+  ↥(cyclePartitionDirectedBoundary K sizes hp).ker ≃ₗ[K] ↥(simpleGraphBoundary (cyclePartitionSimpleGraph sizes)).ker
+'URF.EntropyBridge.cyclePartitionIncidenceKernelEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartitionDirectedKernel_finrank.{u_1} (K : Type u_1) [Field K] (sizes : List ℕ)
+  (hpos : ∀ (i : Fin sizes.length), 0 < sizes.get i) :
+  Module.finrank K ↥(cyclePartitionDirectedBoundary K sizes hpos).ker = sizes.length
+'URF.EntropyBridge.cyclePartitionDirectedKernel_finrank' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_incidenceKernel_finrank.{u_1} {sizes : List ℕ}
+  [LinearOrder (CyclePartitionVertex sizes)] (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i)
+  (hp : ∀ (i : Fin sizes.length), 0 < sizes.get i) (K : Type u_1) [Field K] :
+  Module.finrank K ↥(simpleGraphBoundary (cyclePartitionSimpleGraph sizes)).ker = sizes.length
+'URF.EntropyBridge.cyclePartition_incidenceKernel_finrank' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.rootedBallVertices {V : Type} (G : SimpleGraph V) (r : ℕ) (u : V) : Set V
+'URF.EntropyBridge.rootedBallVertices' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.centeredPath (r : ℕ) : SimpleGraph (CenteredPathVertex r)
+'URF.EntropyBridge.centeredPath' depends on axioms: [propext, Quot.sound]
+URF.EntropyBridge.centeredPathRoot (r : ℕ) : CenteredPathVertex r
+'URF.EntropyBridge.centeredPathRoot' depends on axioms: [propext, Quot.sound]
+URF.EntropyBridge.rootedBallRoot {V : Type} (G : SimpleGraph V) (r : ℕ) (u : V) : ↑(rootedBallVertices G r u)
+'URF.EntropyBridge.rootedBallRoot' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_rootedBallIso {sizes : List ℕ} (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (r : ℕ)
+  (u : CyclePartitionVertex sizes) (hsize : 2 * r + 2 ≤ sizes.get u.fst) :
+  centeredPath r ≃g
+    SimpleGraph.induce (rootedBallVertices (cyclePartitionSimpleGraph sizes) r u) (cyclePartitionSimpleGraph sizes)
+'URF.EntropyBridge.cyclePartition_rootedBallIso' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_rootedBallIso_root {sizes : List ℕ} (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i)
+  (r : ℕ) (u : CyclePartitionVertex sizes) (hsize : 2 * r + 2 ≤ sizes.get u.fst) :
+  (cyclePartition_rootedBallIso h3 r u hsize) (centeredPathRoot r) =
+    rootedBallRoot (cyclePartitionSimpleGraph sizes) r u
+'URF.EntropyBridge.cyclePartition_rootedBallIso_root' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.RootedNeighborhood.isoSetoid : Setoid RootedNeighborhood
+'URF.EntropyBridge.RootedNeighborhood.isoSetoid' depends on axioms: [propext, Quot.sound]
+URF.EntropyBridge.graphRootedBall {V : Type} (G : SimpleGraph V) (r : ℕ) (u : V) : RootedNeighborhood
+'URF.EntropyBridge.graphRootedBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.rootedNeighborhoodObservation {V : Type} [Fintype V] (G : SimpleGraph V) (r : ℕ) :
+  Multiset RootedNeighborhoodClass
+'URF.EntropyBridge.rootedNeighborhoodObservation' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_neighborhoodObservation_eq_replicate {sizes : List ℕ} (r : ℕ)
+  (h3 : ∀ (i : Fin sizes.length), 3 ≤ sizes.get i) (hsize : ∀ (i : Fin sizes.length), 2 * r + 2 ≤ sizes.get i) :
+  rootedNeighborhoodObservation (cyclePartitionSimpleGraph sizes) r =
+    Multiset.replicate (Fintype.card (CyclePartitionVertex sizes)) (centeredPathClass r)
+'URF.EntropyBridge.cyclePartition_neighborhoodObservation_eq_replicate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+URF.EntropyBridge.AdmissibleCycleSpace.{u_1} (K : Type u_1) [Field K] {N L : ℕ} (g : AdmissibleCycleFamily N L) :
+  Submodule K (OrderedEdge (cyclePartitionSimpleGraph g.sizes) → K)
+'URF.EntropyBridge.AdmissibleCycleSpace' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.admissibleCycleSpaceFintype.{u_1} (K : Type u_1) [Field K] [Fintype K] {N L : ℕ}
+  (g : AdmissibleCycleFamily N L) : Fintype ↥(AdmissibleCycleSpace K g)
+'URF.EntropyBridge.admissibleCycleSpaceFintype' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.uniform_entropy_exact_candidate.{u_1} {α : Type u_1} [Fintype α] [Nonempty α] :
+  (finiteEntropy fun x => 1 / ↑(Fintype.card α)) = Real.log ↑(Fintype.card α)
+'URF.EntropyBridge.uniform_entropy_exact_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.admissibleCycleEntropy.{u_1} (K : Type u_1) [Field K] [Fintype K] {N L : ℕ}
+  (g : AdmissibleCycleFamily N L) : ℝ
+'URF.EntropyBridge.admissibleCycleEntropy' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.admissibleCycleEntropy_eq.{u_1} (K : Type u_1) [Field K] [Fintype K] {N L : ℕ} (hL : 3 ≤ L)
+  (g : AdmissibleCycleFamily N L) :
+  admissibleCycleEntropy K g = ↑(admissibleGraphComponentCount g) * Real.log ↑(Fintype.card K)
+'URF.EntropyBridge.admissibleCycleEntropy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.admissibleCycleObservation {N L : ℕ} (r : ℕ) (g : AdmissibleCycleFamily N L) :
+  Multiset RootedNeighborhoodClass
+'URF.EntropyBridge.admissibleCycleObservation' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.admissibleCycleObservation_eq {N L r : ℕ} (hL : max 3 (2 * r + 2) ≤ L)
+  (g : AdmissibleCycleFamily N L) : admissibleCycleObservation r g = Multiset.replicate N (centeredPathClass r)
+'URF.EntropyBridge.admissibleCycleObservation_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_extremizers (N L : ℕ) (hNL : L ≤ N) (hL : 0 < L) :
+  (∃ sizes, sizes.sum = N ∧ sizes.length = 1 ∧ ∀ t ∈ sizes, L ≤ t) ∧
+    ∃ sizes, sizes.sum = N ∧ sizes.length = N / L ∧ ∀ t ∈ sizes, L ≤ t
+'URF.EntropyBridge.cyclePartition_extremizers' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cycle_count_observation_minimax.{u_1, u_2} {G : Type u_1} {O : Type u_2} (obs : G → O)
+  (componentCount : G → ℕ) (M : ℕ) (hM : 1 ≤ M) (w : ℝ) (hw : 0 ≤ w) (glo ghi : G) (hobs : obs glo = obs ghi)
+  (hlo : componentCount glo = 1) (hhi : componentCount ghi = M)
+  (hrange : ∀ (g : G), 1 ≤ componentCount g ∧ componentCount g ≤ M) :
+  (∀ (estimate : O → ℝ), ∃ g, (↑M - 1) * w / 2 ≤ |estimate (obs g) - ↑(componentCount g) * w|) ∧
+    ∃ estimate, ∀ (g : G), |estimate (obs g) - ↑(componentCount g) * w| ≤ (↑M - 1) * w / 2
+'URF.EntropyBridge.cycle_count_observation_minimax' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_radius_minimax.{u_1} (K : Type u_1) [Field K] [Fintype K] (N L r : ℕ) (hNL : L ≤ N)
+  (hL : max 3 (2 * r + 2) ≤ L) :
+  (∀ (estimate : Multiset RootedNeighborhoodClass → ℝ),
+      ∃ g,
+        (↑(N / L) - 1) * Real.log ↑(Fintype.card K) / 2 ≤
+          |estimate (admissibleCycleObservation r g) - admissibleCycleEntropy K g|) ∧
+    ∃ estimate,
+      ∀ (g : AdmissibleCycleFamily N L),
+        |estimate (admissibleCycleObservation r g) - admissibleCycleEntropy K g| ≤
+          (↑(N / L) - 1) * Real.log ↑(Fintype.card K) / 2
+'URF.EntropyBridge.cyclePartition_radius_minimax' depends on axioms: [propext, Classical.choice, Quot.sound]
+URF.EntropyBridge.cyclePartition_radius_minimax_value.{u_1} (K : Type u_1) [Field K] [Fintype K] (N L r : ℕ)
+  (hNL : L ≤ N) (hL : max 3 (2 * r + 2) ≤ L) :
+  IsLeast
+    {E |
+      ∃ estimate,
+        ∀ (g : AdmissibleCycleFamily N L), |estimate (admissibleCycleObservation r g) - admissibleCycleEntropy K g| ≤ E}
+    ((↑(N / L) - 1) * Real.log ↑(Fintype.card K) / 2)
+'URF.EntropyBridge.cyclePartition_radius_minimax_value' depends on axioms: [propext, Classical.choice, Quot.sound]

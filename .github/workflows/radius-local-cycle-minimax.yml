@@ -1,0 +1,38 @@
+name: Radius-local cycle minimax
+on:
+  push:
+    branches: [research/exact-local-entropy-minimax-20261125]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Build and audit the exact head
+        shell: bash
+        run: |
+          set -euo pipefail
+          cert=research/certificates/radius_local_cycle_minimax
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(head -n 1 lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          sha256sum -c "$cert/source.sha256"
+          mkdir -p "$RUNNER_TEMP/radius-minimax"
+          git rev-parse HEAD | tee "$RUNNER_TEMP/radius-minimax/head.txt"
+          lake build URF +URF.Foundation.CyclePartitionIncidence +URF.Foundation.CyclePartitionNeighborhood +URF.Foundation.CyclePartitionRadiusMinimax 2>&1 | tee "$RUNNER_TEMP/radius-minimax/build.log"
+          lake env lean --root="$cert" "$cert/Audit.lean" 2>&1 | tee "$RUNNER_TEMP/radius-minimax/axioms.log"
+          python3 "$cert/check_axioms.py" "$cert/Audit.lean" "$RUNNER_TEMP/radius-minimax/axioms.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: radius-local-cycle-minimax-receipts
+          path: ${{ runner.temp }}/radius-minimax/
