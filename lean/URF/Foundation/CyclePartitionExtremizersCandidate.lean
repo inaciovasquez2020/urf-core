@@ -30,7 +30,7 @@ theorem maximalCycleLengths_sum (N L : ℕ) (hNL : L ≤ N) (hL : 0 < L) :
     (N / L - 1) * L + (L + N % L) =
         (N / L - 1 + 1) * L + N % L := by ring
     _ = (N / L) * L + N % L := by rw [hs]
-    _ = N := by omega
+    _ = N := by simpa [mul_comm, add_comm] using hdiv
 
 theorem maximalCycleLengths_min (N L : ℕ) :
     ∀ t ∈ maximalCycleLengths N L, L ≤ t := by
