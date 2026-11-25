@@ -97,6 +97,39 @@ real-field incidence rank formula. Neither was compiled or imported
 against this repository's pinned Mathlib, and neither is evidence
 that the *current* ordered-edge kernel bridge is Lean-verified.
 
+## New verified unequal-length circulation bridge (2026-11-25)
+
+The source-locked GitHub Actions run
+`https://github.com/inaciovasquez2020/urf-core/actions/runs/45642318685`
+compiled `lean/URF/Foundation/CyclePartitionDirectedKernelCandidate.lean`
+and audited all four load-bearing declarations:
+`cyclePartitionDirectedKernel_succ`,
+`cyclePartitionDirectedKernel_constant`,
+`cyclePartitionDirectedKernelEquiv`,
+`cyclePartitionDirectedKernel_finrank`.
+Each has precisely allowed axiom dependencies
+`[propext, Classical.choice, Quot.sound]`; no `sorryAx`.
+
+**LEAN_VERIFIED**: For every list of positive (not necessarily equal)
+component lengths and every field `K`, the cyclic shift-difference
+linear boundary on the actual dependent graph-vertex carrier has kernel
+linearly equivalent to `Fin sizes.length → K`, and therefore dimension
+`sizes.length`. This is a genuine proof, not a dimension assumption.
+
+**OPEN**: The source of this directed boundary uses one coordinate
+per vertex as the directed edge `v → successor(v)`. The existing
+`SharpCliqueEntropy.simpleGraphBoundary` uses `OrderedEdge G`
+(unordered edges with a canonical orientation). Before substituting
+this verified dimension in the full theorem, construct and verify an
+edge-coordinate equivalence for blocks of length at least three, and
+show it conjugates the two linear boundaries (with consistent signs).
+The positive-length kernel theorem alone is not the ordered-edge
+kernel theorem. The induced rooted radius-`r` neighborhood equivalence
+also remains **OPEN IN LEAN**.
+
+All work was pushed to PR #603's isolated research branch. No
+full-radius Lean verification, independent review or merge is claimed.
+
 ## Verification boundary
 
 - Lean verified: exact scalar and observation minimax; extremal cycle
