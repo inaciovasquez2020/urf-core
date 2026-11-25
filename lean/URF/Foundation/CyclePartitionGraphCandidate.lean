@@ -44,6 +44,15 @@ requires all lengths at least three). -/
 theorem cyclePartition_vertices_finite (sizes : List ℕ) :
     Finite (CyclePartitionVertex sizes) := inferInstance
 
+/-- Exact cardinality of the dependent vertex carrier, indexed by
+the lengths of its constituent cycle components. -/
+theorem cyclePartition_vertices_card (sizes : List ℕ) :
+    Fintype.card (CyclePartitionVertex sizes) =
+      ∑ i : Fin sizes.length, sizes.get i := by
+  simp only [CyclePartitionVertex, Fintype.card_sigma, Fintype.card_fin]
+
+#print axioms URF.EntropyBridge.cyclePartition_vertices_card
+
 #print axioms URF.EntropyBridge.cyclePartition_adj_same_component
 #print axioms URF.EntropyBridge.cyclePartition_vertices_finite
 
