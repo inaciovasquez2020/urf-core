@@ -69,7 +69,7 @@ theorem cycle_count_observation_minimax
   have h := indistinguishable_extremizers_minimax obs
     (fun g => (componentCount g : ℝ) * w)
     w ((M : ℝ) * w) hle glo ghi hobs hlow hhigh hb
-  convert h using 1 <;> ring
+  simpa only [sub_mul, one_mul] using h
 
 #print axioms URF.EntropyBridge.indistinguishable_extremizers_minimax
 #print axioms URF.EntropyBridge.cycle_count_observation_minimax
