@@ -1,7 +1,9 @@
 name: Exact local entropy minimax Lean audit
 "on":
-  push:
-    branches: [research/exact-local-entropy-minimax-20261125]
+  pull_request:
+    paths:
+      - 'lean/URF/Foundation/ExactLocalEntropyMinimaxCandidate.lean'
+      - '.github/workflows/exact-local-entropy-minimax-audit.yml'
   workflow_dispatch:
 permissions:
   contents: read
