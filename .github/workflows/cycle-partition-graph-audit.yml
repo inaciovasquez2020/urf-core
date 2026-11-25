@@ -1,0 +1,50 @@
+name: Concrete cycle-partition graph Lean audit
+"on":
+  pull_request:
+    paths:
+      - 'lean/URF/Foundation/CyclePartitionGraphCandidate.lean'
+      - '.github/workflows/cycle-partition-graph-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Compile concrete graph carrier and check axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          SRC=lean/URF/Foundation/CyclePartitionGraphCandidate.lean
+          test "$(git hash-object "$SRC")" = 'dc617262a54b4db0ba5da4be378b35b57b9ce707'
+          lake build URF.Foundation.CyclePartitionExtremizersCandidate
+          lake env lean "$SRC" 2>&1 | tee "$RUNNER_TEMP/cycle-partition-graph.log"
+          python3 - "$RUNNER_TEMP/cycle-partition-graph.log" <<'PY'
+          import re,sys
+          s=open(sys.argv[1],encoding='utf8').read()
+          for name in ('cyclePartition_adj_same_component','cyclePartition_vertices_finite'):
+              f='URF.EntropyBridge.'+name
+              pattern=r"(?m)^'"+re.escape(f)+r"' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])"
+              m=re.findall(pattern,s)
+              if len(m)!=1:
+                  raise SystemExit('MISSING_AXIOM_REPORT: '+f)
+              ax={x.strip() for x in m[0].split(',') if x.strip()}
+              if not ax <= {'propext','Classical.choice','Quot.sound'}:
+                  raise SystemExit('FORBIDDEN_AXIOMS: '+f+' '+repr(ax))
+              print('LEAN_VERIFIED_ISOLATED',f,sorted(ax))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cycle-partition-graph-log
+          path: ${{ runner.temp }}/cycle-partition-graph.log
