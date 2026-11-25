@@ -82,6 +82,7 @@ theorem cyclePartition_consecutive_adj (sizes : List ℕ)
 /-- The last position of a cycle block is adjacent to its first position. -/
 theorem cyclePartition_wrap_adj (sizes : List ℕ)
     (i : Fin sizes.length) (x y : Fin (sizes.get i))
+    (hsize : 2 ≤ sizes.get i)
     (hlast : x.val + 1 = sizes.get i) (hfirst : y.val = 0) :
     (cyclePartitionSimpleGraph sizes).Adj
       (⟨i, x⟩ : CyclePartitionVertex sizes)
