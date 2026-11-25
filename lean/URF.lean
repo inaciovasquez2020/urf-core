@@ -61,3 +61,4 @@ import URF.Frontier.MetricLikeCandidateConstructionObligation
 
 import URF.Frontier.MetricCandidateCompatibilityWithScalingLimitObligation
 import URF.Foundation.SharpCliqueEntropy
+import URF.Foundation.CyclePartitionRadiusMinimax

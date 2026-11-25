@@ -1,8 +1,12 @@
 # Sharp radius-local cycle-information minimax theorem
 
-Status: **PAPER_PROVED; PARTIALLY_LEAN_VERIFIED**  
-Date: 2026-11-25. Branch: `research/exact-local-entropy-minimax-20261125` (draft PR #603).  
-Do not report a complete Lean verification of the radius-local graph theorem.
+Status: **LEAN_VERIFIED** for deterministic minimax on the represented cycle families.
+Date: 2026-11-25. PR #603.
+
+The exact Lean statements, local build receipt, source hashes and executable
+audit are in [the reproducibility certificate](radius_local_cycle_minimax/).
+The local receipt identifies the baseline checkout and the verified patch
+before publication.
 
 ## Theorem
 
@@ -116,35 +120,15 @@ linear boundary on the actual dependent graph-vertex carrier has kernel
 linearly equivalent to `Fin sizes.length → K`, and therefore dimension
 `sizes.length`. This is a genuine proof, not a dimension assumption.
 
-**OPEN**: The source of this directed boundary uses one coordinate
-per vertex as the directed edge `v → successor(v)`. The existing
-`SharpCliqueEntropy.simpleGraphBoundary` uses `OrderedEdge G`
-(unordered edges with a canonical orientation). Before substituting
-this verified dimension in the full theorem, construct and verify an
-edge-coordinate equivalence for blocks of length at least three, and
-show it conjugates the two linear boundaries (with consistent signs).
-The positive-length kernel theorem alone is not the ordered-edge
-kernel theorem. The induced rooted radius-`r` neighborhood equivalence
-also remains **OPEN IN LEAN**.
+The completed bridge `cyclePartitionIncidenceKernelEquiv` identifies the
+directed kernel with the actual ordered-edge graph incidence kernel, and
+`cyclePartition_incidenceKernel_finrank` transfers the dimension.
+`cyclePartition_rootedBallIso` and `cyclePartition_rootedBallIso_root`
+certify the modular offset map. The observation is the multiset of rooted
+induced ball isomorphism classes, and its equality is proved.
+`cyclePartition_radius_minimax_value` certifies the least achievable
+worst-case error for uniform entropy on the finite-field incidence kernel.
 
-All work was pushed to PR #603's isolated research branch. No
-full-radius Lean verification, independent review or merge is claimed.
-
-## Verification boundary
-
-- Lean verified: exact scalar and observation minimax; extremal cycle
-  partitions; simple graph construction; vertex cardinality;
-  reachability iff equal component index; connected-component quotient
-  equivalence and exact connected-component cardinality.
-- The observed vertex-count (radius-zero) minimax assembly is submitted
-  separately for compiler/axiom verification.
-- OPEN IN LEAN: induced radius-r rooted-ball equivalences for all allowed
-  variable cycle lengths; formal identification of the constructed
-  graph's `Z_1(-;F_q)` dimension with its component count; hence the
-  **full radius-local entropy theorem is not LEAN_VERIFIED**.
-- Any Hanf-locality / first-order quantifier-rank consequence requires
-  a separate bound and formalization; it is not part of this certificate.
-- Novelty and external independent review: NOT_ESTABLISHED.
-
-The main branch is unchanged. A green isolated Lean audit must not be
-mistaken for merger, full pipeline completion, or novelty review.
+The verification covers the deterministic result and audited hypotheses.
+The random-estimator statement above remains a paper argument. Novelty
+and external independent review remain unestablished.
