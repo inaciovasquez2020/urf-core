@@ -79,6 +79,25 @@ theorem cyclePartition_consecutive_adj (sizes : List ℕ)
     omega
   · exact Or.inl ⟨rfl, Or.inl hxy⟩
 
+/-- The last position of a cycle block is adjacent to its first position. -/
+theorem cyclePartition_wrap_adj (sizes : List ℕ)
+    (i : Fin sizes.length) (x y : Fin (sizes.get i))
+    (hlast : x.val + 1 = sizes.get i) (hfirst : y.val = 0) :
+    (cyclePartitionSimpleGraph sizes).Adj
+      (⟨i, x⟩ : CyclePartitionVertex sizes)
+      (⟨i, y⟩ : CyclePartitionVertex sizes) := by
+  change (⟨i, x⟩ : CyclePartitionVertex sizes) ≠ ⟨i, y⟩ ∧
+    (cyclePartitionSuccessorRel sizes ⟨i, x⟩ ⟨i, y⟩ ∨
+      cyclePartitionSuccessorRel sizes ⟨i, y⟩ ⟨i, x⟩)
+  constructor
+  · intro he
+    have hv : x.val = y.val :=
+      congrArg (fun z : CyclePartitionVertex sizes => z.2.val) he
+    omega
+  · exact Or.inl ⟨rfl, Or.inr ⟨hlast, hfirst⟩⟩
+
+#print axioms URF.EntropyBridge.cyclePartition_wrap_adj
+
 /-- Every position in a nonempty cycle block is reachable from its
 zero position, using only consecutive edges. -/
 theorem cyclePartition_zero_reachable (sizes : List ℕ)
