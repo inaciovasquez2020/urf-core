@@ -51,6 +51,19 @@ theorem cyclePartition_vertices_card (sizes : List ℕ) :
       ∑ i : Fin sizes.length, sizes.get i := by
   simp only [CyclePartitionVertex, Fintype.card_sigma, Fintype.card_fin]
 
+/-- Reachability cannot cross between separately indexed cycle blocks. -/
+theorem cyclePartition_reachable_same_component (sizes : List ℕ)
+    (u v : CyclePartitionVertex sizes)
+    (h : (cyclePartitionSimpleGraph sizes).Reachable u v) :
+    u.1 = v.1 := by
+  obtain ⟨w⟩ := h
+  induction w with
+  | nil => rfl
+  | @cons a b c hab w ih =>
+    exact (cyclePartition_adj_same_component sizes a b hab).trans ih
+
+#print axioms URF.EntropyBridge.cyclePartition_reachable_same_component
+
 #print axioms URF.EntropyBridge.cyclePartition_vertices_card
 
 #print axioms URF.EntropyBridge.cyclePartition_adj_same_component
