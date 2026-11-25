@@ -52,9 +52,12 @@ theorem cyclePartition_count_le (N L : ℕ) (hL : 0 < L)
     calc
       sizes.length * L = (List.replicate sizes.length L).sum := by simp
       _ ≤ sizes.sum := by
-        apply List.sum_le_sum
-        intro i hi
-        exact hmin i (by simpa using hi)
+        have hsum_le :
+            (sizes.map (fun _ => L)).sum ≤ (sizes.map id).sum := by
+          apply List.sum_le_sum
+          intro i hi
+          exact hmin i hi
+        simpa only [List.map_const, List.map_id] using hsum_le
   apply (Nat.le_div_iff_mul_le hL).2
   simpa [hsum] using hmul
 
