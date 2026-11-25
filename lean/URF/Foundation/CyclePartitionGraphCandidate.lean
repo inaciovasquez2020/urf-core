@@ -11,7 +11,7 @@ namespace URF.EntropyBridge
 
 /-- Vertices of the disjoint union of the cycles specified by a length list. -/
 abbrev CyclePartitionVertex (sizes : List ℕ) :=
-  (i : Fin sizes.length) × Fin (sizes.get i)
+  Σ i : Fin sizes.length, Fin (sizes.get i)
 
 /-- Clockwise successor relation, including the last-to-first edge. -/
 def cyclePartitionSuccessorRel (sizes : List ℕ)
