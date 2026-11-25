@@ -116,6 +116,23 @@ theorem cyclePartition_same_index_reachable (sizes : List ℕ)
   exact (cyclePartition_zero_reachable sizes i hpos x).symm.trans
     (cyclePartition_zero_reachable sizes i hpos y)
 
+/-- For nonempty blocks, graph reachability is exactly equality of
+the explicit cycle component indices. -/
+theorem cyclePartition_reachable_iff_index_eq (sizes : List ℕ)
+    (hpos : ∀ i : Fin sizes.length, 0 < sizes.get i)
+    (u v : CyclePartitionVertex sizes) :
+    (cyclePartitionSimpleGraph sizes).Reachable u v ↔ u.1 = v.1 := by
+  constructor
+  · exact cyclePartition_reachable_same_component sizes u v
+  · intro he
+    rcases u with ⟨i, x⟩
+    rcases v with ⟨j, y⟩
+    change i = j at he
+    subst j
+    exact cyclePartition_same_index_reachable sizes i (hpos i) x y
+
+#print axioms URF.EntropyBridge.cyclePartition_reachable_iff_index_eq
+
 #print axioms URF.EntropyBridge.cyclePartition_same_index_reachable
 
 #print axioms URF.EntropyBridge.cyclePartition_zero_reachable
