@@ -106,6 +106,18 @@ theorem cyclePartition_zero_reachable (sizes : List ℕ)
         exact ⟨w.concat hed⟩
   exact haux x.val x.isLt
 
+/-- Any two vertices in the same nonempty indexed cycle are connected. -/
+theorem cyclePartition_same_index_reachable (sizes : List ℕ)
+    (i : Fin sizes.length) (hpos : 0 < sizes.get i)
+    (x y : Fin (sizes.get i)) :
+    (cyclePartitionSimpleGraph sizes).Reachable
+      (⟨i, x⟩ : CyclePartitionVertex sizes)
+      (⟨i, y⟩ : CyclePartitionVertex sizes) := by
+  exact (cyclePartition_zero_reachable sizes i hpos x).symm.trans
+    (cyclePartition_zero_reachable sizes i hpos y)
+
+#print axioms URF.EntropyBridge.cyclePartition_same_index_reachable
+
 #print axioms URF.EntropyBridge.cyclePartition_zero_reachable
 
 #print axioms URF.EntropyBridge.cyclePartition_consecutive_adj
