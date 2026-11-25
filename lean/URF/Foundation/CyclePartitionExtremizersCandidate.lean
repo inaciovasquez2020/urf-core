@@ -57,12 +57,13 @@ theorem cyclePartition_count_le (N L : ℕ) (hL : 0 < L)
           apply List.sum_le_sum
           intro i hi
           exact hmin i hi
-        have hmap : sizes.map (fun _ => L) =
-            List.replicate sizes.length L := by
-          induction sizes with
+        have hmap : ∀ ys : List ℕ,
+            ys.map (fun _ => L) = List.replicate ys.length L := by
+          intro ys
+          induction ys with
           | nil => rfl
-          | cons x xs ih => simp [ih]
-        rw [← hmap]
+          | cons x xs ih => simpa [List.replicate_succ, ih, Nat.add_comm]
+        rw [← hmap sizes]
         simpa only [List.map_id] using hsum_le
   apply (Nat.le_div_iff_mul_le hL).2
   simpa [hsum] using hmul
