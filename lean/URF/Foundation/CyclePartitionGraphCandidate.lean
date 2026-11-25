@@ -79,6 +79,35 @@ theorem cyclePartition_consecutive_adj (sizes : List ℕ)
     omega
   · exact Or.inl ⟨rfl, Or.inl hxy⟩
 
+/-- Every position in a nonempty cycle block is reachable from its
+zero position, using only consecutive edges. -/
+theorem cyclePartition_zero_reachable (sizes : List ℕ)
+    (i : Fin sizes.length) (hpos : 0 < sizes.get i)
+    (x : Fin (sizes.get i)) :
+    (cyclePartitionSimpleGraph sizes).Reachable
+      (⟨i, ⟨0, hpos⟩⟩ : CyclePartitionVertex sizes)
+      (⟨i, x⟩ : CyclePartitionVertex sizes) := by
+  have haux : ∀ n (hn : n < sizes.get i),
+      (cyclePartitionSimpleGraph sizes).Reachable
+        (⟨i, ⟨0, hpos⟩⟩ : CyclePartitionVertex sizes)
+        (⟨i, ⟨n, hn⟩⟩ : CyclePartitionVertex sizes) := by
+    intro n
+    induction n with
+    | zero =>
+        intro hn
+        exact ⟨SimpleGraph.Walk.nil⟩
+    | succ n ih =>
+        intro hn
+        have hn' : n < sizes.get i := by omega
+        obtain ⟨w⟩ := ih hn'
+        have hed := cyclePartition_consecutive_adj sizes i
+          (⟨n, hn'⟩ : Fin (sizes.get i))
+          (⟨n + 1, hn⟩ : Fin (sizes.get i)) (by rfl)
+        exact ⟨w.concat hed⟩
+  exact haux x.val x.isLt
+
+#print axioms URF.EntropyBridge.cyclePartition_zero_reachable
+
 #print axioms URF.EntropyBridge.cyclePartition_consecutive_adj
 
 #print axioms URF.EntropyBridge.cyclePartition_reachable_same_component
