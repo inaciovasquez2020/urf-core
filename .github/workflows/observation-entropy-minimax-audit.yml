@@ -1,0 +1,50 @@
+name: Observation entropy minimax Lean audit
+"on":
+  pull_request:
+    paths:
+      - 'lean/URF/Foundation/ObservationEntropyMinimaxCandidate.lean'
+      - '.github/workflows/observation-entropy-minimax-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Compile isolated minimax observation layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          SRC='lean/URF/Foundation/ObservationEntropyMinimaxCandidate.lean'
+          test "$(git hash-object "$SRC")" = '4e2c1c5364e19b86fb06489c18286bc66bcbc779'
+          lake build URF.Foundation.ExactLocalEntropyMinimaxCandidate
+          lake env lean "$SRC" 2>&1 | tee "$RUNNER_TEMP/observation-minimax.log"
+          python3 - "$RUNNER_TEMP/observation-minimax.log" <<'PY'
+          import re,sys
+          log=open(sys.argv[1],encoding='utf8').read()
+          for name in ('indistinguishable_extremizers_minimax','cycle_count_observation_minimax'):
+              full='URF.EntropyBridge.'+name
+              pattern=r"(?m)^'"+re.escape(full)+r"' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])"
+              matches=re.findall(pattern,log)
+              if len(matches)!=1:
+                  raise SystemExit('AXIOM_REPORT_MISSING: '+full)
+              ax={x.strip() for x in matches[0].split(',') if x.strip()}
+              if not ax <= {'propext','Classical.choice','Quot.sound'}:
+                  raise SystemExit('FORBIDDEN_AXIOMS: '+full+' '+repr(ax))
+              print('LEAN_VERIFIED_ISOLATED',full,sorted(ax))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: observation-minimax-lean-log
+          path: ${{ runner.temp }}/observation-minimax.log
