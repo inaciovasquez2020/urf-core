@@ -56,7 +56,10 @@ theorem cyclePartitionDirectedKernel_succ
   have hs : cyclePartitionNext sizes hpos
       (⟨i, ⟨n, hn⟩⟩ : CyclePartitionVertex sizes) =
         (⟨i, ⟨n + 1, hn1⟩⟩ : CyclePartitionVertex sizes) := by
-    simp [cyclePartitionNext, Nat.mod_eq_of_lt hn1]
+    apply Sigma.ext
+    · rfl
+    · apply Fin.ext
+      exact Nat.mod_eq_of_lt hn1
   rw [hs] at hz
   exact sub_eq_zero.mp hz
 
