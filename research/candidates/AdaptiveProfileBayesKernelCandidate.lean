@@ -326,4 +326,84 @@ theorem coordinateFiber_count_identity {K ι : Type*}
 #print axioms projectedRange_card_mul_dual_pow
 #print axioms coordinateFiber_count_identity
 
+
+/-- Ambient dual functionals that annihilate U and factor through S. -/
+def supportedDual (K : Type*) [Field K] {ι : Type*}
+    (U : Submodule K (ι → K)) (S : Finset ι) :
+    Submodule K (Module.Dual K (ι → K)) :=
+  U.dualAnnihilator ⊓ (LinearMap.ker (coordinateProjection K S)).dualAnnihilator
+
+/-- Pullback identifies the annihilator of the projected image with the
+ambient dual functionals supported on the observed coordinates. -/
+theorem projectedAnnihilator_map_eq_supportedDual
+    {K ι : Type*} [Field K] (U : Submodule K (ι → K)) (S : Finset ι) :
+    (LinearMap.range ((coordinateProjection K S).comp U.subtype)).dualAnnihilator.map
+        (coordinateProjection K S).dualMap = supportedDual K U S := by
+  let p := coordinateProjection K S
+  let W := LinearMap.range (p.comp U.subtype)
+  change W.dualAnnihilator.map p.dualMap =
+    U.dualAnnihilator ⊓ (LinearMap.ker p).dualAnnihilator
+  ext φ
+  rw [Submodule.mem_map, Submodule.mem_inf]
+  constructor
+  · rintro ⟨ψ, hψ, rfl⟩
+    constructor
+    · apply (Submodule.mem_dualAnnihilator _).2
+      intro x hx
+      change ψ (p x) = 0
+      exact (Submodule.mem_dualAnnihilator ψ).1 hψ (p x)
+        (LinearMap.mem_range.mpr ⟨⟨x,hx⟩, rfl⟩)
+    · apply (Submodule.mem_dualAnnihilator _).2
+      intro x hx
+      change ψ (p x) = 0
+      rw [LinearMap.mem_ker.mp hx, map_zero]
+  · rintro ⟨hU, hker⟩
+    have hmem : φ ∈ LinearMap.range p.dualMap := by
+      rw [LinearMap.range_dualMap_eq_dualAnnihilator_ker]
+      exact hker
+    obtain ⟨ψ, hψ⟩ := LinearMap.mem_range.mp hmem
+    refine ⟨ψ, ?_, hψ⟩
+    apply (Submodule.mem_dualAnnihilator _).2
+    intro y hy
+    obtain ⟨x, hx⟩ := LinearMap.mem_range.mp hy
+    rw [← hx]
+    change ψ (p x.1) = 0
+    change p.dualMap ψ x.1 = 0
+    rw [hψ]
+    exact (Submodule.mem_dualAnnihilator φ).1 hU x.1 x.2
+
+theorem projectedAnnihilator_finrank_eq_supportedDual
+    {K ι : Type*} [Field K] [Fintype ι]
+    (U : Submodule K (ι → K)) (S : Finset ι) :
+    Module.finrank K
+        (LinearMap.range ((coordinateProjection K S).comp U.subtype)).dualAnnihilator =
+      Module.finrank K (supportedDual K U S) := by
+  have h := (Submodule.equivMapOfInjective (coordinateProjection K S).dualMap
+    (LinearMap.dualMap_injective_of_surjective (coordinateProjection_surjective K S))
+    (LinearMap.range ((coordinateProjection K S).comp U.subtype)).dualAnnihilator).finrank_eq
+  rw [projectedAnnihilator_map_eq_supportedDual U S] at h
+  exact h
+
+/-- A functional vanishing on the projection kernel depends only on S. -/
+theorem supportedDual_agree {K ι : Type*} [Field K]
+    (U : Submodule K (ι → K)) (S : Finset ι)
+    (φ : Module.Dual K (ι → K)) (hφ : φ ∈ supportedDual K U S)
+    (x y : ι → K) (hxy : ∀ i ∈ S, x i = y i) :
+    φ x = φ y := by
+  have hker : φ ∈ (LinearMap.ker (coordinateProjection K S)).dualAnnihilator :=
+    (Submodule.mem_inf.mp hφ).2
+  have heq : coordinateProjection K S x = coordinateProjection K S y := by
+    funext i
+    exact hxy i.1 i.2
+  have hmem : x - y ∈ LinearMap.ker (coordinateProjection K S) := by
+    rw [LinearMap.mem_ker, map_sub, heq, sub_self]
+  have hzero := (Submodule.mem_dualAnnihilator φ).1 hker (x - y) hmem
+  rw [map_sub, sub_eq_zero] at hzero
+  exact hzero
+
+#print axioms supportedDual
+#print axioms projectedAnnihilator_map_eq_supportedDual
+#print axioms projectedAnnihilator_finrank_eq_supportedDual
+#print axioms supportedDual_agree
+
 end URF.Foundation.AdaptiveProfileAudit
