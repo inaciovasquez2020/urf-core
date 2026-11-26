@@ -1,15 +1,5 @@
-AC0-CSP Unconditional Locality Separation
+# AC0-CSP manuscript — corrected scope
 
-This folder contains a standalone, unconditional result:
+The historical normalization proof and universal EntropyDepth separation are superseded by the [mathematical erratum](../../docs/math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md). The corrected TeX source establishes only the restricted path-broadcast theorem and the parallel-update counterexample. Unrestricted separation and B** remain OPEN; no SAT lower bound or TRAP conclusion follows.
 
-- A proved normalization theorem for AC0 bounded-arity update systems
-- A linear EntropyDepth lower bound for frozen AC0-local CSP instances
-- A worked example demonstrating the bound explicitly
-
-No global normalization axiom (TRAP) is used in this result.
-All extensions beyond AC0 locality are explicitly conditional
-and documented elsewhere in the repository.
-
-Citation:
-Use tag ac0-csp-v1.0.
-
+**Artifact warning:** the existing ac0-csp-separation.pdf and historical tag ac0-csp-v1.0 are superseded and retained as historical evidence. The corrected TeX has not yet been compiled into a replacement PDF. Do not cite the historical PDF as the corrected theorem. Paper-level proof; Lean NOT_RUN for the path theorem.
