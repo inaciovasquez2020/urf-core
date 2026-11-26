@@ -623,4 +623,158 @@ theorem uniformObservationMass_partition {M L : Type*} [Finite M] [Nonempty M]
 #print axioms partitionDomain_card
 #print axioms uniformObservationMass_partition
 
+
+/-- Only realized transcripts are included in the finite observation alphabet. -/
+def RealizedTrace {ι A : Type*} (t : CoordinateQueryTree ι A) :=
+  Set.range (queryTrace t)
+
+def realizedTrace {ι A : Type*} (t : CoordinateQueryTree ι A) (x : ι → A) :
+    RealizedTrace t := ⟨queryTrace t x, ⟨x,rfl⟩⟩
+
+noncomputable instance realizedTraceFintype {ι A : Type*}
+    [Fintype ι] [Finite A] (t : CoordinateQueryTree ι A) :
+    Fintype (RealizedTrace t) := by
+  letI : Finite (RealizedTrace t) := Finite.of_surjective (realizedTrace t) (by
+    rintro ⟨l, x, hx⟩
+    exact ⟨x, Subtype.ext hx⟩)
+  exact Fintype.ofFinite _
+
+theorem uniformRealizedTraceMass_eq {K ι M : Type*}
+    (t : CoordinateQueryTree ι K) (g : M → (ι → K)) (l : RealizedTrace t) :
+    uniformObservationMass (fun x => realizedTrace t (g x)) l =
+      uniformObservationMass (fun x => queryTrace t (g x)) l.1 := by
+  unfold uniformObservationMass
+  have e : {x : M // realizedTrace t (g x) = l} ≃
+      {x : M // queryTrace t (g x) = l.1} :=
+    { toFun := fun x => ⟨x.1, congrArg Subtype.val x.2⟩
+      invFun := fun x => ⟨x.1, Subtype.ext x.2⟩
+      left_inv := fun _ => rfl
+      right_inv := fun _ => rfl }
+  rw [Nat.card_congr e]
+
+noncomputable def classWeight {K ι : Type*} [Field K]
+    (U : Submodule K (ι → K)) : ℝ :=
+  (Nat.card U : ℝ) / (Nat.card (ι → K) : ℝ)
+
+theorem classWeight_eq_dual_inverse {K ι : Type*} [Field K] [Finite K] [Fintype ι]
+    (U : Submodule K (ι → K)) :
+    classWeight U = 1 / (Nat.card K : ℝ) ^ Module.finrank K U.dualAnnihilator := by
+  have hc := projectedRange_card_mul_dual_pow U
+  have hR : (Nat.card U : ℝ) * (Nat.card K : ℝ) ^
+      Module.finrank K U.dualAnnihilator = (Nat.card (ι → K) : ℝ) := by
+    exact_mod_cast hc
+  have hA : (Nat.card (ι → K) : ℝ) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt (Nat.card_pos (α := ι → K)))
+  have hq : (Nat.card K : ℝ) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt (Nat.card_pos (α := K)))
+  unfold classWeight
+  apply (div_eq_div_iff hA (pow_ne_zero _ hq)).2
+  simpa only [one_mul] using hR
+
+theorem classWeight_lt_one {K ι : Type*} [Field K] [Finite K] [Fintype ι]
+    (U : Submodule K (ι → K)) (hproper : U ≠ ⊤) :
+    classWeight U < 1 := by
+  have hx : ∃ x : ι → K, x ∉ U := by
+    by_contra h
+    apply hproper
+    exact Submodule.eq_top_iff'.2 (fun x => by by_contra hn; exact h ⟨x,hn⟩)
+  letI : Nonempty {x : ι → K // x ∉ U} := ⟨⟨hx.choose,hx.choose_spec⟩⟩
+  have hd := partitionDomain_card (fun x : ι → K => x ∈ U)
+  have hp : 0 < Nat.card {x : ι → K // x ∉ U} := Nat.card_pos
+  have hA : 0 < (Nat.card (ι → K) : ℝ) := by exact_mod_cast (Nat.card_pos (α := ι → K))
+  unfold classWeight
+  apply (div_lt_iff₀ hA).2
+  rw [one_mul]
+  exact_mod_cast (show Nat.card U < Nat.card (ι → K) by omega)
+
+noncomputable def actualQueryRisk {K ι : Type*} [Field K] [Finite K] [Fintype ι]
+    (U : Submodule K (ι → K)) (pi : ℝ) (t : CoordinateQueryTree ι K)
+    (rule : RealizedTrace t → Bool) : ℝ :=
+  decisionRisk pi
+    (uniformObservationMass (fun x : U => realizedTrace t x.1))
+    (uniformObservationMass (fun x : {x : ι → K // x ∉ U} => realizedTrace t x.1))
+    rule
+
+/-- Error expression at a given achievable dual dimension j. -/
+noncomputable def profileError {K ι : Type*} [Field K]
+    (U : Submodule K (ι → K)) (pi : ℝ) (j : ℕ) : ℝ :=
+  min pi ((1 - pi) * ((1 / (Nat.card K : ℝ)^j - classWeight U) /
+    (1 - classWeight U)))
+
+/-- For every budget there is an actual maximizing coordinate set. -/
+theorem exists_max_supportedDual {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
+    (U : Submodule K (ι → K)) (k : ℕ) :
+    ∃ S : Finset ι, S.card ≤ k ∧
+      ∀ T : Finset ι, T.card ≤ k →
+        Module.finrank K (supportedDual K U T) ≤
+          Module.finrank K (supportedDual K U S) := by
+  classical
+  let sets := (Finset.univ : Finset ι).powerset.filter (fun S => S.card ≤ k)
+  have hne : sets.Nonempty := ⟨∅, by simp [sets]⟩
+  obtain ⟨S,hS,hmax⟩ := Finset.exists_max_image sets
+    (fun T => Module.finrank K (supportedDual K U T)) hne
+  refine ⟨S, (Finset.mem_filter.mp hS).2, ?_⟩
+  intro T hT
+  exact hmax T (by simp [sets,hT])
+
+/-- No adaptive tree can beat the error at a dominating support dimension. -/
+theorem actualQueryRisk_ge_profile {K ι : Type*} [Field K] [Finite K]
+    [Fintype ι] [DecidableEq ι] (U : Submodule K (ι → K)) (hproper : U ≠ ⊤)
+    (pi : ℝ) (hpi : pi ≤ 1) (k j : ℕ)
+    (hmax : ∀ S : Finset ι, S.card ≤ k →
+      Module.finrank K (supportedDual K U S) ≤ j)
+    (t : CoordinateQueryTree ι K)
+    (hbudget : ∀ x, (queryTrace t x).length ≤ k)
+    (rule : RealizedTrace t → Bool) :
+    profileError U pi j ≤ actualQueryRisk U pi t rule := by
+  classical
+  have hx : ∃ x : ι → K, x ∉ U := by
+    by_contra h
+    apply hproper
+    exact Submodule.eq_top_iff'.2 (fun x => by by_contra hn; exact h ⟨x,hn⟩)
+  letI : Nonempty {x : ι → K // x ∉ U} := ⟨⟨hx.choose,hx.choose_spec⟩⟩
+  let mu := uniformObservationMass (fun x : U => realizedTrace t x.1)
+  let nu := uniformObservationMass (fun x : {x : ι → K // x ∉ U} => realizedTrace t x.1)
+  let lam := uniformObservationMass (realizedTrace t)
+  have hq : 1 ≤ (Nat.card K : ℝ) := by
+    exact_mod_cast (Nat.card_pos (α := K))
+  have hmix : ∀ l, lam l = classWeight U * mu l + (1 - classWeight U) * nu l := by
+    intro l
+    exact uniformObservationMass_partition (fun x : ι → K => x ∈ U) (realizedTrace t) l
+  have hbound : ∀ l, (1 / (Nat.card K : ℝ)^j) * mu l ≤ lam l := by
+    intro l
+    by_cases h : ∃ x : U, realizedTrace t x.1 = l
+    · obtain ⟨x,rfl⟩ := h
+      have hratio : lam (realizedTrace t x.1) = mu (realizedTrace t x.1) /
+          (Nat.card K : ℝ)^Module.finrank K (supportedDual K U (queriedCoordinates t x.1)) := by
+        unfold lam mu
+        rw [uniformRealizedTraceMass_eq, uniformRealizedTraceMass_eq]
+        exact uniformTraceMass_feasible_ratio U t x
+      have hj := hmax (queriedCoordinates t x.1) (queriedCoordinates_card_le_budget t k hbudget x.1)
+      rw [hratio]
+      calc
+        (1 / (Nat.card K : ℝ)^j) * mu (realizedTrace t x.1) =
+            mu (realizedTrace t x.1) / (Nat.card K : ℝ)^j := by ring
+        _ ≤ _ := div_le_div_of_nonneg_left (uniformObservationMass_nonneg _ _)
+          (pow_pos (lt_of_lt_of_le zero_lt_one hq) _) (pow_le_pow_right₀ hq hj)
+    · have hz : mu l = 0 := uniformObservationMass_eq_zero_of_not_realized _ _
+        (fun x hx => h ⟨x,hx⟩)
+      rw [hz, mul_zero]
+      exact uniformObservationMass_nonneg _ _
+  exact decisionRisk_ge_mixture_bound pi (1 / (Nat.card K : ℝ)^j) (classWeight U)
+    mu nu lam rule hpi (classWeight_lt_one U hproper)
+    (uniformObservationMass_nonneg _) (uniformObservationMass_sum_one _) hmix hbound
+
+#print axioms RealizedTrace
+#print axioms realizedTrace
+#print axioms realizedTraceFintype
+#print axioms uniformRealizedTraceMass_eq
+#print axioms classWeight
+#print axioms classWeight_eq_dual_inverse
+#print axioms classWeight_lt_one
+#print axioms actualQueryRisk
+#print axioms profileError
+#print axioms exists_max_supportedDual
+#print axioms actualQueryRisk_ge_profile
+
 end URF.Foundation.AdaptiveProfileAudit
