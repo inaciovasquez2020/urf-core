@@ -568,8 +568,7 @@ noncomputable def partitionFiberEquiv {M L : Type*} (P : M → Prop)
     | inl x => simp [x.1.2]
     | inr x => simp [x.1.2]
   · intro x
-    dsimp
-    split <;> rfl
+    by_cases h : P x.1 <;> simp [h]
 
 theorem partitionFiber_card {M L : Type*} [Finite M]
     (P : M → Prop) (g : M → L) (l : L) :
