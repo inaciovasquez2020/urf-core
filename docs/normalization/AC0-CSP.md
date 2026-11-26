@@ -1,19 +1,5 @@
-Title: AC0-Local CSP Class
+# AC0-local CSP class — model specification required
 
-Definition:
-An AC0-local CSP is a constraint satisfaction problem where:
-- Constraints have bounded arity
-- Constraint scopes form a bounded-degree hypergraph
-- Propagation rules are computable by AC0 circuits
-- No global aggregation, counting, or linear algebra is allowed
+**Status: restricted model definition; universal normalization and separation OPEN.** See [AC0 mathematical erratum](../math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md). Historical statements remain available at the source blobs listed there.
 
-Examples:
-- Bounded-width CSPs
-- Horn-SAT
-- 2-SAT
-- Fixed-template CSPs of bounded relational width
-
-Model:
-Solvers operate via iterative local propagation
-with AC0 bounded-arity updates.
-
+The intended model concerns bounded-arity constraints on a bounded-degree hypergraph, iterative updates by constant-depth bounded-fan-in Boolean circuits over a fixed finite vocabulary, and no unrestricted global aggregation. Bounded arity does not imply bounded incidence degree; 2-SAT and Horn-SAT have unbounded-degree instances. Fixed-template and bounded-width CSP propagation must be checked against the actual access/encoding hypotheses. Circuit fan-in and depth do not imply geometric locality on the original incidence graph or bounded aggregate observations. A theorem must specify initialization, allowed wiring, synchronous versus sequential cost, output semantics and success. No general class-wide lower bound follows from this definition.
