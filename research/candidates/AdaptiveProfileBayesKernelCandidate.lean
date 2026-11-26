@@ -419,11 +419,16 @@ theorem uniformObservationMass_linear {K M N : Type*}
     (f : M →ₗ[K] N) (x₀ : M) :
     uniformObservationMass f (f x₀) =
       1 / (Nat.card (LinearMap.range f) : ℝ) := by
+  have hK : Nat.card K ≠ 0 := Nat.ne_of_gt Nat.card_pos
   have hM : (Nat.card M : ℝ) ≠ 0 := by
-    have h : Nat.card M ≠ 0 := Nat.ne_of_gt Nat.card_pos
+    have h : Nat.card M ≠ 0 := by
+      rw [finiteVectorSpace_card_pow K M]
+      exact pow_ne_zero _ hK
     exact_mod_cast h
   have hR : (Nat.card (LinearMap.range f) : ℝ) ≠ 0 := by
-    have h : Nat.card (LinearMap.range f) ≠ 0 := Nat.ne_of_gt Nat.card_pos
+    have h : Nat.card (LinearMap.range f) ≠ 0 := by
+      rw [finiteVectorSpace_card_pow K (LinearMap.range f)]
+      exact pow_ne_zero _ hK
     exact_mod_cast h
   unfold uniformObservationMass
   apply (div_eq_div_iff hM hR).2
