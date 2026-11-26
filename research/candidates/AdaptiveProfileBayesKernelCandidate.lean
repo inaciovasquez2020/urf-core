@@ -239,4 +239,91 @@ theorem fixedQueries_support {ι : Type u} {A : Type v} [DecidableEq ι]
 #print axioms fixedQueries_trace_length
 #print axioms fixedQueries_support
 
+
+/-- A nonempty linear fiber is a translate of the kernel. -/
+def linearFiberEquivKer {K M N : Type*}
+    [Field K] [AddCommGroup M] [Module K M]
+    [AddCommGroup N] [Module K N]
+    (f : M →ₗ[K] N) (x₀ : M) :
+    {x : M // f x = f x₀} ≃ LinearMap.ker f where
+  toFun x := ⟨x.1 - x₀, by
+    rw [LinearMap.mem_ker, map_sub, x.2, sub_self]⟩
+  invFun z := ⟨z.1 + x₀, by
+    rw [map_add, LinearMap.mem_ker.mp z.2, zero_add]⟩
+  left_inv x := by
+    apply Subtype.ext
+    exact sub_add_cancel x.1 x₀
+  right_inv z := by
+    apply Subtype.ext
+    exact add_sub_cancel_right z.1 x₀
+
+theorem finiteVectorSpace_card_pow (K M : Type*)
+    [Field K] [Finite K] [AddCommGroup M] [Module K M]
+    [FiniteDimensional K M] :
+    Nat.card M = Nat.card K ^ Module.finrank K M := by
+  classical
+  calc
+    Nat.card M = Nat.card (Fin (Module.finrank K M) → K) :=
+      Nat.card_congr (Module.finBasis K M).equivFun.toEquiv
+    _ = Nat.card K ^ Module.finrank K M := by simp [Nat.card_fun]
+
+theorem linearFiber_card_mul_range {K M N : Type*}
+    [Field K] [Finite K] [AddCommGroup M] [Module K M]
+    [AddCommGroup N] [Module K N]
+    [FiniteDimensional K M] [FiniteDimensional K N]
+    (f : M →ₗ[K] N) (x₀ : M) :
+    Nat.card {x : M // f x = f x₀} * Nat.card (LinearMap.range f) =
+      Nat.card M := by
+  rw [Nat.card_congr (linearFiberEquivKer f x₀),
+    finiteVectorSpace_card_pow K (LinearMap.ker f),
+    finiteVectorSpace_card_pow K (LinearMap.range f),
+    finiteVectorSpace_card_pow K M, ← pow_add,
+    add_comm (Module.finrank K (LinearMap.ker f)),
+    f.finrank_range_add_finrank_ker]
+
+/-- Exact coordinate restriction, with no assumptions on the input subspace. -/
+def coordinateProjection (K : Type*) [Field K] {ι : Type*}
+    (S : Finset ι) : (ι → K) →ₗ[K] (S → K) where
+  toFun x i := x i.1
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
+
+theorem coordinateProjection_surjective (K : Type*) [Field K] {ι : Type*}
+    (S : Finset ι) : Function.Surjective (coordinateProjection K S) := by
+  classical
+  intro y
+  refine ⟨fun i => if h : i ∈ S then y ⟨i,h⟩ else 0, ?_⟩
+  funext i
+  change (if h : i.1 ∈ S then y ⟨i.1,h⟩ else 0) = y i
+  simp [i.2]
+
+/-- The codimension of the projected subspace equals its dual-annihilator dimension. -/
+theorem projectedRange_card_mul_dual_pow {K N : Type*}
+    [Field K] [Finite K] [AddCommGroup N] [Module K N]
+    [FiniteDimensional K N] (W : Submodule K N) :
+    Nat.card W * Nat.card K ^ Module.finrank K W.dualAnnihilator =
+      Nat.card N := by
+  rw [finiteVectorSpace_card_pow K W, ← pow_add,
+    Subspace.finrank_add_finrank_dualAnnihilator_eq W,
+    ← finiteVectorSpace_card_pow K N]
+
+/-- Exact integer cross-multiplication identity for the uniform law on a
+subspace restricted to coordinates, on every feasible observation. -/
+theorem coordinateFiber_count_identity {K ι : Type*}
+    [Field K] [Finite K] [Fintype ι]
+    (U : Submodule K (ι → K)) (S : Finset ι) (x₀ : U) :
+    Nat.card {x : U // coordinateProjection K S x.1 =
+        coordinateProjection K S x₀.1} *
+      Nat.card (LinearMap.range ((coordinateProjection K S).comp U.subtype)) =
+      Nat.card U := by
+  exact linearFiber_card_mul_range ((coordinateProjection K S).comp U.subtype) x₀
+
+#print axioms linearFiberEquivKer
+#print axioms finiteVectorSpace_card_pow
+#print axioms linearFiber_card_mul_range
+#print axioms coordinateProjection
+#print axioms coordinateProjection_surjective
+#print axioms projectedRange_card_mul_dual_pow
+#print axioms coordinateFiber_count_identity
+
 end URF.Foundation.AdaptiveProfileAudit
