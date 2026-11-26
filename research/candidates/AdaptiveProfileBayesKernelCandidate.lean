@@ -510,7 +510,7 @@ theorem uniformTraceMass_feasible_ratio {K ι : Type*}
       Module.finrank K (supportedDual K U S) = (Nat.card (S → K) : ℝ) := by
     exact_mod_cast hc
   change _ = _ / (Nat.card K : ℝ) ^ Module.finrank K (supportedDual K U S)
-  rw [ha, hu, ← hcR, div_div_eq_div_mul]
+  rw [ha, hu, ← hcR, div_div]
 
 #print axioms uniformObservationMass
 #print axioms uniformObservationMass_linear
