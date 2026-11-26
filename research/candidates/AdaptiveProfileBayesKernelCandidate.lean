@@ -519,4 +519,109 @@ theorem uniformTraceMass_feasible_ratio {K ι : Type*}
 #print axioms uniformCoordinateMass_ambient
 #print axioms uniformTraceMass_feasible_ratio
 
+
+theorem uniformObservationMass_nonneg {M L : Type*} (g : M → L) (l : L) :
+    0 ≤ uniformObservationMass g l := by
+  unfold uniformObservationMass
+  positivity
+
+theorem uniformObservationMass_eq_zero_of_not_realized {M L : Type*}
+    (g : M → L) (l : L) (h : ∀ x, g x ≠ l) :
+    uniformObservationMass g l = 0 := by
+  letI : IsEmpty {x : M // g x = l} := ⟨fun x => h x.1 x.2⟩
+  simp [uniformObservationMass, Nat.card_eq_zero_of_isEmpty]
+
+/-- The uniform observation law is normalized on any finite observation type. -/
+theorem uniformObservationMass_sum_one {M L : Type*}
+    [Finite M] [Nonempty M] [Fintype L] (g : M → L) :
+    ∑ l, uniformObservationMass g l = 1 := by
+  classical
+  letI := Fintype.ofFinite M
+  have hcard : (∑ l : L, Nat.card {x : M // g x = l}) = Nat.card M := by
+    simp_rw [Nat.card_eq_fintype_card, Fintype.card_subtype]
+    simpa using Finset.sum_card_fiberwise_eq_card_filter
+      (Finset.univ : Finset M) (Finset.univ : Finset L) g
+  have hcast : (∑ l : L, (Nat.card {x : M // g x = l} : ℝ)) =
+      (Nat.card M : ℝ) := by exact_mod_cast hcard
+  have hM : (Nat.card M : ℝ) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt (Nat.card_pos (α := M)))
+  unfold uniformObservationMass
+  rw [← Finset.sum_div, hcast, div_self hM]
+
+/-- Explicit equivalence between a partitioned observation fiber and
+the unpartitioned fiber; this makes the mixture identity a count, not an assumption. -/
+noncomputable def partitionFiberEquiv {M L : Type*} (P : M → Prop)
+    (g : M → L) (l : L) :
+    ({x : {m : M // P m} // g x.1 = l} ⊕
+      {x : {m : M // ¬ P m} // g x.1 = l}) ≃ {m : M // g m = l} := by
+  classical
+  refine
+    { toFun := fun s => match s with
+        | .inl x => ⟨x.1.1,x.2⟩
+        | .inr x => ⟨x.1.1,x.2⟩
+      invFun := fun x => if h : P x.1 then
+        .inl ⟨⟨x.1,h⟩,x.2⟩ else .inr ⟨⟨x.1,h⟩,x.2⟩
+      left_inv := ?_
+      right_inv := ?_ }
+  · intro x
+    cases x with
+    | inl x => simp [x.1.2]
+    | inr x => simp [x.1.2]
+  · intro x
+    dsimp
+    split <;> rfl
+
+theorem partitionFiber_card {M L : Type*} [Finite M]
+    (P : M → Prop) (g : M → L) (l : L) :
+    Nat.card {x : {m : M // P m} // g x.1 = l} +
+      Nat.card {x : {m : M // ¬ P m} // g x.1 = l} =
+        Nat.card {m : M // g m = l} := by
+  rw [← Nat.card_sum, Nat.card_congr (partitionFiberEquiv P g l)]
+
+theorem partitionDomain_card {M : Type*} [Finite M] (P : M → Prop) :
+    Nat.card {m : M // P m} + Nat.card {m : M // ¬ P m} = Nat.card M := by
+  classical
+  rw [← Nat.card_sum, Nat.card_congr (Equiv.sumCompl P)]
+
+/-- Uniform ambient mass is the exact cardinality-weighted mixture of
+the uniform class and its uniform complement. Both classes must be nonempty. -/
+theorem uniformObservationMass_partition {M L : Type*} [Finite M] [Nonempty M]
+    (P : M → Prop) [Nonempty {m : M // P m}] [Nonempty {m : M // ¬ P m}]
+    (g : M → L) (l : L) :
+    uniformObservationMass g l =
+      ((Nat.card {m : M // P m} : ℝ) / (Nat.card M : ℝ)) *
+        uniformObservationMass (fun x : {m : M // P m} => g x.1) l +
+      (1 - (Nat.card {m : M // P m} : ℝ) / (Nat.card M : ℝ)) *
+        uniformObservationMass (fun x : {m : M // ¬ P m} => g x.1) l := by
+  have hM : (Nat.card M : ℝ) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt (Nat.card_pos (α := M)))
+  have hP : (Nat.card {m : M // P m} : ℝ) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt (Nat.card_pos (α := {m : M // P m})))
+  have hC : (Nat.card {m : M // ¬ P m} : ℝ) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt (Nat.card_pos (α := {m : M // ¬ P m})))
+  have hd : (Nat.card {m : M // P m} : ℝ) +
+      (Nat.card {m : M // ¬ P m} : ℝ) = (Nat.card M : ℝ) := by
+    exact_mod_cast partitionDomain_card P
+  have hf : (Nat.card {x : {m : M // P m} // g x.1 = l} : ℝ) +
+      (Nat.card {x : {m : M // ¬ P m} // g x.1 = l} : ℝ) =
+        (Nat.card {m : M // g m = l} : ℝ) := by
+    exact_mod_cast partitionFiber_card P g l
+  unfold uniformObservationMass
+  rw [← hf]
+  have hweight : 1 - (Nat.card {m : M // P m} : ℝ) / (Nat.card M : ℝ) =
+      (Nat.card {m : M // ¬ P m} : ℝ) / (Nat.card M : ℝ) := by
+    field_simp
+    linarith
+  rw [hweight]
+  field_simp
+  <;> ring
+
+#print axioms uniformObservationMass_nonneg
+#print axioms uniformObservationMass_eq_zero_of_not_realized
+#print axioms uniformObservationMass_sum_one
+#print axioms partitionFiberEquiv
+#print axioms partitionFiber_card
+#print axioms partitionDomain_card
+#print axioms uniformObservationMass_partition
+
 end URF.Foundation.AdaptiveProfileAudit
