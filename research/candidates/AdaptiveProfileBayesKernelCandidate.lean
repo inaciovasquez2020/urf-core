@@ -529,7 +529,7 @@ theorem uniformObservationMass_eq_zero_of_not_realized {M L : Type*}
     (g : M → L) (l : L) (h : ∀ x, g x ≠ l) :
     uniformObservationMass g l = 0 := by
   letI : IsEmpty {x : M // g x = l} := ⟨fun x => h x.1 x.2⟩
-  simp [uniformObservationMass, Nat.card_eq_zero_of_isEmpty]
+  simp [uniformObservationMass, Nat.card_of_isEmpty]
 
 /-- The uniform observation law is normalized on any finite observation type. -/
 theorem uniformObservationMass_sum_one {M L : Type*}
