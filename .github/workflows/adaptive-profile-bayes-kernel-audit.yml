@@ -42,7 +42,7 @@ jobs:
           from pathlib import Path
           log = Path(sys.argv[1]).read_text()
           prefix = "URF.Foundation.AdaptiveProfileAudit."
-          names = ["decisionRisk","bayesRisk","bayesRisk_le_decisionRisk","bayesRisk_attained","bayesRisk_ge_likelihood","bayesRisk_eq_of_likelihood","likelihood_of_mixture","decisionRisk_ge_mixture_bound"]
+          names = ["decisionRisk","bayesRisk","bayesRisk_le_decisionRisk","bayesRisk_attained","bayesRisk_ge_likelihood","bayesRisk_eq_of_likelihood","likelihood_of_mixture","decisionRisk_ge_mixture_bound","CoordinateQueryTree","queryTrace","traceMatches","queryTrace_eq_iff_matches","queriedCoordinates","queryTrace_eq_iff_agreeCoordinates","queriedCoordinates_card_le_trace_length","queriedCoordinates_card_le_budget","fixedQueries","fixedQueries_trace_coordinates","fixedQueries_trace_length","fixedQueries_support"]
           allowed = {"propext", "Classical.choice", "Quot.sound"}
           for name in names:
               m = re.search(r"'" + re.escape(prefix+name) + r"' depends on axioms:\s*\[([^\]]*)\]", log)
@@ -51,7 +51,7 @@ jobs:
                   assert axioms <= allowed, (name, axioms)
               else:
                   assert "'" + prefix + name + "' does not depend on any axioms" in log, name
-          print("AXIOM_AUDIT := PASS_8_OF_8")
+          print("AXIOM_AUDIT := PASS_20_OF_20")
           PY
       - uses: actions/upload-artifact@v4
         if: always()
