@@ -1,19 +1,7 @@
-Title: Proof Sketch of (B**) for AC0 Update Algebra
+# B** normalization proof sketch — withdrawn inference
 
-1. AC0 circuits of constant depth correspond to FO-definable queries
-   over finite structures with bounded quantifier rank.
+**Status: OPEN.** See [AC0 mathematical erratum](../math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md). Historical statements remain available at the source blobs listed there.
 
-2. Bounded fan-in and bounded arity ensure that each update step
-   modifies only O(1) relations with O(1) new dependencies.
+The historical argument inferred O(1) aggregate information per round from bounded fan-in and arity. For n independent uniform bits, parallel coordinatewise copying or negation exposes n bits relative to an input-independent initial transcript. Thus the inference is REFUTED even for depth-one radius-zero updates. Bounded fan-in bounds dependency size per output, not the number of outputs. The statement also needs a circuit wiring/encoding and a proved cost-preserving simulation; bounded quantifier rank alone is not strict neighborhood locality.
 
-3. By classical results (Immerman–Vardi style),
-   bounded-depth AC0 update sequences can be unfolded into
-   bounded-rank logical refinement over time layers.
-
-4. Each refinement step increases descriptive information by O(1),
-   hence EntropyDepth is preserved up to a constant factor.
-
-Conclusion:
-AC0 bounded-arity update systems embed into bounded-rank logic refinement.
-Therefore (B**) holds for this restricted model.
-
+A valid restricted statement: if each round exposes at most c bits of conditional entropy given the preceding nested transcript, its conditional mutual information about a fixed hidden variable is at most c. Summing the increments bounds total information acquisition. This does not establish the missing refinement simulation, terminal uncertainty requirement, or unrestricted separation. The exact path-broadcast theorem in the erratum remains valid.

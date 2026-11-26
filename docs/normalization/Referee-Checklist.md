@@ -1,21 +1,8 @@
-Referee Checklist
+# Referee checklist — corrected
 
-Unconditional:
-- B** AC0 bounded-arity normalization: proved
-- AC0-local CSP separation: proved
-- No use of TRAP in these results
-
-Conditional:
-- Any claim extending to all polytime algorithms: conditional on TRAP
-- No claim of P ≠ NP without TRAP
-
-Refuted:
-- Axiom A (bounded update normalization): falsified by Gaussian elimination
-
-Logic:
-- FO^k replaced by bounded-rank logic throughout normalization layer
-
-Scope discipline:
-- All conditional dependencies explicitly labeled
-- No cross-contamination between unconditional and conditional sections
-
+- **Paper proof:** exact n-1 rounds for seeded path broadcast under synchronous radius-one local output semantics; see the [erratum](../math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md).
+- **REFUTED inference:** bounded fan-in/arity implies O(1) aggregate information per step; parallel independent outputs are a counterexample.
+- **OPEN:** B**, unrestricted AC0 normalization, universal EDA separation, bounded aggregation lift, and TRAP.
+- **Conditional only:** a proposed transfer must prove encoding, access, capacity, terminal residual entropy and cost hypotheses. TRAP is unproved; no P vs NP conclusion follows.
+- **Logic:** no automatic substitution of bounded rank for FO^k or strict rooted-neighborhood locality.
+- **Evidence:** distinguish paper proofs, computations, Lean receipts and historical claims. See [foundational erratum](../foundations/ENTROPY_TRAP_FOUNDATIONAL_ERRATUM_2026_11_26.md).

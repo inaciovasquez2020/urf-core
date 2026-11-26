@@ -1,28 +1,7 @@
-Title: Control–Information Coupling Principle (Conditional)
+# Control–information accounting — corrected scope
 
-Status:
-Conditional. Proven for restricted models; open for general RAM.
+**Status: historical write-count inference REFUTED under data-memory-only conditioning/cost; general coupling and equivalence to TRAP OPEN.** See the [foundational erratum](../foundations/ENTROPY_TRAP_FOUNDATIONAL_ERRATUM_2026_11_26.md) and [AC0 erratum](../math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md).
 
-Statement:
-In deterministic RAM computation, the entropy accumulated in control
-flow (instruction/address trace) is upper-bounded by the cumulative
-number of bits written to memory, up to constant factors.
+If initial configuration includes the complete input of a fixed deterministic program, the trace is determined by it and conditional entropy is zero. If conditioning excludes read-only random input and the cost counts only data-memory writes, a branching program can read n independent bits, branch and rejoin at each read, and expose all n bits through the control trace without any data-memory writes. Indirect addressing is not required. Charging control-state changes or registers defines a different model. Variable costs also require a pathwise or expected formulation.
 
-Formally:
-Let Δ_t be the number of bits written to memory at step t. Then
-H(p_0, …, p_T | M_0) ≤ Σ_t Δ_t + O(1).
-
-Scope of validity:
-- Proven for oblivious RAM, fixed-access RAM, branching programs,
-  AC0 update systems, and bounded-update algebras.
-- Open for general RAM with unrestricted indirect addressing.
-
-Role:
-This principle is equivalent to TRAP. If true, TRAP holds and
-locality-based results lift to all polynomial-time computation.
-If false, any counterexample must exploit indirect addressing to
-accumulate information without corresponding memory writes.
-
-Non-claims:
-No unconditional statement about P vs NP is made here.
-
+Valid replacement: for finite random variables, if P is a deterministic function of initial side information M and observations R_1,...,R_T, then H(P|M) <= H(R_1,...,R_T|M) <= sum_t log |alphabet(R_t)|, in consistent units. Fix/pad the horizon or charge termination. This is observation-capacity accounting, not a memory-write bound or a TRAP equivalence. No P vs NP conclusion follows.

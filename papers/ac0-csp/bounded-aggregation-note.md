@@ -1,18 +1,3 @@
-Title: Conditional Note on Bounded Aggregation
+# Bounded aggregation — open conjecture
 
-Scope:
-We consider AC0 extended with fixed-threshold aggregation gates.
-
-Status:
-Unproven.
-
-Observation:
-Such gates permit limited non-local correlation but do not allow
-unbounded information creation in one step.
-
-Conjecture:
-Bounded aggregation increases EntropyDepth efficiency by at most
-polylogarithmic factors.
-
-This note is explicitly conditional and not used elsewhere.
-
+Fixed-threshold gates can have bounded per-gate output, but arbitrary parallel collections need not have bounded aggregate information disclosure. The proposed polylogarithmic EntropyDepth distortion remains OPEN and needs explicit aggregate capacity, encoding, access and cost preservation. The underlying unrestricted AC0 normalization is not proved. No lift to general polytime or TRAP is asserted. See [erratum](../../docs/math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md).

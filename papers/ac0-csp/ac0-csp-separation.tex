@@ -1,57 +1,66 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm,geometry}
 \geometry{margin=1in}
-
-\title{An Unconditional Locality Separation for AC$^0$-Local CSPs}
+\title{Synchronous Local Path Broadcast and the Limits of AC$^0$ Normalization}
 \author{Inacio F. Vasquez}
-\date{}
-
+\date{Corrected scope: November 26, 2026}
 \newtheorem{theorem}{Theorem}
-\newtheorem{definition}{Definition}
-
 \begin{document}
 \maketitle
-
 \begin{abstract}
-We prove an unconditional separation for a broad class of
-constraint satisfaction problems solvable by local propagation.
-Any solver whose update rules are expressible by constant-depth
-AC$^0$ circuits with bounded arity necessarily requires linear
-EntropyDepth on frozen instances. No global normalization axiom
-is assumed.
+We distinguish bounded per-output circuit dependence from bounded aggregate
+observation capacity. The former does not imply the latter. We prove an
+exact minimum-round bound for seeded broadcast on a path under synchronous
+nearest-neighbor communication and distributed output requirements.
+The historical unrestricted AC$^0$ normalization and universal
+EntropyDepth separation are not established.
 \end{abstract}
-
-\section{AC$^0$-Local CSPs}
-
-\begin{definition}
-An AC$^0$-local CSP is a constraint satisfaction problem whose
-constraints have bounded arity and bounded degree, and whose
-solver dynamics consist of iterative local propagation steps
-computable by constant-depth AC$^0$ circuits with bounded fan-in
-over a fixed finite vocabulary.
-\end{definition}
-
-\section{Normalization}
-
-\begin{theorem}[AC$^0$ Normalization]
-Every AC$^0$ bounded-arity update system admits a simulation by
-bounded-rank logical refinement, preserving EntropyDepth up to
-constant factors.
+\section{Parallel update counterexample}
+Let $X$ be uniform on $\{0,1\}^n$, and let $Y_i=1-X_i$.
+Each of the $n$ outputs is computed by a depth-one fan-in-one gate.
+Relative to an input-independent initial observation, $Y$ exposes
+$I(X;Y)=H(X)=n$ bits. Thus bounded fan-in, arity and depth do not
+supply a constant aggregate information bound. If the initial
+observation already contains $X$, the conditional information gain is
+zero instead; the observation model must be fixed.
+A bounded dependency cone per output also need not be a geometrically
+local neighborhood of the original constraint graph.
+\section{Exact restricted distributed result}
+\begin{theorem}
+Let $P_n$ be the path with $n\geq1$ vertices.
+Only the first vertex receives an arbitrary bit $b$ initially, with
+all other initial data fixed independently of $b$.
+Each deterministic synchronous round updates each vertex using only
+its own and adjacent states from the preceding round.
+Require every vertex to output $b$ correctly for both seeds, with
+no nonlocal communication, input-dependent auxiliary initialization,
+or substitute global readout.
+The minimum worst-case number of rounds is $n-1$.
 \end{theorem}
-
-\section{Separation}
-
-\begin{theorem}[Unconditional Separation]
-For every AC$^0$-local CSP solver $A$ and every frozen instance $F$,
-\[
-\mathrm{EDA}_A(F) = \Theta(n).
-\]
-\end{theorem}
-
-\section{Conclusion}
-
-The locality frontier is unconditionally closed for AC$^0$-local
-constraint satisfaction. Any algorithm escaping this barrier must
-exit the AC$^0$-local regime.
+\begin{proof}
+Induct on $t$ to show the state of each vertex after $t$ rounds
+depends only on the initial states at distance at most $t$.
+At time zero this holds by definition; the union of the preceding
+neighbor dependency balls is contained in the next ball.
+If $t<n-1$, the last vertex has identical states for the two seeds,
+but different required outputs. Hence no correct algorithm can
+finish by that round for both seeds.
+Broadcasting the known bit to adjacent vertices each round attains
+$n-1$ rounds, including zero rounds for $n=1$.
+\end{proof}
+\section{Scope and open obligations}
+This theorem concerns distributed output and round complexity,
+not deciding satisfiability of an already known family.
+The unseeded implication chain has both all-zero and all-one
+satisfying assignments; unit propagation does not start without a seed.
+With the unit clause $x_1=1$, synchronous unit propagation forces
+the first $\min(n,t+1)$ variables after $t$ rounds.
+This is an algorithm-specific result.
+No universal $\mathrm{EDA}_A(F)=\Theta(n)$ assertion follows.
+The proposed B** simulation requires explicit encoding, access,
+aggregate capacity, terminal uncertainty and cost preservation.
+Bounded quantifier rank alone is not strict neighborhood locality.
+TRAP remains an unproved assumption; no general SAT or P versus NP
+lower bound is derived. Lean verification of the path theorem is
+not claimed.
 \end{document}
-

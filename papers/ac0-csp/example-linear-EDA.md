@@ -1,17 +1,5 @@
-Title: Worked Example of Linear EntropyDepth
+# Corrected implication-chain example
 
-Instance:
-A bounded-degree 2-SAT instance consisting of a chain of implications:
-x1 → x2 → x3 → … → xn
+The unseeded chain x1 -> x2 -> ... -> xn has at least the all-zero and all-one satisfying assignments and no initial unit clause. Add x1=1. Count time zero as the initial unit assignment. With synchronous unit propagation using only assignments known at round start, exactly the first min(n,t+1) variables are forced after t rounds, by induction on the newly forced successor. Completion occurs after n-1 rounds. This is a bound for that algorithm, not every solver or SAT decision.
 
-Propagation:
-Unit propagation can only infer xi+1 after xi is fixed.
-Each refinement step resolves exactly one new variable.
-
-EntropyDepth:
-After t steps, only variables {x1,…,xt} are fixed.
-Global solution requires n steps.
-
-Conclusion:
-EDA = Θ(n) for this frozen instance under any AC0-local solver.
-
+For the distinct distributed output model, initialize only the first vertex with an arbitrary seed bit, require every vertex to output it, and allow only synchronous nearest-neighbor updates. The last vertex cannot depend on the seed before n-1 rounds; forwarding attains the bound. See [erratum](../../docs/math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md).

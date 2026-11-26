@@ -1,18 +1,5 @@
-Title: Axiom B — Logical Refinement Normalization
+# Axiom B — Logical Refinement Normalization
 
-Status: Candidate axiom (restricted, partially provable)
+**Status: candidate assumption; general and claimed constant-distortion restricted simulations OPEN.** See [AC0 mathematical erratum](../math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md). Historical statements remain available at the source blobs listed there.
 
-Statement:
-Any computation expressed as bounded-fan-in updates over a fixed
-finite vocabulary admits a simulation by a bounded-rank logical
-refinement system (FO^r or bounded-rank logic), preserving
-EntropyDepth up to constant factors.
-
-Meaning:
-Axiom B upgrades bounded update structure to logical locality.
-It does not assert that all polynomial-time algorithms satisfy
-bounded update structure.
-
-Known validity:
-Provable for oblivious RAM and fixed-order streaming models.
-
+Proposed statement: bounded-fan-in updates over a fixed finite vocabulary admit bounded-rank refinement simulation preserving EntropyDepth up to constant factors. This statement does not follow from bounded fan-in. Claims for oblivious RAM or fixed-order streaming require an actual encoding, selected observations, cost and distortion proof. A restricted expanded space-time graph construction and selected-transcript preservation are described in the [foundational erratum](../foundations/ENTROPY_TRAP_FOUNDATIONAL_ERRATUM_2026_11_26.md); they do not establish original-instance locality or global normalization. Axiom B does not imply universal polytime applicability.

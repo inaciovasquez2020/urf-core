@@ -1,60 +1,16 @@
-Referee Map — Chronos / EntropyDepth
+# Referee map — corrected claim classifications
 
-This document classifies results by epistemic status.
+## Paper-level mathematical results
+For a fixed hidden finite variable X and nested finite transcripts, conditional entropy decrease equals conditional mutual information. This does not identify evolving-state marginal entropy contraction with information acquisition or elapsed time. The [foundational erratum](../foundations/ENTROPY_TRAP_FOUNDATIONAL_ERRATUM_2026_11_26.md) gives the correction and counterexamples. The [AC0 erratum](../math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md) establishes exact seeded path broadcast under synchronous nearest-neighbor local-output requirements, not arbitrary SAT decision complexity. Separately audited Lean declarations retain their own exact hypotheses and receipts.
 
-1. Proven (Unconditional)
-2. Conditional (Explicit Hypotheses Stated)
-3. Framework / Reduction Results
-4. Explicit Non-Claims
+## Conditional results and open hypotheses
+- H1: actual refinement procedure and admissibility must be connected to a specified logical signature and access semantics; fixed variable count or rank alone does not supply that bridge.
+- H2: each round has an independently justified aggregate conditional-information cap.
+- H3: the task requires a nontrivial uncertainty reduction or independently proved semantic obstruction.
+If a correct run must acquire at least cn bits of information and each round acquires at most C bits, then the round count is at least cn/C for positive constants c and C. This linear bound does not exclude polynomial time. No assertion that every polynomial-time algorithm violates H1-H3 follows.
 
-No claim outside Section 1 is asserted unconditionally.
+## Framework / open reductions
+B**, unrestricted AC0 separation, normalization into refinement, TRAP and constant-distortion cost transfer are OPEN. A polynomial simulation or bounded fan-in does not establish the missing access/cost contract. These research directions are not theorem-level closures.
 
---------------------------------------------------
-1. Proven (Unconditional)
---------------------------------------------------
-
-• Formal definition of EntropyDepth.
-• Correctness of the refinement–entropy accounting identity.
-• Monotonicity of EntropyDepth under admissible refinement.
-• Equivalence of transcript capacity and entropy non-amplification.
-
---------------------------------------------------
-2. Conditional Results (Explicit Hypotheses)
---------------------------------------------------
-
-All results in this section are conditional on the stated hypotheses and are not asserted unconditionally.
-
-Hypothesis H1 (Locality):
-Refinement procedures are FO^k-admissible with fixed k.
-
-Hypothesis H2 (Bounded Information Loss):
-Each refinement step incurs O(1) conditional mutual information loss.
-
-Hypothesis H3 (Residual Entropy Persistence):
-Adaptive refinement preserves Ω(n) residual entropy unless depth is Ω(n).
-
-Under H1–H3:
-• EntropyDepth lower bounds of order Ω(n) (or stronger, as stated) hold.
-• Any polynomial-time refinement algorithm must violate at least one hypothesis.
-
---------------------------------------------------
-3. Framework / Reduction Results
---------------------------------------------------
-
-• Definition of EntropyDepth as a refinement-complexity invariant.
-• Formal separation between refinement-based and global-invariant algorithms.
-• Reduction of P ≠ NP lower-bound attempts to entropy non-amplification.
-• Normalization of algorithmic strategies into admissible refinement systems.
-• Identification of exact obstruction points requiring new mathematics.
-
---------------------------------------------------
-4. Explicit Non-Claims
---------------------------------------------------
-
-• This work does not claim an unconditional proof of P ≠ NP.
-• This work does not claim a resolution of any Clay Millennium Problem.
-• No lower bound is asserted outside explicitly stated hypotheses.
-• No probabilistic or empirical evidence is used as proof.
-• No claim depends on unverified physical assumptions.
-• No result asserts optimal constants unless stated.
-
+## Non-claims
+No unconditional P versus NP result, Clay Millennium solution, unrestricted lower bound, or physical claim follows. Paper proofs, formal proofs, computation and framework statements must be classified separately.
