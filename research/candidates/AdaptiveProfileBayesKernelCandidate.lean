@@ -777,4 +777,146 @@ theorem actualQueryRisk_ge_profile {K ι : Type*} [Field K] [Finite K]
 #print axioms exists_max_supportedDual
 #print axioms actualQueryRisk_ge_profile
 
+
+/-- A fixed query list containing each selected coordinate once attains
+the exact Bayes error associated with its supported dual dimension. -/
+theorem fixedQueries_attains_profile {K ι : Type*} [Field K] [Finite K]
+    [Fintype ι] [DecidableEq ι] (U : Submodule K (ι → K)) (hproper : U ≠ ⊤)
+    (pi : ℝ) (hpi : pi ≤ 1) (S : Finset ι) :
+    ∃ rule : RealizedTrace (fixedQueries (A := K) S.toList) → Bool,
+      actualQueryRisk U pi (fixedQueries S.toList) rule =
+        profileError U pi (Module.finrank K (supportedDual K U S)) := by
+  classical
+  have hx : ∃ x : ι → K, x ∉ U := by
+    by_contra h
+    apply hproper
+    exact Submodule.eq_top_iff'.2 (fun x => by by_contra hn; exact h ⟨x,hn⟩)
+  letI : Nonempty {x : ι → K // x ∉ U} := ⟨⟨hx.choose,hx.choose_spec⟩⟩
+  let t := fixedQueries (A := K) S.toList
+  let mu := uniformObservationMass (fun x : U => realizedTrace t x.1)
+  let nu := uniformObservationMass (fun x : {x : ι → K // x ∉ U} => realizedTrace t x.1)
+  let lam := uniformObservationMass (realizedTrace t)
+  let a := 1 / (Nat.card K : ℝ)^Module.finrank K (supportedDual K U S)
+  let b := classWeight U
+  have hb : b < 1 := classWeight_lt_one U hproper
+  have hmix : ∀ l, lam l = b * mu l + (1 - b) * nu l := by
+    intro l
+    exact uniformObservationMass_partition (fun x : ι → K => x ∈ U) (realizedTrace t) l
+  have heq : ∀ l, mu l ≠ 0 → nu l = ((a - b) / (1 - b)) * mu l := by
+    intro l hn
+    have hreal : ∃ x : U, realizedTrace t x.1 = l := by
+      by_contra h
+      exact hn (uniformObservationMass_eq_zero_of_not_realized _ _
+        (fun x hx => h ⟨x,hx⟩))
+    obtain ⟨x,rfl⟩ := hreal
+    have hs : queriedCoordinates t x.1 = S := by
+      rw [show t = fixedQueries (A := K) S.toList from rfl,
+        fixedQueries_support, Finset.toList_toFinset]
+    have hr : lam (realizedTrace t x.1) = a * mu (realizedTrace t x.1) := by
+      have hr' : lam (realizedTrace t x.1) = mu (realizedTrace t x.1) /
+          (Nat.card K : ℝ)^Module.finrank K (supportedDual K U S) := by
+        unfold lam mu
+        rw [uniformRealizedTraceMass_eq, uniformRealizedTraceMass_eq]
+        have h := uniformTraceMass_feasible_ratio U t x
+        rw [hs] at h
+        exact h
+      rw [hr']
+      unfold a
+      ring
+    have hm := hmix (realizedTrace t x.1)
+    rw [hr] at hm
+    calc
+      nu (realizedTrace t x.1) =
+          ((a - b) * mu (realizedTrace t x.1)) / (1 - b) :=
+        (eq_div_iff (ne_of_gt (sub_pos.mpr hb))).2 (by linarith)
+      _ = _ := by ring
+  obtain ⟨rule, hrule⟩ := bayesRisk_attained pi mu nu
+  refine ⟨rule, ?_⟩
+  change decisionRisk pi mu nu rule = min pi ((1 - pi) * ((a - b) / (1 - b)))
+  rw [hrule]
+  exact bayesRisk_eq_of_likelihood pi ((a - b) / (1 - b)) mu nu hpi
+    (uniformObservationMass_nonneg _) (uniformObservationMass_nonneg _)
+    (uniformObservationMass_sum_one _) heq
+
+/-- A maximizing set is selected from the actual finite family of budget-feasible sets. -/
+noncomputable def maximizingCoordinates {K ι : Type*} [Field K] [Fintype ι]
+    [DecidableEq ι] (U : Submodule K (ι → K)) (k : ℕ) : Finset ι :=
+  Classical.choose (exists_max_supportedDual U k)
+
+noncomputable def profileRank {K ι : Type*} [Field K] [Fintype ι]
+    [DecidableEq ι] (U : Submodule K (ι → K)) (k : ℕ) : ℕ :=
+  Module.finrank K (supportedDual K U (maximizingCoordinates U k))
+
+theorem maximizingCoordinates_spec {K ι : Type*} [Field K] [Fintype ι]
+    [DecidableEq ι] (U : Submodule K (ι → K)) (k : ℕ) :
+    (maximizingCoordinates U k).card ≤ k ∧
+      ∀ T : Finset ι, T.card ≤ k →
+        Module.finrank K (supportedDual K U T) ≤ profileRank U k :=
+  Classical.choose_spec (exists_max_supportedDual U k)
+
+theorem profileError_eq_explicit {K ι : Type*} [Field K] [Finite K] [Fintype ι]
+    (U : Submodule K (ι → K)) (pi : ℝ) (j : ℕ) :
+    profileError U pi j =
+      min pi ((1 - pi) * ((1 / (Nat.card K : ℝ)^j -
+        1 / (Nat.card K : ℝ)^Module.finrank K U.dualAnnihilator) /
+        (1 - 1 / (Nat.card K : ℝ)^Module.finrank K U.dualAnnihilator))) := by
+  unfold profileError
+  rw [classWeight_eq_dual_inverse]
+
+/-- Sharp adaptive-query optimum, with a fixed budget-feasible strategy
+attaining the universal deterministic lower bound. -/
+theorem exact_adaptive_query_profile {K ι : Type*} [Field K] [Finite K]
+    [Fintype ι] [DecidableEq ι] (U : Submodule K (ι → K)) (hproper : U ≠ ⊤)
+    (pi : ℝ) (hpi : pi ≤ 1) (k : ℕ) :
+    (∀ (t : CoordinateQueryTree ι K),
+      (∀ x, (queryTrace t x).length ≤ k) →
+      ∀ rule : RealizedTrace t → Bool,
+        profileError U pi (profileRank U k) ≤ actualQueryRisk U pi t rule) ∧
+    (∃ S : Finset ι, S.card ≤ k ∧
+      (∀ x : ι → K, (queryTrace (fixedQueries S.toList) x).length ≤ k) ∧
+      ∃ rule : RealizedTrace (fixedQueries (A := K) S.toList) → Bool,
+        actualQueryRisk U pi (fixedQueries S.toList) rule =
+          profileError U pi (profileRank U k)) := by
+  have hm := maximizingCoordinates_spec U k
+  constructor
+  · intro t ht rule
+    exact actualQueryRisk_ge_profile U hproper pi hpi k (profileRank U k)
+      hm.2 t ht rule
+  · refine ⟨maximizingCoordinates U k, hm.1, ?_, ?_⟩
+    · intro x
+      rw [fixedQueries_trace_length, Finset.length_toList]
+      exact hm.1
+    · exact fixedQueries_attains_profile U hproper pi hpi (maximizingCoordinates U k)
+
+/-- Independent finite randomization is a convex combination of actual
+deterministic risks; even randomized adaptive queries cannot improve the optimum. -/
+theorem randomized_query_profile_lower {K ι R : Type*} [Field K] [Finite K]
+    [Fintype ι] [DecidableEq ι] [Fintype R]
+    (U : Submodule K (ι → K)) (hproper : U ≠ ⊤)
+    (pi : ℝ) (hpi : pi ≤ 1) (k : ℕ)
+    (weight : R → ℝ) (hw : ∀ s, 0 ≤ weight s) (hsum : ∑ s, weight s = 1)
+    (tree : R → CoordinateQueryTree ι K)
+    (rule : ∀ s, RealizedTrace (tree s) → Bool)
+    (hbudget : ∀ s x, (queryTrace (tree s) x).length ≤ k) :
+    profileError U pi (profileRank U k) ≤
+      ∑ s, weight s * actualQueryRisk U pi (tree s) (rule s) := by
+  calc
+    profileError U pi (profileRank U k) =
+        ∑ s, weight s * profileError U pi (profileRank U k) := by
+      rw [← Finset.sum_mul, hsum, one_mul]
+    _ ≤ _ := by
+      apply Finset.sum_le_sum
+      intro s _
+      exact mul_le_mul_of_nonneg_left
+        ((exact_adaptive_query_profile U hproper pi hpi k).1
+          (tree s) (hbudget s) (rule s)) (hw s)
+
+#print axioms fixedQueries_attains_profile
+#print axioms maximizingCoordinates
+#print axioms profileRank
+#print axioms maximizingCoordinates_spec
+#print axioms profileError_eq_explicit
+#print axioms exact_adaptive_query_profile
+#print axioms randomized_query_profile_lower
+
 end URF.Foundation.AdaptiveProfileAudit
