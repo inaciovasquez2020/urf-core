@@ -406,4 +406,112 @@ theorem supportedDual_agree {K ι : Type*} [Field K]
 #print axioms projectedAnnihilator_finrank_eq_supportedDual
 #print axioms supportedDual_agree
 
+
+/-- Pushforward of a uniform finite input law, defined by actual fiber counts. -/
+noncomputable def uniformObservationMass {M L : Type*}
+    (g : M → L) (l : L) : ℝ :=
+  (Nat.card {x : M // g x = l} : ℝ) / (Nat.card M : ℝ)
+
+theorem uniformObservationMass_linear {K M N : Type*}
+    [Field K] [Finite K] [AddCommGroup M] [Module K M]
+    [AddCommGroup N] [Module K N]
+    [FiniteDimensional K M] [FiniteDimensional K N]
+    (f : M →ₗ[K] N) (x₀ : M) :
+    uniformObservationMass f (f x₀) =
+      1 / (Nat.card (LinearMap.range f) : ℝ) := by
+  have hM : (Nat.card M : ℝ) ≠ 0 := by
+    have h : Nat.card M ≠ 0 := Nat.ne_of_gt Nat.card_pos
+    exact_mod_cast h
+  have hR : (Nat.card (LinearMap.range f) : ℝ) ≠ 0 := by
+    have h : Nat.card (LinearMap.range f) ≠ 0 := Nat.ne_of_gt Nat.card_pos
+    exact_mod_cast h
+  unfold uniformObservationMass
+  apply (div_eq_div_iff hM hR).2
+  rw [one_mul]
+  exact_mod_cast linearFiber_card_mul_range f x₀
+
+/-- The transcript fiber and its coordinate-projection fiber are equivalent,
+even for inputs restricted to an arbitrary domain M. -/
+def queryTraceFiberEquivProjection {K ι M : Type*}
+    [Field K] [DecidableEq ι]
+    (t : CoordinateQueryTree ι K) (g : M → (ι → K)) (x₀ : M) :
+    {x : M // queryTrace t (g x) = queryTrace t (g x₀)} ≃
+      {x : M // coordinateProjection K (queriedCoordinates t (g x₀)) (g x) =
+        coordinateProjection K (queriedCoordinates t (g x₀)) (g x₀)} where
+  toFun x := ⟨x.1, by
+    funext i
+    exact (queryTrace_eq_iff_agreeCoordinates t (g x₀) (g x.1)).mp x.2 i.1 i.2⟩
+  invFun x := ⟨x.1, by
+    apply (queryTrace_eq_iff_agreeCoordinates t (g x₀) (g x.1)).mpr
+    intro i hi
+    exact congrFun x.2 ⟨i,hi⟩⟩
+  left_inv _ := rfl
+  right_inv _ := rfl
+
+theorem uniformTraceMass_eq_projectionMass {K ι M : Type*}
+    [Field K] [DecidableEq ι]
+    (t : CoordinateQueryTree ι K) (g : M → (ι → K)) (x₀ : M) :
+    uniformObservationMass (fun x => queryTrace t (g x)) (queryTrace t (g x₀)) =
+      uniformObservationMass
+        (fun x => coordinateProjection K (queriedCoordinates t (g x₀)) (g x))
+        (coordinateProjection K (queriedCoordinates t (g x₀)) (g x₀)) := by
+  unfold uniformObservationMass
+  rw [Nat.card_congr (queryTraceFiberEquivProjection t g x₀)]
+
+theorem uniformCoordinateMass_ambient {K ι : Type*}
+    [Field K] [Finite K] [Fintype ι]
+    (S : Finset ι) (x : ι → K) :
+    uniformObservationMass (coordinateProjection K S) (coordinateProjection K S x) =
+      1 / (Nat.card (S → K) : ℝ) := by
+  have h := uniformObservationMass_linear (coordinateProjection K S) x
+  have hc : Nat.card (LinearMap.range (coordinateProjection K S)) =
+      Nat.card (S → K) :=
+    Nat.card_congr (LinearEquiv.ofTop _ (LinearMap.range_eq_top.mpr
+      (coordinateProjection_surjective K S))).toEquiv
+  rw [hc] at h
+  exact h
+
+/-- Exact feasible-leaf likelihood ratio for actual adaptive coordinate queries. -/
+theorem uniformTraceMass_feasible_ratio {K ι : Type*}
+    [Field K] [Finite K] [Fintype ι] [DecidableEq ι]
+    (U : Submodule K (ι → K)) (t : CoordinateQueryTree ι K) (x₀ : U) :
+    uniformObservationMass (queryTrace t) (queryTrace t x₀.1) =
+      uniformObservationMass (fun x : U => queryTrace t x.1) (queryTrace t x₀.1) /
+        (Nat.card K : ℝ) ^
+          Module.finrank K (supportedDual K U (queriedCoordinates t x₀.1)) := by
+  let S := queriedCoordinates t x₀.1
+  let p := coordinateProjection K S
+  let W := LinearMap.range (p.comp U.subtype)
+  have ha : uniformObservationMass (queryTrace t) (queryTrace t x₀.1) =
+      1 / (Nat.card (S → K) : ℝ) := by
+    rw [show uniformObservationMass (queryTrace t) (queryTrace t x₀.1) =
+      uniformObservationMass p (p x₀.1) from
+        uniformTraceMass_eq_projectionMass t (fun x : ι → K => x) x₀.1]
+    exact uniformCoordinateMass_ambient S x₀.1
+  have hu : uniformObservationMass (fun x : U => queryTrace t x.1) (queryTrace t x₀.1) =
+      1 / (Nat.card W : ℝ) := by
+    rw [show uniformObservationMass (fun x : U => queryTrace t x.1) (queryTrace t x₀.1) =
+      uniformObservationMass (p.comp U.subtype) ((p.comp U.subtype) x₀) from
+        uniformTraceMass_eq_projectionMass t (fun x : U => x.1) x₀]
+    exact uniformObservationMass_linear (p.comp U.subtype) x₀
+  have hc : Nat.card W * Nat.card K ^ Module.finrank K (supportedDual K U S) =
+      Nat.card (S → K) := by
+    have h := projectedRange_card_mul_dual_pow W
+    rw [show Module.finrank K W.dualAnnihilator =
+      Module.finrank K (supportedDual K U S) from
+        projectedAnnihilator_finrank_eq_supportedDual U S] at h
+    exact h
+  have hcR : (Nat.card W : ℝ) * (Nat.card K : ℝ) ^
+      Module.finrank K (supportedDual K U S) = (Nat.card (S → K) : ℝ) := by
+    exact_mod_cast hc
+  change _ = _ / (Nat.card K : ℝ) ^ Module.finrank K (supportedDual K U S)
+  rw [ha, hu, ← hcR, div_div_eq_div_mul]
+
+#print axioms uniformObservationMass
+#print axioms uniformObservationMass_linear
+#print axioms queryTraceFiberEquivProjection
+#print axioms uniformTraceMass_eq_projectionMass
+#print axioms uniformCoordinateMass_ambient
+#print axioms uniformTraceMass_feasible_ratio
+
 end URF.Foundation.AdaptiveProfileAudit
