@@ -25,9 +25,16 @@ theorem cyclePartition_shortBall_eq_component
     let v' : CyclePartitionVertex sizes := ⟨i, y⟩
     let d : ℤ := (y.val : ℤ) - x.val
     let m : ℤ := sizes.get i
-    have hx : (x.val : ℤ) < m := by exact_mod_cast x.isLt
-    have hy : (y.val : ℤ) < m := by exact_mod_cast y.isLt
-    have hs : m ≤ 2 * (r : ℤ) + 1 := by exact_mod_cast hshort
+    have hx : (x.val : ℤ) < m := by
+      dsimp only [m]
+      exact_mod_cast x.isLt
+    have hy : (y.val : ℤ) < m := by
+      dsimp only [m]
+      exact_mod_cast y.isLt
+    have hs : m ≤ 2 * (r : ℤ) + 1 := by
+      dsimp only [m]
+      have hsNat : sizes.get i ≤ 2 * r + 1 := hshort
+      exact_mod_cast hsNat
     have hdlo : -m < d := by dsimp [d]; omega
     have hdhi : d < m := by dsimp [d]; omega
     have hbase : cycleOffset hp u' d = v' := by
