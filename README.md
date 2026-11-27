@@ -227,3 +227,13 @@ This is a repository-hygiene and verifier-status milestone. It means the tracked
 
 Boundary: this status does not claim theorem closure, solve an external mathematical problem, or assert completion of any future research target. It records only the current verified state of the active-obligation ledger.
 <!-- URF_ACTIVE_OBLIGATION_STATUS_END -->
+
+## Cross-domain information recovery — 2026-11-27 UTC
+
+Three scoped mathematical connections: 52 distinct audited Lean theorem declarations across two standalone certificates (41 + 11; the original 33 are counted once).
+
+- [Chronos–Biological Friction, BFF #116](https://github.com/inaciovasquez2020/biological-friction-framework/blob/799b41b4692c71589587cba037f26f0ad4bff7fb/proofs/hidden-dissipation/receipt/HiddenDissipation.lean): merged; 33/33 audited declarations, fresh Linux build PASS. In finite cyclic Markov models with the stated stationary and path-gauge observations, different entropy production can be indistinguishable; sharp absolute-error minimax equals half maximal dissipation in the bounded current family. `BFF.HiddenDissipation.ring_observation_minimax`.
+- [Biology–Cosmology, BFF #117](https://github.com/inaciovasquez2020/biological-friction-framework/blob/c5c8b2f24a0d4de57c764c161ab29c3689bec62f/proofs/hidden-dissipation/receipt/HiddenDissipation.lean): merged; eight additional declarations, cumulative 41/41 audit and fresh Linux build PASS. One diagonal generator-square observable with the specified stationary observations identifies squared current and entropy production; the restricted cosmological mode coefficient is invertible for known positive radius and nonzero mode. `BFF.HiddenDissipation.entropy_identified_by_curvature`, `BFF.HiddenDissipation.mode_identifiable`.
+- [Cosmology–Chronos, #1392 pinned PR revision](https://github.com/inaciovasquez2020/chronos-urf-rr/blob/2ed7df1497824343fce34924501d42a220c3006f/research/certificates/cosmology_causal_projection/receipt/CausalProjection.lean): Mac 11/11 and dedicated Linux Lean CI PASS; wider integration CI pending at this dated checkpoint. Identical projected coordinates can conceal different causal comparability; strip-area algebra and optimal pointwise decision loss are verified. `Chronos.CosmologyBridge.no_perfect_visible_decoder`, `Chronos.CosmologyBridge.strip_optimal_decoder`.
+
+Only permitted standard Lean axioms were audited. These are mathematical comparisons, not physical equivalence or software dependencies. Full semigroup derivative, covariant action/Fourier derivation, continuum measure formalization, empirical validation, physical 5D detection and independent novelty remain OPEN. No repository-wide status promotion.
