@@ -1,4 +1,27 @@
-# URF Core — Formal Verification Infrastructure
+# URF Core — Formal Mathematics and Verification Infrastructure
+
+## Featured Lean theorem: exact local entropy recovery
+
+For disjoint unions of simple cycles with N vertices, minimum cycle length L,
+and observation radius r, assume N >= L >= max(3, 2r+2). Over a finite field
+of cardinality q, the exact deterministic worst-case absolute error in recovering
+uniform cycle-space entropy from the rooted induced radius-r neighborhood multiset is
+
+    E* = (floor(N/L) - 1) * log(q) / 2.
+
+Every such deck is identical; the attaining estimator is
+`(floor(N/L) + 1) * log(q) / 2`, with natural logarithms.
+
+- **LEAN_VERIFIED (restricted cycle family):**
+  [`URF.EntropyBridge.cyclePartition_radius_minimax_value`](lean/URF/Foundation/CyclePartitionRadiusMinimax.lean)
+- [Mathematical statement and proof](research/certificates/radius_local_cycle_minimax_20261125.md)
+  · [37-declaration axiom audit and build receipt](research/certificates/radius_local_cycle_minimax/)
+  · [Merged PR #603](https://github.com/inaciovasquez2020/urf-core/pull/603)
+- The recorded theorem audit permits only `propext`, `Classical.choice`, and
+  `Quot.sound`. No repository-wide axiom-clean claim is made.
+- [Mixed-cycle extension](research/certificates/mixed_cycle_minimax_20261127.md):
+  paper proof and bounded computation; Lean formalization OPEN. Novelty and
+  independent full formal-proof review remain OPEN for both results.
 
 ## What is the Unified Rigidity Framework (URF)?
 
@@ -153,7 +176,8 @@ Exposition and release-facing documentation belong in `urf-textbook`.
 
 Current reference whole-URF residual frontier: `docs/status/URF_REMAINING_FRONTIER_CANONICAL.md`
 
-Current theorem-level closed surface: `docs/status/URF_CORE_NO_STATUS_PROMOTION_THEOREM_CLOSURE_2026_05_15.md`
+Historical status-labeling theorem: `docs/status/URF_CORE_NO_STATUS_PROMOTION_THEOREM_CLOSURE_2026_05_15.md`.
+For a substantive mathematical theorem, see the featured entropy minimax result above.
 
 ## Consolidated Modules
 
@@ -163,25 +187,26 @@ Current theorem-level closed surface: `docs/status/URF_CORE_NO_STATUS_PROMOTION_
 
 ## Formal Status
 
-Status: Axiomatic Core / Trusted-Base Prototype
+Status: Mixed portfolio of audited mathematical theorems, conditional
+research modules, infrastructure, and legacy axiomatic prototypes.
 
-Build status:
-
-- A successful build means the checked root target compiles.
-- It does not imply that axiom-dependent or admit-dependent results prove their headline targets.
+A successful build means the checked target compiles; it does not establish
+that every declaration is free from unresolved assumptions or proof holes.
+The April 27 historical inventory lists five project-defined axioms in
+`legacy/urf-prefab-system/lean/URF_Prefab.lean` and zero admits and sorries
+at that dated audit. A current repository-wide source and dependency audit
+remains OPEN; the historical inventory does not establish today's counts.
 
 Theorem status:
 
-- This repository currently contains project-defined `axiom` declarations and `admit` proof holes.
-- `axiom` is a trusted assumption, not a proof.
-- `admit` is a proof hole.
-- Any result depending on project axioms or admitted obligations is Conditional.
-
-Current status:
-
-- Strongest verified theorem: `URF.no_status_promotion_closed` in `URF/TheoremClosure/NoStatusPromotion.lean`
-- Weakest missing theorem: replace each load-bearing axiom/admit with a proof or quarantine it as an explicit assumption
-- Obligation inventory: `docs/status/OPEN_OBLIGATION_INVENTORY_2026_04_27.md`
+- LEAN_VERIFIED applies only to a stated theorem and audited dependencies.
+- A project-defined `axiom` is an assumption, not a proof. Results relying on
+  such axioms are conditional on those assumptions.
+- `admit`, `sorry`, or `sorryAx` dependencies are unresolved proof holes,
+  not evidence of a Lean-verified proof.
+- `URF.no_status_promotion_closed` is a historical status-discipline theorem,
+  not a ranking of the repository's mathematical results.
+- Historical inventory: `docs/status/OPEN_OBLIGATION_INVENTORY_2026_04_27.md`.
 
 ## External Status
 

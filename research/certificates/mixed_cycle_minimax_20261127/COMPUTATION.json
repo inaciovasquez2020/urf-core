@@ -1,0 +1,22 @@
+{
+  "status": "COMPUTATION_PASS",
+  "N_range": [
+    3,
+    24
+  ],
+  "radius_range": "0..floor(N/2)",
+  "fields": [
+    2,
+    3
+  ],
+  "python": "3.13.5",
+  "networkx": "3.6.1",
+  "unordered_partitions": 572,
+  "signed_rank_checks": 1144,
+  "partition_radius_instances": 6193,
+  "family_parameter_triples": 2343,
+  "family_instances": 14476,
+  "deck_checks": 11336,
+  "mismatches": 0,
+  "seconds": 1.988
+}
