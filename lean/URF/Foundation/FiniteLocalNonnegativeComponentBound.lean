@@ -13,25 +13,8 @@ theorem finite_local_nonnegative_component_bound
     (t : Fin T) :
     localCMI t ≤ C := by
   have h_mem : t ∈ (Finset.univ : Finset (Fin T)) := Finset.mem_univ t
-  have h_sum_split :
-      Finset.univ.sum localCMI =
-        localCMI t + ((Finset.univ : Finset (Fin T)).erase t).sum localCMI := by
-    rw [Finset.sum_eq_add_sum_diff_singleton
-      (ι := Fin T)
-      (M := ℝ)
-      (i := t)
-      (h := by
-      intro h_not_mem
-      exact (h_not_mem h_mem).elim)
-      (s := (Finset.univ : Finset (Fin T)))
-      (f := localCMI)]
-    simp
-  have h_tail_nonneg :
-      0 ≤ ((Finset.univ : Finset (Fin T)).erase t).sum localCMI := by
-    exact Finset.sum_nonneg (fun x _ => h_nonneg x)
   have h_le_sum : localCMI t ≤ Finset.univ.sum localCMI := by
-    rw [h_sum_split]
-    exact le_add_of_nonneg_right h_tail_nonneg
+    exact Finset.single_le_sum (fun x _ => h_nonneg x) h_mem
   have h_sum_le_C : Finset.univ.sum localCMI ≤ C := by
     rw [← h_total]
     exact h_bound

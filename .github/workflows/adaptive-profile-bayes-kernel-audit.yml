@@ -1,0 +1,60 @@
+name: Adaptive profile Bayes kernel audit
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'research/candidates/AdaptiveProfileBayesKernelCandidate.lean'
+      - '.github/workflows/adaptive-profile-bayes-kernel-audit.yml'
+permissions:
+  contents: read
+jobs:
+  isolated-audit:
+    if: github.head_ref == 'research/adaptive-profile-bayes-kernel-20261126'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Compile and inspect exact candidate
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(head -n 1 lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          receipt="$RUNNER_TEMP/adaptive-bayes-kernel"
+          mkdir -p "$receipt"
+          git rev-parse HEAD | tee "$receipt/head.txt"
+          lean --version | tee "$receipt/toolchain.txt"
+          sha256sum research/candidates/AdaptiveProfileBayesKernelCandidate.lean | tee "$receipt/source.sha256"
+          lake env lean research/candidates/AdaptiveProfileBayesKernelCandidate.lean 2>&1 | tee "$receipt/axioms.log"
+          python3 - "$receipt/axioms.log" <<'PY'
+          import re, sys
+          from pathlib import Path
+          log = Path(sys.argv[1]).read_text()
+          prefix = "URF.Foundation.AdaptiveProfileAudit."
+          names = ["decisionRisk","bayesRisk","bayesRisk_le_decisionRisk","bayesRisk_attained","bayesRisk_ge_likelihood","bayesRisk_eq_of_likelihood","likelihood_of_mixture","decisionRisk_ge_mixture_bound","CoordinateQueryTree","queryTrace","traceMatches","queryTrace_eq_iff_matches","queriedCoordinates","queryTrace_eq_iff_agreeCoordinates","queriedCoordinates_card_le_trace_length","queriedCoordinates_card_le_budget","fixedQueries","fixedQueries_trace_coordinates","fixedQueries_trace_length","fixedQueries_support","linearFiberEquivKer","finiteVectorSpace_card_pow","linearFiber_card_mul_range","coordinateProjection","coordinateProjection_surjective","projectedRange_card_mul_dual_pow","coordinateFiber_count_identity","supportedDual","projectedAnnihilator_map_eq_supportedDual","projectedAnnihilator_finrank_eq_supportedDual","supportedDual_agree","uniformObservationMass","uniformObservationMass_linear","queryTraceFiberEquivProjection","uniformTraceMass_eq_projectionMass","uniformCoordinateMass_ambient","uniformTraceMass_feasible_ratio","uniformObservationMass_nonneg","uniformObservationMass_eq_zero_of_not_realized","uniformObservationMass_sum_one","partitionFiberEquiv","partitionFiber_card","partitionDomain_card","uniformObservationMass_partition","RealizedTrace","realizedTrace","realizedTraceFintype","uniformRealizedTraceMass_eq","classWeight","classWeight_eq_dual_inverse","classWeight_lt_one","actualQueryRisk","profileError","exists_max_supportedDual","actualQueryRisk_ge_profile","fixedQueries_attains_profile","maximizingCoordinates","profileRank","maximizingCoordinates_spec","profileError_eq_explicit","exact_adaptive_query_profile","randomized_query_profile_lower"]
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          for name in names:
+              m = re.search(r"'" + re.escape(prefix+name) + r"' depends on axioms:\s*\[([^\]]*)\]", log)
+              if m:
+                  axioms = {x.strip() for x in m.group(1).split(",") if x.strip()}
+                  assert axioms <= allowed, (name, axioms)
+              else:
+                  assert "'" + prefix + name + "' does not depend on any axioms" in log, name
+          print("AXIOM_AUDIT := PASS_62_OF_62")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: adaptive-profile-bayes-kernel-receipts
+          path: ${{ runner.temp }}/adaptive-bayes-kernel/

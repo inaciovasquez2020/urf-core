@@ -35,7 +35,7 @@ private lemma finite_sum_mul_log_div_leq
     fun i hi => div_nonneg (hb i hi) B_pos.le
   have A'' : ∀ i ∈ s, 0 ≤ a i / b i :=
     fun i hi => div_nonneg (ha i hi) (hb i hi)
-  convert! ConcaveOn.le_map_sum Real.concaveOn_negMulLog A' A
+  convert ConcaveOn.le_map_sum Real.concaveOn_negMulLog A' A
       (p := fun i => a i / b i) A'' using 1
   · simp only [Real.negMulLog, neg_mul, smul_eq_mul, mul_neg, Finset.sum_neg_distrib]
     rw [neg_div, Finset.sum_div]
@@ -90,30 +90,36 @@ theorem finiteMutualInformation_nonneg
     by_contra hpa
     have hpa_pos : 0 < a p := lt_of_le_of_ne (ha p hp) (Ne.symm hpa)
     have hx_pos : 0 < ∑ y, P.joint (p.1, y) := by
-      exact lt_of_le_of_lt
-        (ha p hp)
-        (by
-          have hterm : P.joint p ≤ ∑ y, P.joint (p.1, y) := by
-            exact Finset.single_le_sum
-              (s := (Finset.univ : Finset β))
-              (fun y _ => P.nonneg (p.1, y))
-              (Finset.mem_univ p.2)
-          exact hterm)
+      exact lt_of_lt_of_le hpa_pos
+        (Finset.single_le_sum
+          (s := (Finset.univ : Finset β))
+          (fun y _ => P.nonneg (p.1, y))
+          (Finset.mem_univ p.2))
     have hy_pos : 0 < ∑ x, P.joint (x, p.2) := by
-      have hterm : P.joint p ≤ ∑ x, P.joint (x, p.2) := by
-        exact Finset.single_le_sum
+      exact lt_of_lt_of_le hpa_pos
+        (Finset.single_le_sum
           (s := (Finset.univ : Finset α))
           (fun x _ => P.nonneg (x, p.2))
-          (Finset.mem_univ p.1)
-      exact lt_of_le_of_lt (ha p hp) (lt_of_le_of_ne hterm (Ne.symm hpa))
+          (Finset.mem_univ p.1))
     exact (ne_of_gt (mul_pos hx_pos hy_pos)) hbp
   have hsum_a : ∑ p, a p = 1 := by
     simpa [a] using P.sum_one
   have hsum_b : ∑ p, b p = 1 := by
-    simp only [b, Finset.sum_product, ← Finset.sum_mul]
-    rw [show (∑ x : α, ∑ y : β, P.joint (x, y)) = 1 by
-      simpa [Finset.sum_product] using P.sum_one]
-    simp
+    have hx : (∑ x : α, ∑ y : β, P.joint (x, y)) = 1 :=
+      (Fintype.sum_prod_type P.joint).symm.trans P.sum_one
+    have hy : (∑ y : β, ∑ x : α, P.joint (x, y)) = 1 :=
+      (Fintype.sum_prod_type_right P.joint).symm.trans P.sum_one
+    calc
+      (∑ p, b p) =
+          ∑ x : α, ∑ y : β,
+            (∑ v : β, P.joint (x, v)) * (∑ u : α, P.joint (u, y)) :=
+        Fintype.sum_prod_type b
+      _ = (∑ x : α, ∑ v : β, P.joint (x, v)) *
+          (∑ y : β, ∑ u : α, P.joint (u, y)) :=
+        (Fintype.sum_mul_sum
+          (fun x : α => ∑ v : β, P.joint (x, v))
+          (fun y : β => ∑ u : α, P.joint (u, y))).symm
+      _ = 1 := by rw [hx, hy, one_mul]
   have hlog :=
     finite_sum_mul_log_div_leq
       (s := (Finset.univ : Finset (α × β))) ha hb habs

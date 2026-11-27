@@ -38,7 +38,11 @@ theorem finiteConditionalEntropyXGivenY_nonneg
           (s := (Finset.univ : Finset α))
           (fun x' _ => P.nonneg (x', y))
           (Finset.mem_univ x)
-      exact div_le_one_of_le
-        (Finset.sum_nonneg (fun x' _ => P.nonneg (x', y))) hle
+      have hm : 0 ≤ finiteMarginalY P y :=
+        Finset.sum_nonneg (fun x' _ => P.nonneg (x', y))
+      unfold finiteConditionalXGivenY
+      rcases eq_or_lt_of_le hm with hzero | hpos
+      · simp [← hzero]
+      · exact (div_le_one hpos).2 hle
 
 end URF.Foundation

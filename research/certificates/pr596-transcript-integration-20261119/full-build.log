@@ -1,0 +1,86 @@
+info: [root]: lakefile.lean and lakefile.toml are both present; using lakefile.lean
+⚠ [7928/7956] Replayed URF.Foundation.FiniteT2MutualInformationChainRule
+warning: lean/URF/Foundation/FiniteT2MutualInformationChainRule.lean:109:12: This simp argument is unused:
+  hw
+
+Hint: Omit it from the simp argument list.
+  simp [hw̵,̵ ̵h̵j]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: lean/URF/Foundation/FiniteT2MutualInformationChainRule.lean:140:57: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: lean/URF/Foundation/FiniteT2MutualInformationChainRule.lean:140:57: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [7933/7956] Replayed URF.Foundation.FiniteMutualInformationDecomposition
+warning: lean/URF/Foundation/FiniteMutualInformationDecomposition.lean:91:14: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: lean/URF/Foundation/FiniteMutualInformationDecomposition.lean:91:14: 'ring' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [7953/7956] Replayed URF.Foundation.SharpCliqueEntropy
+warning: lean/URF/Foundation/SharpCliqueEntropy.lean:264:4: 'change f (z.1 + x₀) = y' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: lean/URF/Foundation/SharpCliqueEntropy.lean:393:0: automatically included section variable(s) unused in theorem `URF.EntropyBridge.observation_surjective`:
+  [FiniteDimensional K V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional K V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: lean/URF/Foundation/SharpCliqueEntropy.lean:398:0: automatically included section variable(s) unused in theorem `URF.EntropyBridge.observation_kernel`:
+  [FiniteDimensional K V]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [FiniteDimensional K V] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:581:0: 'URF.EntropyBridge.orderedEdge_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:582:0: 'URF.EntropyBridge.concreteGraph_hidden_finrank' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:659:0: 'URF.EntropyBridge.matrix_zero_of_isolating_rows_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:739:0: 'URF.EntropyBridge.orderedEdge_unique_incident_pair_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:740:0: 'URF.EntropyBridge.spoke_isolation_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:741:0: 'URF.EntropyBridge.spoke_only_zero_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:742:0: 'URF.EntropyBridge.simpleGraphBoundary_spoke_zero_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:832:0: 'URF.EntropyBridge.circulation_eq_of_rim_eq_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:833:0: 'URF.EntropyBridge.circulation_rim_decomposition_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:988:0: 'URF.EntropyBridge.boundary_unit_edge_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:989:0: 'URF.EntropyBridge.directed_edge_boundary_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:990:0: 'URF.EntropyBridge.cone_triangle_boundary_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:991:0: 'URF.EntropyBridge.cone_triangle_rim_delta_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:992:0: 'URF.EntropyBridge.radius_one_triangle_generation_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1112:0: 'URF.EntropyBridge.radiusOne_le_triangleBoundary_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1113:0: 'URF.EntropyBridge.cone_triangle_closedBall_support_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1114:0: 'URF.EntropyBridge.triangleBoundary_le_radiusOne_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1115:0: 'URF.EntropyBridge.radiusOne_eq_triangleBoundary_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1116:0: 'URF.EntropyBridge.triangleBoundary_le_cycleKernel_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1182:0: 'URF.EntropyBridge.radiusOne_localCycles_eq_cliqueBoundary_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1183:0: 'URF.EntropyBridge.cliqueH1_finrank_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1184:0: 'URF.EntropyBridge.radiusOne_hidden_finrank_eq_cliqueH1_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1371:0: 'URF.EntropyBridge.uniform_entropy_exact_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1372:0: 'URF.EntropyBridge.uniform_fiber_entropy_exact_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1373:0: 'URF.EntropyBridge.linear_uniform_conditional_entropy_exact_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1458:0: 'URF.EntropyBridge.radiusOne_kernel_card_eq_pow_cliqueH1_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1459:0: 'URF.EntropyBridge.radiusOne_log_kernel_eq_cliqueH1_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1460:0: 'URF.EntropyBridge.radiusOne_entropy_le_cliqueH1_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: lean/URF/Foundation/SharpCliqueEntropy.lean:1461:0: 'URF.EntropyBridge.radiusOne_uniform_entropy_eq_cliqueH1_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+✔ [7954/7956] Built URF.Foundation.FiniteTranscriptCapacityBound (7.8s)
+✔ [7955/7956] Built URF (6.4s)
+Build completed successfully (7956 jobs).

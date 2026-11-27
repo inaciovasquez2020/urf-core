@@ -1,0 +1,26 @@
+info: [root]: lakefile.lean and lakefile.toml are both present; using lakefile.lean
+'URF.Foundation.transcriptPrefixDistribution' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcriptPrefixDistribution_mutualInformation_eq_prefixMarginal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.Foundation.transcriptStepCMI' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcriptChainCMISumAux' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcriptChainCMISum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcriptChainCMISum_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcriptChainCMISum_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcriptMutualInformation_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcript_mutual_information_eq_chain_cmi_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.Foundation.jointConditionalMI_le_log_card_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcript_step_cmi_le_log_card_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.Foundation.transcript_mutual_information_le_time_log_card_left' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.Foundation.transcript_one_step_mutual_information_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'URF.EntropyBridge.radiusOne_entropy_le_cliqueH1_candidate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'URF.EntropyBridge.radiusOne_uniform_entropy_eq_cliqueH1_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

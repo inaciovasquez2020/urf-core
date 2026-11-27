@@ -1,4 +1,5 @@
 import Mathlib
+import URF.Foundation.ConcreteFiniteShannonEntropy
 
 namespace URF.Foundation
 
@@ -17,8 +18,9 @@ theorem finiteShannonEntropy_le_log_card
       by_contra hb
       have : b ∈ t := by simp [t, hb]
       simp [ht] at this
-    rw [Finset.sum_eq_zero fun b _ ↦ hpzero b] at P.sum_one
-    exact zero_ne_one P.sum_one
+    have hsum := P.sum_one
+    rw [Finset.sum_eq_zero fun b _ ↦ hpzero b] at hsum
+    exact zero_ne_one hsum
   have hk_pos : 0 < k := by
     simpa [k] using Finset.card_pos.mpr ht_nonempty
   have hkR : (0 : ℝ) < k := by exact_mod_cast hk_pos
@@ -62,10 +64,10 @@ theorem finiteShannonEntropy_le_log_card
   rw [hscaled, hright] at hmul
   have hcard_le : t.card ≤ Finset.univ.card :=
     Finset.card_le_card (Finset.subset_univ t)
-  have hlog_card : Real.log (t.card : ℝ) ≤ Real.log (Fintype.card β) := by
-    apply Real.strictMonoOn_log.monotoneOn
-    · exact_mod_cast hcard_le
-    · exact_mod_cast hk_pos
-  exact le_trans hmul hlog_card
+  have hcard_le' : k ≤ Fintype.card β := by
+    simpa [hk] using hcard_le
+  have hcardR : (k : ℝ) ≤ (Fintype.card β : ℝ) := by
+    exact_mod_cast hcard_le'
+  exact le_trans hmul (Real.log_le_log hkR hcardR)
 
 end URF.Foundation

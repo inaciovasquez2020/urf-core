@@ -1,0 +1,26 @@
+RESULT := done
+TARGET := exact deterministic radius-r minimax theorem for PR #603
+REPOSITORY := https://github.com/inaciovasquez2020/urf-core.git
+BRANCH := research/exact-local-entropy-minimax-20261125
+HEAD := 2c91f8eb956f1b69f95916a1a66c473e4f6ebc52
+DIRTY :=
+ M lean/URF.lean
+?? lean/URF/Foundation/CyclePartitionIncidence.lean
+?? lean/URF/Foundation/CyclePartitionNeighborhood.lean
+?? lean/URF/Foundation/CyclePartitionRadiusMinimax.lean
+
+Lean: leanprover/lean4:v4.27.0
+Mathlib HEAD: a3a10db0e9d66acbebf76c5e6a135066525ac900
+
+VALIDATION
+lake build +URF.Foundation.CyclePartitionDirectedKernelCandidate +URF.Foundation.SharpCliqueEntropy +URF.Foundation.CyclePartitionMinimaxAssemblyCandidate
+Build completed successfully (7892 jobs).
+lake build +URF.Foundation.CyclePartitionIncidence
+Build completed successfully (7889 jobs).
+lake build +URF.Foundation.CyclePartitionNeighborhood
+Build completed successfully (7890 jobs).
+lake build URF
+Build completed successfully (7966 jobs).
+lake env lean --root="$out_dir" "$out_dir/Audit.lean"
+PASS: 37 declarations imported through URF
+Final diff inspection, git diff --check, baseline-index git apply --cached --check, and SHA-256 verification passed.

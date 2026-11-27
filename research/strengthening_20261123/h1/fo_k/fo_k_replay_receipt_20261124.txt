@@ -1,0 +1,17 @@
+MODEL := loopless complete graphs, equality + adjacency, pure FO^k
+ALGORITHM := exact canonical equality-pattern greatest fixed point
+PARAMETERS := {'max_k': 6, 'seconds': 30, 'max_states': 20000}
+K_1_K_2 := EQUIVALENT k=1 patterns=2/2 winning=2 iterations=0
+K_2_K_3 := EQUIVALENT k=2 patterns=5/5 winning=5 iterations=0
+K_1_K_2 := DISTINGUISHABLE k=2 iterations=2
+K_3_K_4 := EQUIVALENT k=3 patterns=15/15 winning=15 iterations=0
+K_2_K_3 := DISTINGUISHABLE k=3 iterations=3
+K_4_K_5 := EQUIVALENT k=4 patterns=52/52 winning=52 iterations=0
+K_3_K_4 := DISTINGUISHABLE k=4 iterations=4
+K_5_K_6 := EQUIVALENT k=5 patterns=203/203 winning=203 iterations=0
+K_4_K_5 := DISTINGUISHABLE k=5 iterations=5
+K_6_K_7 := EQUIVALENT k=6 patterns=877/877 winning=877 iterations=0
+K_5_K_6 := DISTINGUISHABLE k=6 iterations=6
+RESULT := COMPUTATION_PASS (bounded finite game certificate)
+UNBOUNDED_THEOREM := PAPER_PROOF_ONLY
+LEAN := NOT_RUN

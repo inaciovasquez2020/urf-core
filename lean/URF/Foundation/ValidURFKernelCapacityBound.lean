@@ -1,3 +1,4 @@
+import Mathlib
 import URF.Foundation.ValidURFKernelPredicate
 
 namespace URF.Foundation
@@ -13,9 +14,10 @@ theorem ValidURFFiniteKernel.total_mi_le_time_capacity
     intro t ht
     exact K.perStepCapacityBound t (Finset.mem_range.mp ht)
   calc
-    ∑ t in Finset.range K.chain.T, K.chain.localCMIValue t ≤
-        ∑ _t in Finset.range K.chain.T, K.channelCapacity :=
+    ∑ t ∈ Finset.range K.chain.T, K.chain.localCMIValue t ≤
+        ∑ _t ∈ Finset.range K.chain.T, K.channelCapacity :=
       Finset.sum_le_sum hterm
-    _ = K.chain.T * K.channelCapacity := by simp
+    _ = K.chain.T * K.channelCapacity := by
+      simp [Finset.sum_const, nsmul_eq_mul]
 
 end URF.Foundation

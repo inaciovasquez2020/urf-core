@@ -1,17 +1,29 @@
-\section*{Cycle Fan Predicate}
+\section*{Cycle Fan Predicate: syntax and semantic boundary}
 
-For fixed $k,R$, define the FO$^k$ formula:
+\noindent\textbf{Status: OPEN for arbitrary fixed $k,R,m$.}
+The previously displayed expression containing
+$\exists^{\ge m}z$ was described as an ordinary $\mathrm{FO}^k$
+formula without proving that it can be expressed using at most $k$
+variable names. As written, $\exists^{\ge m}$ is counting-quantifier
+notation; counting logic $\mathrm{C}^k$ must not be silently identified
+with ordinary $\mathrm{FO}^k$.
 
+For contrast, with at least $m+1$ available variable names the
+\emph{simple} property that $x$ has $m$ distinct neighbors is defined in
+ordinary first-order logic by
 \[
-\varphi_{m,R}(x_1):=
-\exists x_2,\dots,x_k
-\Big(
-\mathrm{Path}_{\le R}(x_1,x_k)
-\;\wedge\;
-\exists^{\ge m} z\;
-[\mathrm{Adj}(x_k,z)\wedge \mathrm{Path}_{\le R}(z,x_1)]
-\Big)
+\psi_m(x):=\exists z_1\cdots\exists z_m\,
+\Bigl(\bigwedge_{i=1}^{m}E(x,z_i)\ \land\
+\bigwedge_{1\le i<j\le m}z_i\ne z_j\Bigr).
 \]
+This uses $m+1$ names including $x$, and says nothing about independent
+cycles or a shared fan. It is \emph{not} a replacement proof for the
+cycle-fan claim. Adding bounded paths, fixed anchors, and cycle
+independence requires a separate formal construction with its variable
+budget and semantic assumptions explicit.
 
-This expresses that $x_1$ admits an $(m,R)$-cycle fan.
-
+\noindent\textbf{OPEN obligations:} Fix the graph vocabulary and logic;
+define an $(m,R)$-fan and independent cycles; construct a corresponding
+formula with an audited variable bound; then prove any proposed
+cycle-rank-to-fan implication independently. None of those steps follows
+from the existing counting-quantifier display.

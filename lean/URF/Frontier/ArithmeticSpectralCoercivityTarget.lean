@@ -250,7 +250,8 @@ theorem ArithmeticSpectralCoercivityTarget_coercive_iff :
           0 ≤ reducedPrimitiveFormNormSq q v := by
         simp [reducedPrimitiveFormNormSq]
         positivity
-      nlinarith
+      have hnorm' : 0 ≤ ArithmeticSpectralCoercivityTarget.normSq q v := hnorm
+      exact le_trans (mul_le_mul_of_nonneg_right hc_le hnorm') hhalf
 
 end Frontier
 end URF

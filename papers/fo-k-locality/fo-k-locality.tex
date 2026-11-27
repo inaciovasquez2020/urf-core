@@ -3,8 +3,9 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
+\newtheorem{lemma}{Lemma}
 
-\title{FO$^k$ Locality and Conditional Configuration Pumping}
+\title{FO$^k$ Locality: Finite-Type Counting and Corrected Splitting Status}
 \author{Inacio F. Vasquez}
 \date{}
 
@@ -12,34 +13,42 @@
 \maketitle
 
 \begin{abstract}
-We study the expressive limits of locality in finite-variable logic on
-bounded-degree graphs. We show that FO$^k$-local refinement procedures admit
-only a finite per-step outcome alphabet, yielding an a priori bound on
-information extracted at each local query. Building on this, we introduce a
-configuration pumping principle based on finite FO$^k$ type counting and prove
-a conditional closure of the FO$^k$ locality wall: sufficiently large local
-cycle complexity forces FO$^k$ type splitting within bounded radius. Our
-approach avoids global linkage, holonomy, or Ehrenfeucht--Fraïssé cycle-trapping
-arguments and relies solely on bounded degree, bounded quantifier rank, and
-local configuration repetition. All results are stated with explicit
-conditional dependencies.
+We audit finite-variable locality arguments on bounded-degree graphs.
+Finite bounded-radius type spaces yield a valid pigeonhole lemma for
+\emph{explicitly encoded distinct configurations}, but repetition of
+types cannot establish diversity of rooted vertex types. A uniform
+local cycle-rank ceiling renders an existential sufficiently-large
+threshold formally vacuous, and the vertex-transitive Petersen graph
+refutes the intended nonvacuous cycle--orbit splitting implication for
+maximum degree three and radius one. A formerly proposed cycle-fan
+predicate also needs an explicit ordinary FO$^k$ variable-budget audit;
+counting quantifiers must not be silently introduced. The intended
+repository-native H1 locality theorem remains open. No general
+P-versus-NP, global normalization, or scientific URF closure is claimed.
 \end{abstract}
 
-\section{Introduction}
-% content to be filled later
+\section{Scope and assumptions}
+We work with finite, simple, undirected uncolored graphs unless a
+specific statement supplies a different signature. FO$^k$ denotes
+ordinary first-order logic with at most $k$ variable names, without
+counting, constants, built-in order, or arithmetic. The radius balls
+below are induced subgraphs.
 
-\section{Preliminaries}
-% content to be filled later
-
-\section{Configuration Pumping}
+\section{Finite configuration-type counting}
 \input{configuration_pumping.tex}
 
-\section{Cycle--Orbit Splitting}
+\section{Cycle--orbit splitting obstruction}
 \input{cycle_orbit_splitting.tex}
 
-\section{Discussion and Status}
-All results in this paper are conditional on configuration pumping.
-No claims are made beyond FO$^k$ locality.
+\section{Cycle-fan expressibility boundary}
+\input{cycle_fan_predicate.tex}
+
+\section{Discussion and status}
+Finite type repetition is proved under its explicit cardinality premise.
+The original cycle-rank-to-vertex-type splitting route is not valid as a
+nonvacuous general theorem. A code-bound refinement operator, its
+semantics, and a correct FO$^k$-admissibility statement remain unproved.
+The Petersen obstruction is a classical graph example, not an original
+new graph-theoretic result.
 
 \end{document}
-

@@ -7,7 +7,8 @@ namespace URF.Foundation
 noncomputable def transcriptPrefixLastEquiv
     (β : Type u) (T : ℕ) [DecidableEq β] [Fintype β] :
     (Fin (T + 1) → β) ≃ (Fin T → β) × β :=
-  (Equiv.piFinCastSucc T β).trans (Equiv.prodComm β (Fin T → β))
+  (Fin.snocEquiv (n := T) (fun _ => β)).symm.trans
+    (Equiv.prodComm β (Fin T → β))
 
 noncomputable def transcriptOneStepJoint
     {α β : Type u} {T : ℕ}
@@ -30,8 +31,11 @@ noncomputable def transcriptOneStepJoint
         (fun p => P.joint p)
         (fun p => P.joint (p.1, (transcriptPrefixLastEquiv β T).symm p.2))
         (by
-          intro p
-          rfl)
+          rintro ⟨a, t⟩
+          change P.joint (a, t) =
+            P.joint (a, (transcriptPrefixLastEquiv β T).symm
+              ((transcriptPrefixLastEquiv β T) t))
+          rw [Equiv.symm_apply_apply])
     simpa [e] using h.symm.trans P.sum_one
 
 theorem transcriptOneStepJoint_nonneg

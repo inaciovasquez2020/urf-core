@@ -1,0 +1,50 @@
+name: Fixed-size graph minimax assembly Lean audit
+"on":
+  pull_request:
+    paths:
+      - 'lean/URF/Foundation/CyclePartitionMinimaxAssemblyCandidate.lean'
+      - '.github/workflows/cycle-partition-minimax-assembly-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Compile graph minimax and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          SRC='lean/URF/Foundation/CyclePartitionMinimaxAssemblyCandidate.lean'
+          test "$(git hash-object "$SRC")" = 'a1f2773f3a49c31b397dad10db9aefde7c9a9ffa'
+          lake build URF.Foundation.CyclePartitionComponentsCandidate URF.Foundation.ObservationEntropyMinimaxCandidate
+          lake env lean "$SRC" 2>&1 | tee "$RUNNER_TEMP/minimax-assembly.log"
+          python3 - "$RUNNER_TEMP/minimax-assembly.log" <<'PY'
+          import re,sys
+          s=open(sys.argv[1],encoding='utf8').read()
+          for name in ('admissibleGraphComponentCount_eq_length','cyclePartition_vertexCount_minimax'):
+              f='URF.EntropyBridge.'+name
+              pattern=r"(?m)^'"+re.escape(f)+r"' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])"
+              m=re.findall(pattern,s)
+              if len(m)!=1:
+                  raise SystemExit('MISSING_AXIOM_REPORT: '+f)
+              ax={x.strip() for x in m[0].split(',') if x.strip()}
+              if not ax <= {'propext','Classical.choice','Quot.sound'}:
+                  raise SystemExit('UNEXPECTED_AXIOMS: '+f+' '+repr(ax))
+              print('LEAN_VERIFIED_ISOLATED',f,sorted(ax))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fixed-size-minimax-assembly-log
+          path: ${{ runner.temp }}/minimax-assembly.log

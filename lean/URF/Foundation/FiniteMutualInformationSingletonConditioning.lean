@@ -7,13 +7,13 @@ noncomputable def singletonConditioningJoint
     {α β : Type u}
     [DecidableEq α] [DecidableEq β] [Fintype α] [Fintype β]
     (P : FiniteMutualInformationData α β) :
-    JointFiniteDistributionData α β Unit where
-  joint := fun p => P.joint (p.1, p.2)
+    JointFiniteDistributionData α β PUnit.{u+1} where
+  joint := fun p => P.joint (p.1, p.2.1)
   nonneg := by
     intro p
-    exact P.nonneg (p.1, p.2)
+    exact P.nonneg (p.1, p.2.1)
   sum_one := by
-    simpa [Finset.sum_product] using P.sum_one
+    simpa [Fintype.sum_prod_type] using P.sum_one
 
 theorem jointConditionalMI_singletonConditioning
     {α β : Type u}
@@ -24,6 +24,6 @@ theorem jointConditionalMI_singletonConditioning
   unfold jointConditionalMI
   classical
   simp [singletonConditioningJoint, jointWeight, jointConditional,
-    finiteMutualInformation]
+    finiteMutualInformation, P.sum_one]
 
 end URF.Foundation

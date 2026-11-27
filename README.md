@@ -120,15 +120,13 @@ Scope:
 References:
 
 - URF Core: https://github.com/inaciovasquez2020/urf-core
-- Scientific Infrastructure: https://github.com/inaciovasquez2020/scientific-infrastructure
 - Website: https://www.vasquezresearch.com
-- Scientific Infrastructure Environment: https://inaciovasquez2020.github.io/scientific-infrastructure/
 
 ## Technical Notes
 
 - Integration: this library is designed to be imported by other repositories within the `inaciovasquez2020` organization.
 - Reproducibility: for stable research results, use the specific version referenced in the Vasquez Index dashboard.
-- Dependencies: refer to `scientific-infrastructure` for the standard execution environment.
+- Dependencies and setup: [Quickstart](QUICKSTART.md) and [dependency notes](DEPENDENCIES.md).
 
 ## Citation
 
@@ -143,9 +141,9 @@ If you utilize this core logic in your research, please cite it using the follow
 }
 ```
 
-Cross-link `scientific-infrastructure` as the current reference environment layer.
-
 ## Repository Role
+
+The [finite observation-fiber audit](https://github.com/inaciovasquez2020/urf-core/pull/594) supplies optional algebraic support for the Chronos–Cosmology research path. It quantifies information loss in a specified finite \(S_3\) observation model. The physical transfer remains **OPEN**.
 
 This repository is the current reference upstream for URF definitions, theorem statements, dependency ledgers, and closure claims.
 

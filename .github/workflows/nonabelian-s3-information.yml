@@ -1,0 +1,22 @@
+name: Nonabelian S3 information certificate
+on:
+  pull_request:
+    paths:
+      - 'experiments/nonabelian_information/**'
+      - '.github/workflows/nonabelian-s3-information.yml'
+  push:
+    paths:
+      - 'experiments/nonabelian_information/**'
+      - '.github/workflows/nonabelian-s3-information.yml'
+permissions:
+  contents: read
+jobs:
+  s3-information:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - name: Exact S3 orbit and information audit
+        run: python3 -B experiments/nonabelian_information/s3_information_fibers.py

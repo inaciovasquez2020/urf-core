@@ -1,21 +1,7 @@
-Title: Theorem (B**): AC0 Bounded-Arity Update Normalization
+# B**: AC0 bounded-arity update normalization
 
-Status: Proven (restricted)
+**Status: OPEN (conjecture, not a proved theorem).** See [AC0 mathematical erratum](../math/AC0_CSP_NORMALIZATION_ERRATUM_2026_11_26.md). Historical statements remain available at the source blobs listed there.
 
-Restricted Update Algebra:
-We consider update systems where each step consists of:
-- A constant-depth AC0 circuit
-- Bounded fan-in
-- Fixed finite vocabulary
-- Bounded-arity state relations
-- No unbounded aggregation or arithmetic
+Historical hypotheses: constant-depth circuits, bounded fan-in, fixed finite vocabulary, bounded-arity relations, no unbounded aggregation or arithmetic. These do not imply a constant aggregate update/observation capacity. Parallel updates can change or expose arbitrarily many coordinates in one step.
 
-Claim (B**):
-Any computation expressed as an AC0 bounded-arity update system
-admits a simulation by bounded-rank logical refinement,
-preserving EntropyDepth up to constant factors.
-
-Interpretation:
-This is a strict strengthening of Axiom B,
-but applies only to sharply restricted update algebra.
-
+The proposed constant-distortion simulation by bounded-rank refinement requires additional explicit hypotheses on encoding, access, aggregate capacity, initialization, output semantics and cost. Even bounded aggregate capacity by itself does not prove such a simulation. No unrestricted solver or TRAP transfer is established.
