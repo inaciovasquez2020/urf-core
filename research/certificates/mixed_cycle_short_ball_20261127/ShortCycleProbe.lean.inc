@@ -213,3 +213,86 @@ theorem canonicalShortCycleClass_eq_iff
 #print axioms canonicalShortCycleClass_eq_iff
 
 end URF.EntropyBridge
+
+
+namespace URF.EntropyBridge
+
+/-- Candidate: a canonical simple cycle cannot have the rooted class
+of a centered path, even when their vertex cardinalities coincide. -/
+theorem canonicalShortCycleClass_ne_centeredPathClass
+    (m r : ℕ) (hm : 3 ≤ m) :
+    canonicalShortCycleClass m (by omega) ≠ centeredPathClass r := by
+  intro heq
+  have hIso : RootedNeighborhood.isoSetoid.r
+      ⟨Fin m, canonicalShortCycle m, ⟨0, by omega⟩⟩
+      ⟨CenteredPathVertex r, centeredPath r, centeredPathRoot r⟩ := by
+    apply Quotient.exact
+    exact heq
+  obtain ⟨e, _⟩ := hIso
+  have hforward (x y : Fin m)
+      (h : x.val + 1 = y.val ∨ (x.val + 1 = m ∧ y.val = 0)) :
+      (canonicalShortCycle m).Adj x y := by
+    change x ≠ y ∧
+      (((x.val : ℤ) + 1 ≡ (y.val : ℤ) [ZMOD (m : ℤ)]) ∨
+       ((y.val : ℤ) + 1 ≡ (x.val : ℤ) [ZMOD (m : ℤ)]))
+    refine ⟨?_, Or.inl ?_⟩
+    · intro hxy
+      subst y
+      rcases h with h | ⟨h1, h2⟩ <;> omega
+    · apply Int.modEq_iff_dvd.mpr
+      rcases h with h | ⟨h1, h2⟩
+      · exact ⟨0, by omega⟩
+      · exact ⟨-1, by omega⟩
+  let p : CenteredPathVertex r :=
+    ⟨-(r : ℤ), by constructor <;> omega⟩
+  let x : Fin m := e.symm p
+  have hx : e x = p := e.toEquiv.apply_symm_apply p
+  let a : Fin m :=
+    if h : x.val + 1 < m then ⟨x.val + 1, h⟩ else ⟨0, by omega⟩
+  let b : Fin m :=
+    if h : 0 < x.val then ⟨x.val - 1, by have := x.isLt; omega⟩
+    else ⟨m - 1, by omega⟩
+  have ha : x.val + 1 = a.val ∨ (x.val + 1 = m ∧ a.val = 0) := by
+    by_cases h : x.val + 1 < m
+    · left
+      simp [a, h]
+    · right
+      constructor
+      · have := x.isLt
+        omega
+      · simp [a, h]
+  have hb : b.val + 1 = x.val ∨ (b.val + 1 = m ∧ x.val = 0) := by
+    by_cases h : 0 < x.val
+    · left
+      simp only [b, dif_pos h]
+      omega
+    · right
+      constructor
+      · simp only [b, dif_neg h]
+        omega
+      · omega
+  have hab : a ≠ b := by
+    intro h
+    have hv := congrArg Fin.val h
+    rcases ha with ha | ⟨ha1, ha2⟩ <;>
+      rcases hb with hb | ⟨hb1, hb2⟩ <;> omega
+  have hap : (centeredPath r).Adj p (e a) := by
+    rw [← hx]
+    exact (e.map_rel_iff).2 (hforward x a ha)
+  have hbp : (centeredPath r).Adj p (e b) := by
+    rw [← hx]
+    exact (e.map_rel_iff).2 ((canonicalShortCycle m).symm (hforward b x hb))
+  change p.val + 1 = (e a).val ∨ (e a).val + 1 = p.val at hap
+  change p.val + 1 = (e b).val ∨ (e b).val + 1 = p.val at hbp
+  have hla := (e a).property.1
+  have hlb := (e b).property.1
+  change -(r : ℤ) ≤ (e a).val at hla
+  change -(r : ℤ) ≤ (e b).val at hlb
+  have hval : (e a).val = (e b).val := by
+    dsimp only [p] at hap hbp
+    rcases hap with hap | hap <;> rcases hbp with hbp | hbp <;> omega
+  exact hab (e.injective (Subtype.ext hval))
+
+#print axioms canonicalShortCycleClass_ne_centeredPathClass
+
+end URF.EntropyBridge
