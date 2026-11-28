@@ -39,9 +39,18 @@ jobs:
           out="$RUNNER_TEMP/short-ball"
           mkdir -p "$out"
           git rev-parse HEAD | tee "$out/head.txt"
-          lake build +URF.Foundation.CyclePartitionIncidence 2>&1 | tee "$out/build.log"
-          cat lean/URF/Foundation/CyclePartitionNeighborhood.lean "$cert/ShortCycleProbe.lean.inc" > "$out/ShortCycleProbe.lean"
-          sha256sum "$cert/ShortCycleProbe.lean.inc" "$out/ShortCycleProbe.lean" | tee "$out/source.sha256"
+          radius=lean/URF/Foundation/CyclePartitionRadiusMinimax.lean
+          test "$(git hash-object "$radius")" = '6148ee55dddfbf9fc1f6f8a8885777458ec25af5'
+          test "$(git hash-object lean/URF/Foundation/CyclePartitionMinimaxAssemblyCandidate.lean)" = 'a1f2773f3a49c31b397dad10db9aefde7c9a9ffa'
+          test "$(git hash-object "$cert/ShortCycleProbe.lean.inc")" = '27878a0b367c33a2b60f973e28acc3503f0b1253'
+          lake build +URF.Foundation.CyclePartitionIncidence +URF.Foundation.CyclePartitionMinimaxAssemblyCandidate 2>&1 | tee "$out/build.log"
+          {
+            head -n 1 "$radius"
+            cat lean/URF/Foundation/CyclePartitionNeighborhood.lean "$cert/ShortCycleProbe.lean.inc"
+            tail -n +3 "$radius"
+            cat "$cert/FinalMinimaxProbe.lean.inc"
+          } > "$out/ShortCycleProbe.lean"
+          sha256sum "$cert/ShortCycleProbe.lean.inc" "$cert/FinalMinimaxProbe.lean.inc" "$radius" "$out/ShortCycleProbe.lean" | tee "$out/source.sha256"
           lake env lean --root="$out" "$out/ShortCycleProbe.lean" 2>&1 | tee "$out/LEAN.log"
           python3 "$cert/check_axioms.py" "$out/LEAN.log" | tee "$out/VERIFICATION.txt"
       - uses: actions/upload-artifact@v4
