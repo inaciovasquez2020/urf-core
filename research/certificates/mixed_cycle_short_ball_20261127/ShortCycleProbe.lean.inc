@@ -439,3 +439,122 @@ theorem cyclePartition_mixedObservation_recoverStatistics
 #print axioms cyclePartition_mixedObservation_recoverStatistics
 
 end URF.EntropyBridge
+
+
+namespace URF.EntropyBridge
+
+/-- Candidate: the hidden component count minus the observed short-component
+count is zero when no long vertices are observed, and otherwise lies in the
+sharp global interval from one to the long-cycle packing bound. -/
+theorem cyclePartition_mixedCount_bounds
+    (sizes : List ℕ) (N L r : ℕ) (hL : 3 ≤ L)
+    (hsum : sizes.sum = N)
+    (hmin : ∀ i : Fin sizes.length, L ≤ sizes.get i) :
+    let D := rootedNeighborhoodObservation (cyclePartitionSimpleGraph sizes) r
+    let S := (D.map (mixedCycleShortWeight r)).sum
+    let M := (D.map (mixedCycleLongWeight r)).sum
+    let k := (sizes.length : ℝ) - S
+    (M = 0 → k = 0) ∧
+    (M ≠ 0 → 1 ≤ k ∧ k ≤ ((N / max L (2 * r + 2) : ℕ) : ℝ)) := by
+  classical
+  dsimp only
+  let A := max L (2 * r + 2)
+  let c (i : Fin sizes.length) : ℕ := if sizes.get i ≤ 2 * r + 1 then 0 else 1
+  let t (i : Fin sizes.length) : ℕ :=
+    if sizes.get i ≤ 2 * r + 1 then 0 else sizes.get i
+  let C := ∑ i, c i
+  let T := ∑ i, t i
+  have h3 (i : Fin sizes.length) : 3 ≤ sizes.get i := hL.trans (hmin i)
+  obtain ⟨hs, hm⟩ := cyclePartition_mixedObservation_recoverStatistics sizes r h3
+  have hC : (C : ℝ) = ∑ i : Fin sizes.length,
+      (if sizes.get i ≤ 2 * r + 1 then (0 : ℝ) else 1) := by
+    unfold C
+    rw [Nat.cast_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    by_cases h : sizes.get i ≤ 2 * r + 1
+    · simp only [c, if_pos h, Nat.cast_zero]
+    · simp only [c, if_neg h, Nat.cast_one]
+  have hT : (T : ℝ) = ∑ i : Fin sizes.length,
+      (if sizes.get i ≤ 2 * r + 1 then (0 : ℝ) else (sizes.get i : ℝ)) := by
+    unfold T
+    rw [Nat.cast_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    by_cases h : sizes.get i ≤ 2 * r + 1
+    · simp only [t, if_pos h, Nat.cast_zero]
+    · simp only [t, if_neg h]
+  rw [hs, hm, ← hT]
+  have hcount : (∑ i : Fin sizes.length,
+        (if sizes.get i ≤ 2 * r + 1 then (1 : ℝ) else 0)) + (C : ℝ) =
+      (sizes.length : ℝ) := by
+    rw [hC, ← Finset.sum_add_distrib]
+    calc
+      _ = ∑ _i : Fin sizes.length, (1 : ℝ) := by
+        apply Finset.sum_congr rfl
+        intro i _
+        by_cases h : sizes.get i ≤ 2 * r + 1
+        · simp only [if_pos h, add_zero]
+        · simp only [if_neg h, zero_add]
+      _ = _ := by rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin,
+          nsmul_eq_mul, mul_one]
+  have hk : (sizes.length : ℝ) -
+      (∑ i : Fin sizes.length, (if sizes.get i ≤ 2 * r + 1 then (1 : ℝ) else 0)) =
+      (C : ℝ) := by linarith
+  rw [hk]
+  have hmul : A * C ≤ T := by
+    unfold C T
+    rw [Finset.mul_sum]
+    apply Finset.sum_le_sum
+    intro i _
+    by_cases h : sizes.get i ≤ 2 * r + 1
+    · simp only [c, t, if_pos h, mul_zero, le_refl]
+    · simp only [c, t, if_neg h, mul_one]
+      exact max_le (hmin i) (by omega)
+  have hTN : T ≤ N := by
+    calc
+      T ≤ ∑ i : Fin sizes.length, sizes.get i := by
+        unfold T
+        apply Finset.sum_le_sum
+        intro i _
+        by_cases h : sizes.get i ≤ 2 * r + 1
+        · simp only [t, if_pos h, Nat.zero_le]
+        · simp only [t, if_neg h, le_refl]
+      _ = N := by rw [← List.sum_ofFn, List.ofFn_get, hsum]
+  have hA : 0 < A := by
+    exact lt_of_lt_of_le (by omega : 0 < L) (le_max_left _ _)
+  have hCT : C ≤ T := by
+    calc
+      C = 1 * C := by rw [one_mul]
+      _ ≤ A * C := Nat.mul_le_mul_right C (by omega)
+      _ ≤ T := hmul
+  constructor
+  · intro hzero
+    have ht : T = 0 := by exact_mod_cast hzero
+    have hc : C = 0 := by omega
+    exact_mod_cast hc
+  · intro hn
+    have hc : C ≠ 0 := by
+      intro hc
+      have hall := (Finset.sum_eq_zero_iff_of_nonneg
+        (fun i (_ : i ∈ (Finset.univ : Finset (Fin sizes.length))) =>
+          Nat.zero_le (c i))).mp hc
+      have ht : T = 0 := by
+        unfold T
+        apply Finset.sum_eq_zero
+        intro i hi
+        have hz := hall i hi
+        by_cases h : sizes.get i ≤ 2 * r + 1
+        · simp only [t, if_pos h]
+        · simp only [c, if_neg h] at hz
+          omega
+      exact hn (by exact_mod_cast ht)
+    have hb : C ≤ N / A := (Nat.le_div_iff_mul_le hA).2
+      (by rw [Nat.mul_comm]; exact hmul.trans hTN)
+    constructor
+    · exact_mod_cast (show 1 ≤ C by omega)
+    · exact_mod_cast hb
+
+#print axioms cyclePartition_mixedCount_bounds
+
+end URF.EntropyBridge
