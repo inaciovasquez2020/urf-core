@@ -75,3 +75,112 @@ theorem cyclePartition_shortBall_eq_component
 #print axioms cyclePartition_shortBall_eq_component
 
 end URF.EntropyBridge
+
+
+namespace URF.EntropyBridge
+
+/-- Canonical cycle on residue representatives, with clockwise modular
+successor and its symmetric, irreflexive closure. -/
+def canonicalShortCycle (m : ℕ) : SimpleGraph (Fin m) :=
+  SimpleGraph.fromRel (fun a b : Fin m =>
+    (a.val : ℤ) + 1 ≡ (b.val : ℤ) [ZMOD (m : ℤ)])
+
+/-- Candidate: the entire short-cycle ball is rooted-isomorphic to the
+canonical modular cycle, rooted at residue zero. -/
+theorem cyclePartition_shortBall_rootedIso
+    {sizes : List ℕ}
+    (h3 : ∀ i : Fin sizes.length, 3 ≤ sizes.get i)
+    (r : ℕ) (u : CyclePartitionVertex sizes)
+    (hshort : sizes.get u.1 ≤ 2 * r + 1) :
+    ∃ e : canonicalShortCycle (sizes.get u.1) ≃g
+        (cyclePartitionSimpleGraph sizes).induce
+          (rootedBallVertices (cyclePartitionSimpleGraph sizes) r u),
+      e ⟨0, lt_of_lt_of_le (by decide : 0 < 3) (h3 u.1)⟩ =
+        rootedBallRoot (cyclePartitionSimpleGraph sizes) r u := by
+  let hp : ∀ i : Fin sizes.length, 0 < sizes.get i :=
+    fun i => lt_of_lt_of_le (by decide : 0 < 3) (h3 i)
+  let f : Fin (sizes.get u.1) →
+      rootedBallVertices (cyclePartitionSimpleGraph sizes) r u :=
+    fun a => ⟨cycleOffset hp u (a.val : ℤ), by
+      rw [cyclePartition_shortBall_eq_component h3 r u hshort]
+      rfl⟩
+  have hf : Function.Bijective f := by
+    constructor
+    · intro a b hab
+      apply Fin.ext
+      have hm := (cycleOffset_eq hp u (a.val : ℤ) (b.val : ℤ)).1
+        (congrArg Subtype.val hab)
+      have ha := a.isLt
+      have hb := b.isLt
+      have he := cycleOffset_modEq_eq hm (by omega)
+      exact_mod_cast he
+    · intro v
+      obtain ⟨w⟩ := v.property.1
+      obtain ⟨d, _, _, hd⟩ := cycleOffset_walk hp h3 w
+      let z : ℤ := d % (sizes.get u.1 : ℤ)
+      have hm : (0 : ℤ) < (sizes.get u.1 : ℤ) := by
+        exact_mod_cast hp u.1
+      have hznonneg : 0 ≤ z := Int.emod_nonneg _ hm.ne'
+      have hzlt : z < (sizes.get u.1 : ℤ) := Int.emod_lt_of_pos _ hm
+      let a : Fin (sizes.get u.1) := ⟨z.toNat, by omega⟩
+      have ha : (a.val : ℤ) = z := Int.toNat_of_nonneg hznonneg
+      refine ⟨a, Subtype.ext ?_⟩
+      change cycleOffset hp u (a.val : ℤ) = v.val
+      calc
+        _ = cycleOffset hp u d := by
+          apply (cycleOffset_eq hp u _ _).2
+          rw [ha]
+          change (d % (sizes.get u.1 : ℤ)) % (sizes.get u.1 : ℤ) =
+            d % (sizes.get u.1 : ℤ)
+          simp
+        _ = v.val := hd
+  let e : canonicalShortCycle (sizes.get u.1) ≃g
+      (cyclePartitionSimpleGraph sizes).induce
+        (rootedBallVertices (cyclePartitionSimpleGraph sizes) r u) :=
+    ⟨Equiv.ofBijective f hf, by
+      intro a b
+      change (cyclePartitionSimpleGraph sizes).Adj
+          (cycleOffset hp u (a.val : ℤ)) (cycleOffset hp u (b.val : ℤ)) ↔
+        a ≠ b ∧
+          (((a.val : ℤ) + 1 ≡ (b.val : ℤ) [ZMOD (sizes.get u.1 : ℤ)]) ∨
+           ((b.val : ℤ) + 1 ≡ (a.val : ℤ) [ZMOD (sizes.get u.1 : ℤ)]))
+      have hrev :
+          ((a.val : ℤ) + (-1) ≡ (b.val : ℤ) [ZMOD (sizes.get u.1 : ℤ)]) ↔
+          ((b.val : ℤ) + 1 ≡ (a.val : ℤ) [ZMOD (sizes.get u.1 : ℤ)]) := by
+        constructor
+        · intro h
+          have hh := h.symm.add_left (1 : ℤ)
+          have he : 1 + ((a.val : ℤ) + (-1)) = (a.val : ℤ) := by ring
+          rw [he, add_comm (1 : ℤ) (b.val : ℤ)] at hh
+          exact hh
+        · intro h
+          have hh := h.symm.add_left (-1 : ℤ)
+          have he : -1 + ((b.val : ℤ) + 1) = (b.val : ℤ) := by ring
+          rw [he, add_comm (-1 : ℤ) (a.val : ℤ)] at hh
+          exact hh
+      constructor
+      · intro h
+        have hab : a ≠ b := by
+          intro hab
+          subst b
+          exact (cyclePartitionSimpleGraph sizes).loopless _ h
+        rw [cycleOffset_adj hp h3, cycleOffset_add, cycleOffset_add,
+          cycleOffset_eq, cycleOffset_eq] at h
+        refine ⟨hab, ?_⟩
+        rcases h with h | h
+        · exact Or.inl h
+        · exact Or.inr (hrev.mp h)
+      · rintro ⟨_, h⟩
+        rw [cycleOffset_adj hp h3, cycleOffset_add, cycleOffset_add,
+          cycleOffset_eq, cycleOffset_eq]
+        rcases h with h | h
+        · exact Or.inl h
+        · exact Or.inr (hrev.mpr h)⟩
+  refine ⟨e, ?_⟩
+  apply Subtype.ext
+  change cycleOffset hp u 0 = u
+  exact cycleOffset_zero hp u
+
+#print axioms cyclePartition_shortBall_rootedIso
+
+end URF.EntropyBridge
