@@ -369,3 +369,68 @@ theorem cyclePartition_mixedObservation_weightSum
 #print axioms cyclePartition_mixedObservation_weightSum
 
 end URF.EntropyBridge
+
+
+namespace URF.EntropyBridge
+
+/-- Vertex cardinality is an invariant of the actual rooted neighborhood class. -/
+noncomputable def rootedNeighborhoodCarrierCard : RootedNeighborhoodClass → ℕ :=
+  Quotient.lift (fun b : RootedNeighborhood => Nat.card b.carrier) (by
+    intro a b h
+    obtain ⟨e, _⟩ := h
+    exact Nat.card_congr e.toEquiv)
+
+/-- Weight each short-cycle vertex by the reciprocal of its component size. -/
+noncomputable def mixedCycleShortWeight (r : ℕ)
+    (c : RootedNeighborhoodClass) : ℝ := by
+  classical
+  exact if c = centeredPathClass r then 0 else
+    1 / (rootedNeighborhoodCarrierCard c : ℝ)
+
+/-- Indicator of a long-cycle observation. -/
+noncomputable def mixedCycleLongWeight (r : ℕ)
+    (c : RootedNeighborhoodClass) : ℝ := by
+  classical
+  exact if c = centeredPathClass r then 1 else 0
+
+/-- Candidate: the two statistics needed by the mixed-cycle minimax
+estimator are determined by the actual observation multiset. -/
+theorem cyclePartition_mixedObservation_recoverStatistics
+    (sizes : List ℕ) (r : ℕ)
+    (h3 : ∀ i : Fin sizes.length, 3 ≤ sizes.get i) :
+    let D := rootedNeighborhoodObservation (cyclePartitionSimpleGraph sizes) r
+    ((D.map (mixedCycleShortWeight r)).sum =
+      ∑ i : Fin sizes.length, (if sizes.get i ≤ 2 * r + 1 then (1 : ℝ) else 0)) ∧
+    ((D.map (mixedCycleLongWeight r)).sum =
+      ∑ i : Fin sizes.length,
+        (if sizes.get i ≤ 2 * r + 1 then (0 : ℝ) else (sizes.get i : ℝ))) := by
+  classical
+  dsimp only
+  constructor
+  · rw [cyclePartition_mixedObservation_weightSum sizes r h3]
+    apply Finset.sum_congr rfl
+    intro i _
+    by_cases hs : sizes.get i ≤ 2 * r + 1
+    · have hp : 0 < sizes.get i := by have := h3 i; omega
+      have hc : rootedNeighborhoodCarrierCard
+          (canonicalShortCycleClass (sizes.get i) hp) = sizes.get i := by
+        change Nat.card (Fin (sizes.get i)) = sizes.get i
+        rw [Nat.card_eq_fintype_card, Fintype.card_fin]
+      have hn : canonicalShortCycleClass (sizes.get i) hp ≠ centeredPathClass r :=
+        canonicalShortCycleClass_ne_centeredPathClass (sizes.get i) r (h3 i)
+      simp only [cycleLengthNeighborhoodClass, dif_pos hs, if_pos hs,
+        mixedCycleShortWeight, if_neg hn, hc]
+      have hm : (sizes.get i : ℝ) ≠ 0 := by exact_mod_cast hp.ne'
+      field_simp
+    · simp [cycleLengthNeighborhoodClass, hs, mixedCycleShortWeight]
+  · rw [cyclePartition_mixedObservation_weightSum sizes r h3]
+    apply Finset.sum_congr rfl
+    intro i _
+    by_cases hs : sizes.get i ≤ 2 * r + 1
+    · have hn := canonicalShortCycleClass_ne_centeredPathClass (sizes.get i) r (h3 i)
+      simp [cycleLengthNeighborhoodClass, hs, mixedCycleLongWeight, hn]
+    · simp [cycleLengthNeighborhoodClass, hs, mixedCycleLongWeight]
+
+#print axioms cyclePartition_mixedObservation_recoverStatistics
+
+end URF.EntropyBridge
