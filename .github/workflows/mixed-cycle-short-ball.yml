@@ -1,0 +1,61 @@
+name: Mixed-cycle short-ball isolated proof
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'research/certificates/mixed_cycle_short_ball_20261127/**'
+      - '.github/workflows/mixed-cycle-short-ball.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  short-ball:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: leanprover/lean-action@v1
+        with:
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Exact head and dependency guards
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          test "$(head -n 1 lean-toolchain)" = 'leanprover/lean4:v4.27.0'
+          test "$(git hash-object lake-manifest.json)" = 'b02c07b713c7448aafd13c67fcda22dbbd155ce5'
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = 'a3a10db0e9d66acbebf76c5e6a135066525ac900'
+          test "$(git hash-object lean/URF/Foundation/CyclePartitionNeighborhood.lean)" = 'd0879affbeb065cdd395a1bbcdf73b6bc380400b'
+      - name: Build dependencies and check isolated candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          cert=research/certificates/mixed_cycle_short_ball_20261127
+          out="$RUNNER_TEMP/short-ball"
+          mkdir -p "$out"
+          git rev-parse HEAD | tee "$out/head.txt"
+          radius=lean/URF/Foundation/CyclePartitionRadiusMinimax.lean
+          test "$(git hash-object "$radius")" = '6148ee55dddfbf9fc1f6f8a8885777458ec25af5'
+          test "$(git hash-object lean/URF/Foundation/CyclePartitionMinimaxAssemblyCandidate.lean)" = 'a1f2773f3a49c31b397dad10db9aefde7c9a9ffa'
+          test "$(git hash-object "$cert/ShortCycleProbe.lean.inc")" = '27878a0b367c33a2b60f973e28acc3503f0b1253'
+          lake build +URF.Foundation.CyclePartitionIncidence +URF.Foundation.CyclePartitionMinimaxAssemblyCandidate 2>&1 | tee "$out/build.log"
+          {
+            head -n 1 "$radius"
+            cat lean/URF/Foundation/CyclePartitionNeighborhood.lean "$cert/ShortCycleProbe.lean.inc"
+            tail -n +3 "$radius"
+            cat "$cert/FinalMinimaxProbe.lean.inc"
+          } > "$out/ShortCycleProbe.lean"
+          sha256sum "$cert/ShortCycleProbe.lean.inc" "$cert/FinalMinimaxProbe.lean.inc" "$radius" "$out/ShortCycleProbe.lean" | tee "$out/source.sha256"
+          lake env lean --root="$out" "$out/ShortCycleProbe.lean" 2>&1 | tee "$out/LEAN.log"
+          python3 "$cert/check_axioms.py" "$out/LEAN.log" | tee "$out/VERIFICATION.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mixed-cycle-short-ball-receipts
+          path: ${{ runner.temp }}/short-ball/
+          if-no-files-found: warn
