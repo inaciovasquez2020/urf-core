@@ -422,14 +422,17 @@ theorem cyclePartition_mixedObservation_recoverStatistics
         mixedCycleShortWeight, if_neg hn, hc]
       have hm : (sizes.get i : ℝ) ≠ 0 := by exact_mod_cast hp.ne'
       field_simp
-    · simp [cycleLengthNeighborhoodClass, hs, mixedCycleShortWeight]
+    · simp only [cycleLengthNeighborhoodClass, dif_neg hs, if_neg hs,
+        mixedCycleShortWeight, if_pos rfl, mul_zero]
   · rw [cyclePartition_mixedObservation_weightSum sizes r h3]
     apply Finset.sum_congr rfl
     intro i _
     by_cases hs : sizes.get i ≤ 2 * r + 1
     · have hn := canonicalShortCycleClass_ne_centeredPathClass (sizes.get i) r (h3 i)
-      simp [cycleLengthNeighborhoodClass, hs, mixedCycleLongWeight, hn]
-    · simp [cycleLengthNeighborhoodClass, hs, mixedCycleLongWeight]
+      simp only [cycleLengthNeighborhoodClass, dif_pos hs, if_pos hs,
+        mixedCycleLongWeight, if_neg hn, mul_zero]
+    · simp only [cycleLengthNeighborhoodClass, dif_neg hs, if_neg hs,
+        mixedCycleLongWeight, if_pos rfl, mul_one]
 
 #print axioms cyclePartition_mixedObservation_recoverStatistics
 
