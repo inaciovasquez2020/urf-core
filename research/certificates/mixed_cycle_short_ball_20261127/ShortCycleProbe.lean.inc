@@ -296,3 +296,42 @@ theorem canonicalShortCycleClass_ne_centeredPathClass
 #print axioms canonicalShortCycleClass_ne_centeredPathClass
 
 end URF.EntropyBridge
+
+
+namespace URF.EntropyBridge
+
+/-- The local observation determined by a component length. Short cycles
+retain their length; long cycles share the centered-path class. -/
+def cycleLengthNeighborhoodClass (r m : ℕ) (hm : 3 ≤ m) :
+    RootedNeighborhoodClass :=
+  if h : m ≤ 2 * r + 1 then
+    canonicalShortCycleClass m (by omega)
+  else centeredPathClass r
+
+/-- Candidate: the actual observation deck factors through the component
+length at each vertex, with no replacement of the graph observation model. -/
+theorem cyclePartition_mixedObservation_eq_lengthMap
+    (sizes : List ℕ) (r : ℕ)
+    (h3 : ∀ i : Fin sizes.length, 3 ≤ sizes.get i) :
+    rootedNeighborhoodObservation (cyclePartitionSimpleGraph sizes) r =
+      (Finset.univ : Finset (CyclePartitionVertex sizes)).val.map
+        (fun u => cycleLengthNeighborhoodClass r (sizes.get u.1) (h3 u.1)) := by
+  unfold rootedNeighborhoodObservation
+  apply congrArg (fun f : CyclePartitionVertex sizes → RootedNeighborhoodClass =>
+    (Finset.univ : Finset (CyclePartitionVertex sizes)).val.map f)
+  funext u
+  unfold cycleLengthNeighborhoodClass
+  by_cases hs : sizes.get u.1 ≤ 2 * r + 1
+  · simp only [dif_pos hs]
+    obtain ⟨e, he⟩ := cyclePartition_shortBall_rootedIso h3 r u hs
+    symm
+    exact Quotient.sound ⟨e, he⟩
+  · simp only [dif_neg hs]
+    have hl : 2 * r + 2 ≤ sizes.get u.1 := by omega
+    symm
+    exact Quotient.sound ⟨cyclePartition_rootedBallIso h3 r u hl,
+      cyclePartition_rootedBallIso_root h3 r u hl⟩
+
+#print axioms cyclePartition_mixedObservation_eq_lengthMap
+
+end URF.EntropyBridge
