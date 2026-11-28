@@ -362,7 +362,7 @@ theorem cyclePartition_mixedObservation_weightSum
   rw [hu, Finset.sum_sigma]
   apply Finset.sum_congr rfl
   intro i _
-  simp [nsmul_eq_mul]
+  rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
 
 #print axioms cyclePartition_mixedObservation_weightSum
 
