@@ -335,3 +335,35 @@ theorem cyclePartition_mixedObservation_eq_lengthMap
 #print axioms cyclePartition_mixedObservation_eq_lengthMap
 
 end URF.EntropyBridge
+
+
+namespace URF.EntropyBridge
+
+/-- Candidate: each cycle contributes its length times the weight of its
+actual rooted-neighborhood class. Arbitrary weights allow both multiplicity
+recovery and observation-dependent estimators. -/
+theorem cyclePartition_mixedObservation_weightSum
+    (sizes : List ℕ) (r : ℕ)
+    (h3 : ∀ i : Fin sizes.length, 3 ≤ sizes.get i)
+    (w : RootedNeighborhoodClass → ℝ) :
+    ((rootedNeighborhoodObservation (cyclePartitionSimpleGraph sizes) r).map w).sum =
+      ∑ i : Fin sizes.length,
+        (sizes.get i : ℝ) * w (cycleLengthNeighborhoodClass r (sizes.get i) (h3 i)) := by
+  classical
+  rw [cyclePartition_mixedObservation_eq_lengthMap sizes r h3, Multiset.map_map]
+  change (∑ u : CyclePartitionVertex sizes,
+      w (cycleLengthNeighborhoodClass r (sizes.get u.1) (h3 u.1))) = _
+  have hu :
+      (Finset.univ : Finset (CyclePartitionVertex sizes)) =
+        (Finset.univ : Finset (Fin sizes.length)).sigma
+          (fun i => (Finset.univ : Finset (Fin (sizes.get i)))) := by
+    ext u
+    simp
+  rw [hu, Finset.sum_sigma]
+  apply Finset.sum_congr rfl
+  intro i _
+  simp [nsmul_eq_mul]
+
+#print axioms cyclePartition_mixedObservation_weightSum
+
+end URF.EntropyBridge
