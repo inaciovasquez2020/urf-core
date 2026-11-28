@@ -184,3 +184,32 @@ theorem cyclePartition_shortBall_rootedIso
 #print axioms cyclePartition_shortBall_rootedIso
 
 end URF.EntropyBridge
+
+
+namespace URF.EntropyBridge
+
+/-- The rooted isomorphism class of the canonical modular cycle. -/
+def canonicalShortCycleClass (m : ℕ) (hm : 0 < m) :
+    RootedNeighborhoodClass :=
+  Quotient.mk _ ⟨Fin m, canonicalShortCycle m, ⟨0, hm⟩⟩
+
+/-- Candidate: equality of canonical rooted cycle classes detects their lengths. -/
+theorem canonicalShortCycleClass_eq_iff
+    {m n : ℕ} (hm : 0 < m) (hn : 0 < n) :
+    canonicalShortCycleClass m hm = canonicalShortCycleClass n hn ↔ m = n := by
+  constructor
+  · intro h
+    have hIso : RootedNeighborhood.isoSetoid.r
+        ⟨Fin m, canonicalShortCycle m, ⟨0, hm⟩⟩
+        ⟨Fin n, canonicalShortCycle n, ⟨0, hn⟩⟩ := by
+      apply Quotient.exact
+      exact h
+    obtain ⟨e, _⟩ := hIso
+    simpa only [Fintype.card_fin] using Fintype.card_congr e.toEquiv
+  · intro h
+    subst n
+    rfl
+
+#print axioms canonicalShortCycleClass_eq_iff
+
+end URF.EntropyBridge
