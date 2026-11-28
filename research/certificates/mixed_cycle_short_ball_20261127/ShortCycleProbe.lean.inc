@@ -423,7 +423,8 @@ theorem cyclePartition_mixedObservation_recoverStatistics
       have hm : (sizes.get i : ℝ) ≠ 0 := by exact_mod_cast hp.ne'
       field_simp
     · simp only [cycleLengthNeighborhoodClass, dif_neg hs, if_neg hs,
-        mixedCycleShortWeight, if_pos rfl, mul_zero]
+        mixedCycleShortWeight]
+      simp
   · rw [cyclePartition_mixedObservation_weightSum sizes r h3]
     apply Finset.sum_congr rfl
     intro i _
@@ -432,7 +433,8 @@ theorem cyclePartition_mixedObservation_recoverStatistics
       simp only [cycleLengthNeighborhoodClass, dif_pos hs, if_pos hs,
         mixedCycleLongWeight, if_neg hn, mul_zero]
     · simp only [cycleLengthNeighborhoodClass, dif_neg hs, if_neg hs,
-        mixedCycleLongWeight, if_pos rfl, mul_one]
+        mixedCycleLongWeight]
+      simp
 
 #print axioms cyclePartition_mixedObservation_recoverStatistics
 
